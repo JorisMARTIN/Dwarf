@@ -1,0 +1,21 @@
+﻿Cahier des charges :
+
+- analyse de l’existant et du terrain
+
+- définir les objectifs du projet
+
+- faire une analyse et une gestion des contraintes et des risques associés
+
+- expression des besoins
+
+- hiérarchiser les besoins
+
+- réaliser des maquettes non-fonctionnelles
+
+- définir les environnements techniques possibles
+
+- choix argumenté de modèle de développement,
+
+- définir + mettre en place le cadre de gestion
+
+
