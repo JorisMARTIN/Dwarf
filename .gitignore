@@ -1,13 +1,28 @@
-frontend/node_modules/**/*
-frontend/.expo/*
-frontend/npm-debug.*
-frontend/*.jks
-frontend/*.p8
-frontend/*.p12
-frontend/*.key
-frontend/*.mobileprovision
-frontend/*.orig.*
-frontend/web-build/
+dwarf-app/node_modules/**/*
+dwarf-app/.expo/*
+dwarf-app/npm-debug.*
+dwarf-app/*.jks
+dwarf-app/*.p8
+dwarf-app/*.p12
+dwarf-app/*.key
+dwarf-app/*.mobileprovision
+dwarf-app/*.orig.*
+dwarf-app/web-build/
+
+dwarf-browser/node_modules
+dwarf-browser/.pnp
+dwarf-browser/.pnp.js
+dwarf-browser/coverage
+dwarf-browser/build
+dwarf-browser/.env.local
+dwarf-browser/.env.development.local
+dwarf-browser/.env.test.local
+dwarf-browser/.env.production.local
+dwarf-browser/npm-debug.log*
+dwarf-browser/yarn-debug.log*
+dwarf-browser/yarn-error.log*
+
+.vscode
 
 # Created by https://www.toptal.com/developers/gitignore/api/netbeans,pycharm+all,xcode,jetbrains+all,kdevelop4,phpstorm+all,vim,emacs,eclipse,intellij+all,windows,linux,macos
 # Edit at https://www.toptal.com/developers/gitignore?templates=netbeans,pycharm+all,xcode,jetbrains+all,kdevelop4,phpstorm+all,vim,emacs,eclipse,intellij+all,windows,linux,macos
