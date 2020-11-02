@@ -18,19 +18,19 @@ export default function App() {
       <div>
         <ul>
           <li>
-            <Link to="/">Home</Link>
+            <Link className="link" to="/">Home</Link>
           </li>
           <li>
-            <Link to="/browse">Browse Drawings</Link>
+            <Link className="link" to="/browse">Browse Drawings</Link>
           </li>
           <li>
-            <Link to="/draw">Draw !</Link>
+            <Link className="link" to="/draw">Draw !</Link>
           </li>
           <li>
-            <Link to="/init">Initiate a drawing</Link>
+            <Link className="link" to="/init">Initiate a drawing</Link>
           </li>
           <li>
-            <Link to="/login">Log in / sign in</Link>
+            <Link className="link" to="/login">Log in / sign in</Link>
           </li>
         </ul>
 
