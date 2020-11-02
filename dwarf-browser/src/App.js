@@ -30,7 +30,7 @@ export default function App() {
             <Link to="/init">Initiate a drawing</Link>
           </li>
           <li>
-            <Link to="/login">Log in / sign in</Link>
+            <Link to="/login">Log in / sign up</Link>
           </li>
         </ul>
 
