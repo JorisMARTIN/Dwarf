@@ -9,7 +9,7 @@ import Home from './Home';
 import Browse from './Browse';
 import Draw from './Draw';
 import InitDrawing from './InitDrawing';
-import LogIn from './LogIn';
+import AuthPage from './AuthPage';
 import E404 from './E404';
 
 export default function App() {
@@ -30,33 +30,39 @@ export default function App() {
             <Link className="link" to="/init">Initiate a drawing</Link>
           </li>
           <li>
-            <Link className="link" to="/login">Log in / sign up</Link>
+            <Link className="link" to="/auth">Log in / sign up</Link>
           </li>
         </ul>
-
-        <hr />
-
-        <Switch>
-          <Route exact path="/">
-            <Home />
-          </Route>
-          <Route path="/browse">
-            <Browse />
-          </Route>
-          <Route path="/draw">
-            <Draw />
-          </Route>
-          <Route path="/login">
-            <LogIn />
-          </Route>
-          <Route path="/init">
-            <InitDrawing />
-          </Route>
-          <Route path="*">
-            <E404 />
-          </Route>
-        </Switch>
       </div>
+
+
+      <hr />
+
+      <Switch>
+        <Route exact path="/">
+          <Home />
+        </Route>
+
+        <Route path="/browse">
+          <Browse />
+        </Route>
+
+        <Route path="/draw">
+          <Draw />
+        </Route>
+
+        <Route path="/auth">
+          <AuthPage />
+        </Route>
+
+        <Route path="/init">
+          <InitDrawing />
+        </Route>
+
+        <Route path="*">
+          <E404 />
+        </Route>
+      </Switch>
     </Router>
   );
 }
