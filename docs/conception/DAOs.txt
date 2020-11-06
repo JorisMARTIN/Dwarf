@@ -1,0 +1,44 @@
+UserDAO:
+    SELECT : 
+        user : userId -> User
+            |
+            +-> Inclu la récupération des boards associées
+
+        lastId : -> int
+        userBords : userID -> BoardId[]
+
+    INSERT :
+        user : userId, email, username, password, creationDate, ip
+
+    UPDATE :
+        addIp : ip
+
+BoardDAO:
+    SELECT :
+        board : id -> Board
+            |
+            +-> Inclu la récupération des boxs associées
+
+        lastId : -> int
+        rangeOfBoard : firstId, lastId -> Boards[]
+
+    INSERT :
+        board : id, name, description, gameMode, templateType, creationDate, finished, rate
+
+    UPDATE :
+        setFinished : finished
+        updateRate : rate
+
+BoxDAO:
+    SELECT:
+        box : id -> Box
+            |
+            +-> Inclu la récupération de la board associée
+    
+    INSERT :
+        box : id, imgURL, drawable, drew, creationDate, width, height
+
+    UPDATE :
+        setImgURL : imgURL
+        setDrawable : drawable
+        setDrew : drew
