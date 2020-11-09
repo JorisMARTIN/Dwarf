@@ -1,4 +1,5 @@
 import { Component } from "react";
+import { Redirect } from 'react-router-dom';
 import Auth from '../components/AuthHelperMethods';
 import './index.css'
 
@@ -6,6 +7,7 @@ import './index.css'
 
 export default class Login extends Component {
     state = {
+        redirectToHome: false,
         username: "",
         password: ""
     };
@@ -26,7 +28,7 @@ export default class Login extends Component {
                 if (res === false) {
                     return alert("Log in failed. Try again.");
                 }
-                this.props.history.replace('/');
+                this.setState({redirectToHome: true});
             })
             .catch(err => {
                 alert(err);
@@ -34,25 +36,29 @@ export default class Login extends Component {
     }
 
     render() {
-        return (
-            <div>
-                <h1>Login</h1>
-                <form>
-                    <input
-                        placeholder="Username"
-                        name="username"
-                        type="text"
-                        onChange={this._handleChange}
-                    />
-                    <input
-                        placeholder="Password"
-                        name="password"
-                        type="password"
-                        onChange={this._handleChange}
-                    />
-                    <button onClick={this.handleFormSubmit}>Log in</button>
-                </form>
-            </div>
-        );
+        if(this.state.redirectToHome) {
+            return <Redirect to='/' />
+        } else {
+            return (
+                <div>
+                    <h1>Login</h1>
+                    <form>
+                        <input
+                            placeholder="Username"
+                            name="username"
+                            type="text"
+                            onChange={this._handleChange}
+                        />
+                        <input
+                            placeholder="Password"
+                            name="password"
+                            type="password"
+                            onChange={this._handleChange}
+                        />
+                        <button onClick={this.handleFormSubmit}>Log in</button>
+                    </form>
+                </div>
+            );
+        }
     }
 }
