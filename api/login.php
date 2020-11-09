@@ -40,12 +40,14 @@ $data = json_decode(file_get_contents("php://input"));
 $email = $data->email;
 $password = $data->password;
 
-//check si user existe dans la bdd
-$validCredentials = true;
-// à faire
+//AUTH PLACEHOLDER
+$validCredentials = $email == "root" && $password == "root";
 
 if($validCredentials){
-	
+    $userId = 1;
+    
+    $expiration = microtime(true);
+    
 	$token = generateToken($userId, $SECRET, $expiration, $ISSUER);
 
 	echo json_encode([
