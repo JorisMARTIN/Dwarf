@@ -1,4 +1,5 @@
 import { Component } from 'react';
+import { Redirect } from 'react-router-dom';
 import Auth from './AuthHelperMethods';
 
 //adapted from https://github.com/jinolacson/login-jwt-react-php/
@@ -9,14 +10,15 @@ export default function withAuth(AuthComponent) {
 
         state = {
             confirm: null,
-            loaded: false
+            loaded: false,
+            redirectToAuth: false
         }
 
         /* In the componentWillMount, we would want to do a couple of important tasks in order to verify 
         the current users authentication status prior to granting them enterance into the app. */
         componentWillMount() {
             if (!Auth.loggedIn()) {
-                this.props.history.replace('/auth');
+                this.setState({redirectToAuth: true});
             } else {
                 /* Try to get confirmation message from the Auth helper. */
                 try {
@@ -31,18 +33,22 @@ export default function withAuth(AuthComponent) {
                 catch (err) {
                     console.log(err);
                     Auth.logout();
-                    this.props.history.replace('/auth');
+                    this.setState({ redirectToAuth: true });
                 }
             }
         }
 
         render() {
+            if(this.state.redirectToAuth === true) {
+                return <Redirect to='/auth' />
+            }
+
             if (this.state.loaded === true) {
                 if (this.state.confirm) {
                     console.log("confirmed!");
                     return (
                         /* component that is currently being wrapper(App.js) */
-                        <AuthComponent history={this.props.history} confirm={this.state.confirm} />
+                        <AuthComponent confirm={this.state.confirm} />
                     );
                 }
                 else {
