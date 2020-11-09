@@ -1,0 +1,3 @@
+Case(__caseId__, creationDate, imagePtr, isNext, done, width, height, #boardId, #userId)
+Board(__boardId__, name, description, gameMode, template, creationDate, completed, #userId)
+User(__userId__, nickname, email, password, creationDate, IPs)

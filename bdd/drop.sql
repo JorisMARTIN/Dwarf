@@ -1,0 +1,4 @@
+
+DROP TABLE "Case";
+DROP TABLE "Board";
+DROP TABLE "User";
