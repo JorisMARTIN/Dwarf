@@ -8,7 +8,7 @@ UserDAO:
         userBords : userID -> BoardId[]
 
     INSERT :
-        user : userId, email, username, password, creationDate, ip
+        user : email, username, password, creationDate, ip
 
     UPDATE :
         addIp : ip
@@ -23,7 +23,7 @@ BoardDAO:
         rangeOfBoard : firstId, lastId -> Boards[]
 
     INSERT :
-        board : id, name, description, gameMode, templateType, creationDate, finished, rate
+        board : name, description, gameMode, templateType, creationDate, finished, rate
 
     UPDATE :
         setFinished : finished
@@ -36,9 +36,9 @@ BoxDAO:
             +-> Inclu la récupération de la board associée
     
     INSERT :
-        box : id, imgURL, drawable, drew, creationDate, width, height
+        box : imgURL, drawable, drew, creationDate, width, height
 
     UPDATE :
-        setImgURL : imgURL
-        setDrawable : drawable
-        setDrew : drew
+        setImgURL : boxId, imgURL
+        setDrawable : boxId, drawable
+        setDrew : boxId, drew
