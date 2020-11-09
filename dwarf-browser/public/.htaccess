@@ -1,3 +1,5 @@
+RedirectMatch 403 ^/api/?$
+
 Options -MultiViews
 RewriteEngine On
 RewriteCond %{REQUEST_FILENAME} !-f
