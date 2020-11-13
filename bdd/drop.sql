@@ -1,4 +1,3 @@
-
-DROP TABLE "Case";
-DROP TABLE "Board";
+DROP TABLE "Frame";
+DROP TABLE "Page";
 DROP TABLE "User";
