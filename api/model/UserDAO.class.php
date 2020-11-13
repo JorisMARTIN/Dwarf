@@ -22,15 +22,14 @@ class UserDAO extends DAO {
         }
     }
 
-    function putUser(string $email, string $username, string $password, string $creationDate, string $ip) : boolean {
+    function putUser(string $email, string $username, string $password, string $ip) : boolean {
         $data = [
             'email' => $email,
             'username' => $username,
             'password' => password_hash($password, PASSWORD_DEFAULT),
-            'creationDate' => $creationDate,
             'ips' => $ip
         ];
-        $query = "INSERT INTO 'User' ('nickname', 'email', 'password', 'creationdate', 'ips') VALUES (:username, :email, :password, :creationDate, ARRAY[:ip])";
+        $query = "INSERT INTO 'User' ('nickname', 'email', 'password', 'creationdate', 'ips') VALUES (':username', ':email', ':password', NOW()::timestamp, ARRAY[:ip])";
         return $this->db->prepare($query)->execute($data);
     }
 
