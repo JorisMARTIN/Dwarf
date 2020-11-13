@@ -1,12 +1,20 @@
 <?php
 
-class FrameDAO extends DAO {
+class Frame {
 
-  Frame getFrame(int $frameId) {
-    $requete = "SELECT * FROM 'Frame' WHERE frameId = ?";
-    $db->prepare($requete)->execute([$frameId]);
+  private int $frameId;
+  private string $creationDate;
+  private string $imagePtr;
+  private bool $next;
+  private bool $done;
+  private int $width;
+  private int $height;
+  private int $pageId;
+  private int $userId;
+
+  function __get(string $prop) : int {
+    return $this->$prop;
   }
-
 }
 
 ?>
