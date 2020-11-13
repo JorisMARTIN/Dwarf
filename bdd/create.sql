@@ -22,7 +22,7 @@ CREATE TABLE IF NOT EXISTS "Frame" (
 frameId SERIAL PRIMARY KEY,
 creationDate timestamp NOT NULL,
 imagePtr varchar(64) NOT NULL,
-next boolean DEFAULT FALSE,
+drawable boolean DEFAULT FALSE,
 done boolean DEFAULT FALSE,
 width int CHECK (width > 0),
 height int CHECK (height > 0),
