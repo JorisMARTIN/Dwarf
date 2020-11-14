@@ -2,6 +2,9 @@
 header("Access-Control-Allow-Origin: *");
 header('Content-type: application/json');
 
+//ATTENTION A ENLEVER QD CA SERA EN PRODUCITON
+header("Access-Control-Allow-Headers: Content-Type");
+
 $SECRET = "vHg&0WdWK6qo95fe";
 $ISSUER = "dwarf.jorismartin.fr";
 
