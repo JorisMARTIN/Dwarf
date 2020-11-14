@@ -49,6 +49,7 @@ class AuthHelperMethods {
         }
         catch (err) {
             console.log("expired check failed! in AuthService.js component");
+            console.log(err);
             return false;
         }
     }
