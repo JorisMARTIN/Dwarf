@@ -7,10 +7,11 @@ class UserDAO extends DAO {
     function getUser(int $userId) : User {
         $query = 'SELECT * FROM "User" WHERE userid=:userId';
         $tmp = $this->db->prepare($query);
-        if($tmp->execute([':userId' => $userId]))
+        if($tmp->execute([':userId' => $userId])) {
             return $tmp->fetchAll(PDO::FETCH_CLASS, "User")[0];
-        else
+        } else {
             return NULL;
+        }
     }
 
     function getUserPages(int $userId) : array {
