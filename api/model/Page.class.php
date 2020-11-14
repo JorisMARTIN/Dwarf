@@ -2,14 +2,14 @@
 
 class Page {
 
-  private $pageId;
-  private $creationDate;
+  private $pageid;
+  private $creationdate;
   private $name;
   private $description;
-  private $gameMode;
+  private $gamemode;
   private $template;
   private $completed;
-  private $userId;
+  private $userid;
 
   function __get(string $prop) : int {
     return $this->$prop;

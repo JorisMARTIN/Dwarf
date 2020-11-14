@@ -26,15 +26,15 @@ class UserDAO extends DAO {
     function putUser(string $email, string $username, string $password, string $ip) : bool {
         $query = 'INSERT INTO "User" (nickname, email, password, creationdate, ips) VALUES (:username, :email, :password, NOW()::timestamp, ARRAY[:ip])';
         return $this->db->prepare($query)->execute([
-            ':email' => $email,
             ':username' => $username,
+            ':email' => $email,
             ':password' => password_hash($password, PASSWORD_DEFAULT),
-            ':ips' => $ip
+            ':ip' => $ip
         ]);
     }
 
     function addIp(int $userId, string $ip) : bool {
-        $query = 'UPDATE "User" SET ips = ips || :ip WHERE userid=:userid';
+        $query = 'UPDATE "User" SET ips = ips || :ip WHERE userid=:userId';
         return $this->db->prepare($query)->execute([':userId' => $userId, ':ip' => $ip]);
     }
 

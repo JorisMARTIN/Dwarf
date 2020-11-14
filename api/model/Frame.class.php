@@ -2,15 +2,15 @@
 
 class Frame {
 
-  private $frameId;
-  private $creationDate;
-  private $imagePtr;
+  private $frameid;
+  private $creationdate;
+  private $imageptr;
   private $drawable;
   private $done;
   private $width;
   private $height;
-  private $pageId;
-  private $userId;
+  private $pageid;
+  private $userid;
 
   function __get(string $prop) : int {
     return $this->$prop;

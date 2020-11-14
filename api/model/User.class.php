@@ -2,12 +2,12 @@
 
 class User {
 
-  private $userId;
+  private $userid;
   private $email;
   private $nickname;
   private $password;
-  private $IPs;
-  private $creationDate;
+  private $ips;
+  private $creationdate;
 
   function __get(string $prop) : int {
     return $this->$prop;
