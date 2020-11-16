@@ -6,25 +6,26 @@ class AuthHelperMethods {
     apiURL = "http://dwarf.jorismartin.fr/api/";
     
     // Initializing important variables
-    login = (username, password) => {
+    login = (email, password) => {
         // Get a token from api server using the fetch api
         return this.fetch(this.apiURL + "login.php", {
             method: 'POST',
             body: JSON.stringify({
-                username,
+                email,
                 password
             })
         }).then(res => {
-            this.setToken(res.token) // Setting the token in localStorage
-            return Promise.resolve(res);
+            if(res.token !== undefined)
+                this.setToken(res.token);
+            return Promise.resolve(res.token !== undefined);
         })
     }
 
-    signup = (username, password) => {
+    signup = (email, password) => {
         return this.fetch(this.apiURL + "signup.php", {
             method: 'POST',
             body: JSON.stringify({
-                username,
+                email,
                 password
             })
         }).then(res => {
@@ -41,11 +42,8 @@ class AuthHelperMethods {
     isTokenExpired = (token) => {
         try {
             const decoded = decode(token);
-            if (decoded.exp < Date.now() / 1000) { // Checking if token is expired.
-                return true;
-            }
-            else
-                return false;
+            console.log(decoded);
+            return decoded.exp < Date.now() / 1000;
         }
         catch (err) {
             console.log("expired check failed! in AuthService.js component");
@@ -69,12 +67,12 @@ class AuthHelperMethods {
         localStorage.removeItem('id_token');
     }
 
-    getConfirm = () => {
-        // Using jwt-decode npm package to decode the token
-        let answer = decode(this.getToken());
-        console.log("Recieved answer!");
-        return answer;
-    }
+    // getConfirm = () => {
+    //     // Using jwt-decode npm package to decode the token
+    //     let answer = decode(this.getToken());
+    //     console.log("Recieved answer!");
+    //     return answer;
+    // }
 
     fetch = (url, options) => {
         // performs api calls sending the required authentication headers
@@ -109,5 +107,4 @@ class AuthHelperMethods {
 }
 
 const Auth = new AuthHelperMethods();
-
 export default Auth;

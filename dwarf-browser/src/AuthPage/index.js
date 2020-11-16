@@ -8,12 +8,7 @@ import Login from "./Login";
 export default class AuthPage extends Component {
 
     state = {
-        redirectToHome: false
-    }
-
-    componentWillMount() {
-        if (Auth.loggedIn())
-            this.setState({redirectToHome: true});
+        redirectToHome: Auth.loggedIn()
     }
 
     render() {
