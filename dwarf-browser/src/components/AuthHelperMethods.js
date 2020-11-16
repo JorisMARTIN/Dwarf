@@ -35,20 +35,22 @@ class AuthHelperMethods {
 
     loggedIn = () => {
         // Checks if there is a saved token and it's still valid
-        const token = this.getToken() // Getting token from localstorage
-        return !!token && !this.isTokenExpired(token) // handwaiving here
+        const token = this.getToken();
+        return !!token && this.isTokenValid(token);
     }
 
-    isTokenExpired = (token) => {
+    isTokenValid = (token) => {
         try {
             const decoded = decode(token);
             console.log(decoded);
-            return decoded.exp < Date.now() / 1000;
+            return decoded.exp > Date.now() / 1000; //check expiration date
         }
         catch (err) {
-            console.log("expired check failed! in AuthService.js component");
+            console.log("token check failed !");
             console.log(err);
-            return false;
+            //asume token is expired and logout
+            this.logout();
+            return false; 
         }
     }
 
