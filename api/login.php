@@ -49,7 +49,7 @@ $validCredentials = $email == "root" && $password == "root";
 if($validCredentials){
     $userId = 1;
     
-    $expiration = microtime(true);
+    $expiration = time() + 24 * 60 * 60; //token valide 24h   int time() = timestamp UNIX en secondes
     
 	$token = generateToken($userId, $SECRET, $expiration, $ISSUER);
 
