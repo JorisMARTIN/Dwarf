@@ -8,7 +8,7 @@ class AuthHelperMethods {
     // Initializing important variables
     login = (email, password) => {
         // Get a token from api server using the fetch api
-        return this.fetch(this.apiURL + "login.php", {
+        return this.fetch("login.php", {
             method: 'POST',
             body: JSON.stringify({
                 email,
@@ -21,21 +21,10 @@ class AuthHelperMethods {
         })
     }
 
-    signup = (email, password) => {
-        return this.fetch(this.apiURL + "signup.php", {
-            method: 'POST',
-            body: JSON.stringify({
-                email,
-                password
-            })
-        }).then(res => {
-            return Promise.resolve(res);
-        })
-    }
-
     loggedIn = () => {
         // Checks if there is a saved token and it's still valid
         const token = this.getToken();
+        console.log(token);
         return !!token && this.isTokenValid(token);
     }
 
@@ -69,14 +58,7 @@ class AuthHelperMethods {
         localStorage.removeItem('id_token');
     }
 
-    // getConfirm = () => {
-    //     // Using jwt-decode npm package to decode the token
-    //     let answer = decode(this.getToken());
-    //     console.log("Recieved answer!");
-    //     return answer;
-    // }
-
-    fetch = (url, options) => {
+    fetch = (endpoint, options) => {
         // performs api calls sending the required authentication headers
         const headers = {
             'Accept': 'application/json',
@@ -88,12 +70,12 @@ class AuthHelperMethods {
             headers['Authorization'] = 'Bearer ' + this.getToken()
         }
         
-        return fetch(url, {
+        return fetch(this.apiURL + endpoint, {
             headers,
             ...options
         })
-            .then(this._checkStatus)
-            .then(response => response.json())
+        .then(this._checkStatus)
+        .then(response => response.json())
     }
 
     _checkStatus = (response) => {

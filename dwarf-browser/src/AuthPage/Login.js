@@ -44,7 +44,7 @@ export default class Login extends Component {
                     <h1>Login</h1>
                     <form>
                         <input
-                            placeholder="email"
+                            placeholder="Email"
                             name="email"
                             type="email"
                             onChange={this._handleChange}

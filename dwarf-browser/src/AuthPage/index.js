@@ -8,11 +8,11 @@ import Login from "./Login";
 export default class AuthPage extends Component {
 
     state = {
-        redirectToHome: Auth.loggedIn()
+        loggedIn: Auth.loggedIn()
     }
 
     render() {
-        if(this.state.redirectToHome) {
+        if (this.state.loggedIn) {
             return <Redirect to='/' />
         } else {
             return (
