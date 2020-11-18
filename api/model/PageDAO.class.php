@@ -49,11 +49,11 @@ class PageDAO extends DAO {
             ':description' => $description,
             ':gamemode' => $gamemode,
             ':template' => $template,
-            ':completed' => $completed ? 'true' : 'false',
+            ':completed' => $completed,
             ':userId' => $userId
         ])) {
             $result = $tmp->fetchColumn();
-            mkdir(dirname(__FILE__).'/../../cdn/frames/'.$result, 0644);
+            mkdir(dirname(__FILE__).'/../../cdn/frames/page-'.$result, 0644);
             return $result;
         } else {
             return -1;
