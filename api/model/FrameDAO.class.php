@@ -24,21 +24,22 @@ class FrameDAO extends DAO {
     }
   }
 
-  function putFrame(string $imagePtr, bool $drawable, bool $done, int $width, int $height, int $pageId, int $userId) : int {
-    $query = 'INSERT INTO "Frame" (creationDate, imagePtr, drawable, done, width, height, pageId, userId)
-              VALUES (CURRENT_TIMESTAMP, :imagePtr, :drawable, :done, :width, :height, :pageId, :userId)
+  function putFrame(bool $drawable, bool $done, int $width, int $height, int $pageId, int $userId) : int {
+    $query = 'INSERT INTO "Frame" (creationDate, drawable, done, width, height, pageId, userId)
+              VALUES (CURRENT_TIMESTAMP, :drawable, :done, :width, :height, :pageId, :userId)
               RETURNING frameid';
     $tmp = $this->db->prepare($query);
     if($tmp->execute([
-      ':imagePtr' => $imagePtr,
-      ':drawable' => $drawable,
-      ':done' => $done,
+      ':drawable' => $drawable ? 't' : 'f',
+      ':done' => $done ? 't' : 'f',
       ':width' => $width,
       ':height' => $height,
       ':pageId' => $pageId,
       ':userId' => $userId
     ])) {
-      return $tmp->fetchColumn();
+      $frameId = $tmp->fetchColumn();
+      $this->setImagePtr($frameId, "frame-".$frameId);
+      return $frameId;
     } else {
       return -1;
     }
@@ -46,17 +47,26 @@ class FrameDAO extends DAO {
 
   function setImagePtr(int $frameId, string $imagePtr) : bool {
     $query = 'UPDATE "Frame" SET imagePtr = :imagePtr WHERE frameId = :frameId';
-    return $this->db->prepare($query)->execute([':imagePtr' => $imagePtr, ':frameId' => $frameId]);
+    return $this->db->prepare($query)->execute([
+      ':imagePtr' => $imagePtr,
+      ':frameId' => $frameId
+    ]);
   }
 
   function setDrawable(int $frameId, bool $drawable) : bool {
     $query = 'UPDATE "Frame" SET drawable = :drawable WHERE frameId = :frameId';
-    return $this->db->prepare($query)->execute([':drawable' => $drawable, ':frameId' => $frameId]);
+    return $this->db->prepare($query)->execute([
+      ':drawable' => $drawable ? 't' : 'f',
+      ':frameId' => $frameId
+    ]);
   }
 
   function setDone(int $frameId, bool $done) : bool {
     $query = 'UPDATE "Frame" SET done = :done WHERE frameId = :frameId';
-    return $this->db->prepare($query)->execute([':done' => $done, ':frameId' => $frameId]);
+    return $this->db->prepare($query)->execute([
+      ':done' => $done ? 't' : 'f',
+      ':frameId' => $frameId
+    ]);
   }
 }
 

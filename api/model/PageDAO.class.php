@@ -36,7 +36,7 @@ class PageDAO extends DAO {
     function setCompleted(int $pageId, bool $completed) : bool {
         $query = 'UPDATE "Page" SET completed = :completed WHERE pageId = :pageId';
         return $this->db->prepare($query)->execute([
-            ':completed' => $completed,
+            ':completed' => $completed ? 't' : 'f',
             ':pageId' => $pageId
         ]);
     }
@@ -49,12 +49,12 @@ class PageDAO extends DAO {
             ':description' => $description,
             ':gamemode' => $gamemode,
             ':template' => $template,
-            ':completed' => $completed ? 'true' : 'false',
+            ':completed' => $completed ? 't' : 'f',
             ':userId' => $userId
         ])) {
-            $result = $tmp->fetchColumn();
-            mkdir(dirname(__FILE__).'/../../cdn/frames/'.$result, 0644);
-            return $result;
+            $pageId = $tmp->fetchColumn();
+            mkdir(dirname(__FILE__).'/../../cdn/frames/page-'.$pageId, 0644);
+            return $pageId;
         } else {
             return -1;
         }
