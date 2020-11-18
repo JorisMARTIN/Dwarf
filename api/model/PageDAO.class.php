@@ -14,13 +14,13 @@ class PageDAO extends DAO {
         }
     }
 
-    function getLastPageId() {
+    function getLastPageId() : int {
         $query = 'SELECT max(pageId) FROM "Page"';
         $tmp = $this->db->prepare($query);
         if ($tmp->execute()) {
             return $tmp->fetchColumn();
         } else {
-            return false;
+            return -1;
         }
     }
 
@@ -42,16 +42,21 @@ class PageDAO extends DAO {
         ]);
     }
 
-    function putPage(string $name, string $description, int $gamemode, int $template, bool $completed, int $userId) : bool {
-        $query = 'INSERT INTO "Page" (creationDate, name, description, gamemode, template, completed, userId) VALUES (CURRENT_TIMESTAMP, :name, :description, :gamemode, :template, :completed, :userId)';
-        return $this->db->prepare($query)->execute([
+    function putPage(string $name, string $description, int $gamemode, int $template, bool $completed, int $userId) : int {
+        $query = 'INSERT INTO "Page" (creationDate, name, description, gamemode, template, completed, userId)
+                  VALUES (CURRENT_TIMESTAMP, :name, :description, :gamemode, :template, :completed, :userId)
+                  RETURNING pageid';
+        $tmp = $this->db->prepare($query);
+        if($tmp->execute([
             ':name' => $name,
             ':description' => $description,
             ':gamemode' => $gamemode,
             ':template' => $template,
             ':completed' => $completed,
             ':userId' => $userId
-        ]);
+        ])) {
+            return $tmp->fetchColumn();
+        }
     }
 
     function getUserPages(int $userId) : array {
