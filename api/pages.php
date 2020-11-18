@@ -1,5 +1,5 @@
 <?php
-require_once(dirname(__FILE__) . '/includes/endpoint.inc.php');
+require_once(dirname(__FILE__) . '/includes/httpheaders.inc.php');
 
 require_once(dirname(__FILE__).'/model/AuthMethods.php');
 require_once(dirname(__FILE__).'/model/PageDAO.class.php');
