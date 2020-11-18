@@ -1,6 +1,5 @@
 <?php
-header("Access-Control-Allow-Origin: *");
-header('Content-type: application/json');
+require_once(dirname(__FILE__) . '/includes/endpoint.inc.php');
 
 
 //store signup in db & echo response

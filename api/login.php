@@ -1,7 +1,5 @@
 <?php
-header("Access-Control-Allow-Origin: *");
-header('Content-type: application/json');
-header("Access-Control-Allow-Headers: Content-Type");
+require_once(dirname(__FILE__) . '/includes/endpoint.inc.php');
 
 require_once(dirname(__FILE__) . '/model/AuthMethods.php');
 require_once(dirname(__FILE__) . '/model/UserDAO.class.php');
