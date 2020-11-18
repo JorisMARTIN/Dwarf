@@ -30,7 +30,6 @@ class AuthHelperMethods {
     isTokenValid = (token) => {
         try {
             const decoded = decode(token);
-            console.log(decoded);
             return decoded.exp > Date.now() / 1000; //check expiration date
         }
         catch (err) {
