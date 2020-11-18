@@ -17,8 +17,8 @@ $data = [
 for ($i = 0; $i < count($pages); $i++) {
     $p = $pages[$i];
     $data['pages'][$i] = [
-        'name' => $p->name,
-        'description' => $p->description,
+        'name' => $p->getName(),
+        'description' => $p->getDescription(),
     ];
 }
 
