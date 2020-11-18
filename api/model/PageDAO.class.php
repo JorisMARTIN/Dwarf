@@ -1,5 +1,4 @@
 <?php
-
 require_once(dirname(__FILE__) . '/DAO.class.php');
 require_once(dirname(__FILE__).'/Page.class.php');
 
@@ -43,19 +42,19 @@ class PageDAO extends DAO {
     }
 
     function putPage(string $name, string $description, int $gamemode, int $template, bool $completed, int $userId) : int {
-        $query = 'INSERT INTO "Page" (creationDate, name, description, gamemode, template, completed, userId)
-                  VALUES (CURRENT_TIMESTAMP, :name, :description, :gamemode, :template, :completed, :userId)
-                  RETURNING pageid';
+        $query = 'INSERT INTO "Page" (creationDate, name, description, gamemode, template, completed, userId) VALUES (CURRENT_TIMESTAMP, :name, :description, :gamemode, :template, :completed, :userId) RETURNING pageid';
         $tmp = $this->db->prepare($query);
         if($tmp->execute([
             ':name' => $name,
             ':description' => $description,
             ':gamemode' => $gamemode,
             ':template' => $template,
-            ':completed' => $completed,
+            ':completed' => $completed ? 'true' : 'false',
             ':userId' => $userId
         ])) {
-            return $tmp->fetchColumn();
+            $result = $tmp->fetchColumn();
+            mkdir(dirname(__FILE__).'/../../cdn/frames/'.$result, 0644);
+            return $result;
         } else {
             return -1;
         }
