@@ -15,7 +15,7 @@ $lastId = $pageDAO->getLastPageId();
 $pages = $pageDAO->getRangeOfPages($lastId - 5, $lastId);
 
 $data = [
-    'pages' => array()
+    'pages' => []
 ];
 
 for ($i = 0; $i < count($pages); $i++) {
@@ -31,3 +31,5 @@ if($userId != -1) {
 
     $data['loggedInContent'] = "Hello, " . $userDAO->getUser($userId)->nickname . " !";
 }
+
+echo json_encode($data);
