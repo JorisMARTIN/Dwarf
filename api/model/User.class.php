@@ -9,9 +9,26 @@ class User {
   private $ips;
   private $creationdate;
 
-  function __get(string $prop) {
-    return $this->$prop;
+  function getId() : int {
+    return $this->userid;
   }
+
+  function getEmail() : string {
+    return $this->email;
+  }
+
+  function getUsername() : string {
+    return $this->nickname;
+  }
+
+  function getCreationDate() : string {
+    return $this->creationdate;
+  }
+
+  function getIps() : array {
+    return $this->ips;
+  }
+
 }
 
 ?>

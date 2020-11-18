@@ -11,9 +11,38 @@ class Page {
   private $completed;
   private $userid;
 
-  function __get(string $prop) {
-    return $this->$prop;
+  function getId() : int {
+    return $this->pageid;
   }
+
+  function getName() : string {
+    return $this->name;
+  }
+
+  function getDescription() : string {
+    return $this->desciption;
+  }
+
+  function getGameMode() : int {
+    return $this->gamemode;
+  }
+
+  function getTemplateType() : int {
+    return $this->template;
+  }
+
+  function getCreationDate() : string {
+    return $this->creationdate;
+  }
+
+  function isCompleted() : bool {
+    return $this->completed;
+  }
+
+  function getOwnerId() : int {
+    return $this->userid;
+  }
+
 }
 
 ?>

@@ -12,9 +12,34 @@ class Frame {
   private $pageid;
   private $userid;
 
-  function __get(string $prop) {
-    return $this->$prop;
+  function getId() : int {
+    return $this->frameid;
   }
+
+  function getImagePtr() : string {
+    return $this->imageptr;
+  }
+
+  function getCreationDate() : string {
+    return $this->creationDate;
+  }
+
+  function getWidth() : int {
+    return $this->width;
+  }
+
+  function getHeight() : int {
+    return $this->height;
+  }
+
+  function getPageId() : int {
+    return $this->pageid;
+  }
+
+  function getOwnerId() : int {
+    return $this->userid;
+  }
+
 }
 
 ?>
