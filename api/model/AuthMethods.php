@@ -25,7 +25,9 @@ function tokenToUserId() : int { // returns userId OR -1 if it fails
 
     //check signature
     $secret = $GLOBALS['DWARF_SECRET'];
-    if ($signature != hash_hmac('sha256', $header . "." . $payload, $secret, true)) return -1;
+    $trueSignatureBIN = hash_hmac('sha256', $header . "." . $payload, $secret, true);
+    $trueSignature = str_replace(['+', '/', '='], ['-', '_', ''], base64_encode($trueSignatureBIN));
+    if ($signature != $trueSignature) return -1;
 
     if(isset($payload_decoded->uid))
         return $payload_decoded->uid;
