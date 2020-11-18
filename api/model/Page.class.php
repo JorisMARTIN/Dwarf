@@ -20,7 +20,7 @@ class Page {
   }
 
   function getDescription() : string {
-    return $this->desciption;
+    return $this->description;
   }
 
   function getGameMode() : int {
