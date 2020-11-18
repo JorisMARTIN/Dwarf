@@ -22,6 +22,8 @@ dwarf-browser/npm-debug.log*
 dwarf-browser/yarn-debug.log*
 dwarf-browser/yarn-error.log*
 
+cdn/*
+
 .vscode
 
 docs/conception/VPP/*.vpp.bak_*
