@@ -36,7 +36,7 @@ class PageDAO extends DAO {
     function setCompleted(int $pageId, bool $completed) : bool {
         $query = 'UPDATE "Page" SET completed = :completed WHERE pageId = :pageId';
         return $this->db->prepare($query)->execute([
-            ':completed' => $completed,
+            ':completed' => $completed ? 't' : 'f',
             ':pageId' => $pageId
         ]);
     }
@@ -49,7 +49,7 @@ class PageDAO extends DAO {
             ':description' => $description,
             ':gamemode' => $gamemode,
             ':template' => $template,
-            ':completed' => $completed,
+            ':completed' => $completed ? 't' : 'f',
             ':userId' => $userId
         ])) {
             $result = $tmp->fetchColumn();
