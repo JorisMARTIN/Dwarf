@@ -46,7 +46,7 @@ class UserDAO extends DAO {
         if ($tmp->execute([':email' => $email])) {
             $userInfos = $tmp->fetch(PDO::FETCH_ASSOC);
             if(password_verify($password, $userInfos['password'])) {
-                return $userInfos['userId'];
+                return $userInfos['userid'];
             } else {
                 return -1;
             }
