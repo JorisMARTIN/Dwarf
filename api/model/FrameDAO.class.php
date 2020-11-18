@@ -14,9 +14,22 @@ class FrameDAO extends DAO {
     }
   }
 
-  function putFrame(string $imagePtr, bool $drawable, bool $done, int $width, int $height, int $pageId, int $userId) : bool {
-    $query = 'INSERT INTO "Frame" (creationDate, imagePtr, drawable, done, width, height, pageId, userId) VALUES (CURRENT_TIMESTAMP, :imagePtr, :drawable, :done, :width, :height, :pageId, :userId)';
-    return $this->db->prepare($query)->execute([
+  function getFrames(int $pageId) : array {
+    $query = 'SELECT * FROM "Frame" WHERE pageId = :pageId';
+    $tmp = $this->db->prepare($query);
+    if ($tmp->execute([':pageId' => $pageId])) {
+      return $tmp->fetchAll(PDO::FETCH_CLASS, 'Frame');
+    } else {
+      return NULL;
+    }
+  }
+
+  function putFrame(string $imagePtr, bool $drawable, bool $done, int $width, int $height, int $pageId, int $userId) : int {
+    $query = 'INSERT INTO "Frame" (creationDate, imagePtr, drawable, done, width, height, pageId, userId)
+              VALUES (CURRENT_TIMESTAMP, :imagePtr, :drawable, :done, :width, :height, :pageId, :userId)
+              RETURNING frameid';
+    $tmp = $this->db->prepare($query);
+    if($tmp->execute([
       ':imagePtr' => $imagePtr,
       ':drawable' => $drawable,
       ':done' => $done,
@@ -24,7 +37,9 @@ class FrameDAO extends DAO {
       ':height' => $height,
       ':pageId' => $pageId,
       ':userId' => $userId
-    ]);
+    ])) {
+      return $tmp->fetchColumn();
+    }
   }
 
   function setImagePtr(int $frameId, string $imagePtr) : bool {
