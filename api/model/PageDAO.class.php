@@ -52,9 +52,9 @@ class PageDAO extends DAO {
             ':completed' => $completed ? 't' : 'f',
             ':userId' => $userId
         ])) {
-            $result = $tmp->fetchColumn();
-            mkdir(dirname(__FILE__).'/../../cdn/frames/page-'.$result, 0644);
-            return $result;
+            $pageId = $tmp->fetchColumn();
+            mkdir(dirname(__FILE__).'/../../cdn/frames/page-'.$pageId, 0644);
+            return $pageId;
         } else {
             return -1;
         }

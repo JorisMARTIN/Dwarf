@@ -24,13 +24,12 @@ class FrameDAO extends DAO {
     }
   }
 
-  function putFrame(string $imagePtr, bool $drawable, bool $done, int $width, int $height, int $pageId, int $userId) : int {
-    $query = 'INSERT INTO "Frame" (creationDate, imagePtr, drawable, done, width, height, pageId, userId)
-              VALUES (CURRENT_TIMESTAMP, :imagePtr, :drawable, :done, :width, :height, :pageId, :userId)
+  function putFrame(bool $drawable, bool $done, int $width, int $height, int $pageId, int $userId) : int {
+    $query = 'INSERT INTO "Frame" (creationDate, drawable, done, width, height, pageId, userId)
+              VALUES (CURRENT_TIMESTAMP, :drawable, :done, :width, :height, :pageId, :userId)
               RETURNING frameid';
     $tmp = $this->db->prepare($query);
     if($tmp->execute([
-      ':imagePtr' => $imagePtr,
       ':drawable' => $drawable ? 't' : 'f',
       ':done' => $done ? 't' : 'f',
       ':width' => $width,
@@ -38,7 +37,9 @@ class FrameDAO extends DAO {
       ':pageId' => $pageId,
       ':userId' => $userId
     ])) {
-      return $tmp->fetchColumn();
+      $frameId = $tmp->fetchColumn();
+      $this->setImagePtr($frameId, "frame-".$frameId);
+      return $frameId;
     } else {
       return -1;
     }
