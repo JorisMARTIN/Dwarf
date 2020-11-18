@@ -60,4 +60,14 @@ class PageDAO extends DAO {
             return -1;
         }
     }
+
+    function getUserPages(int $userId) : array {
+        $query = 'SELECT * FROM "Page" WHERE userid=:userId';
+        $tmp = $this->db->prepare($query);
+        if($tmp->execute([':userId' => $userId])) {
+            return $tmp->fetchAll(PDO::FETCH_CLASS, "Page");
+        } else {
+            return NULL;
+        }
+    }
 }
