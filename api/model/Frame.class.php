@@ -12,7 +12,7 @@ class Frame {
   private $pageid;
   private $userid;
 
-  function __get(string $prop) : int {
+  function __get(string $prop) {
     return $this->$prop;
   }
 }
