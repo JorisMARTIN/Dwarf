@@ -56,6 +56,8 @@ class PageDAO extends DAO {
             ':userId' => $userId
         ])) {
             return $tmp->fetchColumn();
+        } else {
+            return -1;
         }
     }
 }
