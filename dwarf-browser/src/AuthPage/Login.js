@@ -45,11 +45,13 @@ export default class Login extends Component {
                     <form>
                         <input
                             placeholder="Email"
+                            name="email"
                             type="email"
                             onChange={this._handleChange}
                         />
                         <input
                             placeholder="Password"
+                            name="password"
                             type="password"
                             onChange={this._handleChange}
                         />
