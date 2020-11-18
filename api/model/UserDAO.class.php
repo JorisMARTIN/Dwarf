@@ -41,15 +41,15 @@ class UserDAO extends DAO {
 
     //get userId from email & plain password
     function logUser(string $email, string $password) : int {
-        $query = 'SELECT userid FROM "User" WHERE email=:email AND password=:password';
+        $query = 'SELECT userid, password FROM "User" WHERE email=:email';
         $tmp = $this->db->prepare($query);
-        if ($tmp->execute([
-            ':email' => $email,
-            ':password' => password_hash($password, PASSWORD_DEFAULT)
-        ])) {
-            $userId = $tmp->fetchColumn();
-            if($userId == false) return -1;
-            else return $userId;
+        if ($tmp->execute([':email' => $email])) {
+            $userInfos = $tmp->fetch(PDO::FETCH_ASSOC);
+            if(password_verify($password, $userInfos['password'])) {
+                return $userInfos['userId'];
+            } else {
+                return -1;
+            }
         } else {
             return -1;
         }
