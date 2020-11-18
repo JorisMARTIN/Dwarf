@@ -8,7 +8,7 @@ import './index.css'
 export default class Login extends Component {
     state = {
         redirectToHome: false,
-        username: "",
+        email: "",
         password: ""
     };
 
@@ -23,7 +23,7 @@ export default class Login extends Component {
         we would like to utilize a login method that will send our entered credentials
         over to the server for verification. Once verified, it should store your token
         and send you to the protected route. */
-        Auth.login(this.state.username, this.state.password)
+        Auth.login(this.state.email, this.state.password)
             .then(res => {
                 if (res === false) {
                     return alert("Log in failed. Try again.");
@@ -44,9 +44,9 @@ export default class Login extends Component {
                     <h1>Login</h1>
                     <form>
                         <input
-                            placeholder="Username"
-                            name="username"
-                            type="text"
+                            placeholder="Email"
+                            name="email"
+                            type="email"
                             onChange={this._handleChange}
                         />
                         <input

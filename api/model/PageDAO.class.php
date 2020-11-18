@@ -14,6 +14,16 @@ class PageDAO extends DAO {
         }
     }
 
+    function getLastPageId() {
+        $query = 'SELECT max(pageId) FROM "Page"';
+        $tmp = $this->db->prepare($query);
+        if ($tmp->execute()) {
+            return $tmp->fetchColumn();
+        } else {
+            return false;
+        }
+    }
+
     function getRangeOfPages(int $firstId, int $lastId) : array {
         $query = 'SELECT * FROM "Page" WHERE pageid >= :firstId AND pageid <= :lastId';
         $tmp = $this->db->prepare($query);
@@ -29,6 +39,18 @@ class PageDAO extends DAO {
         return $this->db->prepare($query)->execute([
             ':completed' => $completed,
             ':pageId' => $pageId
+        ]);
+    }
+
+    function putPage(string $name, string $description, int $gamemode, int $template, bool $completed, int $userId) : bool {
+        $query = 'INSERT INTO "Page" (creationDate, name, description, gamemode, template, completed, userId) VALUES (CURRENT_TIMESTAMP, :name, :description, :gamemode, :template, :completed, :userId)';
+        return $this->db->prepare($query)->execute([
+            ':name' => $name,
+            ':description' => $description,
+            ':gamemode' => $gamemode,
+            ':template' => $template,
+            ':completed' => $completed,
+            ':userId' => $userId
         ]);
     }
 }

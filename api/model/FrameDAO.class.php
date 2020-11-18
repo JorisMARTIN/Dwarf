@@ -14,14 +14,16 @@ class FrameDAO extends DAO {
     }
   }
 
-  function putFrame(string $imagePtr, bool $drawable, bool $done, int $width, int $height) : bool {
-    $query = 'INSERT INTO "Frame" (creationDate, imagePtr, drawable, done, width, height) VALUES (NOW()::timestamp, :imagePtr, :drawable, :done, :width, :height)';
+  function putFrame(string $imagePtr, bool $drawable, bool $done, int $width, int $height, int $pageId, int $userId) : bool {
+    $query = 'INSERT INTO "Frame" (creationDate, imagePtr, drawable, done, width, height, pageId, userId) VALUES (CURRENT_TIMESTAMP, :imagePtr, :drawable, :done, :width, :height, :pageId, :userId)';
     return $this->db->prepare($query)->execute([
       ':imagePtr' => $imagePtr,
       ':drawable' => $drawable,
       ':done' => $done,
       ':width' => $width,
-      ':height' => $height
+      ':height' => $height,
+      ':pageId' => $pageId,
+      ':userId' => $userId
     ]);
   }
 

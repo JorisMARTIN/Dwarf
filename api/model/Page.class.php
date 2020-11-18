@@ -11,7 +11,7 @@ class Page {
   private $completed;
   private $userid;
 
-  function __get(string $prop) : int {
+  function __get(string $prop) {
     return $this->$prop;
   }
 }

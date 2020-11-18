@@ -3,7 +3,7 @@ userId SERIAL PRIMARY KEY,
 creationDate timestamp NOT NULL,
 nickname varchar(16) NOT NULL,
 email varchar(64) UNIQUE,
-password varchar(32) NOT NULL,
+password varchar(255) NOT NULL,
 IPs varchar(16)[]
 );
 

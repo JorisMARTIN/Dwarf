@@ -9,7 +9,7 @@ class User {
   private $ips;
   private $creationdate;
 
-  function __get(string $prop) : int {
+  function __get(string $prop) {
     return $this->$prop;
   }
 }

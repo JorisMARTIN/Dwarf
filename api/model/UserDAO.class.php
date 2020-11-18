@@ -25,7 +25,7 @@ class UserDAO extends DAO {
     }
 
     function putUser(string $email, string $username, string $password, string $ip) : bool {
-        $query = 'INSERT INTO "User" (nickname, email, password, creationdate, ips) VALUES (:username, :email, :password, NOW()::timestamp, ARRAY[:ip])';
+        $query = 'INSERT INTO "User" (nickname, email, password, creationdate, ips) VALUES (:username, :email, :password, CURRENT_TIMESTAMP, ARRAY[:ip])';
         return $this->db->prepare($query)->execute([
             ':username' => $username,
             ':email' => $email,
@@ -39,6 +39,20 @@ class UserDAO extends DAO {
         return $this->db->prepare($query)->execute([':userId' => $userId, ':ip' => $ip]);
     }
 
-}
+    //get userId from email & plain password
+    function logUser(string $email, string $password) : int {
+        $query = 'SELECT userid, password FROM "User" WHERE email=:email';
+        $tmp = $this->db->prepare($query);
+        if ($tmp->execute([':email' => $email])) {
+            $userInfos = $tmp->fetch(PDO::FETCH_ASSOC);
+            if(password_verify($password, $userInfos['password'])) {
+                return $userInfos['userid'];
+            } else {
+                return -1;
+            }
+        } else {
+            return -1;
+        }
+    }
 
-?>
+}

@@ -6,7 +6,7 @@ import './index.css'
 
 export default class Signup extends Component {
     state = {
-        username: "",
+        email: "",
         password: ""
     };
 
@@ -17,17 +17,22 @@ export default class Signup extends Component {
     handleFormSubmit = (e) => {
         e.preventDefault();
 
-        Auth.signup(this.state.username, this.state.password)
-            .then(res => {
-                if (res === true) {
-                    alert("Sign up failed");
-                } else {
-                    alert("Sign up successful, you may now log in.");
-                }
+        Auth.fetch("signup.php", {
+            method: 'POST',
+            body: JSON.stringify({
+                "email": this.state.email,
+                "password": this.state.password
             })
-            .catch(err => {
-                alert(err);
-            })
+        }).then(res => {
+            if (res.success) {
+                alert("Sign up successful, you may now log in.");
+            } else {
+                alert("Sign up failed");
+            }
+        })
+        .catch(err => {
+            alert(err);
+        })
     }
 
     render() {
@@ -36,9 +41,9 @@ export default class Signup extends Component {
                 <h1>Signup</h1>
                 <form>
                     <input
-                        placeholder="Username"
-                        name="username"
-                        type="text"
+                        placeholder="Email"
+                        name="email"
+                        type="email"
                         onChange={this._handleChange}
                     />
                     <input
