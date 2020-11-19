@@ -30,52 +30,59 @@ class InitDrawing extends Component{
                 gameType: 0 // Public par défaut, à modifier lors de la création de partie privée
             })
         }).then(res => {
+            console.log("Resultat : ");
             console.log(res);
         });
     }
 
     render() {
         return (
-            <div className="container">
+            <div className="initateDrawingContainer">
                 <h1>Initiate a Drawing</h1>
                 <form>
 
                     <fieldset className="first">
-                        <label htmlFor="title">Title :</label>
+                        <label htmlFor="title" className="labelTitle">Title :</label>
                         <input type="text" name="title" id="title" value={this.state.title} onChange={this._handleChange} required/>
                     </fieldset>
 
                     <fieldset className="second">
                         <div>
-                            <label>Game Mode :</label>
-                            <div>
-                                <input type="radio" name="gamemode" id="normal" value="0" onChange={this._handleChange} checked/>
-                                <label htmlFor="normal">Normal</label>
-
-                                <input type="radio" name="gamemode" id="reverse" value="1" onChange={this._handleChange}/>
-                                <label htmlFor="reverse">Reverse</label>
-
-                                <input type="radio" name="gamemode" id="intermediate" value="2" onChange={this._handleChange}/>
-                                <label htmlFor="intermediate">Intermediate</label>
+                            <label className="labelTitle">Game Mode :</label>
+                            <div className="radiosButtons">
+                                <div>
+                                    <input type="radio" name="gamemode" id="normal" value="0" onChange={this._handleChange} checked/>
+                                    <label htmlFor="normal">Normal</label>
+                                </div>
+                                <div>
+                                    <input type="radio" name="gamemode" id="reverse" value="1" onChange={this._handleChange}/>
+                                    <label htmlFor="reverse">Reverse</label>
+                                </div>
+                                <div>
+                                    <input type="radio" name="gamemode" id="intermediate" value="2" onChange={this._handleChange} disabled/>
+                                    <label htmlFor="intermediate">Intermediate</label>
+                                </div>
                             </div>
                         </div>
                         <div>
-                            <label htmlFor="description">Description :</label>
-                            <textarea name="descritpion" id="description" onChange={this._handleChange}></textarea>
+                            <label htmlFor="description" className="labelTitle">Description :</label>
+                            <textarea name="descritpion" rows="5" cols="60" id="description" onChange={this._handleChange}></textarea>
                         </div>
                     </fieldset>
 
                     <fieldset className="third">
-                        <label>Game type :</label>
-
-                        <input type="radio" name="gametype" id="public" value="0" onChange={this._handleChange} checked/>
-                        <label htmlFor="public">Public</label>
-
-                        <input type="radio" name="gametype" id="private" value="1" onChange={this._handleChange}/>
-                        <label htmlFor="private">Private</label>
+                        <label className="labelTitle">Game type :</label>
+                        <div>
+                            <input type="radio" name="gametype" id="public" value="0" onChange={this._handleChange} checked/>
+                            <label htmlFor="public">Public</label>
+                        </div>
+                        <div>
+                            <input type="radio" name="gametype" id="private" value="1" onChange={this._handleChange} disabled/>
+                            <label htmlFor="private">Private</label>
+                        </div>
                     </fieldset>
 
-                    <button onClick={this.handleFormSubmit}>Submit</button>
+                    <button className="submitButton" onClick={this.handleFormSubmit}>Submit</button>
                 </form>
             </div>
         )

@@ -1,12 +1,70 @@
- .container{
-     width: 80%;
-     margin: auto;
- }
+html{
+    background-color: grey;
+}
 
- fieldset{
-     margin: 10px 0px 10px 0px;
-     display: flex;
-     flex-direction: column;
-     justify-content: center;
-     align-items: center;
- }
+.initateDrawingContainer{
+    width: 80%;
+    margin: auto;
+}
+
+fieldset{
+    margin: 20px 0px 20px 0px;
+    padding: 10px 0px 10px 0px;
+    border: none;
+    background-color: lightgray;
+}
+
+.labelTitle{
+    text-decoration: underline;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.first{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.second{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    text-align: center;
+}
+
+.second textarea{
+    resize: none;
+}
+
+.second>div{
+    display: flex;
+    flex-direction: column;
+}
+
+.radiosButtons{
+    display: flex;
+    flex-direction: column;
+    text-align: start;
+}
+
+.third{
+    display: flex;
+    flex-direction: column;
+    padding-left: 30px;
+}
+
+.submitButton{
+    width: 100%;
+    height: 70px;
+    background-color: lightgreen;
+    font-weight: 900;
+    font-size: large;
+    cursor: pointer;
+}
+
+.submitButton:hover{
+    border: solid 8px green;
+}
