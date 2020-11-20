@@ -92,19 +92,19 @@ class InitDrawing extends Component{
                     </fieldset>
 
                     <fieldset className="initateDrawingTemplate">
-                        <label className="labelTemplate">Game type :</label>
+                        <label className="labelTemplate">Template :</label>
                         <div className="initDrawingRadiosButtons">
                             <div>
-                                <input type="radio" name="gametype" id="public" value="0" onChange={this._handleChange} checked />
-                                <label htmlFor="public">T1</label>
+                                <input type="radio" name="template" id="template1" value="0" onChange={this._handleChange} checked />
+                                <label htmlFor="template1">1</label>
                             </div>
                             <div>
-                                <input type="radio" name="gametype" id="private" value="1" onChange={this._handleChange} disabled />
-                                <label htmlFor="private">T2</label>
+                                <input type="radio" name="template" id="template2" value="1" onChange={this._handleChange} disabled />
+                                <label htmlFor="template2">2</label>
                             </div>
                             <div>
-                                <input type="radio" name="gametype" id="private" value="1" onChange={this._handleChange} disabled />
-                                <label htmlFor="private">T3</label>
+                                <input type="radio" name="template" id="template3" value="1" onChange={this._handleChange} disabled />
+                                <label htmlFor="template3">3</label>
                             </div>
                         </div>
                     </fieldset>
