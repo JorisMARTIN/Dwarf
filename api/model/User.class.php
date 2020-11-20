@@ -17,7 +17,7 @@ class User {
     return $this->email;
   }
 
-  function getUsername() : string {
+  function getNickname() : string {
     return $this->nickname;
   }
 

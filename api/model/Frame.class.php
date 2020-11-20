@@ -40,6 +40,14 @@ class Frame {
     return $this->userid;
   }
 
+  function isDrawable() : bool {
+     return $this->drawable;
+  }
+
+  function isDone() : bool {
+    return $this->done;
+  }
+
 }
 
 ?>
