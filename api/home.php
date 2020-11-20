@@ -19,6 +19,8 @@ for ($i = 0; $i < count($pages); $i++) {
     $data['pages'][$i] = [
         'name' => $p->getName(),
         'description' => $p->getDescription(),
+        'gamemode' => $p->getGameMode(),
+        'date' => $p->getCreationDate(),
     ];
 }
 
