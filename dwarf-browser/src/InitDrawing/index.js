@@ -2,6 +2,7 @@ import { Component } from 'react';
 import './index.css';
 import Auth from '../components/AuthHelperMethods';
 import withAuth from '../components/withAuth';
+import { Redirect } from 'react-router-dom';
 
 class InitDrawing extends Component{
 
@@ -10,7 +11,8 @@ class InitDrawing extends Component{
         gamemode: 0,
         description: "",
         template: 0,
-        gametype: 0
+        gametype: 0,
+        frameId: -1,
     };
 
     _handleChange = (e) => {
@@ -30,13 +32,17 @@ class InitDrawing extends Component{
                 gametype: this.state.gametype
             })
         }).then(res => {
-            console.log("Resultat : "); // TODO
-            console.log(res);
+            if(res.frameId && res.frameId !== -1){
+                this.setState({frameId: res.frameId});
+            }else{
+                alert("Erreur dans la création de la page");
+            }
         });
     }
 
     render() {
-        return (
+        if(this.state.frameId !== -1) return (<Redirect to={"canvas/" + this.state.frameId}/>)
+        else return (
             <div className="initateDrawingContainer">
                 <h1>Initiate a Drawing</h1>
                 <form>
