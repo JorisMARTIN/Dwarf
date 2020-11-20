@@ -30,7 +30,7 @@ class InitDrawing extends Component{
                 gameType: 0 // Public par défaut, à modifier lors de la création de partie privée
             })
         }).then(res => {
-            console.log("Resultat : ");
+            console.log("Resultat : "); // TODO
             console.log(res);
         });
     }
@@ -55,7 +55,7 @@ class InitDrawing extends Component{
                                     <label htmlFor="normal">Normal</label>
                                 </div>
                                 <div>
-                                    <input type="radio" name="gamemode" id="reverse" value="1" onChange={this._handleChange}/>
+                                    <input type="radio" name="gamemode" id="reverse" value="1" onChange={this._handleChange} disabled/>
                                     <label htmlFor="reverse">Reverse</label>
                                 </div>
                                 <div>
