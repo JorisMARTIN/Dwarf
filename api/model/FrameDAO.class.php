@@ -38,9 +38,10 @@ class FrameDAO extends DAO {
       ':userId' => $userId
     ])) {
       $frameId = $tmp->fetchColumn();
-      $this->setImagePtr($frameId, "frame-".$frameId);
+      $this->setImagePtr($frameId, dirname(__FILE__)."/frame-".$frameId);
       return $frameId;
     } else {
+      var_dump($tmp->errorInfo());
       return -1;
     }
   }

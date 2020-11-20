@@ -20,5 +20,6 @@ var_dump($page2);
 var_dump($frame1);
 
 var_dump($pageDAO->putPage('Creation', 'Je suis', 0, 0, false, 1));
+var_dump($frameDAO->putFrame(True, False, 100, 100, 1, 1));
 
 ?>

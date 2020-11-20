@@ -18,7 +18,6 @@ if ($userId != -1) {
 
     $imagePtr = dirname(__FILE__).'/../cdn/frames/'.$frame->getPageId().'/frame-'.$frameid;
 
-    $frameDAO->setImagePtr($frameid, $imagePtr);
     $frameDAO->setDone($frameid, True);
 
     $image = base64_decode($image_base64);

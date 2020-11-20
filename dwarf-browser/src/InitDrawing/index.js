@@ -18,7 +18,6 @@ class InitDrawing extends Component{
     }
 
     handleForm = (e) => {
-        alert('Création de la page ...');
         e.preventDefault();
 
         Auth.fetch("initDrawing.php", {
@@ -26,7 +25,8 @@ class InitDrawing extends Component{
             body: JSON.stringify({
                 title: this.state.title,
                 gamemode: this.state.gamemode,
-                descritpion: this.state.descritpion,
+                descritpion: this.state.description,
+                template: this.state.template,
                 gameType: 0 // Public par défaut, à modifier lors de la création de partie privée
             })
         }).then(res => {

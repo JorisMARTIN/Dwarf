@@ -21,7 +21,7 @@ userId int NOT NULL REFERENCES "User"(userId)
 CREATE TABLE IF NOT EXISTS "Frame" (
 frameId SERIAL PRIMARY KEY,
 creationDate timestamp NOT NULL,
-imagePtr varchar(64) NOT NULL,
+imagePtr varchar(64),
 drawable boolean DEFAULT FALSE,
 done boolean DEFAULT FALSE,
 width int CHECK (width > 0),
