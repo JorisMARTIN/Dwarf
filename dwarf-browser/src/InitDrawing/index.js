@@ -20,7 +20,7 @@ class InitDrawing extends Component{
     handleForm = (e) => {
         e.preventDefault();
 
-        Auth.fetch("initDrawing.php", {
+        Auth.fetch("initdrawing.php", {
             method: 'POST',
             body: JSON.stringify({
                 title: this.state.title,
