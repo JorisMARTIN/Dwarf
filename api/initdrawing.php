@@ -43,7 +43,7 @@ if($userId != -1) {
             $tmpSize = count($TEMPLATES[$template]);
             for($i = 0; $i < $tmpSize; $i++) {
                 $box = $TEMPLATES[$template][$i];
-                $fid = $frameDAO->putFrame(true, false, $box['w'], $box['h'], $pageId, $userid);
+                $fid = $frameDAO->putFrame(true, false, $box['w'], $box['h'], $pageId, $userId);
                 if($gamemode == 0) {
                     if($i == 0) {
                         $frameId = $fid;
