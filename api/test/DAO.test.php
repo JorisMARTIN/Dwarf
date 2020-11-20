@@ -18,7 +18,7 @@ if ($user1) {
   print(" - Vérification de son pseudo : ".($user1NickName === "dwarf" ? "OK" : "FAILED"));
   $user1Email = $user1->getEmail();
   print("Vérification de son email : ".($user1Email === "dwarf@gmail.com" ? "OK" : "FAILED"));
-
+}
 $page1 = $pageDAO->getUserPages($user1Id)[0];
 $page2 = $pageDAO->getPage(2);
 $frame1 = $frameDAO->getFrames($page1->getId());

@@ -19,24 +19,36 @@ html{
 
 .initateDrawingForm {
     background-color: #2C2C2E;
+    color: #E5E5EA;
+    display: flex;
+    flex-direction: column;
     border-radius: 10px;
     padding-top: 2.5%;
     padding-bottom: 2.5%;
-    display: flex;
-    flex-direction: column;
-    color: #E5E5EA;
 }
 
 .initateDrawingChoseTitle, .initateDrawingDescription, .initateDrawingGameMode, .initateDrawingGameType, .initateDrawingTemplate {
     border: none;
     padding-bottom: 2.5%;
-    padding-left: auto;
+    width: 80%;
+    margin-right: auto;
+    margin-left: auto;
 }
 
 .initateDrawingChoseTitle {
-    display: flex;
-    flex-direction: row;
+    display: block;
+    flex-direction: column;
 }
+.initateDrawingTitleFrame {
+    margin-top: 2%;
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 10px;
+    padding: 1%;
+    max-width: 300px;
+}
+
 .initateDrawingDescription {
     display: flex;
     flex-direction: column;
@@ -48,10 +60,19 @@ html{
     margin-right: 10%;
     margin-top: 2%;
     border-radius: 10px;
+    padding: 1%;
 }
+
+.initateDrawingGameMode, .initateDrawingGameType, .initateDrawingTemplate {
+    display: flex;
+    flex-direction: column;
+}
+
 .initDrawingRadiosButtons {
     margin-top: 1%;
-    width: 50%;
+    width: 70%;
+    margin-left: auto;
+    margin-right: auto;
     display: flex;
     flex-direction: row;
     justify-content: space-around;

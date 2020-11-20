@@ -45,11 +45,12 @@ class InitDrawing extends Component{
         else return (
             <div className="initateDrawingContainer">
                 <h1 className="initateDrawingTitle">Initiate a Drawing</h1>
+
                 <form className="initateDrawingForm" >
 
                     <fieldset className="initateDrawingChoseTitle">
                         <label htmlFor="title" className="labelTitle">Title :</label>
-                        <input type="text" maxLength="32" name="title" id="title" value={this.state.title} onChange={this._handleChange} required/>
+                        <input className="initateDrawingTitleFrame" type="text" maxLength="32" name="title" id="title" value={this.state.title} onChange={this._handleChange} required/>
                     </fieldset>
 
                     <fieldset className="initateDrawingGameMode">
@@ -103,7 +104,7 @@ class InitDrawing extends Component{
                                 <label htmlFor="template2">2</label>
                             </div>
                             <div>
-                                <input type="radio" name="template" id="template3" value="1" onChange={this._handleChange} disabled />
+                                <input type="radio" name="template" id="template3" value="2" onChange={this._handleChange} disabled />
                                 <label htmlFor="template3">3</label>
                             </div>
                         </div>
