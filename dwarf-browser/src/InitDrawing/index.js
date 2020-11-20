@@ -72,7 +72,7 @@ class InitDrawing extends Component{
                         </div>
                         <div>
                             <label htmlFor="description" className="labelTitle">Description :</label>
-                            <textarea name="descritpion" rows="5" cols="60" maxLength="512" id="description" onChange={this._handleChange}></textarea>
+                            <textarea name="description" rows="5" cols="60" maxLength="512" id="description" onChange={this._handleChange}></textarea>
                         </div>
                     </fieldset>
 
