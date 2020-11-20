@@ -2,41 +2,47 @@ import { Component } from 'react';
 import './index.css';
 import Auth from '../components/AuthHelperMethods';
 import withAuth from '../components/withAuth';
+import { Redirect } from 'react-router-dom';
 
 class InitDrawing extends Component{
 
     state = {
         title: "",
         gamemode: 0,
-        descritpion: "",
+        description: "",
         template: 0,
-        gameType: 0
+        gametype: 0,
+        frameId: -1,
     };
 
     _handleChange = (e) => {
         this.setState({ [e.target.name]: e.target.value });
     }
 
-    handleForm = (e) => {
+    handleFormSubmit = (e) => {
         e.preventDefault();
 
-        Auth.fetch("initDrawing.php", {
+        Auth.fetch("initdrawing.php", {
             method: 'POST',
             body: JSON.stringify({
                 title: this.state.title,
                 gamemode: this.state.gamemode,
-                descritpion: this.state.description,
+                description: this.state.description,
                 template: this.state.template,
-                gameType: 0 // Public par défaut, à modifier lors de la création de partie privée
+                gametype: this.state.gametype
             })
         }).then(res => {
-            console.log("Resultat : "); // TODO
-            console.log(res);
+            if(res.frameId && res.frameId !== -1){
+                this.setState({frameId: res.frameId});
+            }else{
+                alert("Erreur dans la création de la page");
+            }
         });
     }
 
     render() {
-        return (
+        if(this.state.frameId !== -1) return (<Redirect to={"canvas/" + this.state.frameId}/>)
+        else return (
             <div className="initateDrawingContainer">
                 <h1 className="initateDrawingTitle">Initiate a Drawing</h1>
                 <form className="initateDrawingForm" >
@@ -68,7 +74,7 @@ class InitDrawing extends Component{
 
                     <fieldset className="initateDrawingDescription">
                         <label htmlFor="description" className="labelTitle">Description :</label>
-                        <textarea name="descritpion" rows="5" cols="60" maxLength="512" id="description" onChange={this._handleChange}></textarea>
+                        <textarea name="description" rows="5" cols="60" maxLength="512" id="description" onChange={this._handleChange}></textarea>
                     </fieldset>
 
                     <fieldset className="initateDrawingGameType">

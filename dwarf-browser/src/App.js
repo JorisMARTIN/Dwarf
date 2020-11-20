@@ -11,6 +11,7 @@ import Draw from './Draw';
 import InitDrawing from './InitDrawing';
 import AuthPage from './AuthPage';
 import E404 from './E404';
+import Canvas from './Canvas';
 
 export default function App() {
   return (
@@ -58,6 +59,8 @@ export default function App() {
         <Route path="/init">
           <InitDrawing />
         </Route>
+
+        <Route path={"/canvas/:id"} component={Canvas}/>
 
         <Route path="*">
           <E404 />

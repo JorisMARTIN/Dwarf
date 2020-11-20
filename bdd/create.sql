@@ -26,7 +26,7 @@ drawable boolean DEFAULT FALSE,
 done boolean DEFAULT FALSE,
 width int CHECK (width > 0),
 height int CHECK (height > 0),
-pageId int NOT NULL REFERENCES "Frame"(frameId),
+pageId int NOT NULL REFERENCES "Page"(pageId),
 userId int REFERENCES "User"(userId)
 );
 
