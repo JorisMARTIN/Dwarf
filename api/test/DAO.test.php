@@ -10,11 +10,19 @@ $pageDAO = new PageDAO();
 $frameDAO = new FrameDAO();
 
 $user1 = $userDAO->getUser(1);
-$page1 = $pageDAO->getUserPages($user1->getId())[0];
+if ($user1) {
+  print("Récupération d'un utilisateur : OK");
+  $user1Id = $user1->getId();
+  print(" - Vérification de son identifiant : ".($user1Id === 1 ? "OK" : "FAILED"));
+  $user1NickName = $user1->getNickName();
+  print(" - Vérification de son pseudo : ".($user1NickName === "dwarf" ? "OK" : "FAILED"));
+  $user1Email = $user1->getEmail();
+  print("Vérification de son email : ".($user1Email === "dwarf@gmail.com" ? "OK" : "FAILED"));
+
+$page1 = $pageDAO->getUserPages($user1Id)[0];
 $page2 = $pageDAO->getPage(2);
 $frame1 = $frameDAO->getFrames($page1->getId());
 
-var_dump($user1);
 var_dump($page1);
 var_dump($page2);
 var_dump($frame1);
