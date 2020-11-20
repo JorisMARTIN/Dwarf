@@ -38,18 +38,18 @@ class InitDrawing extends Component{
     render() {
         return (
             <div className="initateDrawingContainer">
-                <h1>Initiate a Drawing</h1>
-                <form>
+                <h1 className="initateDrawingTitle">Initiate a Drawing</h1>
+                <form className="initateDrawingForm" >
 
-                    <fieldset className="first">
+                    <fieldset className="initateDrawingChoseTitle">
                         <label htmlFor="title" className="labelTitle">Title :</label>
                         <input type="text" maxLength="32" name="title" id="title" value={this.state.title} onChange={this._handleChange} required/>
                     </fieldset>
 
-                    <fieldset className="second">
+                    <fieldset className="initateDrawingGameMode">
                         <div>
                             <label className="labelTitle">Game Mode :</label>
-                            <div className="radiosButtons">
+                            <div className="initDrawingRadiosButtons">
                                 <div>
                                     <input type="radio" name="gamemode" id="normal" value="0" onChange={this._handleChange} checked/>
                                     <label htmlFor="normal">Normal</label>
@@ -64,25 +64,46 @@ class InitDrawing extends Component{
                                 </div>
                             </div>
                         </div>
-                        <div>
-                            <label htmlFor="description" className="labelTitle">Description :</label>
-                            <textarea name="descritpion" rows="5" cols="60" maxLength="512" id="description" onChange={this._handleChange}></textarea>
-                        </div>
                     </fieldset>
 
-                    <fieldset className="third">
+                    <fieldset className="initateDrawingDescription">
+                        <label htmlFor="description" className="labelTitle">Description :</label>
+                        <textarea name="descritpion" rows="5" cols="60" maxLength="512" id="description" onChange={this._handleChange}></textarea>
+                    </fieldset>
+
+                    <fieldset className="initateDrawingGameType">
                         <label className="labelTitle">Game type :</label>
-                        <div>
-                            <input type="radio" name="gametype" id="public" value="0" onChange={this._handleChange} checked/>
-                            <label htmlFor="public">Public</label>
-                        </div>
-                        <div>
-                            <input type="radio" name="gametype" id="private" value="1" onChange={this._handleChange} disabled/>
-                            <label htmlFor="private">Private</label>
+                        <div className="initDrawingRadiosButtons">
+                            <div>
+                                <input type="radio" name="gametype" id="public" value="0" onChange={this._handleChange} checked/>
+                                <label htmlFor="public">Public</label>
+                            </div>
+                            <div>
+                                <input type="radio" name="gametype" id="private" value="1" onChange={this._handleChange} disabled/>
+                                <label htmlFor="private">Private</label>
+                            </div>
                         </div>
                     </fieldset>
 
-                    <button className="submitButton" onClick={this.handleFormSubmit}>Submit</button>
+                    <fieldset className="initateDrawingTemplate">
+                        <label className="labelTemplate">Game type :</label>
+                        <div className="initDrawingRadiosButtons">
+                            <div>
+                                <input type="radio" name="gametype" id="public" value="0" onChange={this._handleChange} checked />
+                                <label htmlFor="public">T1</label>
+                            </div>
+                            <div>
+                                <input type="radio" name="gametype" id="private" value="1" onChange={this._handleChange} disabled />
+                                <label htmlFor="private">T2</label>
+                            </div>
+                            <div>
+                                <input type="radio" name="gametype" id="private" value="1" onChange={this._handleChange} disabled />
+                                <label htmlFor="private">T3</label>
+                            </div>
+                        </div>
+                    </fieldset>
+
+                    <button className="initateDrawingSubmitButton" onClick={this.handleFormSubmit}>Submit</button>
                 </form>
             </div>
         )

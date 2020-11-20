@@ -41,7 +41,7 @@ export default class Home extends Component {
 
     render() {
         return (
-            <div>
+            <div className="homeAll">
                 <h1 className="homeTitle">Home</h1>
                 <div className="homeMain">
                     <div className="homeDivPlanche">
