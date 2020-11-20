@@ -6,7 +6,6 @@ import {
   Link
 } from 'react-router-dom';
 import Home from './Home';
-import Browse from './Browse';
 import Draw from './Draw';
 import InitDrawing from './InitDrawing';
 import AuthPage from './AuthPage';
@@ -20,9 +19,6 @@ export default function App() {
         <ul>
           <li>
             <Link className="link" to="/">Home</Link>
-          </li>
-          <li>
-            <Link className="link" to="/browse">Browse Drawings</Link>
           </li>
           <li>
             <Link className="link" to="/draw">Draw !</Link>
@@ -42,10 +38,6 @@ export default function App() {
       <Switch>
         <Route exact path="/">
           <Home />
-        </Route>
-
-        <Route path="/browse">
-          <Browse />
         </Route>
 
         <Route path="/draw">
