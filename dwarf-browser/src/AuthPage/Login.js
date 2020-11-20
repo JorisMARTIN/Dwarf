@@ -30,9 +30,6 @@ export default class Login extends Component {
                 }
                 this.setState({redirectToHome: true});
             })
-            .catch(err => {
-                alert(err);
-            })
     }
 
     render() {

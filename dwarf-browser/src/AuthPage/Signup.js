@@ -30,9 +30,6 @@ export default class Signup extends Component {
                 alert("Sign up failed");
             }
         })
-        .catch(err => {
-            alert(err);
-        })
     }
 
     render() {

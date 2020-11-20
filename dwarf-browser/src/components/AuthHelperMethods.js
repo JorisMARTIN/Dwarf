@@ -73,6 +73,7 @@ class AuthHelperMethods {
             ...options
         })
         .then(this._checkStatus)
+        .catch(err => alert(err))
         .then(response => response.json())
     }
 

@@ -8,16 +8,16 @@ class InitDrawing extends Component{
     state = {
         title: "",
         gamemode: 0,
-        descritpion: "",
+        description: "",
         template: 0,
-        gameType: 0
+        gametype: 0
     };
 
     _handleChange = (e) => {
         this.setState({ [e.target.name]: e.target.value });
     }
 
-    handleForm = (e) => {
+    handleFormSubmit = (e) => {
         e.preventDefault();
 
         Auth.fetch("initdrawing.php", {
@@ -25,9 +25,9 @@ class InitDrawing extends Component{
             body: JSON.stringify({
                 title: this.state.title,
                 gamemode: this.state.gamemode,
-                descritpion: this.state.description,
+                description: this.state.description,
                 template: this.state.template,
-                gameType: 0 // Public par défaut, à modifier lors de la création de partie privée
+                gametype: this.state.gametype
             })
         }).then(res => {
             console.log("Resultat : "); // TODO
