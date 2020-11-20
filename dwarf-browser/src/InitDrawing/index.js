@@ -43,7 +43,7 @@ class InitDrawing extends Component{
 
                     <fieldset className="first">
                         <label htmlFor="title" className="labelTitle">Title :</label>
-                        <input type="text" name="title" id="title" value={this.state.title} onChange={this._handleChange} required/>
+                        <input type="text" maxLength="32" name="title" id="title" value={this.state.title} onChange={this._handleChange} required/>
                     </fieldset>
 
                     <fieldset className="second">
@@ -66,7 +66,7 @@ class InitDrawing extends Component{
                         </div>
                         <div>
                             <label htmlFor="description" className="labelTitle">Description :</label>
-                            <textarea name="descritpion" rows="5" cols="60" id="description" onChange={this._handleChange}></textarea>
+                            <textarea name="descritpion" rows="5" cols="60" maxLength="512" id="description" onChange={this._handleChange}></textarea>
                         </div>
                     </fieldset>
 
