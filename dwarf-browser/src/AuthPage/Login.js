@@ -37,21 +37,29 @@ export default class Login extends Component {
             return <Redirect to='/' />
         } else {
             return (
-                <div>
+                <div className="authPageLogin">
                     <h1>Login</h1>
-                    <form>
-                        <input
-                            placeholder="Email"
-                            name="email"
-                            type="email"
-                            onChange={this._handleChange}
-                        />
-                        <input
-                            placeholder="Password"
-                            name="password"
-                            type="password"
-                            onChange={this._handleChange}
-                        />
+                    <form className="authPageLoginForm">
+                        <div className="authPageLoginEmail">
+                            <label htmlFor="email">Email :</label>
+                            <input
+                                id="email"
+                                placeholder="Email"
+                                name="email"
+                                type="email"
+                                onChange={this._handleChange}
+                            />
+                        </div>
+                        <div className="authPageLoginPwd">
+                            <label htmlFor="pwd">Password :</label>
+                            <input
+                                id="pwd"
+                                placeholder="Password"
+                                name="password"
+                                type="password"
+                                onChange={this._handleChange}
+                            />
+                        </div>
                         <button onClick={this.handleFormSubmit}>Log in</button>
                     </form>
                 </div>
