@@ -53,9 +53,12 @@ export default class Home extends Component {
     }
 
     fetchMoreData = () => {
+
         if(!this.state.hasMoreData) return;
         
-        this.loadComponents();
+        setTimeout(() => {
+            this.loadComponents()
+        }, 500);
 
     }
 
@@ -64,9 +67,10 @@ export default class Home extends Component {
             <div className="homeAll">
                 <h1 className="homeTitle">Home</h1>
                 <div className="homeMain">
+                    {this.state.hasMoreData ? "Oui" : "Non"}
                     <InfiniteScroll
                         className="homeDivPlanche"
-                        dataLength={10}
+                        dataLength={this.state.pages.length}
                         next={this.fetchMoreData}
                         hasMore={this.state.hasMoreData}
                         loader={<h4>Loading ...</h4>}
