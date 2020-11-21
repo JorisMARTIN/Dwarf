@@ -14,14 +14,21 @@ class UserDAO extends DAO {
         }
     }
 
-    function putUser(string $email, string $username, string $password, string $ip) : bool {
-        $query = 'INSERT INTO "User" (nickname, email, password, creationdate, ips) VALUES (:username, :email, :password, CURRENT_TIMESTAMP, ARRAY[:ip])';
-        return $this->db->prepare($query)->execute([
+    function putUser(string $email, string $username, string $password, string $ip) : int {
+        $query = 'INSERT INTO "User" (nickname, email, password, creationdate, ips) VALUES (:username, :email, :password, CURRENT_TIMESTAMP, ARRAY[:ip]) RETURNING userid';
+        $tmp = $this->db->prepare($query);
+        if ($tmp->execute([
             ':username' => $username,
             ':email' => $email,
             ':password' => password_hash($password, PASSWORD_DEFAULT),
             ':ip' => $ip
-        ]);
+        ])) {
+            $userId = $tmp->fetchColumn();
+            return $userId;
+        } else {
+            var_dump($tmp->errorInfo());
+            return -1;
+        }
     }
 
     function addIp(int $userId, string $ip) : bool {

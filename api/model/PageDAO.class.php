@@ -56,6 +56,7 @@ class PageDAO extends DAO {
             mkdir(dirname(__FILE__).'/../../cdn/frames/page-'.$pageId, 0644);
             return $pageId;
         } else {
+            var_dump($tmp->errorInfo());
             return -1;
         }
     }

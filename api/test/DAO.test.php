@@ -61,11 +61,11 @@ if ($frame1) {
 }
 print("\n\n");
 
-$newUserId = $userDAO->putUser('DrStone@gmail.com', 'drStone', 'qwerty', '192.168.1.1');
-print("Création d'un utilisateur : ".($newUserId ? "OK" : "FAILED ($newUserId)")."\n");
-$newPageId = $pageDAO->putPage('Creation de DrStone', 'Téléphone', 0, 0, false, 1);
+$newUserId = $userDAO->putUser('DrStone'.$pageDAO->getLastPageId().'@gmail.com', 'drStone', 'qwerty', '192.168.1.1');
+print("Création d'un utilisateur : ".($newUserId != -1 ? "OK" : "FAILED ($newUserId)")."\n");
+$newPageId = $pageDAO->putPage('Creation de DrStone', 'Téléphone', 0, 0, false, $newUserId);
 print("Création d'une planche : ".($newPageId != -1 ? "OK" : "FAILED ($newPageId)")."\n");
-$newFrameId = $frameDAO->putFrame(True, False, 100, 100, $newPageId, 1);
+$newFrameId = $frameDAO->putFrame(True, False, 100, 100, $newPageId, $newUserId);
 print("Création d'une frame : ".($newFrameId != -1 ? "OK" : "FAILED ($newFrameId)")."\n");
 
 ?>
