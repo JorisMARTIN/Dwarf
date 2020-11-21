@@ -21,11 +21,12 @@ if ($userId != -1) {
         if ($frame != NULL) {
             // TODO : check si user a bien le droit de dessiner la frame
             $imagePtr = $frame->getImagePtr();
+            $imagePath = dirname(__FILE__, 1).$imagePtr;
 
             $frameDAO->setDone($frameid, True);
 
             $image = base64_decode($image_base64);
-            $file = fopen($imagePtr, "w");
+            $file = fopen($imagePath, "w");
 
             if ($file && $image && fwrite($file, $image) && fclose($file)) {
                 $out = [
