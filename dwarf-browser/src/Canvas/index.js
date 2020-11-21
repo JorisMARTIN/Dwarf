@@ -88,7 +88,7 @@ class Canvas extends React.Component {
                 <div className="canvasMain">
                     <div className="canvasToolsLeft">
                         <div className="canvasToolsLeftImage">
-                            <img></img>
+                            <img alt="precedente"></img>
                             <p>Intégrer l'image précédente !</p>
                         </div>
                         <div className="canvasToolsLeftOthersTools">
