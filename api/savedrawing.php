@@ -1,29 +1,64 @@
 <?php
+require_once(dirname(__FILE__) . '/includes/httpheaders.inc.php');
+require_once(dirname(__FILE__) . '/model/AuthMethods.php');
 
-require_once(dirname(__FILE__).'/model/FrameDAO.class.php');
+require_once(dirname(__FILE__) . '/model/FrameDAO.class.php');
 
 $userId = tokenToUserId();
 
 if ($userId != -1) {
-  $data = json_decode(file_get_contents("php://input"));
+    $data = json_decode(file_get_contents("php://input"));
 
-  if (isset($data)) {
+    if (isset($data)) {
 
-    $frameid = (int) ($data->frameid ?? -1);
-    $image_base64 = ($data->img ?? "");
+        $frameid = (int) ($data->frameid ?? -1);
+        $image_base64 = ($data->img ?? "");
 
-    $frameDAO = new FrameDAO();
+        $frameDAO = new FrameDAO();
 
-    $frame = $frameDAO->getFrame($frameid);
+        $frame = $frameDAO->getFrame($frameid);
 
-    $imagePtr = dirname(__FILE__).'/../cdn/frames/'.$frame->getPageId().'/frame-'.$frameid;
+        if ($frame != NULL) {
+            // TODO : check si user a bien le droit de dessiner la frame
+            $imagePtr = $frame->getImagePtr();
+            $imagePath = dirname(__FILE__, 2).$imagePtr;
 
-    $frameDAO->setDone($frameid, True);
+            $frameDAO->setDone($frameid, True);
 
-    $image = base64_decode($image_base64);
-    $file = fopen($imagePtr, "w");
-    $file->fwrite($image);
-    $file->fclose();
-  }
+            $image = base64_decode($image_base64);
+            $file = fopen($imagePath, "w");
+
+            if ($image && $file
+                && chmod($file, 0774)
+                && fwrite($file, $image)
+                && fclose($file)
+            ) {
+                $out = [
+                    'status' => 200,
+                ];
+            } else {
+                $out = [
+                    'status' => 400,
+                    'message' => 'Server failed to save image'
+                ];
+            }
+        } else {
+            $out = [
+                'status' => 400,
+                'message' => 'Invalid frameid'
+            ];
+        }
+    } else {
+        $out = [
+            'status' => 400,
+            'message' => 'No data provided'
+        ];
+    }
+} else {
+    $out = [
+        'status' => 400,
+        'message' => 'You are not logged in'
+    ];
 }
-?>
+
+echo json_encode($out);

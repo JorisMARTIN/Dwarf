@@ -25,7 +25,7 @@ $TEMPLATES = [
 
 $userId = tokenToUserId();
 
-if($userId != -1) {
+if ($userId != -1) {
     $data = json_decode(file_get_contents("php://input"));
 
     if (isset($data)) {
@@ -41,15 +41,15 @@ if($userId != -1) {
 
         if ($pageId != -1) {
             $tmpSize = count($TEMPLATES[$template]);
-            for($i = 0; $i < $tmpSize; $i++) {
+            for ($i = 0; $i < $tmpSize; $i++) {
                 $box = $TEMPLATES[$template][$i];
                 $fid = $frameDAO->putFrame(true, false, $box['w'], $box['h'], $pageId, $userId);
-                if($gamemode == 0) {
-                    if($i == 0) {
+                if ($gamemode == 0) {
+                    if ($i == 0) {
                         $frameId = $fid;
                     }
                 } elseif ($gamemode == 1) {
-                    if($i == $tmpSize) {
+                    if ($i == $tmpSize) {
                         $frameId = $fid;
                     }
                 }
@@ -59,7 +59,6 @@ if($userId != -1) {
                 'status' => 200,
                 'frameId' => $frameId
             ];
-
         } else {
             $out = [
                 'status' => 400,
