@@ -24,7 +24,7 @@ class PageDAO extends DAO {
     }
 
     function getRangeOfPages(int $firstId, int $lastId) : array {
-        $query = 'SELECT * FROM "Page" WHERE pageid >= :firstId AND pageid <= :lastId';
+        $query = 'SELECT * FROM "Page" WHERE pageid >= :firstId AND pageid <= :lastId ORDER BY pageid DESC';
         $tmp = $this->db->prepare($query);
         if ($tmp->execute([':firstId' => $firstId, ':lastId' => $lastId])) {
             return $tmp->fetchAll(PDO::FETCH_CLASS, "Page");
