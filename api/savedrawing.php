@@ -28,7 +28,11 @@ if ($userId != -1) {
             $image = base64_decode($image_base64);
             $file = fopen($imagePath, "w");
 
-            if ($file && $image && fwrite($file, $image) && fclose($file)) {
+            if ($image && $file
+                && chmod($file, 0774)
+                && fwrite($file, $image)
+                && fclose($file)
+            ) {
                 $out = [
                     'status' => 200,
                 ];
