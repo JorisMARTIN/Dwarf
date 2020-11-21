@@ -11,7 +11,8 @@ $data = json_decode(file_get_contents("php://input"));
 
 $lastId = ($data->lastPageLoadedId == -1) ? $pageDAO->getLastPageId() : $data->lastPageLoadedId;
 
-$nextId = ($lastId - 1 <= 1) ? 1 : $lastId - 1;
+if($data->lastPageLoadedId == -1) $nextId = $lastId;
+else $nextId = ($lastId - 1 <= 1) ? 1 : $lastId - 1;
 
 $willReachEnd = $nextId - 5 < 1;
 
@@ -24,7 +25,7 @@ if($willReachEnd){
     $numberToLoad = 5;
 }
 
-if($lastId != 1){
+if($nextId != 1){
     $pages = $pageDAO->getRangeOfPages($nextId - $numberToLoad, $nextId);
 }else{
     $page = [];
@@ -43,7 +44,7 @@ for ($i = 0; $i < count($pages); $i++) {
     $data['pages'][$i] = [
         'name' => $p->getName(),
         'description' => $p->getDescription(),
-        'gamemode' => $p->getGameMode(),
+        'gamemode' => ($p->getGameMode() == 0 ? "Normal" : "Reverse"),
         'date' => $p->getCreationDate(),
     ];
 }
