@@ -1,1 +1,93 @@
- 
+.canvasMain {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.canvasToolsLeft, .canvasDraw, .canvasToolsRight {
+    background-color: #2C2C2E;
+    color: #E5E5EA;
+    padding: 1%;
+    border-radius: 30px;
+}
+
+.canvasToolsLeft {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    
+}
+.canvasToolsLeftImage {
+    background: #1C1C1E;
+    height: 40%;
+    max-height: 40%;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+}
+.canvasToolsLeftOthersTools {
+    background: #1C1C1E;
+    height: 40%;
+    max-height: 40%;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+.canvasToolsLeftUndo {
+    width: 40%;
+    margin-right: auto;
+    margin-left: auto;
+    padding: 0.8em;
+    border-radius: 50px;
+    background-color: grey;
+    border-color: grey;
+    color: #E5E5EA;
+}
+.canvasToolsLeftBrush {
+    text-align: center;
+}
+.canvasToolsLeftBrush > input{
+    width: 80%;
+    margin-left: 10%;
+    margin-right: 10%;
+    margin-top: 5%;
+}
+.canvasToolsLeftLazy {
+    text-align: center;
+}
+.canvasToolsLeftLazy > input {
+    width: 80%;
+    margin-left: 10%;
+    margin-right: 10%;
+    margin-top: 5%;
+}
+.canvasToolsLeftSubmit {
+    width: 40%;
+    margin-right: auto;
+    margin-left: auto;
+    padding: 0.8em;
+    background-color: #0A84FF;
+    border-color: #0A84FF;
+    border-radius: 50px;
+}
+
+.canvasDraw {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+.canvasDrawTitle > h1 {
+    text-align: center;
+}
+.canvasDrawSection {
+    padding: 1.5em;
+    border-radius: 50px;
+}
+
+/*Pour le moment uniquement le color Picker*/
+.canvasToolsRight {
+    display: flex;
+
+}
+.canvasToolsRightColorPicker {}

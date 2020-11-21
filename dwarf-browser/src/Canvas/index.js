@@ -85,39 +85,70 @@ class Canvas extends React.Component {
         else if(isNaN(this.frameid)) return <Redirect to='/init' />
         else return (
             <div>
-                <h1>Vous dessinez la frame {this.frameid}</h1>
-                <CanvasDraw
-                    ref={this.canvas}
-                    brushColor={this.state.color}
-                    brushRadius={this.state.brushRadius}
-                    lazyRadius={this.state.lazyRadius}
-                    canvasWidth={1920}
-                    canvasHeight={700}
-                />
-                <CirclePicker color={this.state.color} onChange={(color) => (this.setState({ color: color.hex }))} />
-                <div>
-                    <button onClick={() => this.canvas.current.undo()}>Undo</button>
-                    <div>
-                        <label>Brush-Radius:</label>
-                        <input
-                            type="number"
-                            value={this.state.brushRadius}
-                            onChange={e =>
-                                this.setState({ brushRadius: parseInt(e.target.value, 10) })
+                <div className="canvasMain">
+                    <div className="canvasToolsLeft">
+                        <div className="canvasToolsLeftImage">
+                            <img></img>
+                            <p>Intégrer l'image précédente !</p>
+                        </div>
+                        <div className="canvasToolsLeftOthersTools">
+                            <button
+                                className="canvasToolsLeftUndo"
+                                onClick={() => this.canvas.current.undo()}>Undo</button>
+                            <div className="canvasToolsLeftBrush">
+                                <label>Brush-Radius:</label>
+                                <input
+                                    type="range"
+                                    min="1"
+                                    max="60"
+                                    value={this.state.brushRadius}
+                                    onChange={e =>
+                                        this.setState({ brushRadius: parseInt(e.target.value, 10) })
+                                    }
+                                />
+                            </div>
+                            <div className="canvasToolsLeftLazy">
+                                <label>Lazy-Radius:</label>
+                                <input
+                                    type="range"
+                                    min="1"
+                                    max="60"
+                                    value={this.state.lazyRadius}
+                                    onChange={e =>
+                                        this.setState({ lazyRadius: parseInt(e.target.value, 10) })
+                                    }
+                                />
+                            </div>                            
+                        </div>
+                        <button
+                            className="canvasToolsLeftSubmit"
+                            onClick={this.handleSubmit}
+                            disabled={this.state.blockSubmit}>Submit
+                        </button>
+                    </div>
+                    <div className="canvasDraw">
+                        <div className="canvasDrawTitle">
+                            <h1>Titre : {this.frameid}</h1>
+                            <p>Description : {this.frameid}</p>
+                        </div>
+                        <CanvasDraw
+                            className="canvasDrawSection"
+                            ref={this.canvas}
+                            brushColor={this.state.color}
+                            brushRadius={this.state.brushRadius}
+                            lazyRadius={this.state.lazyRadius}
+                            canvasWidth={500}
+                            canvasHeight={500}
+                        />
+                    </div>
+                    <div className="canvasToolsRight">
+                        <CirclePicker
+                            className="canvasToolsRightColorPicker"
+                            color={this.state.color}
+                            onChange={(color) => (this.setState({ color: color.hex }))
                             }
                         />
                     </div>
-                    <div>
-                        <label>Lazy-Radius:</label>
-                        <input
-                            type="number"
-                            value={this.state.lazyRadius}
-                            onChange={e =>
-                                this.setState({ lazyRadius: parseInt(e.target.value, 10) })
-                            }
-                        />
-                    </div>
-                    <button onClick={this.handleSubmit} disabled={this.state.blockSubmit}>Submit</button>
                 </div>
             </div>
         );
