@@ -4,7 +4,7 @@ require_once(dirname(__FILE__) .'/DAO.class.php');
 require_once(dirname(__FILE__).'/User.class.php');
 
 class UserDAO extends DAO {
-    function getUser(int $userId) : User {
+    function getUser(int $userId) : ?User {
         $query = 'SELECT * FROM "User" WHERE userid=:userId';
         $tmp = $this->db->prepare($query);
         if($tmp->execute([':userId' => $userId])) {

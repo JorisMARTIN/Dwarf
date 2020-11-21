@@ -11,6 +11,8 @@ class Canvas extends React.Component {
         color: "#ff0000",
         brushRadius: 10,
         lazyRadius: 12,
+        redirectToHome: false,
+        blockSubmit: false
     }
 
     constructor(props) {
@@ -64,7 +66,8 @@ class Canvas extends React.Component {
         }
     }
 
-    handleSubmit() {
+    handleSubmit = () => {
+        this.setState({blockSubmit: true});
         const image = this.exportImageToFile();
         Auth.fetch("savedrawing.php", {
             method:'POST',
@@ -72,13 +75,15 @@ class Canvas extends React.Component {
                 frameid: this.frameid,
                 img: image
             })
+        }).then(res => {
+            this.setState({redirectToHome: true});
         })
     }
 
     render() {
-        if(isNaN(this.frameid)) return <Redirect to='/init' />
-        else
-        return (
+        if (this.state.redirectToHome) return <Redirect to='/' />
+        else if(isNaN(this.frameid)) return <Redirect to='/init' />
+        else return (
             <div>
                 <h1>Vous dessinez la frame {this.frameid}</h1>
                 <CanvasDraw
@@ -112,7 +117,7 @@ class Canvas extends React.Component {
                             }
                         />
                     </div>
-                    <button onClick={this.handleSubmit}>Submit</button>
+                    <button onClick={this.handleSubmit} disabled={this.state.blockSubmit}>Submit</button>
                 </div>
             </div>
         );

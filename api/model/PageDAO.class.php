@@ -3,7 +3,7 @@ require_once(dirname(__FILE__) . '/DAO.class.php');
 require_once(dirname(__FILE__).'/Page.class.php');
 
 class PageDAO extends DAO {
-    function getPage(int $pageId) : Page {
+    function getPage(int $pageId) : ?Page {
         $query = 'SELECT * FROM "Page" WHERE pageid = :pageId';
         $tmp = $this->db->prepare($query);
         if ($tmp->execute([':pageId' => $pageId])) {

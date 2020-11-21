@@ -4,7 +4,7 @@ require_once(dirname(__FILE__).'/DAO.class.php');
 require_once(dirname(__FILE__).'/Frame.class.php');
 
 class FrameDAO extends DAO {
-  function getFrame(int $frameId) : Frame {
+  function getFrame(int $frameId) : ?Frame {
     $query = 'SELECT * FROM "Frame" WHERE frameId = :frameId';
     $tmp = $this->db->prepare($query);
     if ($tmp->execute([':frameId' => $frameId])) {
