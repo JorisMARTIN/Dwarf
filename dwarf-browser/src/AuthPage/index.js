@@ -16,9 +16,12 @@ export default class AuthPage extends Component {
             return <Redirect to='/' />
         } else {
             return (
-                <div>
-                    <Login />
-                    <Signup />
+                <div className="authPageMain">
+                    <h1 className="authPageTitle">Authentification</h1>
+                    <div className="authPage">
+                        <Login />
+                        <Signup />
+                    </div>
                 </div>
             );
         }

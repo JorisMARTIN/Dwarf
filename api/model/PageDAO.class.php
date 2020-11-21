@@ -24,7 +24,7 @@ class PageDAO extends DAO {
     }
 
     function getRangeOfPages(int $firstId, int $lastId) : array {
-        $query = 'SELECT * FROM "Page" WHERE pageid >= :firstId AND pageid <= :lastId';
+        $query = 'SELECT * FROM "Page" WHERE pageid >= :firstId AND pageid <= :lastId ORDER BY pageid DESC';
         $tmp = $this->db->prepare($query);
         if ($tmp->execute([':firstId' => $firstId, ':lastId' => $lastId])) {
             return $tmp->fetchAll(PDO::FETCH_CLASS, "Page");
@@ -53,10 +53,9 @@ class PageDAO extends DAO {
             ':userId' => $userId
         ])) {
             $pageId = $tmp->fetchColumn();
-            mkdir(dirname(__FILE__).'/../../cdn/frames/page-'.$pageId, 0644);
+            mkdir(dirname(__FILE__, 3).'/cdn/frames/page-'.$pageId, 0775, true);
             return $pageId;
         } else {
-            var_dump($tmp->errorInfo());
             return -1;
         }
     }
