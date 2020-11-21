@@ -21,7 +21,7 @@ class Frame {
   }
 
   function getCreationDate() : string {
-    return $this->creationDate;
+    return $this->creationdate;
   }
 
   function getWidth() : int {

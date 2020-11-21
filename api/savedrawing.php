@@ -20,7 +20,7 @@ if ($userId != -1) {
 
         if ($frame != NULL) {
             // TODO : check si user a bien le droit de dessiner la frame
-            $imagePtr = dirname(__FILE__) . '/../cdn/frames/' . $frame->getPageId() . '/frame-' . $frameid;
+            $imagePtr = $frame->getImagePtr();
 
             $frameDAO->setDone($frameid, True);
 
