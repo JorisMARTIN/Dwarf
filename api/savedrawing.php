@@ -21,7 +21,7 @@ if ($userId != -1) {
         if ($frame != NULL) {
             // TODO : check si user a bien le droit de dessiner la frame
             $imagePtr = $frame->getImagePtr();
-            $imagePath = dirname(__FILE__, 1).$imagePtr;
+            $imagePath = dirname(__FILE__, 2).$imagePtr;
 
             $frameDAO->setDone($frameid, True);
 
