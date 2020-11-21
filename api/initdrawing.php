@@ -8,17 +8,17 @@ require_once(dirname(__FILE__) . '/model/FrameDAO.class.php');
 $TEMPLATES = [
     [
         [
-            'w' => 100,
-            'h' => 100
+            'w' => 500,
+            'h' => 500
         ], [
-            'w' => 100,
-            'h' => 100
+            'w' => 500,
+            'h' => 500
         ], [
-            'w' => 100,
-            'h' => 100
+            'w' => 500,
+            'h' => 500
         ], [
-            'w' => 100,
-            'h' => 100
+            'w' => 500,
+            'h' => 500
         ]
     ]
 ];
@@ -44,22 +44,19 @@ if ($userId != -1) {
             for ($i = 0; $i < $tmpSize; $i++) {
                 $box = $TEMPLATES[$template][$i];
                 $fid = $frameDAO->putFrame(true, false, $box['w'], $box['h'], $pageId, $userId);
-                if ($gamemode == 0) {
-                    if ($i == 0) {
-                        $frameId = $fid;
-                    }
-                } elseif ($gamemode == 1) {
-                    if ($i == $tmpSize) {
-                        $frameId = $fid;
-                    }
+                if (($gamemode == 0 && $i == 0) || ($gamemode == 1 && $i = $tmpSize)) {
+                    $frameId = $fid;
                 }
             }
             
             $page = $pageDAO->getPage($pageId);
+            $frame = $frameDAO->getFrame($frameId);
 
             $out = [
                 'status' => 200,
                 'frameId' => $frameId,
+                'width' => $frame->getWidth(),
+                'height' => $frame->getHeight(),
                 'pageName' => $page->getName(),
                 'gameMode' => $page->getGameMode(),
                 'description' => $page->getDescription()
