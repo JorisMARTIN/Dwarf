@@ -28,25 +28,32 @@ export default class App extends Component {
 
   render() {
     return (
-
       <Router>
-        <div className="appMenu">
-          <ul>
+        <div className="menu">
+          <Link className="dwarf" to="/">Draw With Amasing Random Friends</Link>
+          <ul className="menuNav">
+            {this.state.logged &&
             <li>
-              <Link className="link" to="/">Home</Link>
+              <Link className="link" to="/draw">Draw</Link>
             </li>
+            }
+            {!this.state.logged &&
             <li>
-              <Link className="link" to="/draw">Draw !</Link>
+              <Link className="link" to="/auth">Play</Link>
             </li>
+            }
+            {this.state.logged &&
             <li>
-              <Link className="link" to="/init">Initiate a drawing</Link>
+              <Link className="link" to="/init">Play</Link>
             </li>
-            <li>
-              <Link className="link" to="/auth">Log in / sign up</Link>
-            </li>
+            }
           </ul>
 
-          {this.state.logged && <button className="logout" onClick={this.logout}>Log out</button>}
+          {this.state.logged && <button
+                                  className="logout"
+                                  onClick={this.logout}>Log out
+                                  </button>
+          }
         </div>
 
         <Switch>
