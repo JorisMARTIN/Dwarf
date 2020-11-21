@@ -54,10 +54,15 @@ if ($userId != -1) {
                     }
                 }
             }
+            
+            $page = $pageDAO->getPage($pageId);
 
             $out = [
                 'status' => 200,
-                'frameId' => $frameId
+                'frameId' => $frameId,
+                'pageName' => $page->getName(),
+                'gameMode' => $page->getGameMode(),
+                'description' => $page->getDescription()
             ];
         } else {
             $out = [
