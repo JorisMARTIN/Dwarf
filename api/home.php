@@ -2,16 +2,40 @@
 require_once(dirname(__FILE__) . '/includes/httpheaders.inc.php');
 
 require_once(dirname(__FILE__).'/model/PageDAO.class.php');
-
+require_once(dirname(__FILE__) . '/includes/debug.inc.php');
 // Renvoie une liste de BDs
 
 $pageDAO = new PageDAO();
 
-$lastId = $pageDAO->getLastPageId();
-$pages = $pageDAO->getRangeOfPages($lastId - 5, $lastId);
+$data = json_decode(file_get_contents("php://input"));
+
+$lastId = ($data->lastPageLoadedId == -1) ? $pageDAO->getLastPageId() : $data->lastPageLoadedId;
+
+$nextId = ($lastId - 1 <= 1) ? 1 : $lastId - 1;
+
+$willReachEnd = $nextId - 5 < 1;
+
+if($willReachEnd){
+    $numberToLoad = 0;
+    while($nextId - $numberToLoad >= 2){
+        $numberToLoad++;
+    }
+}else{
+    $numberToLoad = 5;
+}
+
+if($lastId != 1){
+    $pages = $pageDAO->getRangeOfPages($nextId - $numberToLoad, $nextId);
+}else{
+    $page = [];
+}
+
+$lastId = $nextId - $numberToLoad;
 
 $data = [
-    'pages' => []
+    'lastPageLoadedId' => $lastId,
+    'endReached' => ($lastId == 1),
+    'pages' => [],
 ];
 
 for ($i = 0; $i < count($pages); $i++) {
