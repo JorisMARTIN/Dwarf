@@ -2,10 +2,12 @@
 require_once(dirname(__FILE__) . '/includes/httpheaders.inc.php');
 
 require_once(dirname(__FILE__) . '/model/PageDAO.class.php');
+require_once(dirname(__FILE__) . '/model/FrameDAO.class.php');
 require_once(dirname(__FILE__) . '/includes/debug.inc.php');
 // Renvoie une liste de BDs
 
 $pageDAO = new PageDAO();
+$frameDAO = new FrameDAO();
 
 $data = json_decode(file_get_contents("php://input"));
 
@@ -49,6 +51,7 @@ for ($i = 0; $i < count($pages); $i++) {
         'description' => $p->getDescription(),
         'gamemode' => ($p->getGameMode() == 0 ? "Normal" : "Reverse"),
         'date' => $p->getCreationDate(),
+        'imagePtr' => $frameDAO->getFrames($p->getId())[0]->getImagePtr()
     ];
 }
 

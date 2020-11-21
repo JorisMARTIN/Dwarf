@@ -7,7 +7,7 @@ function ComicPage(props) {
     return (
         <div className="homePlanche">
             <div className="homePlancheTop">
-                <img className="homePlancheImg" src={props.name} alt={props.name}></img>
+                <img className="homePlancheImg" src={props.imagePtr} alt={props.name}></img>
                 <div>
                     <h3 className="homeName">Titre : {props.name}</h3>
                     <p className="homeDescri">Description :<br></br>
