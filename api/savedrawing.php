@@ -1,4 +1,6 @@
 <?php
+require_once(dirname(__FILE__) . '/includes/httpheaders.inc.php');
+require_once(dirname(__FILE__) . '/model/AuthMethods.php');
 
 require_once(dirname(__FILE__) . '/model/FrameDAO.class.php');
 
@@ -19,12 +21,12 @@ if ($userId != -1) {
         if ($frame != NULL) {
             // TODO : check si user a bien le droit de dessiner la frame
             $imagePtr = dirname(__FILE__) . '/../cdn/frames/' . $frame->getPageId() . '/frame-' . $frameid;
-    
+
             $frameDAO->setDone($frameid, True);
-    
+
             $image = base64_decode($image_base64);
             $file = fopen($imagePtr, "w");
-    
+
             if ($file && $image && fwrite($file, $image) && fclose($file)) {
                 $out = [
                     'status' => 200,
