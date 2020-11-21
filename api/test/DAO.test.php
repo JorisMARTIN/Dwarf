@@ -25,7 +25,6 @@ if ($user1) {
   print("FAILED");
 }
 print("\n\n");
-
 $page2 = $pageDAO->getPage(2);
 print("Récupération d'une planche : ");
 if ($page2) {
