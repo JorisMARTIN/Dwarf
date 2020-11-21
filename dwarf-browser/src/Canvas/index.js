@@ -24,7 +24,7 @@ class Canvas extends React.Component {
 
     //based on https://github.com/embiem/react-canvas-draw/pull/78
     exportImageToFile = () => {
-        if(this.canvas.current !== null) {
+        if (this.canvas.current !== null) {
             // Get a reference to the "drawing" layer of the canvas
             let canvasToExport = this.canvas.current.canvas.drawing;
 
@@ -67,22 +67,22 @@ class Canvas extends React.Component {
     }
 
     handleSubmit = () => {
-        this.setState({blockSubmit: true});
+        this.setState({ blockSubmit: true });
         const image = this.exportImageToFile();
         Auth.fetch("savedrawing.php", {
-            method:'POST',
+            method: 'POST',
             body: JSON.stringify({
                 frameid: this.frameid,
                 img: image
             })
         }).then(res => {
-            this.setState({redirectToHome: true});
+            this.setState({ redirectToHome: true });
         })
     }
 
     render() {
         if (this.state.redirectToHome) return <Redirect to='/' />
-        else if(isNaN(this.frameid)) return <Redirect to='/init' />
+        else if (isNaN(this.frameid)) return <Redirect to='/init' />
         else return (
             <div>
                 <div className="canvasMain">
@@ -118,7 +118,7 @@ class Canvas extends React.Component {
                                         this.setState({ lazyRadius: parseInt(e.target.value, 10) })
                                     }
                                 />
-                            </div>                            
+                            </div>
                         </div>
                         <button
                             className="canvasToolsLeftSubmit"
@@ -139,14 +139,14 @@ class Canvas extends React.Component {
                             lazyRadius={this.state.lazyRadius}
                             canvasWidth={500}
                             canvasHeight={500}
+                            hideGrid
                         />
                     </div>
                     <div className="canvasToolsRight">
                         <CirclePicker
                             className="canvasToolsRightColorPicker"
                             color={this.state.color}
-                            onChange={(color) => (this.setState({ color: color.hex }))
-                            }
+                            onChange={(color) => (this.setState({ color: color.hex }))}
                         />
                     </div>
                 </div>
