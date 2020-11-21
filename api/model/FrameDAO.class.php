@@ -15,7 +15,7 @@ class FrameDAO extends DAO {
   }
 
   function getFrames(int $pageId) : array {
-    $query = 'SELECT * FROM "Frame" WHERE pageId = :pageId';
+    $query = 'SELECT * FROM "Frame" WHERE pageId = :pageId ORDER BY frameid';
     $tmp = $this->db->prepare($query);
     if ($tmp->execute([':pageId' => $pageId])) {
       return $tmp->fetchAll(PDO::FETCH_CLASS, 'Frame');

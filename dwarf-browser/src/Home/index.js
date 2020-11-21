@@ -7,13 +7,13 @@ function ComicPage(props) {
     return (
         <div className="homePlanche">
             <div className="homePlancheTop">
-                <img className="homePlancheImg" src={props.imagePtr} alt={props.name}></img>
+                <img className="homePlancheImg" src={"http://dwarf.jorismartin.fr" + props.imagePtr} alt={props.name}></img>
                 <div>
                     <h3 className="homeName">Titre : {props.name}</h3>
                     <p className="homeDescri">Description :<br></br>
-                        {props.desc}</p>
+                        {props.description}</p>
                     <p className="homeMode">Mode :<br></br>
-                        {props.mode}</p>
+                        {props.gamemode}</p>
                 </div>
             </div>
             <div className="homePlancheBottom">
@@ -44,7 +44,7 @@ export default class Home extends Component {
         }).then(res => {
             this.setState({
                 pages: this.state.pages.concat(res.pages.map((page, i) =>
-                    <ComicPage key={i} name={page.name} desc={page.description} mode={page.gamemode}/>
+                    <ComicPage key={i + this.state.pages.length} {...page}/>
                 )),
                 lastPageLoadedId: res.lastPageLoadedId,
                 hasMoreData: !res.endReached,

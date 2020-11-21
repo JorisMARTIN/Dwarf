@@ -3,7 +3,7 @@ import { CirclePicker } from 'react-color';
 import CanvasDraw from 'react-canvas-draw';
 import './index.css';
 import Auth from '../components/AuthHelperMethods';
-import { Redirect, withRouter } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import withAuth from '../components/withAuth';
 
 class Canvas extends React.Component {
@@ -12,15 +12,13 @@ class Canvas extends React.Component {
         brushRadius: 10,
         lazyRadius: 12,
         redirectToHome: false,
-        blockSubmit: false
+        blockSubmit: false,
     }
 
     constructor(props) {
         super(props);
         this.canvas = React.createRef();
-        this.frameid = parseInt(this.props.match.params.id, 10);
     }
-
 
     //based on https://github.com/embiem/react-canvas-draw/pull/78
     exportImageToFile = () => {
@@ -60,19 +58,19 @@ class Canvas extends React.Component {
 
             //reset the globalCompositeOperation to what it was
             context.globalCompositeOperation = compositeOperation;
-
-            //return imageData;
             return imageData;
         }
     }
 
     handleSubmit = () => {
         this.setState({ blockSubmit: true });
+
         const image = this.exportImageToFile();
+
         Auth.fetch("savedrawing.php", {
             method: 'POST',
             body: JSON.stringify({
-                frameid: this.frameid,
+                frameid: this.props.frameId,
                 img: image
             })
         }).then(res => {
@@ -82,14 +80,12 @@ class Canvas extends React.Component {
 
     render() {
         if (this.state.redirectToHome) return <Redirect to='/' />
-        else if (isNaN(this.frameid)) return <Redirect to='/init' />
         else return (
             <div>
                 <div className="canvasMain">
                     <div className="canvasToolsLeft">
                         <div className="canvasToolsLeftImage">
-                            <img alt="precedente"></img>
-                            <p>Intégrer l'image précédente !</p>
+                            {this.props.refereeImage && <img src={this.props.refereeImage} alt="referee frame"></img>}
                         </div>
                         <div className="canvasToolsLeftOthersTools">
                             <button
@@ -128,8 +124,8 @@ class Canvas extends React.Component {
                     </div>
                     <div className="canvasDraw">
                         <div className="canvasDrawTitle">
-                            <h1>Titre : {this.frameid}</h1>
-                            <p>Description : {this.frameid}</p>
+                            <h1>Titre : {this.props.pageName}</h1>
+                            <p>Description : {this.props.pageDesc}</p>
                         </div>
                         <CanvasDraw
                             className="canvasDrawSection"
@@ -137,8 +133,8 @@ class Canvas extends React.Component {
                             brushColor={this.state.color}
                             brushRadius={this.state.brushRadius}
                             lazyRadius={this.state.lazyRadius}
-                            canvasWidth={500}
-                            canvasHeight={500}
+                            canvasWidth={this.props.frameWidth}
+                            canvasHeight={this.props.frameHeight}
                             hideGrid
                         />
                     </div>
@@ -146,7 +142,7 @@ class Canvas extends React.Component {
                         <CirclePicker
                             className="canvasToolsRightColorPicker"
                             color={this.state.color}
-                            onChange={(color) => (this.setState({ color: color.hex }))}
+                            onChange={color => this.setState({ color: color.hex })}
                         />
                     </div>
                 </div>
@@ -155,4 +151,4 @@ class Canvas extends React.Component {
     }
 }
 
-export default withAuth(withRouter(Canvas));
+export default withAuth(Canvas);

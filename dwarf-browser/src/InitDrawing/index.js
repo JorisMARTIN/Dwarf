@@ -2,9 +2,9 @@ import { Component } from 'react';
 import './index.css';
 import Auth from '../components/AuthHelperMethods';
 import withAuth from '../components/withAuth';
-import { Redirect } from 'react-router-dom';
+import Canvas from '../Canvas';
 
-class InitDrawing extends Component{
+class InitDrawing extends Component {
 
     state = {
         title: "",
@@ -12,7 +12,8 @@ class InitDrawing extends Component{
         description: "",
         template: 0,
         gametype: 0,
-        frameId: -1,
+
+        initResponse: null,
     };
 
     _handleChange = (e) => {
@@ -32,17 +33,27 @@ class InitDrawing extends Component{
                 gametype: this.state.gametype
             })
         }).then(res => {
-            if(res.frameId && res.frameId !== -1){
-                this.setState({frameId: res.frameId});
-            }else{
+            if (res.frameId && res.frameId !== -1) {
+                this.setState({
+                    initResponse: {
+                        frameId: res.frameId,
+                        frameWidth: res.width,
+                        frameHeight: res.height,
+                        pageName: res.pageName,
+                        pageGM: res.gameMode,
+                        pageDesc: res.description,
+                    }
+                });
+            } else {
                 alert("Erreur dans la création de la page");
             }
         });
     }
 
     render() {
-        if(this.state.frameId !== -1) return (<Redirect to={"canvas/" + this.state.frameId}/>)
-        else return (
+        if (this.state.initResponse !== null) return (
+            <Canvas {...this.state.initResponse} />
+        ); else return (
             <div className="initateDrawingContainer">
                 <h1 className="initateDrawingTitle">Initiate a Drawing</h1>
 
@@ -50,7 +61,7 @@ class InitDrawing extends Component{
 
                     <fieldset className="initateDrawingChoseTitle">
                         <label htmlFor="title" className="labelTitle">Title :</label>
-                        <input className="initateDrawingTitleFrame" type="text" maxLength="32" name="title" id="title" value={this.state.title} onChange={this._handleChange} required/>
+                        <input className="initateDrawingTitleFrame" type="text" maxLength="32" name="title" id="title" value={this.state.title} onChange={this._handleChange} required />
                     </fieldset>
 
                     <fieldset className="initateDrawingGameMode">
@@ -58,15 +69,15 @@ class InitDrawing extends Component{
                             <label className="labelTitle">Game Mode :</label>
                             <div className="initDrawingRadiosButtons">
                                 <div>
-                                    <input type="radio" name="gamemode" id="normal" value="0" onChange={this._handleChange} checked/>
+                                    <input type="radio" name="gamemode" id="normal" value="0" onChange={this._handleChange} checked />
                                     <label htmlFor="normal">Normal</label>
                                 </div>
                                 <div>
-                                    <input type="radio" name="gamemode" id="reverse" value="1" onChange={this._handleChange} disabled/>
+                                    <input type="radio" name="gamemode" id="reverse" value="1" onChange={this._handleChange} disabled />
                                     <label htmlFor="reverse">Reverse</label>
                                 </div>
                                 <div>
-                                    <input type="radio" name="gamemode" id="intermediate" value="2" onChange={this._handleChange} disabled/>
+                                    <input type="radio" name="gamemode" id="intermediate" value="2" onChange={this._handleChange} disabled />
                                     <label htmlFor="intermediate">Intermediate</label>
                                 </div>
                             </div>
@@ -82,11 +93,11 @@ class InitDrawing extends Component{
                         <label className="labelTitle">Game type :</label>
                         <div className="initDrawingRadiosButtons">
                             <div>
-                                <input type="radio" name="gametype" id="public" value="0" onChange={this._handleChange} checked/>
+                                <input type="radio" name="gametype" id="public" value="0" onChange={this._handleChange} checked />
                                 <label htmlFor="public">Public</label>
                             </div>
                             <div>
-                                <input type="radio" name="gametype" id="private" value="1" onChange={this._handleChange} disabled/>
+                                <input type="radio" name="gametype" id="private" value="1" onChange={this._handleChange} disabled />
                                 <label htmlFor="private">Private</label>
                             </div>
                         </div>

@@ -11,69 +11,48 @@ import Draw from './Draw';
 import InitDrawing from './InitDrawing';
 import AuthPage from './AuthPage';
 import E404 from './E404';
-import Canvas from './Canvas';
 import Auth from './components/AuthHelperMethods';
 
 export default class App extends Component {
 
   state = {
-    logged: Auth.loggedIn,
+    logged: Auth.loggedIn(),
   };
 
   logout = (e) => {
     e.preventDefault();
-    this.setState({logged: false});
     Auth.logout();
+    this.setState({ logged: Auth.loggedIn() });
   };
 
   render() {
     return (
       <Router>
         <div className="menu">
-          <Link className="dwarf" to="/">Draw With Amasing Random Friends</Link>
+          <Link className="dwarf" to="/">Draw With Amazing Random Friends</Link>
           <ul className="menuNav">
-            {this.state.logged &&
             <li>
               <Link className="link" to="/draw">Draw</Link>
             </li>
-            }
-            {!this.state.logged &&
-            <li>
-              <Link className="link" to="/auth">Play</Link>
-            </li>
-            }
-            {this.state.logged &&
             <li>
               <Link className="link" to="/init">Play</Link>
             </li>
-            }
           </ul>
 
           {this.state.logged && <button
-                                  className="logout"
-                                  onClick={this.logout}>Log out
-                                  </button>
-          }
+            className="logout"
+            onClick={this.logout}>Log out
+          </button>}
         </div>
 
         <Switch>
-          <Route exact path="/">
-            <Home />
-          </Route>
+          <Route exact path="/" component={Home} />
 
-          <Route path="/draw">
-            <Draw />
-          </Route>
+          <Route path="/draw" component={Draw} />
 
-          <Route path="/auth">
-            <AuthPage />
-          </Route>
+          <Route path="/auth" component={AuthPage} />
 
-          <Route path="/init">
-            <InitDrawing />
-          </Route>
-
-          <Route path={"/canvas/:id"} component={Canvas}/>
+          <Route path="/init" component={InitDrawing} />
 
           <Route path="*">
             <E404 />

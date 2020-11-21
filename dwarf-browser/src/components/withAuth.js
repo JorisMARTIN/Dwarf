@@ -14,7 +14,7 @@ export default function withAuth(AuthComponent) {
 
         render() {
             if (this.state.loggedIn) {
-                return <AuthComponent />
+                return <AuthComponent {...this.props} />
             } else {
                 return <Redirect to='/auth' />
             }
