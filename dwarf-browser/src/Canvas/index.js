@@ -122,10 +122,14 @@ class Canvas extends React.Component {
                             disabled={this.state.blockSubmit}>Submit
                         </button>
                     </div>
-                    <div className="canvasDraw">
+                    <div className="canvasDraw"
+                        style={{
+                            maxWidth: this.props.frameWidth * (1.1) /*pour intégré les margin du canvas .. Corect ?*/
+                        }}
+                    >
                         <div className="canvasDrawTitle">
-                            <h1>Titre : {this.props.pageName}</h1>
-                            <p>Description : {this.props.pageDesc}</p>
+                            <h1>{this.props.pageName}</h1>
+                            <p>Description :<br></br>{this.props.pageDesc}</p>
                         </div>
                         <CanvasDraw
                             className="canvasDrawSection"

@@ -1,4 +1,5 @@
 .canvasMain {
+    margin-top: 1%;
     display: flex;
     flex-direction: row;
     justify-content: space-around;
@@ -73,9 +74,13 @@
 }
 
 .canvasDraw {
+    max-width: 60%;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
+}
+.canvasDraw {
+    max-width: 100%;
 }
 .canvasDrawTitle > h1 {
     text-align: center;
@@ -88,6 +93,10 @@
 /*Pour le moment uniquement le color Picker*/
 .canvasToolsRight {
     display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.canvasToolsRightColorPicker {
+    transform: rotate(90deg);
 
 }
-.canvasToolsRightColorPicker {}

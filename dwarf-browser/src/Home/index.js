@@ -8,12 +8,10 @@ function ComicPage(props) {
         <div className="homePlanche">
             <div className="homePlancheTop">
                 <img className="homePlancheImg" src={"http://dwarf.jorismartin.fr" + props.imagePtr} alt={props.name}></img>
-                <div>
-                    <h3 className="homeName">Titre : {props.name}</h3>
-                    <p className="homeDescri">Description :<br></br>
-                        {props.description}</p>
-                    <p className="homeMode">Mode :<br></br>
-                        {props.gamemode}</p>
+                <div className="homePlancheTopInfos">
+                    <h3 className="homeName">{props.name}</h3> 
+                    <p className="homeDescri">{props.description}</p>
+                    <p className="homeMode">{props.gamemode}</p>
                 </div>
             </div>
             <div className="homePlancheBottom">
@@ -72,7 +70,7 @@ export default class Home extends Component {
                         dataLength={this.state.pages.length}
                         next={this.fetchMoreData}
                         hasMore={this.state.hasMoreData}
-                        loader={<h4>Loading ...</h4>}
+                        loader={<h4 className="homeDivPlancheLoader">Loading ...</h4>}
                         endMessage={<p>You have seen all the pages</p>}
                     >
                         {this.state.pages}
