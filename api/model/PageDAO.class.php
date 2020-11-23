@@ -17,7 +17,9 @@ class PageDAO extends DAO {
         $query = 'SELECT max(pageId) FROM "Page"';
         $tmp = $this->db->prepare($query);
         if ($tmp->execute()) {
-            return $tmp->fetchColumn();
+            $res = $tmp->fetchColumn();
+            if(!$res) return -1;
+            else return $res;
         } else {
             return -1;
         }
@@ -29,7 +31,7 @@ class PageDAO extends DAO {
         if ($tmp->execute([':firstId' => $firstId, ':lastId' => $lastId])) {
             return $tmp->fetchAll(PDO::FETCH_CLASS, "Page");
         } else {
-            return NULL;
+            return array();
         }
     }
 
