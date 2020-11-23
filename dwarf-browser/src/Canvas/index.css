@@ -82,8 +82,21 @@
 .canvasDraw {
     max-width: 100%;
 }
-.canvasDrawTitle > h1 {
-    text-align: center;
+.canvasDrawTitle > textarea {
+    width: 100%;
+    resize: none;
+    border: none;
+    background-color: #2C2C2E;
+    color: #E5E5EA;
+    font-family: system;
+    text-align: left;
+    justify-content: left;
+}
+.canvasDrawTitle:first-child {
+    font-style: 1.2em;
+}
+.canvasDrawTitle:last-child {
+    margin-bottom: 3%;
 }
 .canvasDrawSection {
     padding: 1.5em;

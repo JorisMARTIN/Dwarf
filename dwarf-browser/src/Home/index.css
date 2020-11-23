@@ -29,20 +29,31 @@
     color: #F2F2F7;
 }
 .homePlancheImg{
-    max-width: 50%;
+    max-width: 45%;
     border-radius: 10px;
-    margin: 3%;
+    margin: auto;
+    margin-top: 3%;
     height: auto;
     width: auto;
 }
 .homePlancheTopInfos {
-    max-width: 50%;
-    margin: 3%;
+    max-width: 45%;
+    margin-top: 3%;
+    margin: auto;
+}
+.homePlancheTopInfos > textarea {
+    max-width: 100%;
+    resize: none;
+    border: none;
+    background-color: #2C2C2E;
+    font-family: system;
 }
 .homeName{
+    margin-top: 1%;
     color: #FF453A;
 }
 .homeDescri{
+    margin-top: 2%;
     color: #FF3E4D;
 }
 .homeMode{

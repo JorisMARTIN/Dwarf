@@ -128,8 +128,11 @@ class Canvas extends React.Component {
                         }}
                     >
                         <div className="canvasDrawTitle">
-                            <h1>{this.props.pageName}</h1>
-                            <p>Description :<br></br>{this.props.pageDesc}</p>
+                            <textarea readOnly>
+                                {this.props.pageName}</textarea>
+                            <p>Description :<br></br></p>
+                            <textarea readOnly>
+                                {this.props.pageDesc}</textarea> 
                         </div>
                         <CanvasDraw
                             className="canvasDrawSection"
