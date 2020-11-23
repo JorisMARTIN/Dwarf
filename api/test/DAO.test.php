@@ -61,7 +61,7 @@ if ($page1) {
   print("\n - Vérification de son template : ".($page1Template === 0 ? "OK" : "FAILED"));
   $page1Completed = $page1->isCompleted();
   print("\n - Vérification de sa complétion : ".(!$page1Completed ? "OK" : "FAILED"));
-  $page1OwnerId = $page1->getOwherId();
+  $page1OwnerId = $page1->getOwnerId();
   print("\n - Vérification de l'identifiant de son créateur : ".($page1OwnerId === $newUserId ? "OK" : "FAILED"));
 } else {
   print("FAILED");
