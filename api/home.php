@@ -11,37 +11,22 @@ $frameDAO = new FrameDAO();
 
 $data = json_decode(file_get_contents("php://input"));
 
-$lastId = ($data->lastPageLoadedId == -1) ? $pageDAO->getLastPageId() : $data->lastPageLoadedId;
-
 if ($data->lastPageLoadedId == -1) {
-    $nextId = $lastId;
+    $lastId = ($pageDAO->getLastPageId() == -1) ? 0 : $pageDAO->getLastPageId();
 } else {
-    $nextId = ($lastId - 1 <= 1) ? 1 : $lastId - 1;
+    $lastId = ($data->lastPageLoadedId < 1) ? 0 : $data->lastPageLoadedId - 1;
 }
 
-$willReachEnd = $nextId - 5 < 1;
+$pages = $pageDAO->getRangeOfPages($lastId - 5, $lastId);
 
-if ($willReachEnd) {
-    $numberToLoad = 0;
-    while ($nextId - $numberToLoad >= 2) {
-        $numberToLoad++;
-    }
-} else {
-    $numberToLoad = 5;
-}
+$lastLoadedId = ($lastId - count($pages) + 1 == 1) ? 0 : $lastId - count($pages) + 1;
 
-if ($nextId != 1) {
-    $pages = $pageDAO->getRangeOfPages($nextId - $numberToLoad, $nextId);
-} else {
-    $page = [];
-}
-
-$lastId = $nextId - $numberToLoad;
+$endReached = $lastLoadedId == 0;
 
 $data = [
-    'lastPageLoadedId' => $lastId,
-    'endReached' => ($lastId == 1),
-    'pages' => [],
+    'lastPageLoadedId' => $lastLoadedId,
+    'endReached' => $endReached,
+    'pages' => []
 ];
 
 for ($i = 0; $i < count($pages); $i++) {
