@@ -9,7 +9,14 @@ $userDAO = new UserDAO();
 $pageDAO = new PageDAO();
 $frameDAO = new FrameDAO();
 
-$user1 = $userDAO->getUser(1);
+$newUserId = $userDAO->putUser('DrStone'.$pageDAO->getLastPageId().'@gmail.com', 'drStone', 'qwerty', '192.168.1.1');
+print("Création d'un utilisateur : ".($newUserId != -1 ? "OK" : "FAILED ($newUserId)")."\n");
+$newPageId = $pageDAO->putPage('Creation de DrStone', 'Téléphone', 0, 0, false, $newUserId);
+print("Création d'une planche : ".($newPageId != -1 ? "OK" : "FAILED ($newPageId)")."\n");
+$newFrameId = $frameDAO->putFrame(True, False, 100, 100, $newPageId, $newUserId);
+print("Création d'une frame : ".($newFrameId != -1 ? "OK" : "FAILED ($newFrameId)")."\n");
+
+$user1 = $userDAO->getUser($newUserId);
 print("Récupération d'un utilisateur : ");
 if ($user1) {
   print("OK");
@@ -24,8 +31,9 @@ if ($user1) {
 } else {
   print("FAILED");
 }
+
 print("\n\n");
-$page2 = $pageDAO->getPage(2);
+$page2 = $pageDAO->getPage($newPageId);
 print("Récupération d'une planche : ");
 if ($page2) {
   print("OK");
@@ -33,12 +41,12 @@ if ($page2) {
   print("FAILED");
 }
 print("\n");
-$page1 = $pageDAO->getUserPages($user1Id)[0];
+$page1 = $pageDAO->getUserPages($$newUserId)[0];
 print("Récupération d'une planche depuis un utilisateur : ");
 if ($page1) {
   print("OK");
   $page1Id = $page1->getId();
-  print("\n - Vérification de son identifiant : ".($page1Id === 1 ? "OK" : "FAILED"));
+  print("\n - Vérification de son identifiant : ".($page1Id === $newPageId ? "OK" : "FAILED"));
   $page1Name = $page1->getName();
   print("\n - Vérification de son nom : ".($page1Name === "Page 1" ? "OK" : "FAILED"));
   $page1Description = $page1->getDescription();
@@ -61,11 +69,11 @@ if ($frame1) {
 }
 print("\n\n");
 
-$newUserId = $userDAO->putUser('DrStone'.$pageDAO->getLastPageId().'@gmail.com', 'drStone', 'qwerty', '192.168.1.1');
-print("Création d'un utilisateur : ".($newUserId != -1 ? "OK" : "FAILED ($newUserId)")."\n");
-$newPageId = $pageDAO->putPage('Creation de DrStone', 'Téléphone', 0, 0, false, $newUserId);
-print("Création d'une planche : ".($newPageId != -1 ? "OK" : "FAILED ($newPageId)")."\n");
-$newFrameId = $frameDAO->putFrame(True, False, 100, 100, $newPageId, $newUserId);
-print("Création d'une frame : ".($newFrameId != -1 ? "OK" : "FAILED ($newFrameId)")."\n");
+$removed = $frameDAO->removeFrame($newFrameId);
+print("Suppression d'une frame : ".($removed ? "OK" : "FAILED")."\n");
+$removed = $pageDAO->removePage($newPageId);
+print("Suppression d'une page : ".($removed ? "OK" : "FAILED")."\n");
+$removed = $userDAO->removeUser($newUserId);
+print("Suppression d'une utilisateur : ".($removed ? "OK" : "FAILED")."\n");
 
 ?>
