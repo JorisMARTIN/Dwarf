@@ -81,23 +81,23 @@ print("Récupération d'une frame : ");
 if ($frame1) {
   print("OK");
   $frame1Id = $frame1->getId();
-  print("\n - Vérification de son identifiant : ".($page1Id === $newPageId ? "OK" : "FAILED"));
+  print("\n - Vérification de son identifiant : ".($frame1Id === $newPageId ? "OK" : "FAILED"));
   $frame1ImagePtr = $frame1->getImagePtr();
-  print("\n - Vérification de son chemin d'accès : ".($page1ImagePtr === "/cdn/frames/page-".$newPageId."/frame-".$newFrameId.".png" ? "OK" : "FAILED"));
+  print("\n - Vérification de son chemin d'accès : ".($frame1ImagePtr === "/cdn/frames/page-".$newPageId."/frame-".$newFrameId.".png" ? "OK" : "FAILED"));
   $frame1CreationDate = $frame1->getCreationDate();
-  print("\n - Vérification de sa date de création : ".($page1CreationDate > "2000-01-01" ? "OK" : "FAILED"));
+  print("\n - Vérification de sa date de création : ".($frame1CreationDate > "2000-01-01" ? "OK" : "FAILED"));
   $frame1Width = $frame1->getWidth();
-  print("\n - Vérification de sa largeur : ".($page1Width === 100 ? "OK" : "FAILED"));
+  print("\n - Vérification de sa largeur : ".($frame1Width === 100 ? "OK" : "FAILED"));
   $frame1Height = $frame1->getHeight();
-  print("\n - Vérification de sa hauteur : ".($page1Height === 100 ? "OK" : "FAILED"));
+  print("\n - Vérification de sa hauteur : ".($frame1Height === 100 ? "OK" : "FAILED"));
   $frame1Done = $frame1->isDone();
-  print("\n - Vérification de sa complétion : ".(!$page1Done ? "OK" : "FAILED"));
+  print("\n - Vérification de sa complétion : ".(!$frame1Done ? "OK" : "FAILED"));
   $frame1Drawable = $frame1->isDrawable();
-  print("\n - Vérification de sa capacité a être dessinée : ".($page1Drawable ? "OK" : "FAILED"));
+  print("\n - Vérification de sa capacité a être dessinée : ".($frame1Drawable ? "OK" : "FAILED"));
   $frame1PageId = $frame1->getPageId();
-  print("\n - Vérification de l'identifiant de sa page : ".($page1PageId === $newPageId ? "OK" : "FAILED"));
+  print("\n - Vérification de l'identifiant de sa page : ".($frame1PageId === $newPageId ? "OK" : "FAILED"));
   $frame1UserId = $frame1->getUser();
-  print("\n - Vérification de l'identifiant de son créateur : ".($page1OwnerId === $newUserId ? "OK" : "FAILED"));
+  print("\n - Vérification de l'identifiant de son créateur : ".($frame1OwnerId === $newUserId ? "OK" : "FAILED"));
 } else {
   print("FAILED");
 }
