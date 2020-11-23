@@ -9,8 +9,8 @@ function ComicPage(props) {
             <div className="homePlancheTop">
                 <img className="homePlancheImg" src={"http://dwarf.jorismartin.fr" + props.imagePtr} alt={props.name}></img>
                 <div className="homePlancheTopInfos">
-                    <textarea readOnly className="homeName">{props.name}</textarea> 
-                    <textarea readOnly className="homeDescri">{props.description}</textarea>
+                    <textarea readOnly disabled className="homeName">{props.name}</textarea> 
+                    <textarea readOnly disabled className="homeDescri">{props.description}</textarea>
                     <p className="homeMode">{props.gamemode}</p>
                 </div>
             </div>

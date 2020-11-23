@@ -84,6 +84,7 @@ class Canvas extends React.Component {
             <div>
                 <div className="canvasMain">
                     <div className="canvasToolsLeft">
+                        <span className="canvasToolsLeftSmiley">&#x25B6;</span>
                         <div className="canvasToolsLeftImage">
                             {this.props.refereeImage && <img src={this.props.refereeImage} alt="referee frame"></img>}
                         </div>
@@ -108,7 +109,7 @@ class Canvas extends React.Component {
                                 <input
                                     type="range"
                                     min="1"
-                                    max="60"
+                                    max="30"
                                     value={this.state.lazyRadius}
                                     onChange={e =>
                                         this.setState({ lazyRadius: parseInt(e.target.value, 10) })
@@ -128,10 +129,9 @@ class Canvas extends React.Component {
                         }}
                     >
                         <div className="canvasDrawTitle">
-                            <textarea readOnly>
+                            <textarea disabled readOnly>
                                 {this.props.pageName}</textarea>
-                            <p>Description :<br></br></p>
-                            <textarea readOnly>
+                            <textarea disabled readOnly>
                                 {this.props.pageDesc}</textarea> 
                         </div>
                         <CanvasDraw
@@ -146,6 +146,7 @@ class Canvas extends React.Component {
                         />
                     </div>
                     <div className="canvasToolsRight">
+                        <span className="canvasToolsRightSmiley">&#x1F3A8;</span>
                         <CirclePicker
                             className="canvasToolsRightColorPicker"
                             color={this.state.color}
