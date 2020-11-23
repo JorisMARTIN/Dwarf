@@ -9,9 +9,9 @@ $userDAO = new UserDAO();
 $pageDAO = new PageDAO();
 $frameDAO = new FrameDAO();
 
-$newUserId = $userDAO->putUser('DrStone'.$pageDAO->getLastPageId().'@gmail.com', 'drStone', 'qwerty', '192.168.1.1');
+$newUserId = $userDAO->putUser('test@gmail.com', 'test-nickname', 'test-password', '192.168.1.1');
 print("Création d'un utilisateur : ".($newUserId != -1 ? "OK" : "FAILED ($newUserId)")."\n");
-$newPageId = $pageDAO->putPage('Creation de DrStone', 'Téléphone', 0, 0, false, $newUserId);
+$newPageId = $pageDAO->putPage('test-page', 'test-description', 0, 0, false, $newUserId);
 print("Création d'une planche : ".($newPageId != -1 ? "OK" : "FAILED ($newPageId)")."\n");
 $newFrameId = $frameDAO->putFrame(True, False, 100, 100, $newPageId, $newUserId);
 print("Création d'une frame : ".($newFrameId != -1 ? "OK" : "FAILED ($newFrameId)")."\n");
@@ -21,18 +21,20 @@ print("Récupération d'un utilisateur : ");
 if ($user1) {
   print("OK");
   $user1Id = $user1->getId();
-  print("\n - Vérification de son identifiant : ".($user1Id === 1 ? "OK" : "FAILED"));
+  print("\n - Vérification de son identifiant : ".($user1Id === $newUserId ? "OK" : "FAILED"));
   $user1NickName = $user1->getNickName();
-  print("\n - Vérification de son pseudo : ".($user1NickName === "dwarf" ? "OK" : "FAILED"));
+  print("\n - Vérification de son pseudo : ".($user1NickName === "test-nickname" ? "OK" : "FAILED"));
   $user1Email = $user1->getEmail();
-  print("\n - Vérification de son email : ".($user1Email === "dwarf@gmail.com" ? "OK" : "FAILED"));
+  print("\n - Vérification de son email : ".($user1Email === "test@gmail.com" ? "OK" : "FAILED"));
   $user1CreationDate = $user1->getCreationDate();
   print("\n - Vérification de sa date de création : ".($user1CreationDate > "2000-01-01" ? "OK" : "FAILED"));
+  $user1Ip = $user1->getIps()[0];
+  print("\n - Vérification de son adresse ip : ".($user1Ip === '192.168.1.1' ? "OK" : "FAILED"));
 } else {
   print("FAILED");
 }
-
 print("\n\n");
+
 $page2 = $pageDAO->getPage($newPageId);
 print("Récupération d'une planche : ");
 if ($page2) {
@@ -41,29 +43,61 @@ if ($page2) {
   print("FAILED");
 }
 print("\n");
-$page1 = $pageDAO->getUserPages($$newUserId)[0];
+$page1 = $pageDAO->getUserPages($newUserId)[0];
 print("Récupération d'une planche depuis un utilisateur : ");
 if ($page1) {
   print("OK");
   $page1Id = $page1->getId();
   print("\n - Vérification de son identifiant : ".($page1Id === $newPageId ? "OK" : "FAILED"));
   $page1Name = $page1->getName();
-  print("\n - Vérification de son nom : ".($page1Name === "Page 1" ? "OK" : "FAILED"));
+  print("\n - Vérification de son nom : ".($page1Name === "test-page" ? "OK" : "FAILED"));
   $page1Description = $page1->getDescription();
-  print("\n - Vérification de sa description : ".($page1Description === "Ceci est la page 1" ? "OK" : "FAILED"));
+  print("\n - Vérification de sa description : ".($page1Description === "test-description" ? "OK" : "FAILED"));
   $page1CreationDate = $page1->getCreationDate();
   print("\n - Vérification de sa date de création : ".($page1CreationDate > "2000-01-01" ? "OK" : "FAILED"));
-  $page1Gamemode = $page1->getGameMode();
-  print("\n - Vérification de son mode de jeu : ".($page1Name >= 0 ? "OK" : "FAILED"));
+  $page1GameMode = $page1->getGameMode();
+  print("\n - Vérification de son mode de jeu : ".($page1GameMode === 0 ? "OK" : "FAILED"));
+  $page1Template = $page1->getTemplateType();
+  print("\n - Vérification de son template : ".($page1Template === 0 ? "OK" : "FAILED"));
+  $page1Completed = $page1->isCompleted();
+  print("\n - Vérification de sa complétion : ".(!$page1Completed ? "OK" : "FAILED"));
+  $page1OwnerId = $page1->getOwherId();
+  print("\n - Vérification de l'identifiant de son créateur : ".($page1OwnerId === $newUserId ? "OK" : "FAILED"));
 } else {
   print("FAILED");
 }
 print("\n\n");
 
-$frame1 = $frameDAO->getFrames($page1Id);
+$frame2 = $frameDAO->getFrame($newFrameId);
+print("Récupération d'une frame : ");
+if ($frame2) {
+  print("OK");
+} else {
+  print("FAILED");
+}
+print("\n");
+$frame1 = $frameDAO->getFrames($newPageId)[0];
 print("Récupération d'une frame : ");
 if ($frame1) {
   print("OK");
+  $frame1Id = $frame1->getId();
+  print("\n - Vérification de son identifiant : ".($page1Id === $newPageId ? "OK" : "FAILED"));
+  $frame1ImagePtr = $frame1->getImagePtr();
+  print("\n - Vérification de son chemin d'accès : ".($page1ImagePtr === "/cdn/frames/page-".$newPageId."/frame-".$newFrameId.".png" ? "OK" : "FAILED"));
+  $frame1CreationDate = $frame1->getCreationDate();
+  print("\n - Vérification de sa date de création : ".($page1CreationDate > "2000-01-01" ? "OK" : "FAILED"));
+  $frame1Width = $frame1->getWidth();
+  print("\n - Vérification de sa largeur : ".($page1Width === 100 ? "OK" : "FAILED"));
+  $frame1Height = $frame1->getHeight();
+  print("\n - Vérification de sa hauteur : ".($page1Height === 100 ? "OK" : "FAILED"));
+  $frame1Done = $frame1->isDone();
+  print("\n - Vérification de sa complétion : ".(!$page1Done ? "OK" : "FAILED"));
+  $frame1Drawable = $frame1->isDrawable();
+  print("\n - Vérification de sa capacité a être dessinée : ".($page1Drawable ? "OK" : "FAILED"));
+  $frame1PageId = $frame1->getPageId();
+  print("\n - Vérification de l'identifiant de sa page : ".($page1PageId === $newPageId ? "OK" : "FAILED"));
+  $frame1UserId = $frame1->getUser();
+  print("\n - Vérification de l'identifiant de son créateur : ".($page1OwnerId === $newUserId ? "OK" : "FAILED"));
 } else {
   print("FAILED");
 }
