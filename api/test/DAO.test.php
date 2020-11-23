@@ -96,7 +96,7 @@ if ($frame1) {
   print("\n - Vérification de sa capacité a être dessinée : ".($frame1Drawable ? "OK" : "FAILED"));
   $frame1PageId = $frame1->getPageId();
   print("\n - Vérification de l'identifiant de sa page : ".($frame1PageId === $newPageId ? "OK" : "FAILED"));
-  $frame1UserId = $frame1->getUser();
+  $frame1OwnerId = $frame1->getOwnerId();
   print("\n - Vérification de l'identifiant de son créateur : ".($frame1OwnerId === $newUserId ? "OK" : "FAILED"));
 } else {
   print("FAILED");
