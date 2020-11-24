@@ -25,10 +25,10 @@ class PageDAO extends DAO {
         }
     }
 
-    function getRangeOfPages(int $firstId, int $lastId) : array {
-        $query = 'SELECT * FROM "Page" WHERE pageid >= :firstId AND pageid <= :lastId ORDER BY pageid DESC';
+    function getNPages(int $nb, int $firstId) : array {
+        $query = 'SELECT * FROM "Page" WHERE pageid <= :firstId ORDER BY pageid DESC LIMIT :nb';
         $tmp = $this->db->prepare($query);
-        if ($tmp->execute([':firstId' => $firstId, ':lastId' => $lastId])) {
+        if ($tmp->execute([':firstId' => $firstId, ':nb' => $nb])) {
             return $tmp->fetchAll(PDO::FETCH_CLASS, "Page");
         } else {
             return array();
