@@ -51,5 +51,12 @@ class UserDAO extends DAO {
             return -1;
         }
     }
+    
+    function removeUser(int $userId) : bool {
+        $query = 'DELETE FROM "User" WHERE userId = :userId';
+        return $this->db->prepare($query)->execute([
+        ':userId' => $userId
+        ]);
+    }
 
 }

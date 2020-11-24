@@ -36,10 +36,7 @@ export default class App extends Component {
               <Link className="link" to="/init">Initiate a frame</Link>
           </div>
 
-          {this.state.logged && <button
-            className="logout"
-            onClick={this.logout}>Log out
-          </button>}
+          {this.state.logged && <button className="logout" onClick={this.logout}>Log out</button>}
         </div>
 
         <Switch>
