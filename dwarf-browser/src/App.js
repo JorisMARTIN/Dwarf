@@ -39,10 +39,7 @@ export default class App extends Component {
             </li>
           </ul>
 
-          {this.state.logged && <button
-            className="logout"
-            onClick={this.logout}>Log out
-          </button>}
+          {this.state.logged && <button className="logout" onClick={this.logout}>Log out</button>}
         </div>
 
         <Switch>
