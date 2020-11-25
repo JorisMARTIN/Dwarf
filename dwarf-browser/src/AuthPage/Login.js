@@ -47,6 +47,7 @@ export default class Login extends Component {
                         <div className="authPageLoginEmail">
                             <label htmlFor="email">Email :</label>
                             <input
+                                required
                                 id="email"
                                 placeholder="Email"
                                 name="email"
@@ -57,6 +58,7 @@ export default class Login extends Component {
                         <div className="authPageLoginPwd">
                             <label htmlFor="pwd">Password :</label>
                             <input
+                                required
                                 id="pwd"
                                 placeholder="Password"
                                 name="password"
