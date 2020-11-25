@@ -71,7 +71,7 @@ class PageDAO extends DAO {
             return NULL;
         }
     }
-    
+
     function removePage(int $pageId) : bool {
         $query = 'DELETE FROM "Page" WHERE pageId = :pageId';
         return $this->db->prepare($query)->execute([

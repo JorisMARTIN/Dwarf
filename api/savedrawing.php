@@ -26,7 +26,7 @@ if ($userId != -1) {
             $frameDAO->setDone($frameid, true);
 
             $image = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $image_base64));
-            
+
             $file = fopen($imagePath, "w");
 
             if ($image && $file
