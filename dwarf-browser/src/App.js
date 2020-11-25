@@ -30,14 +30,11 @@ export default class App extends Component {
       <Router>
         <div className="menu">
           <Link className="dwarf" to="/">Draw With Amazing Random Friends</Link>
-          <ul className="menuNav">
-            <li>
+          <div className="menuNav">
+              <button className="menuNavButton">Play</button>
               <Link className="link" to="/draw">Draw</Link>
-            </li>
-            <li>
-              <Link className="link" to="/init">Play</Link>
-            </li>
-          </ul>
+              <Link className="link" to="/init">Initiate a frame</Link>
+          </div>
 
           {this.state.logged && <button className="logout" onClick={this.logout}>Log out</button>}
         </div>
