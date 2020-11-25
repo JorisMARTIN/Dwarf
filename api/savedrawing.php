@@ -23,8 +23,6 @@ if ($userId != -1) {
             $imagePtr = $frame->getImagePtr();
             $imagePath = dirname(__FILE__, 2).$imagePtr;
 
-            $frameDAO->setDone($frameid, true);
-
             $image = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $image_base64));
             
             $file = fopen($imagePath, "w");
@@ -34,6 +32,9 @@ if ($userId != -1) {
                 && fwrite($file, $image)
                 && fclose($file)
             ) {
+                $frameDAO->setDone($frameid, true);
+                $frameDAO->setDrawable($frameid, false);
+
                 $out = [
                     'status' => 200,
                 ];
