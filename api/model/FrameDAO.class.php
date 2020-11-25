@@ -69,6 +69,13 @@ class FrameDAO extends DAO {
       ':frameId' => $frameId
     ]);
   }
+
+  function removeFrame(int $frameId) : bool {
+    $query = 'DELETE FROM "Frame" WHERE frameId = :frameId';
+    return $this->db->prepare($query)->execute([
+      ':frameId' => $frameId
+    ]);
+  }
 }
 
 ?>

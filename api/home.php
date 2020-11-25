@@ -17,11 +17,11 @@ if ($data->lastPageLoadedId == -1) {
     $lastId = ($data->lastPageLoadedId < 1) ? 0 : $data->lastPageLoadedId - 1;
 }
 
-$pages = $pageDAO->getRangeOfPages($lastId - 5, $lastId);
+$pages = $pageDAO->getNPages(6, $lastId);
 
 $lastLoadedId = ($lastId - count($pages) + 1 == 1) ? 0 : $lastId - count($pages) + 1;
 
-$endReached = $lastLoadedId == 0;
+$endReached = count($pages) != 6;
 
 $data = [
     'lastPageLoadedId' => $lastLoadedId,

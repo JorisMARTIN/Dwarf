@@ -26,7 +26,7 @@ class User {
   }
 
   function getIps() : array {
-    return $this->ips;
+    return explode(',', trim($this->ips, "{}"));
   }
 
 }

@@ -82,6 +82,12 @@
 .canvasDraw {
     max-width: 100%;
 }
+.canvasDrawTitle {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-bottom: 3%;
+}
 .canvasDrawTitle > textarea {
     width: 100%;
     resize: none;
@@ -92,11 +98,14 @@
     text-align: left;
     justify-content: left;
 }
-.canvasDrawTitle:first-child {
-    font-style: 1.2em;
+.canvasDrawTitle > textarea {
+    border-color: #2C2C2E;
 }
-.canvasDrawTitle:last-child {
-    margin-bottom: 3%;
+.canvasDrawTitle textarea:first-of-type {
+    text-transform: capitalize;
+    text-align: center;
+    color: #FF453A;
+    font-style: 1.5em;
 }
 .canvasDrawSection {
     padding: 1.5em;
@@ -113,3 +122,26 @@
     transform: rotate(90deg);
 
 }
+
+.canvasToolsLeftSmiley {
+    display: none;
+}
+.canvasToolsRightSmiley {
+    display: none;
+}
+
+/*Dessin responsive ... a finir
+@media only screen and (max-width: 800px) {
+    .canvasToolsLeft {
+        display: none;
+    }
+    .canvasToolsRight {
+        display: none;
+    }
+    .canvasToolsLeftSmiley {
+        display: inherit;
+    }
+    .canvasToolsRightSmiley {
+        display: inherit;
+    }
+}*/
