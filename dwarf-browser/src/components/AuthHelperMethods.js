@@ -4,22 +4,6 @@ import decode from 'jwt-decode';
 
 class AuthHelperMethods {
     apiURL = "http://dwarf.jorismartin.fr/api/";
-    
-    // Initializing important variables
-    login = (email, password) => {
-        // Get a token from api server using the fetch api
-        return this.fetch("login.php", {
-            method: 'POST',
-            body: JSON.stringify({
-                email,
-                password
-            })
-        }).then(res => {
-            if(res.token !== undefined)
-                this.setToken(res.token);
-            return Promise.resolve(res.token !== undefined);
-        })
-    }
 
     loggedIn = () => {
         // Checks if there is a saved token and it's still valid
@@ -72,20 +56,15 @@ class AuthHelperMethods {
             headers,
             ...options
         })
-        .then(this._checkStatus)
-        .catch(err => alert(err))
+        .then(res => {
+            if (res.status >= 200 && res.status < 300) { // Success status lies between 200 to 300
+                return res
+            } else {
+                alert(res);
+            }
+        })
         .then(response => response.json())
-    }
-
-    _checkStatus = (response) => {
-        // raises an error in case response status is not a success
-        if (response.status >= 200 && response.status < 300) { // Success status lies between 200 to 300
-            return response
-        } else {
-            var error = new Error(response.statusText)
-            error.response = response
-            throw error
-        }
+        .catch(alert)
     }
 }
 

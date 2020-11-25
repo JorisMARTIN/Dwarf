@@ -19,21 +19,25 @@ export default class Login extends Component {
 
     handleFormSubmit = (e) => {
         e.preventDefault();
-        /* Here is where all the login logic will go. Upon clicking the login button,
-        we would like to utilize a login method that will send our entered credentials
-        over to the server for verification. Once verified, it should store your token
-        and send you to the protected route. */
-        Auth.login(this.state.email, this.state.password)
-            .then(res => {
-                if (res === false) {
-                    return alert("Log in failed. Try again.");
-                }
-                this.setState({redirectToHome: true});
+
+        Auth.fetch("login.php", {
+            method: 'POST',
+            body: JSON.stringify({
+                'email': this.state.email,
+                'password': this.state.password
             })
+        }).then(res => {
+            if (res.token !== undefined) {
+                Auth.setToken(res.token);
+                this.setState({ redirectToHome: true });
+            } else {
+                alert("Log in failed. Try again.");
+            }
+        })
     }
 
     render() {
-        if(this.state.redirectToHome) {
+        if (this.state.redirectToHome) {
             return <Redirect to='/' />
         } else {
             return (
