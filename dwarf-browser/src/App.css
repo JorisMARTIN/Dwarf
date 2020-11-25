@@ -63,8 +63,6 @@ html{
 .menuNav:hover .menuNavButton{
   background-color: #005296;
 }
-
-
 .logout{
   position: absolute;
   top: 10px;

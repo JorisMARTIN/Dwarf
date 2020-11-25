@@ -84,7 +84,11 @@ class Canvas extends React.Component {
             <div>
                 <div className="canvasMain">
                     <div className="canvasToolsLeft">
-                        <span className="canvasToolsLeftSmiley">&#x25B6;</span>
+                        <div className="canvasToolsLeftDropDown">
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                        </div>
                         <div className="canvasToolsLeftImage">
                             {this.props.refereeImage && <img src={this.props.refereeImage} alt="referee frame"></img>}
                         </div>
@@ -146,7 +150,11 @@ class Canvas extends React.Component {
                         />
                     </div>
                     <div className="canvasToolsRight">
-                        <span className="canvasToolsRightSmiley">&#x1F3A8;</span>
+                        <div className="canvasToolsRightDropDown">
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                        </div>
                         <CirclePicker
                             className="canvasToolsRightColorPicker"
                             color={this.state.color}
