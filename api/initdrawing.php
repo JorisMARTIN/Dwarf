@@ -28,7 +28,7 @@ $userId = tokenToUserId();
 if ($userId != -1) {
     $data = json_decode(file_get_contents("php://input"));
 
-    if (isset($data)) {
+    if (!empty($data)) {
         $title = (string) ($data->title ?? "Comic page");
         $description = (string) ($data->description ?? "Default description");
         $gamemode = (int) ($data->gamemode ?? 0);

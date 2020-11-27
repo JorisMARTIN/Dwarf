@@ -11,33 +11,38 @@ $frameDAO = new FrameDAO();
 
 $data = json_decode(file_get_contents("php://input"));
 
-if ($data->lastPageLoadedId == -1) {
-    $lastId = ($pageDAO->getLastPageId() == -1) ? 0 : $pageDAO->getLastPageId();
-} else {
-    $lastId = ($data->lastPageLoadedId < 1) ? 0 : $data->lastPageLoadedId - 1;
-}
+if(!empty($data)) {
+    if ($data->lastPageLoadedId == -1) {
+        $lastId = ($pageDAO->getLastPageId() == -1) ? 0 : $pageDAO->getLastPageId();
+    } else {
+        $lastId = ($data->lastPageLoadedId < 1) ? 0 : $data->lastPageLoadedId - 1;
+    }
 
-$pages = $pageDAO->getNPages(6, $lastId);
+    $pages = $pageDAO->getNPages(6, $lastId);
 
-$lastLoadedId = count($pages) == 0 ? 0 : $pages[count($pages) - 1]->getId();
+    $lastLoadedId = count($pages) == 0 ? 0 : $pages[count($pages) - 1]->getId();
 
-$endReached = count($pages) != 6;
+    $endReached = count($pages) != 6;
 
-$data = [
-    'lastPageLoadedId' => $lastLoadedId,
-    'endReached' => $endReached,
-    'pages' => []
-];
-
-for ($i = 0; $i < count($pages); $i++) {
-    $p = $pages[$i];
-    $data['pages'][$i] = [
-        'name' => $p->getName(),
-        'description' => $p->getDescription(),
-        'gamemode' => ($p->getGameMode() == 0 ? "Normal" : "Reverse"),
-        'date' => $p->getCreationDate(),
-        'imagePtr' => $frameDAO->getFrames($p->getId())[0]->getImagePtr()
+    $out = [
+        'lastPageLoadedId' => $lastLoadedId,
+        'endReached' => $endReached,
+        'pages' => []
     ];
+
+    for ($i = 0; $i < count($pages); $i++) {
+        $p = $pages[$i];
+        $out['pages'][$i] = [
+            'name' => $p->getName(),
+            'description' => $p->getDescription(),
+            'gamemode' => ($p->getGameMode() == 0 ? "Normal" : "Reverse"),
+            'date' => $p->getCreationDate(),
+            'imagePtr' => $frameDAO->getFrames($p->getId())[0]->getImagePtr()
+        ];
+    }
+
+} else {
+    $out = [];
 }
 
-echo json_encode($data);
+echo json_encode($out);
