@@ -29,14 +29,18 @@ export default class App extends Component {
     return (
       <Router>
         <div className="menu">
-          <Link className="dwarf" to="/">Draw With Amazing Random Friends</Link>
-          <div className="menuNav">
-              <button className="menuNavButton">Play</button>
-              <Link className="link" to="/draw">Draw</Link>
-              <Link className="link" to="/init">Initiate a frame</Link>
+          <Link className="dwarf" to="/">Dwarf</Link>
+          
+          <div className="componentsMenu">
+            <Link className="link" to="/">News</Link>
+            <Link className="link" to="/draw">Draw</Link>
+            <Link className="link" to="/init">New Page</Link>
           </div>
 
-          {this.state.logged && <button className="logout" onClick={this.logout}>Log out</button>}
+          <div className="logComponent">
+            {this.state.logged ? <button className="log" onClick={this.logout}>Log out</button> 
+            : <Link className="log" to="/auth">Log in / Sign up</Link>}
+          </div>
         </div>
 
         <Switch>

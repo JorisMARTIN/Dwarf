@@ -35,13 +35,14 @@ export default class Signup extends Component {
     render() {
         return (
             <div className="authPageSignup">
-                <h1>Signup</h1>
+                <h1>Create a account</h1>
                 <form className="authPageSignupForm">
-                    <div className="authPageSignupFirstDiv">
+                    <div className="authPageSignupDiv">
                         <div className="authPageSignupUserName">
                             <label htmlFor="username">Username :</label>
                             <input
-                                id="name"
+                                required
+                                id="username"
                                 placeholder="Pseudo"
                                 name="name"
                                 type="text"
@@ -49,20 +50,20 @@ export default class Signup extends Component {
                             />
                         </div>
                         <div className="authPageSignupDate">
-                            <label htmlFor="date">Born date :</label>
+                            <label htmlFor="date">Birthdate :</label>
                             <input
+                                required
                                 id="date"
                                 name="date"
                                 type="date"
                                 onChange={this._handleChange}
                             />
                         </div>
-                    </div>
-                    <div className="authPageSignupSecondDiv">
                         <div className="authPageSignupEmail">
-                            <label htmlFor="email">Email :</label><br></br>
+                            <label htmlFor="emailS">Email :</label><br></br>
                             <input
-                                id="email"
+                                required
+                                id="emailS"
                                 placeholder="Email"
                                 name="email"
                                 type="email"
@@ -72,17 +73,19 @@ export default class Signup extends Component {
                         <div className="authPageSignupConfEmail">
                             <label htmlFor="email2">Confirm Email :</label><br></br>
                             <input
+                                required
                                 id="email2"
-                                placeholder="Email"
-                                name="email"
+                                placeholder="Confirm Email"
+                                name="emailConfirm"
                                 type="email"
                                 onChange={this._handleChange}
                             />
                         </div>
                         <div className="authPageSignupPwd">
-                            <label htmlFor="pwd">Password :</label><br></br>
+                            <label htmlFor="pwdS">Password :</label><br></br>
                             <input
-                                id="pwd"
+                                required
+                                id="pwdS"
                                 placeholder="Password"
                                 name="password"
                                 type="password"
@@ -92,15 +95,16 @@ export default class Signup extends Component {
                         <div className="authPageSignupPwd2">
                             <label htmlFor="pwd2">Confirm Password :</label><br></br>
                             <input
+                                required
                                 id="pwd2"
                                 placeholder="Confirm Password"
-                                name="password"
+                                name="passwordConfirm"
                                 type="password"
                                 onChange={this._handleChange}
                             />
                         </div>
                     </div>
-                    <button onClick={this.handleFormSubmit}>Sign up</button>
+                    <button onClick={this.handleFormSubmit}>Create account</button>
                 </form>
             </div>
         );
