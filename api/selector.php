@@ -18,26 +18,26 @@ if(!empty($data)) {
 
     if ($length == 0) {
         $index = 0;
-        $id = $pageDAO->getRandomPageId();
+        $page = $pageDAO->getRandomPage();
+        $id = $page ? $page->getId() : -1;
         $loadedIds = array($id);
     } else {
-        $index = max(0, $data->index + $direction);
         if ($direction == -1 && $index <= 0) {
             $index = 0;
-            $id = $pageDAO->getRandomPageId();
+            $page = $pageDAO->getRandomPage();
+            $id = $page ? $page->getId() : -1;
             array_unshift($loadedIds, $id);
         } else if ($direction == 1 && $index >= $length) {
             $index = $length;
-            $id = $pageDAO->getRandomPageId();
+            $page = $pageDAO->getRandomPage();
+            $id = $page ? $page->getId() : -1;
             array_push($loadedIds, $id);
         } else {
             $index += $direction;
             $id = $loadedIds[$index];
+            $page = $pageDAO->getPage($id);
         }
     }
-
-
-    $result = $pageDAO->getNPages(1, $index);
 
     $out = [
         'loadedIds' => $loadedIds,
@@ -45,8 +45,7 @@ if(!empty($data)) {
         'page' => NULL
     ];
 
-    if (count($result) != 0) {
-        $page = $result[0];
+    if ($page) {
         $out['page'] = [
             'name' => $page->getName(),
             'description' => $page->getDescription(),
