@@ -81,7 +81,7 @@ class PageDAO extends DAO {
     }
 
     function getRandomPageId() : int {
-        $query = 'SELECT $pageid FROM "Page" ORDER BY RANDOM() LIMIT 1';
+        $query = 'SELECT pageid FROM "Page" ORDER BY RANDOM() LIMIT 1';
         $tmp = $this->db->prepare($query);
         if ($tmp->execute()) {
             return $tmp->fetchColumn();
