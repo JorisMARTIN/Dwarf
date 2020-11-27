@@ -4,7 +4,8 @@ creationDate timestamp NOT NULL,
 nickname varchar(16) NOT NULL,
 email varchar(64) UNIQUE,
 password varchar(255) NOT NULL,
-IPs varchar(16)[]
+IPs varchar(16)[],
+isAdmin boolean DEFAULT FALSE
 );
 
 CREATE TABLE IF NOT EXISTS "Page" (
@@ -30,3 +31,9 @@ pageId int NOT NULL REFERENCES "Page"(pageId),
 userId int REFERENCES "User"(userId)
 );
 
+CREATE TABLE IF NOT EXISTS "Rate" (
+userId int NOT NULL REFERENCES "User"(userId),
+pageId int NOT NULL REFERENCES "Page"(pageId),
+vote boolean NOT NULL,
+PRIMARY KEY(userId, pageId)
+);

@@ -1,3 +1,4 @@
 Frame(__frameId__, creationDate, imagePtr, drawable, done, width, height, #pageId, #userId)
 Page(__pageId__, creationDate, name, description, gameMode, template, completed, #userId)
-User(__userId__, creationDate, nickname, email, password,  IPs)
+User(__userId__, creationDate, nickname, email, password,  IPs, isAdmin)
+Rate(__#userId__, __#pageId__, vote);
