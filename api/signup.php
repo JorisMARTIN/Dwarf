@@ -3,6 +3,7 @@ require_once(dirname(__FILE__) . '/includes/httpheaders.inc.php');
 
 require_once(dirname(__FILE__) . '/model/AuthMethods.php');
 require_once(dirname(__FILE__) . '/model/UserDAO.class.php');
+require_once(dirname(__FILE__) . '/includes/debug.inc.php');
 
 $userDAO = new UserDAO();
 
@@ -25,8 +26,8 @@ function getClientIP() {
 }
 
 if (isset($data)) {
-    $pseudo = $date->name;
-    $birthdate = $date->date;
+    $pseudo = $data->name;
+    $birthdate = $data->date;
     $email = $data->email;
     $emailC = $data->emailConfirm;
     $password = $data->password;
@@ -40,12 +41,13 @@ if (($email == $emailC) && ($password == $passwordC))   {
 
 if ($signupOk) {
     echo json_encode([
-        'token' => $token,
+        'success' => true,
         'status' => 200,
-        'message' => 'User add successfully'
+        'message' => 'User added successfully'
     ]);
 } else {
     echo json_encode([
+        'success' => false,
         'status' => 400,
         'message' => 'Signup failed !'
     ]);

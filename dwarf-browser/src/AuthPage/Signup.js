@@ -20,10 +20,15 @@ export default class Signup extends Component {
         Auth.fetch("signup.php", {
             method: 'POST',
             body: JSON.stringify({
+                "name": this.state.name,
+                "date": this.state.date,
                 "email": this.state.email,
-                "password": this.state.password
+                "emailConfirm": this.state.email,
+                "password": this.state.password,
+                "passwordConfirm": this.state.password
             })
         }).then(res => {
+            alert(res.message);
             if (res.success) {
                 alert("Sign up successful, you may now log in.");
             } else {
