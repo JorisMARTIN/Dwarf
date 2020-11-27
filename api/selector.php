@@ -63,4 +63,4 @@ if(!empty($data)) {
     $out = [];
 }
 
-echo json_encode($data);
+echo json_encode($out);
