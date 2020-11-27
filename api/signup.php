@@ -35,7 +35,7 @@ if (isset($data)) {
 }
 
 if (($email == $emailC) && ($password == $passwordC))   {
-    $signupOk = $userDAO->putUser($email, $pseudo, $password, getClientIP());
+    $signupOk = $userDAO->putUser($email, $pseudo, $password, getClientIP(), $birthdate);
 } 
 
 
