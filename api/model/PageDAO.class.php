@@ -86,6 +86,7 @@ class PageDAO extends DAO {
         if ($tmp->execute()) {
             return $tmp->fetchColumn();
         } else {
+            var_dump($tmp->errorInfo());
             return -1;
         }
     }
