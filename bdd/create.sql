@@ -5,7 +5,8 @@ nickname varchar(16) NOT NULL,
 email varchar(64) UNIQUE,
 password varchar(255) NOT NULL,
 IPs varchar(16)[],
-isAdmin boolean DEFAULT FALSE
+birthdate date NOT NULL,
+admin boolean DEFAULT FALSE
 );
 
 CREATE TABLE IF NOT EXISTS "Page" (

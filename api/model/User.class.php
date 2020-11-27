@@ -8,6 +8,8 @@ class User {
   private $password;
   private $ips;
   private $creationdate;
+  private $birthdate;
+  private $admin;
 
   function getId() : int {
     return $this->userid;
@@ -29,6 +31,13 @@ class User {
     return explode(',', trim($this->ips, "{}"));
   }
 
+  function getBirthdate() : string {
+    return $this->birthdate
+  }
+
+  function isAdmin() : boolean {
+    return $this->admin;
+  }
 }
 
 ?>
