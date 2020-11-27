@@ -26,8 +26,8 @@ function getClientIP() {
 }
 
 if (isset($data)) {
-    $pseudo = $date->name;
-    $birthdate = $date->date;
+    $pseudo = $data->name;
+    $birthdate = $data->date;
     $email = $data->email;
     $emailC = $data->emailConfirm;
     $password = $data->password;
