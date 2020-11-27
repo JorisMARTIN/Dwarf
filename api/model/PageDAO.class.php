@@ -55,6 +55,7 @@ class PageDAO extends DAO {
             ':userId' => $userId
         ])) {
             $pageId = $tmp->fetchColumn();
+            umask(0);
             mkdir(dirname(__FILE__, 3).'/cdn/frames/page-'.$pageId, 0775, true);
             return $pageId;
         } else {
