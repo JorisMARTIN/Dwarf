@@ -90,7 +90,7 @@ class Canvas extends React.Component {
                             <div></div>
                         </div>
                         <div className="canvasToolsLeftImage">
-                            {this.props.refereeImage && <img src={this.props.refereeImage} alt="referee frame"></img>}
+                            {this.props.refereeImage && <img src={"http://dwarf.jorismartin.fr" + this.props.refereeImage} alt="referee frame"></img>}
                         </div>
                         <div className="canvasToolsLeftOthersTools">
                             <button

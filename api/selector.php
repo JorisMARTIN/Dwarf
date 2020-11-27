@@ -22,6 +22,7 @@ if(!empty($data)) {
         $id = $page ? $page->getId() : -1;
         $loadedIds = array($id);
     } else {
+        $index = $data->index;
         if ($direction == -1 && $index <= 0) {
             $index = 0;
             $page = $pageDAO->getRandomPage();
