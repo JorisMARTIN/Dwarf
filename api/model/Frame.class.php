@@ -41,7 +41,7 @@ class Frame {
   }
 
   function isDrawable() : bool {
-     return $this->drawable;
+    return $this->drawable;
   }
 
   function isDone() : bool {
