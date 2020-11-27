@@ -42,12 +42,10 @@ if(!empty($data)) {
     $out = [
         'loadedIds' => $loadedIds,
         'index' => $index,
-        'page' => $page
+        'page' => NULL
     ];
 
-    if (count($result) == 0) {
-        $out['page'] = NULL;
-    } else {
+    if (count($result) != 0) {
         $page = $result[0];
         $out['page'] = [
             'name' => $page->getName(),
