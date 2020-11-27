@@ -19,7 +19,7 @@ if ($data->lastPageLoadedId == -1) {
 
 $pages = $pageDAO->getNPages(6, $lastId);
 
-$lastLoadedId = ($lastId - count($pages) + 1 == 1) ? 0 : $lastId - count($pages) + 1;
+$lastLoadedId = $pages[count($pages) - 1]->getId();
 
 $endReached = count($pages) != 6;
 
