@@ -12,7 +12,7 @@ function ComicPage(props) {
                     <textarea readOnly disabled className="homeName" value={props.name} />
                     <textarea readOnly disabled className="homeDescri" value={props.description} />
                     <p className="homeMode">{props.gamemode}</p>
-                    <p className="homeUser">{props.user}</p>
+                    <p className="homeUser">Auteur : {props.user}</p>
                 </div>
             </div>
             <div className="homePlancheBottom">
