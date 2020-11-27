@@ -1,5 +1,5 @@
 import { Component } from "react";
-import { Redirect } from 'react-router-dom';
+import { Redirect, Link } from 'react-router-dom';
 import Auth from '../components/AuthHelperMethods';
 import './index.css'
 
@@ -66,7 +66,10 @@ export default class Login extends Component {
                                 onChange={this._handleChange}
                             />
                         </div>
-                        <button onClick={this.handleFormSubmit}>Log in</button>
+                        <div className="authPageLoginBottom">
+                            <Link className="authPageLoginForgotPwd" to="/">Forgot password</Link>
+                            <button onClick={this.handleFormSubmit}>Log in</button>
+                        </div>
                     </form>
                 </div>
             );

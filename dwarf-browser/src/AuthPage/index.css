@@ -40,7 +40,8 @@
     width: 80%;
     margin-left: auto;
     margin-right: auto;
-    justify-content: center;
+    display: flex;
+    flex-direction: column;
 }
 .authPageLoginEmail, .authPageLoginPwd {
     margin-top: 3%;
@@ -52,12 +53,16 @@
     width: 50%;
     float: right;
 }
-.authPageLoginForm > button {
+.authPageLoginBottom {
+    margin-top: 25%;
+}
+.authPageLoginForgotPwd {
+    color: #E5E5EA;
+}
+.authPageLoginBottom > button {
+    max-width: 125px;
     width: 20%;
-    margin-left: 40%;
-    margin-right: 40%;
-    margin-top: 5%;
-    margin-bottom: 2%;
+    margin: 5% 40% 2% 40%;
     padding-top: 0.5em;
     padding-bottom: 0.5em;
     background-color: #0A84FF;
@@ -110,4 +115,5 @@
     background-color: #0A84FF;
     border-color: #0A84FF;
     border-radius: 50px;
+    max-width: 250px;
 }
