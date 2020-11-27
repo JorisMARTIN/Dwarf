@@ -57,12 +57,16 @@ class AuthHelperMethods {
             ...options
         })
         .then(res => {
-            if (res.status >= 200 && res.status < 300) { // Success status lies between 200 to 300
-                return res
-            } else {
-                alert(res);
-            }
+            res.clone().text().then(txt => console.log(txt));
+            return res;   
         })
+        // .then(res => {
+        //     if (res.status >= 200 && res.status < 300) { // Success status lies between 200 to 300
+        //         return res
+        //     } else {
+        //         alert(res);
+        //     }
+        // })
         .then(response => response.json())
         .catch(alert)
     }
