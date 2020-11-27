@@ -40,12 +40,13 @@ if (($email == $emailC) && ($password == $passwordC))   {
 
 if ($signupOk) {
     echo json_encode([
-        'token' => $token,
+        'success' => true,
         'status' => 200,
-        'message' => 'User add successfully'
+        'message' => 'User added successfully'
     ]);
 } else {
     echo json_encode([
+        'success' => false,
         'status' => 400,
         'message' => 'Signup failed !'
     ]);
