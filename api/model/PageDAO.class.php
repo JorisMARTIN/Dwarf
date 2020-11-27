@@ -26,7 +26,7 @@ class PageDAO extends DAO {
     }
 
     function getNPages(int $nb, int $firstId) : array {
-        $query = 'SELECT * FROM "Page" WHERE pageid <= :firstId and isCompleted = true ORDER BY pageid DESC LIMIT :nb';
+        $query = 'SELECT * FROM "Page" WHERE pageid <= :firstId and completed = true ORDER BY pageid DESC LIMIT :nb';
         $tmp = $this->db->prepare($query);
         if ($tmp->execute([':firstId' => $firstId, ':nb' => $nb])) {
             return $tmp->fetchAll(PDO::FETCH_CLASS, "Page");
@@ -81,11 +81,12 @@ class PageDAO extends DAO {
     }
 
     function getRandomPage() : ?Page {
-        $query = 'SELECT * FROM "Page" WHERE isCompeted = false ORDER BY RANDOM() LIMIT 1';
+        $query = 'SELECT * FROM "Page" WHERE completed = false ORDER BY RANDOM() LIMIT 1';
         $tmp = $this->db->prepare($query);
         if ($tmp->execute()) {
             return $tmp->fetchAll(PDO::FETCH_CLASS, "Page")[0];
         } else {
+            var_dump($tmp->errorInfo());
             return NULL;
         }
     }
