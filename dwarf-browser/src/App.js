@@ -38,8 +38,8 @@ export default class App extends Component {
           </div>
 
           <div className="logComponent">
-            {!this.state.logged && <Link className="log" to="/auth">Log in / Sign in</Link>}
-            {this.state.logged && <button className="log" onClick={this.logout}>Log out</button>}
+            {this.state.logged ? <button className="log" onClick={this.logout}>Log out</button> 
+            : <Link className="log" to="/auth">Log in / Sign up</Link>}
           </div>
         </div>
 
