@@ -1,119 +1,98 @@
 /*Global Page*/
-.authPageMain {
-    margin-top: 2.5%;
-    margin-bottom: 2.5%;
-}
 .authPageTitle {
-    font-family: Roboto;
     text-align: center;
-    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    color: var(--PrimaryText);
+    font-size: 2em;
+    font-weight: 600;
 }
+
 .authPageDescri {
-    width: 80%;
-    margin: auto;
-    font-size:1.2em;
+    text-align: center;
+    color: var(--SecondaryText);
+    font-size: 1.2em;
+    font-weight: 600;
 }
+
 .authPage {
     display: flex;
     flex-direction: row;
+    border-radius: 25px;
+    background-color: var(--CardBackground);
+    box-shadow: 0 5px 10px 10px var(--Shadow);
+}
+
+.authPage, .authPageLogin, .authPageSignup {
     width: 80%;
     margin-left: auto;
-    margin-right: auto;
-    margin-top: 2.5%;
-    border-radius: 50px;
-    background-color: #2C2C2E;
+    margin-right:auto;
 }
-.authPageLogin,.authPageSignup {
-    width: 80%;
-    margin-left: auto;
-    margin-right: auto;
-    color: #E5E5EA;
-}
-.authPageLogin > h1,.authPageSignup > h1 {
-    text-shadow: 0px 4px 4px rgba(229, 229, 234, 0.25);
-    color: #E5E5EA;
+
+.authPageLogin > h1, .authPageSignup > h1 {
+    color: var(--PrimaryText);
     text-align: center;
+    font-size: 2em;
+    font-weight: 700;
 }
 
-/*Login Page*/
-.authPageLoginForm {
-    width: 80%;
-    margin-left: auto;
-    margin-right: auto;
-    display: flex;
-    flex-direction: column;
-}
-.authPageLoginEmail, .authPageLoginPwd {
-    margin-top: 3%;
-}
-.authPageLoginEmail > input[type=email], .authPageLoginPwd > input[type=password]{
-    margin-top: 1%;
-    border-radius: 10px;
-    padding: 2%;
-    width: 50%;
-    float: right;
-}
-.authPageLoginBottom {
-    margin-top: 25%;
-}
-.authPageLoginForgotPwd {
-    color: #E5E5EA;
-}
-.authPageLoginBottom > button {
-    max-width: 125px;
-    width: 20%;
-    margin: 5% 40% 2% 40%;
-    padding-top: 0.5em;
-    padding-bottom: 0.5em;
-    background-color: #0A84FF;
-    border-color: #0A84FF;
-    border-radius: 50px;
+.authPageLogin, .authPageSignup {
+    color: var(--SecondaryText);
+    font-size: 1em;
+    font-weight: 500;
 }
 
-/*Signup Page*/
-.authPageSignup {
-    border-left: 1px solid #fff;
+.authPageLoginEmail, .authPageLoginPwd, .authPageLoginEmail, .authPageLoginPwd, .authPageSignupDate, .authPageSignupUserName, .authPageSignupConfEmail, .authPageSignupEmail, .authPageSignupPwd2, .authPageSignupPwd {
     display: flex;
-    flex-direction: column;
     justify-content: space-between;
+    align-items: center;
 }
-.authPageSignupForm {
-    width: 75%;
-    margin-left: auto;
-    margin-right: auto;
-    justify-content: center;
+
+.authPageLoginForm {
+    display: flex;
+    flex-direction: column;
+    padding: 2em;
 }
-.authPageSignupUserName, .authPageSignupDate {
-    margin-top: 3%;
-}
-.authPageSignupUserName > input[type=text], .authPageSignupDate > input[type=date]{
-    margin-top: 1%;
-    border-radius: 10px;
-    padding: 2%;
-    width: 50%;
-    float: right;
-}
-.authPage label {
-    vertical-align: middle;
-    width: 40%;
-    float: left;
-    padding: 2%;
-    margin-top: 1%;
-}
-.authPageSignupEmail > input[type=email], .authPageSignupConfEmail > input[type=email],
-.authPageSignupPwd > input[type=password], .authPageSignupPwd2 > input[type=password] {
-    margin-top: 1%;
-    border-radius: 10px;
-    padding: 2%;
-    width: 50%;
-    float: right;
-}
-.authPageSignupForm > button {
-    width: 50%;
-    margin: 5% 40% 2% 40%;
+
+.authPageLoginEmail > input[type=email], .authPageLoginPwd > input[type=password], .authPageSignupDate > input[type=date], .authPageSignupUserName > input[type=text], .authPageSignupConfEmail > input[type=email], .authPageSignupEmail > input[type=email], .authPageSignupPwd2 > input[type=password], .authPageSignupPwd > input[type=password] {
+    border-radius: 25px;
+    background: var(--Background2);
     padding: 0.5em;
-    background-color: #0A84FF;
-    border-color: #0A84FF;
-    border-radius: 50px;
-    max-width: 250px;
+    margin: 0.5em;
+    float: right;
+}
+
+.authPageLoginForgotPwd {
+    color: var(--TernaryText);
+}
+
+.authPageLoginBottom > button, .authPageSignupForm > button {
+    padding: 0.5em 1em;
+    margin: 2em;
+    color: rgb(242, 242, 247);
+    background: var(--BlueButton);
+    border-radius: 25px;
+    font-size: 0.8em;
+    font-weight: 600;
+}
+
+.authPageSignup {
+    border-left: 1px solid var(--Background2);
+    display: flex;
+    flex-direction: column;
+    justify-content:space-between
+}
+
+.authPageSignupForm {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.authPageSignupDiv {
+    display: flex;
+    flex-direction: column;
+    padding: 0 2em;
+}
+
+.authPage label {
+    float: left;
 }
