@@ -1,3 +1,39 @@
+@media (prefers-color-scheme: dark) {
+    :root {
+        --Background: rgb(28, 28, 30);
+        --Background2: rgb(28, 28, 30);
+        --CardBackground: rgb(44, 44, 46);
+        
+        --Hover: rgb(28, 28, 30);
+
+        --PrimaryText: rgb(242, 242, 247);
+        --SecondaryText: rgb(229, 229, 234);
+        --TernaryText: rgb(209, 209, 214);
+        
+        --BlueButton: rgb(10, 132, 255);
+        
+        --Shadow: none;
+    }
+}
+
+@media (prefers-color-scheme: light) {
+    :root {
+        --Background: rgb(229, 229, 234);
+        --Background2: rgb(229, 229, 234);
+        --CardBackground: rgb(242, 242, 247);
+        
+        --Hover: rgb(229, 229, 234);
+
+        --PrimaryText: rgb(28, 28, 30);
+        --SecondaryText: rgb(44, 44, 46);
+        --TernaryText: rgb(58, 58, 60);
+        
+        --BlueButton: rgb(0, 122, 255);
+        
+        --Shadow: rgb(209, 209, 214);
+    }
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
