@@ -83,11 +83,12 @@ class PageDAO extends DAO {
     function getRandomPage(array $except = []) : ?Page {
         $exceptCondition = empty($except) ? '' : 'AND pageid NOT IN(' . implode(',', $except) . ')';
         $query = "SELECT * FROM \"Page\" WHERE completed = false $exceptCondition ORDER BY RANDOM() LIMIT 1";
+
         $tmp = $this->db->prepare($query);
-        if ($tmp->execute()) {
+        if ($tmp->execute() && $tmp->rowCount() > 0) {
             return $tmp->fetchAll(PDO::FETCH_CLASS, "Page")[0];
         } else {
-            var_dump($tmp->errorInfo());
+            //var_dump($tmp->errorInfo());
             return NULL;
         }
     }
