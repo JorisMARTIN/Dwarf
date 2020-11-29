@@ -13,57 +13,27 @@ $data = json_decode(file_get_contents("php://input"));
 
 if (!empty($data)) {
     $loadedIds = $data->loadedIds;
-    $direction = $data->direction;
     $index = $data->index;
 
-    $length = count($loadedIds);
-    $i = $index + $direction;
-
-    if (isset($loadedIds[$i])) {
-        $page = $pageDAO->getPage($loadedIds[$i]);
-        $index = $i;
+    if (isset($loadedIds[$index])) {
+        $page = $pageDAO->getPage($loadedIds[$index]);
     } else {
         $page = $pageDAO->getRandomPage($loadedIds);
+
         if ($page != NULL) {
             
             $id = $page->getId();
+            $length = count($loadedIds);
 
-            if($i <= 0) {
+            if($index <= 0) {
                 $index = 0;
                 array_unshift($loadedIds, $id);
-            } else if($i >= $length) {
+            } else if($index >= $length) {
                 $index = $length;
                 array_push($loadedIds, $id);
             }
-            // $loadedIds = array_values($loadedIds);
-            // $index = array_search($id, $loadedIds);
         } // ptet gérer le fait que yai plus rien de nouveau à scroller
     }
-
-
-    // if (empty($loadedIds)) {
-    //     $index = 0;
-    //     $page = $pageDAO->getRandomPage();
-    //     $id = $page ? $page->getId() : -1;
-    //     $loadedIds = array($id);
-    // } else {
-
-    //     if ($direction == -1 && $index <= 0) {
-    //         $index = 0;
-    //         $page = $pageDAO->getRandomPage();
-    //         $id = $page ? $page->getId() : -1;
-    //         array_unshift($loadedIds, $id);
-    //     } else if ($direction == 1 && $index >= $length) {
-    //         $index = $length;
-    //         $page = $pageDAO->getRandomPage();
-    //         $id = $page ? $page->getId() : -1;
-    //         array_push($loadedIds, $id);
-    //     } else {
-    //         $index += $direction;
-    //         $id = $loadedIds[$index];
-    //         $page = $pageDAO->getPage($id);
-    //     }
-    // }
 
     $out = [
         'loadedIds' => $loadedIds,
