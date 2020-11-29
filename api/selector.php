@@ -25,7 +25,7 @@ if (!empty($data)) {
             $id = $page->getId();
             $length = count($loadedIds);
 
-            if($index <= 0) {
+            if($index < 0) {
                 $index = 0;
                 array_unshift($loadedIds, $id);
             } else if($index >= $length) {
