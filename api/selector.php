@@ -28,10 +28,10 @@ if (!empty($data)) {
             
             $id = $page->getId();
 
-            if($direction == -1 && $i == 0) {
+            if($i <= 0) {
                 $index = 0;
                 array_unshift($loadedIds, $id);
-            } else if($direction == 1 && $i >= $length) {
+            } else if($i >= $length) {
                 $index = $length;
                 array_push($loadedIds, $id);
             }
