@@ -16,6 +16,7 @@ if (!empty($data)) {
     $direction = $data->direction;
     $index = $data->index;
 
+    $length = count($loadedIds);
     $i = $index + $direction;
 
     if (isset($loadedIds[$i])) {
@@ -24,10 +25,18 @@ if (!empty($data)) {
     } else {
         $page = $pageDAO->getRandomPage($loadedIds);
         if ($page != NULL) {
+            
             $id = $page->getId();
-            $loadedIds[$i] = $id;
-            $loadedIds = array_values($loadedIds);
-            $index = array_search($id, $loadedIds);
+
+            if($direction == -1 && $i == 0) {
+                $index = 0;
+                array_unshift($loadedIds, $id);
+            } else if($direction == 1 && $i >= $length) {
+                $index = $length;
+                array_push($loadedIds, $id);
+            }
+            // $loadedIds = array_values($loadedIds);
+            // $index = array_search($id, $loadedIds);
         } // ptet gérer le fait que yai plus rien de nouveau à scroller
     }
 
