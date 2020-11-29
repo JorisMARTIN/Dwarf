@@ -11,7 +11,6 @@ class Draw extends Component {
         description: "",
         gamemode: "",
         goToCanvas: false,
-        hasData: false,
     }
 
     loadedIds = [];
@@ -22,14 +21,12 @@ class Draw extends Component {
             method: 'POST',
             body: JSON.stringify({
                 'loadedIds': this.loadedIds,
-                'index': this.index,
-                'direction': direction,
+                'index': this.index + direction,
             })
         }).then(res => {
             console.log(res);
             if(res && res.page != null) {
                 this.setState({
-                    hasData: true,
                     name: res.page.name,
                     description: res.page.description,
                     gamemode: res.page.gamemode,
@@ -38,8 +35,6 @@ class Draw extends Component {
 
                 this.loadedIds = res.loadedIds;
                 this.index = res.index;
-            } else {
-                this.setState({hasData: false});
             }
         });
     }
@@ -63,7 +58,7 @@ class Draw extends Component {
                 pageDesc={this.state.description}
                 refereeImage={this.state.img}
             />
-        ); else if(this.state.hasData) return (
+        ); else if(this.state.img) return (
             <div>
                 <h1>Select a comic to continue based on the latest frame drawn</h1>
                 <button onClick={() => this.requestFrame(-1)}>&lt; Previous</button>
