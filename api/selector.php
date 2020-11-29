@@ -20,11 +20,14 @@ if (!empty($data)) {
 
     if (isset($loadedIds[$i])) {
         $page = $pageDAO->getPage($loadedIds[$i]);
+        $index = $i;
     } else {
         $page = $pageDAO->getRandomPage($loadedIds);
         if ($page != NULL) {
-            $loadedIds[$i] = $page->getId();
+            $id = $page->getId();
+            $loadedIds[$i] = $id;
             $loadedIds = array_values($loadedIds);
+            $index = array_search($id, $loadedIds);
         } // ptet gérer le fait que yai plus rien de nouveau à scroller
     }
 
