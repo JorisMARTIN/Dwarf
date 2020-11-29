@@ -54,10 +54,12 @@
 
 .authPageLoginEmail > input[type=email], .authPageLoginPwd > input[type=password], .authPageSignupDate > input[type=date], .authPageSignupUserName > input[type=text], .authPageSignupConfEmail > input[type=email], .authPageSignupEmail > input[type=email], .authPageSignupPwd2 > input[type=password], .authPageSignupPwd > input[type=password] {
     border-radius: 25px;
+    color: var(--SecondaryText);
     background: var(--Background2);
     padding: 0.5em;
     margin: 0.5em;
     float: right;
+    border: none;
 }
 
 .authPageLoginForgotPwd {
@@ -72,6 +74,7 @@
     border-radius: 25px;
     font-size: 0.8em;
     font-weight: 600;
+    border: none;
 }
 
 .authPageSignup {
