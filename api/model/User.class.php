@@ -32,7 +32,7 @@ class User {
   }
 
   function getBirthdate() : string {
-    return $this->birthdate
+    return $this->birthdate;
   }
 
   function isAdmin() : bool {
