@@ -35,7 +35,7 @@ class User {
     return $this->birthdate
   }
 
-  function isAdmin() : boolean {
+  function isAdmin() : bool {
     return $this->admin;
   }
 }
