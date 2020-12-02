@@ -1,51 +1,65 @@
 html {
-    background-color: var(--Background);
+    background-color:var(--Background)
 }
 
 .menu {
     display: flex;
     justify-content: space-around;
-    align-items: baseline;
-    padding: 0.5em;
-    background-color: var(--CardBackground);
-    box-shadow: 0 5px 10px 10px var(--Shadow);
+    align-items: center;
+    padding: .5em;
+    background-color: var(--Navbar);
+    border-bottom: 1px solid rgb(142, 142, 147);
+    -webkit-backdrop-filter: saturate(1.8) blur(20px);
+    backdrop-filter: saturate(1.8) blur(20px);
+    position: sticky;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 50px;
 }
 
 .dwarf {
     text-decoration: none;
     color: var(--PrimaryText);
     font-size: 2em;
-    font-weight:700;
+    font-weight:700
 }
 
 .componentsMenu {
-    display:flex;
+    display:flex
 }
 
 .link {
     text-align: center;
-    padding: 0.5em 1em;
+    padding: .5em 1em;
     text-decoration: none;
     color: var(--PrimaryText);
     font-size: 1.2em;
-    font-weight: 600;
+    font-weight:600
 }
 
 .link:hover {
-    background: var(--Hover);
-    border-radius: 25px;
+    background:var(--Hover)
+}
+
+.link:hover, .log {
+    border-radius:25px
 }
 
 .log {
     text-decoration: none;
-    border-radius: 25px;
-    padding: 0.5em 1em;
-    color: rgb(242, 242, 247);
+    border: none;
+    padding: .5em 1em;
+    color: #f2f2f7;
     background-color: var(--BlueButton);
     font-size: 1em;
-    font-weight: 600;
+    font-weight:600
+}
+
+.log:hover {
+    background: var(--BlueButtonHover);
 }
 
 input[type=text] {
-    resize: none
+    resize:none
 }

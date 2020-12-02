@@ -1,36 +1,36 @@
 @media (prefers-color-scheme: dark) {
     :root {
-        --Background: rgb(28, 28, 30);
-        --Background2: rgb(28, 28, 30);
-        --CardBackground: rgb(44, 44, 46);
-        
-        --Hover: rgb(28, 28, 30);
-
-        --PrimaryText: rgb(242, 242, 247);
-        --SecondaryText: rgb(229, 229, 234);
-        --TernaryText: rgb(209, 209, 214);
-        
-        --BlueButton: rgb(10, 132, 255);
-        
-        --Shadow: none;
+        --Navbar: rgba(44, 44, 46, 0.8);
+        --Background: #1c1c1e;
+        --Background2: #1c1c1e;
+        --CardBackground: #2c2c2e;
+        --Hover: #1c1c1e;
+        --PrimaryText: #f2f2f7;
+        --SecondaryText: #e5e5ea;
+        --TernaryText: #d1d1d6;
+        --BlueButton: #0a84ff;
+        --BlueButtonHover: rgb(64, 156, 255);
+        --ClassicButtonEnd: rgb(255, 59, 48);
+        --ClassicButtonStart: rgb(255, 45, 85);
+        --Shadow: rgb(20, 20, 24);
     }
 }
 
 @media (prefers-color-scheme: light) {
     :root {
-        --Background: rgb(229, 229, 234);
-        --Background2: rgb(229, 229, 234);
-        --CardBackground: rgb(242, 242, 247);
-        
-        --Hover: rgb(229, 229, 234);
-
-        --PrimaryText: rgb(28, 28, 30);
-        --SecondaryText: rgb(44, 44, 46);
-        --TernaryText: rgb(58, 58, 60);
-        
-        --BlueButton: rgb(0, 122, 255);
-        
-        --Shadow: rgb(209, 209, 214);
+        --Navbar: rgba(242, 242, 247, 0.8);
+        --Background: #e5e5ea;
+        --Background2: #e5e5ea;
+        --CardBackground: #f2f2f7;
+        --Hover: #e5e5ea;
+        --PrimaryText: #1c1c1e;
+        --SecondaryText: #2c2c2e;
+        --TernaryText: #3a3a3c;
+        --BlueButton: #007aff;
+        --BlueButtonHover: rgb(0, 64, 221);
+        --ClassicButtonEnd: rgb(255, 69, 58);
+        --ClassicButtonStart: rgb(255, 55, 95);
+        --Shadow:#d1d1d6
     }
 }
 
