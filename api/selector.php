@@ -47,7 +47,7 @@ if (!empty($data) && isset($data->loadedIds)) {
             'gamemode' => ($page->getGameMode() == 0 ? "Normal" : "Reverse"),
             'date' => $page->getCreationDate(),
             'imagePtr' => $imagePtr,
-            'frameId' => $frameId,
+            'frameId' => $frame->getId(),
             'frameWidth' => $frame->getWidth(),
             'frameHeight' => $frame->getHeight()
         ];
