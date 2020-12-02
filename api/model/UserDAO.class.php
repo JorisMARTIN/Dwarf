@@ -15,7 +15,7 @@ class UserDAO extends DAO {
     }
 
     function putUser(string $email, string $username, string $password, string $ip, string $birthdate) : int {
-        $query = 'INSERT INTO "User" (nickname, email, password, creationdate, ips, birthdate) VALUES (:username, :email, :password, CURRENT_TIMESTAMP, ARRAY[:ip], TO_DATE(:birthdate, "DD/MM/YYYY")) RETURNING userid';
+        $query = "INSERT INTO \"User\" (nickname, email, password, creationdate, ips, birthdate) VALUES (:username, :email, :password, CURRENT_TIMESTAMP, ARRAY[:ip], TO_DATE(:birthdate, 'YYYY-MM-DD')) RETURNING userid";
         $tmp = $this->db->prepare($query);
         if ($tmp->execute([
             ':username' => $username,
