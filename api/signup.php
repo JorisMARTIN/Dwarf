@@ -28,6 +28,10 @@ function getClientIP() {
 if (isset($data)) {
     $pseudo = $data->name;
     $birthdate = $data->date;
+    /*Permut the birthdate string*/
+    $tmp = explode('/',$birthdate);
+    $birthdate = $tmp[2] . "/" . $tmp[1] . "/" . $tmp[0];
+    
     $email = $data->email;
     $emailC = $data->emailConfirm;
     $password = $data->password;

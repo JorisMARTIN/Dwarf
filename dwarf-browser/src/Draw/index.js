@@ -12,6 +12,9 @@ class Draw extends Component {
         gamemode: "",
         goToCanvas: false,
         loadedIds: [],
+        frameId: null,
+        frameWidth: null,
+        frameHeight: null,
     }
 
 
@@ -25,11 +28,14 @@ class Draw extends Component {
             console.log(res);
             if(res && res.page != null) {
                 this.setState({
+                    loadedIds: res.loadedIds,
                     name: res.page.name,
                     description: res.page.description,
                     gamemode: res.page.gamemode,
                     img: res.page.imagePtr,
-                    loadedIds: res.loadedIds,
+                    frameId: res.page.frameId,
+                    frameWidth: res.page.frameWidth,
+                    frameHeight: res.page.frameHeight,
                 });
             }
         });

@@ -129,14 +129,12 @@ class Canvas extends React.Component {
                     </div>
                     <div className="canvasDraw"
                         style={{
-                            maxWidth: this.props.frameWidth * (1.1) /*pour intégré les margin du canvas .. Corect ?*/
+                            maxWidth: this.props.frameWidth //* (1.1) /*pour intégré les margin du canvas .. Corect ?*/
                         }}
                     >
                         <div className="canvasDrawTitle">
-                            <textarea disabled readOnly>
-                                {this.props.pageName}</textarea>
-                            <textarea disabled readOnly>
-                                {this.props.pageDesc}</textarea> 
+                            <textarea disabled readOnly value={this.props.pageName} />
+                            <textarea disabled readOnly value={this.props.pageDesc} />
                         </div>
                         <CanvasDraw
                             className="canvasDrawSection"

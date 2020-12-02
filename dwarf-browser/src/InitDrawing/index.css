@@ -1,4 +1,3 @@
-/*CSS Propre :*/
 .initateDrawingContainer {
     width: 66%;
     margin-right: auto;
@@ -9,27 +8,28 @@
     text-align: center;
     color: var(--PrimaryText);
     font-size: 2em;
-    font-weight: 600;
+    font-weight:600
 }
 
 .initateDrawingForm {
     background-color: var(--CardBackground);
     color: var(--SecondaryText);
+    box-shadow:0 5px 10px 10px var(--Shadow);
     display: flex;
     flex-direction: column;
     border-radius: 25px;
     padding: 2em;
     font-size: 1em;
-    font-weight: 500;
+    font-weight:500
 }
 
 .initateDrawingChoseTitle, .initateDrawingDescription, .initateDrawingGameMode, .initateDrawingGameType, .initateDrawingTemplate {
-    border: none;
+    border:none
 }
 
 .initateDrawingChoseTitle {
     display: flex;
-    flex-direction: column;
+    flex-direction:column
 }
 
 .initateDrawingTitleFrame {
@@ -39,15 +39,15 @@
     border-radius: 25px;
     color: var(--SecondaryText);
     background: var(--Background2);
-    font-size: 0.8em;
+    font-size: .8em;
     font-weight: 500;
-    padding: 0.5em;
-    margin: 0.5em;
+    padding: .5em;
+    margin:.5em
 }
 
 .initateDrawingDescription {
     display: flex;
-    flex-direction:column;
+    flex-direction:column
 }
 
 .initateDrawingDescription > textarea {
@@ -57,16 +57,16 @@
     border-radius: 10px;
     color: var(--SecondaryText);
     background: var(--Background2);
-    font-size: 0.8em;
+    font-size: .8em;
     font-weight: 500;
-    padding: 0.5em;
-    margin: 0.5em;
-    resize: none;
+    padding: .5em;
+    margin: .5em;
+    resize:none
 }
 
 .initateDrawingGameMode, .initateDrawingGameType, .initateDrawingTemplate {
     display: flex;
-    flex-direction: column;
+    flex-direction:column
 }
 
 .initDrawingRadiosButtons {
@@ -74,17 +74,17 @@
     width: 66%;
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content:space-around
 }
 
 .initateDrawingSubmitButton {
-    padding: 0.5em 1em;
+    padding: .5em 1em;
     margin: 2em;
-    color: rgb(242, 242, 247);
+    color: #f2f2f7;
     background: var(--BlueButton);
     border-radius: 25px;
-    font-size: 0.8em;
+    font-size: .8em;
     font-weight: 600;
     border: none;
-    align-self: center;
+    align-self:center
 }
