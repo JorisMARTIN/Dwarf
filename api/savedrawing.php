@@ -44,10 +44,10 @@ if ($userId != -1) {
 
                 if ($page->getGameMode() == 0) {
                     $i = 0;
-                    while ($frames[$i]->isDone()) $i++;
+                    while ($frames[$i] && $frames[$i]->isDone()) $i++;
                 } else if ($page->getGameMode() == 1) {
                     $i = count($frames) - 1;
-                    while ($frames[$i]->isDone()) $i--;
+                    while ($frames[$i] && $frames[$i]->isDone()) $i--;
                 }
 
                 if(array_key_exists($i, $frames)) {

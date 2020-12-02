@@ -30,11 +30,11 @@ if (!empty($data) && isset($data->loadedIds)) {
         $frames = $frameDAO->getFrames($pageId);
         if ($page->getGameMode() == 0) {
             $i = 0;
-            while($frames[$i]->isDone()) $i++;
+            while($frames[$i] && $frames[$i]->isDone()) $i++;
             $refIndex = $i - 1;
         } else if ($page->getGameMode() == 1) {
             $i = count($frames) - 1;
-            while ($frames[$i]->isDone()) $i--;
+            while ($frames[$i] && $frames[$i]->isDone()) $i--;
             $refIndex = $i + 1;
         }
 
