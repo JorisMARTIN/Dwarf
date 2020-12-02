@@ -12,6 +12,7 @@ import InitDrawing from './InitDrawing';
 import AuthPage from './AuthPage';
 import E404 from './E404';
 import Auth from './components/AuthHelperMethods';
+import UserInfos from './UserInfos';
 
 export default class App extends Component {
 
@@ -35,6 +36,7 @@ export default class App extends Component {
             <Link className="link" to="/">News</Link>
             <Link className="link" to="/draw">Draw</Link>
             <Link className="link" to="/init">New Page</Link>
+            <Link className="link" to="/user">User</Link>
           </div>
 
           <div className="logComponent">
@@ -51,6 +53,8 @@ export default class App extends Component {
           <Route path="/auth" component={AuthPage} />
 
           <Route path="/init" component={InitDrawing} />
+
+          <Route path="/user" component={UserInfos} />
 
           <Route path="*">
             <E404 />
