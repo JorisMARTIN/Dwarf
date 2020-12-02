@@ -29,11 +29,6 @@ export default class Signup extends Component {
             })
         }).then(res => {
             alert(res.message);
-            if (res.success) {
-                alert("Sign up successful, you may now log in.");
-            } else {
-                alert("Sign up failed");
-            }
         })
     }
 
