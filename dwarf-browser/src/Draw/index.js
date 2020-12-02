@@ -11,17 +11,15 @@ class Draw extends Component {
         description: "",
         gamemode: "",
         goToCanvas: false,
+        loadedIds: [],
     }
 
-    loadedIds = [];
-    index = 0;
 
-    requestFrame = (direction) => {
+    requestFrame = () => {
         Auth.fetch("selector.php", {
             method: 'POST',
             body: JSON.stringify({
                 'loadedIds': this.loadedIds,
-                'index': this.index + direction,
             })
         }).then(res => {
             console.log(res);
@@ -31,10 +29,8 @@ class Draw extends Component {
                     description: res.page.description,
                     gamemode: res.page.gamemode,
                     img: res.page.imagePtr,
+                    loadedIds: res.loadedIds,
                 });
-
-                this.loadedIds = res.loadedIds;
-                this.index = res.index;
             }
         });
     }
@@ -44,7 +40,7 @@ class Draw extends Component {
     }
 
     componentDidMount() {
-        this.requestFrame(0);
+        this.requestFrame();
     }
 
     render() {
@@ -59,21 +55,20 @@ class Draw extends Component {
                 refereeImage={this.state.img}
             />
         ); else if(this.state.img) return (
-            <div>
-                <h1>Select a comic to continue based on the latest frame drawn</h1>
-                <button onClick={() => this.requestFrame(-1)}>&lt; Previous</button>
-                <img src={"http://dwarf.jorismartin.fr" + this.state.img} alt={this.state.name} />
-                <div>
-                    <textarea readOnly disabled className="" value={this.state.name} />
-                    <textarea readOnly disabled className="" value={this.state.description} />
-                    <p className="">{this.state.gamemode}</p>
+            <div className="drawSelector">
+                <h1 className="drawTitle">Select a comic to continue based on the latest frame drawn</h1>
+                <img className="drawImage" src={"http://dwarf.jorismartin.fr" + this.state.img} alt={this.state.name} />
+                <div className="drawInfos">
+                    <textarea readOnly disabled className="drawName" value={this.state.name} />
+                    <textarea readOnly disabled className="drawDesc" value={this.state.description} />
+                    <p className="drawGM">{this.state.gamemode}</p>
                 </div>
-                <button onClick={() => this.requestFrame(1)}>Next &gt;</button>
-                <button onClick={this.drawThis}>Draw !</button>
+                <button className="drawNext" onClick={this.requestFrame}>Give me another</button>
+                <button className="drawDraw" onClick={this.drawThis}>Draw !</button>
             </div>
         ); else return (
             <div>
-                <p>There is nothing to draw ! :(</p>
+                <p className="drawNothing">There is nothing to draw ! :(</p>
             </div>
         );
     }
