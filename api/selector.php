@@ -11,29 +11,8 @@ $frameDAO = new FrameDAO();
 
 $data = json_decode(file_get_contents("php://input"));
 
-if (!empty($data)) {
+if (!empty($data) && isset($data->loadedIds)) {
     $loadedIds = $data->loadedIds;
-    $index = $data->index;
-
-    if (isset($loadedIds[$index])) {
-        $page = $pageDAO->getPage($loadedIds[$index]);
-    } else {
-        $page = $pageDAO->getRandomPage($loadedIds);
-
-        if ($page != NULL) {
-            
-            $id = $page->getId();
-            $length = count($loadedIds);
-
-            if($index < 0) {
-                $index = 0;
-                array_unshift($loadedIds, $id);
-            } else if($index >= $length) {
-                $index = $length;
-                array_push($loadedIds, $id);
-            }
-        } // ptet gérer le fait que yai plus rien de nouveau à scroller
-    }
 
     $out = [
         'loadedIds' => $loadedIds,
@@ -41,9 +20,17 @@ if (!empty($data)) {
         'page' => NULL
     ];
 
-    //todo : envoyer imagePtr de l'image de référence de l'image à dessiner
-    // et le frameId / frameWidth / frameHeight de l'image à dessiner
-    if ($page) {
+    $page = $pageDAO->getRandomPage($loadedIds);
+
+    if($page == NULL) $page = $pageDAO->getRandomPage();
+    
+    if ($page != NULL) {
+        array_push($loadedIds, $page->getId());
+        //todo : envoyer imagePtr de l'image de référence de l'image à dessiner
+        //et le frameId / frameWidth / frameHeight de l'image à dessiner
+
+        
+
         $out['page'] = [
             'name' => $page->getName(),
             'description' => $page->getDescription(),
@@ -52,6 +39,9 @@ if (!empty($data)) {
             'imagePtr' => $frameDAO->getFrames($page->getId())[0]->getImagePtr()
         ];
     }
+    
+
+    
 } else {
     $out = [];
 }
