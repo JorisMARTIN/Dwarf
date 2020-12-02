@@ -1,16 +1,20 @@
-/*Global Page*/
+.authPageMain {
+    padding-top: 66px;
+}
+
 .authPageTitle {
-    text-align: center;
     color: var(--PrimaryText);
-    font-size: 2em;
-    font-weight: 600;
+    font-size:2em
+}
+
+.authPageDescri, .authPageTitle {
+    text-align: center;
+    font-weight:600
 }
 
 .authPageDescri {
-    text-align: center;
     color: var(--SecondaryText);
-    font-size: 1.2em;
-    font-weight: 600;
+    font-size:1.2em
 }
 
 .authPage {
@@ -18,84 +22,88 @@
     flex-direction: row;
     border-radius: 25px;
     background-color: var(--CardBackground);
-    box-shadow: 0 5px 10px 10px var(--Shadow);
+    box-shadow:0 5px 10px 10px var(--Shadow)
 }
 
 .authPage, .authPageLogin, .authPageSignup {
     width: 80%;
     margin-left: auto;
-    margin-right:auto;
+    margin-right:auto
 }
 
 .authPageLogin > h1, .authPageSignup > h1 {
     color: var(--PrimaryText);
     text-align: center;
     font-size: 2em;
-    font-weight: 700;
+    font-weight:700
 }
 
 .authPageLogin, .authPageSignup {
     color: var(--SecondaryText);
     font-size: 1em;
-    font-weight: 500;
+    font-weight:500
 }
 
-.authPageLoginEmail, .authPageLoginPwd, .authPageLoginEmail, .authPageLoginPwd, .authPageSignupDate, .authPageSignupUserName, .authPageSignupConfEmail, .authPageSignupEmail, .authPageSignupPwd2, .authPageSignupPwd {
+.authPageLoginEmail, .authPageLoginPwd, .authPageSignupConfEmail, .authPageSignupDate, .authPageSignupEmail, .authPageSignupPwd, .authPageSignupPwd2, .authPageSignupUserName {
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items:center
 }
 
 .authPageLoginForm {
     display: flex;
     flex-direction: column;
-    padding: 2em;
+    padding:2em
 }
 
-.authPageLoginEmail > input[type=email], .authPageLoginPwd > input[type=password], .authPageSignupDate > input[type=date], .authPageSignupUserName > input[type=text], .authPageSignupConfEmail > input[type=email], .authPageSignupEmail > input[type=email], .authPageSignupPwd2 > input[type=password], .authPageSignupPwd > input[type=password] {
+.authPageLoginEmail > input[type=email], .authPageLoginPwd > input[type=password], .authPageSignupConfEmail > input[type=email], .authPageSignupDate > input[type=date], .authPageSignupEmail > input[type=email], .authPageSignupPwd2 > input[type=password], .authPageSignupPwd > input[type=password], .authPageSignupUserName > input[type=text] {
     border-radius: 25px;
     color: var(--SecondaryText);
     background: var(--Background2);
-    padding: 0.5em;
-    margin: 0.5em;
+    padding: .5em;
+    margin: .5em;
     float: right;
-    border: none;
+    border:none
 }
 
 .authPageLoginForgotPwd {
-    color: var(--TernaryText);
+    color:var(--TernaryText)
 }
 
 .authPageLoginBottom > button, .authPageSignupForm > button {
-    padding: 0.5em 1em;
+    padding: .5em 1em;
     margin: 2em;
-    color: rgb(242, 242, 247);
+    color: #f2f2f7;
     background: var(--BlueButton);
     border-radius: 25px;
-    font-size: 0.8em;
+    font-size: .8em;
     font-weight: 600;
-    border: none;
+    border:none
+}
+
+.authPageLoginBottom > button:hover, .authPageSignupForm > button:hover {
+    background: var(--BlueButtonHover);
 }
 
 .authPageSignup {
     border-left: 1px solid var(--Background2);
     display: flex;
     flex-direction: column;
-    justify-content:space-between
+    justify-content: space-between
 }
 
 .authPageSignupForm {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items:center
 }
 
 .authPageSignupDiv {
     display: flex;
     flex-direction: column;
-    padding: 0 2em;
+    padding: 0 2em
 }
 
 .authPage label {
-    float: left;
+    float: left
 }
