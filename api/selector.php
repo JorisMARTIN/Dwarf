@@ -16,7 +16,6 @@ if (!empty($data) && isset($data->loadedIds)) {
 
     $out = [
         'loadedIds' => $loadedIds,
-        'index' => $index,
         'page' => NULL
     ];
 
