@@ -19,7 +19,7 @@ class Draw extends Component {
         Auth.fetch("selector.php", {
             method: 'POST',
             body: JSON.stringify({
-                'loadedIds': this.loadedIds,
+                loadedIds: this.state.loadedIds,
             })
         }).then(res => {
             console.log(res);

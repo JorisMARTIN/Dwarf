@@ -21,7 +21,7 @@ if (!empty($data) && isset($data->loadedIds)) {
 
     $page = $pageDAO->getRandomPage($loadedIds);
 
-    if($page == NULL) $page = $pageDAO->getRandomPage();
+    if($page == NULL && !empty($loadedIds)) $page = $pageDAO->getRandomPage([end($loadedIds)]);
     
     if ($page != NULL) {
         array_push($loadedIds, $page->getId());
