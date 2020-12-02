@@ -40,6 +40,7 @@ if ($userId != -1) {
 
                 //set next frame to drawable
                 $frames = $frameDAO->getFrames($frame->getPageId());
+                $page = $pageDAO->getPage($frame->getPageId());
 
                 if ($page->getGameMode() == 0) {
                     $i = 0;
@@ -52,7 +53,7 @@ if ($userId != -1) {
                 if(array_key_exists($i, $frames)) {
                     $frameDAO->setDrawable($frames[$i]->getId(), true);
                 } else {
-                    $pageDAO->setCompleted($frame->getPageId(), true);
+                    $pageDAO->setCompleted($page->getId(), true);
                 }
 
                 $out = [
