@@ -31,15 +31,15 @@ if (!empty($data) && isset($data->loadedIds)) {
         if ($page->getGameMode() == 0) {
             $i = 0;
             while($frames[$i]->isDone()) $i++;
-            $lastIndex = $i + 1;
+            $refIndex = $i - 1;
         } else if ($page->getGameMode() == 1) {
             $i = count($frames) - 1;
             while ($frames[$i]->isDone()) $i--;
-            $lastIndex = $i - 1;
+            $refIndex = $i + 1;
         }
 
-        $frame = $frameDAO->getFrame($frames[$lastIndex]->getId());
-        $imagePtr = $frames[$i]->getImagePtr();
+        $frame = $frameDAO->getFrame($frames[$i]->getId());
+        $imagePtr = $frames[$refIndex]->getImagePtr();
 
         $out['page'] = [
             'name' => $page->getName(),
