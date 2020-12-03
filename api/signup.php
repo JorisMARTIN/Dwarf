@@ -32,29 +32,38 @@ if (isset($data)) {
     $emailC = $data->emailConfirm;
     $password = $data->password;
     $passwordC = $data->passwordConfirm;
-}
-
-if (($email == $emailC) && ($password == $passwordC) && (filter_var($email, FILTER_VALIDATE_EMAIL)))   {
-    $signupOk = $userDAO->putUser($email, $pseudo, $password, getClientIP(), $birthdate);
-
-    if ($signupOk) {
-        echo json_encode([
-            'success' => true,
-            'status' => 200,
-            'message' => 'User added successfully'
-        ]);
+    
+    if (($email == $emailC) && (filter_var($email, FILTER_VALIDATE_EMAIL))) {
+        if ($password == $passwordC) {
+            $signupOk = $userDAO->putUser($email, $pseudo, $password, getClientIP(), $birthdate);
+    
+            if ($signupOk) {
+                echo json_encode([
+                    'success' => true,
+                    'status' => 200,
+                    'message' => 'User added successfully'
+                ]);
+            } else {
+                echo json_encode([
+                    'success' => false,
+                    'status' => 400,
+                    'message' => 'Signup failed !'
+                ]);
+            }
+        } else {
+            echo json_encode([
+                'success' => false,
+                'status' => 400,
+                'message' => 'Password wrong !'
+            ]);
+        }
     } else {
         echo json_encode([
             'success' => false,
             'status' => 400,
-            'message' => 'Signup failed !'
-        ]);
+            'message' => 'Email wrong !'
+        ]);    
     }
-} else {
-    echo json_encode([
-        'success' => false,
-        'status' => 400,
-        'message' => 'Email wrong !'
-    ]);    
 }
+
 
