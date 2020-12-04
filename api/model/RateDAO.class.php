@@ -1,6 +1,6 @@
 <?php
 require_once(dirname(__FILE__) . '/DAO.class.php');
-require_once(dirname(__FILE__) . '/Page.class.php');
+require_once(dirname(__FILE__) . '/Rate.class.php');
 
 class RateDAO extends DAO
 {
