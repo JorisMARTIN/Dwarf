@@ -17,9 +17,9 @@ $newPageId = $pageDAO->putPage('test-page', 'test-description', 0, 0, false, $ne
 print("Création d'une planche : ".($newPageId != -1 ? "OK" : "FAILED ($newPageId)")."\n");
 $newFrameId = $frameDAO->putFrame(True, False, 100, 100, $newPageId, $newUserId);
 print("Création d'une frame : ".($newFrameId != -1 ? "OK" : "FAILED ($newFrameId)")."\n");
-
 $isRateCreated = $rateDAO ->putVote($newUserId, $newPageId, true);
 print("Création d'un vote : " . ($isRateCreated ? "OK" : "FAILED")."\n");
+print("\n");
 
 $user1 = $userDAO->getUser($newUserId);
 print("Récupération d'un utilisateur : ");
@@ -105,6 +105,29 @@ if ($frame1) {
   print("\n - Vérification de l'identifiant de sa page : ".($frame1PageId === $newPageId ? "OK" : "FAILED"));
   $frame1OwnerId = $frame1->getOwnerId();
   print("\n - Vérification de l'identifiant de son créateur : ".($frame1OwnerId === $newUserId ? "OK" : "FAILED"));
+} else {
+  print("FAILED");
+}
+print("\n\n");
+
+$rate2 = $rateDAO->getVote($newPageId);
+print("Récupération d'un vote : ");
+if ($rate2) {
+  print("OK");
+} else {
+  print("FAILED");
+}
+print("\n");
+$rate1 = $rateDAO->getUserVote($newUserId)[0];
+print("Récupération d'un vote : ");
+if ($rate1) {
+  print("OK");
+  $rate1PageId = $rate1->getPageId();
+  print("\n - Vérification de l'identifiant de la page : ".($rate1PageId === $newPageId ? "OK" : "FAILED"));
+  $rate1UserId = $rate1->getUserId();
+  print("\n - Vérification de l'identifiant de l'utilisateur : ".($rate1UserId === $newUserId ? "OK" : "FAILED"));
+  $rate1Vote = $rate1->getVote();
+  print("\n - Vérification du vote : ".($rate1Vote ? "OK" : "FAILED"));
 } else {
   print("FAILED");
 }
