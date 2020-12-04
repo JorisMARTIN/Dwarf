@@ -33,23 +33,29 @@ if (isset($data)) {
     $password = $data->password;
     $passwordC = $data->passwordConfirm;
     
-    if (($email == $emailC) && (filter_var($email, FILTER_VALIDATE_EMAIL))) {
+    if ($email == $emailC) {
         if ($password == $passwordC) {
-            $signupOk = $userDAO->putUser($email, $pseudo, $password, getClientIP(), $birthdate);
-    
-            if ($signupOk) {
-                echo json_encode([
-                    'success' => true,
-                    'status' => 200,
-                    'message' => 'User added successfully'
-                ]);
-            } else {
+            try {
+                $signupOk = $userDAO->putUser($email, $pseudo, $password, getClientIP(), $birthdate);
+                if ($signupOk) {
+                    echo json_encode([
+                        'success' => true,
+                        'message' => 'User added successfully'
+                    ]);
+                } else {
+                    echo json_encode([
+                        'success' => false,
+                        'message' => 'Signup failed !'
+                    ]);
+                }
+            } catch (PDOException $e) {
+                string $msg = $e->getMessage();
                 echo json_encode([
                     'success' => false,
-                    'status' => 400,
-                    'message' => 'Signup failed !'
+                    'message' => 'Signup failed : ' . $msg
                 ]);
-            }
+                exit;
+            }    
         } else {
             echo json_encode([
                 'success' => false,
