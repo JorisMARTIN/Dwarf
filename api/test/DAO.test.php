@@ -88,7 +88,7 @@ print("Récupération d'une frame : ");
 if ($frame1) {
   print("OK");
   $frame1Id = $frame1->getId();
-  print("\n - Vérification de son identifiant : ".($frame1Id === $newPageId ? "OK" : "FAILED"));
+  print("\n - Vérification de son identifiant : ".($frame1Id === $newFrameId ? "OK" : "FAILED"));
   $frame1ImagePtr = $frame1->getImagePtr();
   print("\n - Vérification de son chemin d'accès : ".($frame1ImagePtr === "/cdn/frames/page-".$newPageId."/frame-".$newFrameId.".png" ? "OK" : "FAILED"));
   $frame1CreationDate = $frame1->getCreationDate();
