@@ -10,7 +10,7 @@ $TEMPLATES = [];
 $templatePath = dirname(__FILE__, 2) . '/cdn/templates';
 $templateFiles = scandir($templatePath);
 foreach($templateFiles as $templateFile) {
-    if($templateFile != "." || $templateFile != "..")
+    if($templateFile != "." && $templateFile != "..")
         $TEMPLATES[] = json_decode(file_get_contents($templatePath . '/' . $templateFile));
 }
 
