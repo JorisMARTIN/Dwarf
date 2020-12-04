@@ -9,7 +9,7 @@ $userDAO = new UserDAO();
 $pageDAO = new PageDAO();
 $frameDAO = new FrameDAO();
 
-$newUserId = $userDAO->putUser('test@gmail.com', 'test-nickname', 'test-password', '192.168.1.1');
+$newUserId = $userDAO ->putUser('test@gmail.com', 'test-nickname', 'test-password', '192.168.1.1', "2000-01-01");
 print("Création d'un utilisateur : ".($newUserId != -1 ? "OK" : "FAILED ($newUserId)")."\n");
 $newPageId = $pageDAO->putPage('test-page', 'test-description', 0, 0, false, $newUserId);
 print("Création d'une planche : ".($newPageId != -1 ? "OK" : "FAILED ($newPageId)")."\n");
@@ -28,6 +28,8 @@ if ($user1) {
   print("\n - Vérification de son email : ".($user1Email === "test@gmail.com" ? "OK" : "FAILED"));
   $user1CreationDate = $user1->getCreationDate();
   print("\n - Vérification de sa date de création : ".($user1CreationDate > "2000-01-01" ? "OK" : "FAILED"));
+  $user1BirthDate = $user1->getBirthDate();
+  print("\n - Vérification de sa date de création : ".($user1BirthDate == "2000-01-01" ? "OK" : "FAILED"));
   $user1Ip = $user1->getIps()[0];
   print("\n - Vérification de son adresse ip : ".($user1Ip === '192.168.1.1' ? "OK" : "FAILED"));
 } else {
