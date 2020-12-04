@@ -33,6 +33,7 @@ class Draw extends Component {
                     description: res.page.description,
                     gamemode: res.page.gamemode,
                     img: res.page.imagePtr,
+                    user: res.page.user,
                     frameId: res.page.frameId,
                     frameWidth: res.page.frameWidth,
                     frameHeight: res.page.frameHeight,
@@ -68,6 +69,7 @@ class Draw extends Component {
                     <textarea readOnly disabled className="drawName" value={this.state.name} />
                     <textarea readOnly disabled className="drawDesc" value={this.state.description} />
                     <p className="drawGM">{this.state.gamemode}</p>
+                    <p className="drawUser">Auteur : {this.state.user}</p>
                 </div>
                 <button className="drawNext" onClick={this.requestFrame}>Give me another</button>
                 <button className="drawDraw" onClick={this.drawThis}>Draw !</button>
