@@ -128,7 +128,9 @@ try {
   print("\n\n");
 } catch (Exception $e) {
   echo 'Exception : ',  $e->getMessage(), "\n";
-} catch (Exception $e) {
+} catch (Throwable $e) {
+  echo 'Levée : ',  $e->getMessage(), "\n";
+} catch (Error $e) {
   echo 'Erreur : ',  $e->getMessage(), "\n";
 }
 
