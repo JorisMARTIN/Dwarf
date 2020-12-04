@@ -37,7 +37,7 @@ class RateDAO extends DAO {
 
         return $this->db->prepare($query)->execute([
             ':userId' => $userId,
-            ':pageId' => $frameId,
+            ':pageId' => $pageId,
             ':vote'   => $vote ? 't' : 'f'
           ]);
     }
