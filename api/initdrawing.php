@@ -5,23 +5,10 @@ require_once(dirname(__FILE__) . '/model/AuthMethods.php');
 require_once(dirname(__FILE__) . '/model/PageDAO.class.php');
 require_once(dirname(__FILE__) . '/model/FrameDAO.class.php');
 
-$TEMPLATES = [
-    [
-        [
-            'w' => 500,
-            'h' => 500
-        ], [
-            'w' => 500,
-            'h' => 500
-        ], [
-            'w' => 500,
-            'h' => 500
-        ], [
-            'w' => 500,
-            'h' => 500
-        ]
-    ]
-];
+$TEMPLATES = [];
+foreach(scandir(dirname(__FILE__, 2) . '/cdn/templates') as $templateFile) {
+    $TEMPLATES[] = json_decode($templateFile);
+}
 
 $userId = tokenToUserId();
 
