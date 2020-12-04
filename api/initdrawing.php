@@ -1,27 +1,18 @@
 <?php
+require_once(dirname(__FILE__) . '/includes/debug.inc.php');
 require_once(dirname(__FILE__) . '/includes/httpheaders.inc.php');
-require_once(dirname(__FILE__) . '/model/AuthMethods.php');
 
+require_once(dirname(__FILE__) . '/model/AuthMethods.php');
 require_once(dirname(__FILE__) . '/model/PageDAO.class.php');
 require_once(dirname(__FILE__) . '/model/FrameDAO.class.php');
 
-$TEMPLATES = [
-    [
-        [
-            'w' => 500,
-            'h' => 500
-        ], [
-            'w' => 500,
-            'h' => 500
-        ], [
-            'w' => 500,
-            'h' => 500
-        ], [
-            'w' => 500,
-            'h' => 500
-        ]
-    ]
-];
+$TEMPLATES = [];
+$templatePath = dirname(__FILE__, 2) . '/cdn/templates';
+$templateFiles = scandir($templatePath);
+foreach($templateFiles as $templateFile) {
+    if($templateFile != "." && $templateFile != "..")
+        $TEMPLATES[] = json_decode(file_get_contents($templatePath . '/' . $templateFile));
+}
 
 $userId = tokenToUserId();
 
@@ -43,7 +34,7 @@ if ($userId != -1) {
             $tmpSize = count($TEMPLATES[$template]);
             for ($i = 0; $i < $tmpSize; $i++) {
                 $box = $TEMPLATES[$template][$i];
-                $fid = $frameDAO->putFrame(false, false, $box['w'], $box['h'], $pageId, $userId);
+                $fid = $frameDAO->putFrame(false, false, $box->w, $box->h, $pageId, $userId);
                 if (($gamemode == 0 && $i == 0) || ($gamemode == 1 && $i = $tmpSize)) {
                     $frameId = $fid;
                 }

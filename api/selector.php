@@ -4,10 +4,12 @@ require_once(dirname(__FILE__) . '/includes/httpheaders.inc.php');
 
 require_once(dirname(__FILE__) . '/model/PageDAO.class.php');
 require_once(dirname(__FILE__) . '/model/FrameDAO.class.php');
+require_once(dirname(__FILE__) . '/model/UserDAO.class.php');
 // Renvoie une liste de BDs
 
 $pageDAO = new PageDAO();
 $frameDAO = new FrameDAO();
+$userDAO = new UserDAO();
 
 $data = json_decode(file_get_contents("php://input"));
 
@@ -30,27 +32,30 @@ if (!empty($data) && isset($data->loadedIds)) {
         $frames = $frameDAO->getFrames($pageId);
         if ($page->getGameMode() == 0) {
             $i = 0;
-            while($frames[$i] && $frames[$i]->isDone()) $i++;
+            while (isset($frames[$i]) && $frames[$i]->isDone()) $i++;
             $refIndex = $i - 1;
         } else if ($page->getGameMode() == 1) {
             $i = count($frames) - 1;
-            while ($frames[$i] && $frames[$i]->isDone()) $i--;
+            while (isset($frames[$i]) && $frames[$i]->isDone()) $i--;
             $refIndex = $i + 1;
         }
 
-        $frame = $frameDAO->getFrame($frames[$i]->getId());
-        $imagePtr = $frames[$refIndex]->getImagePtr();
-
-        $out['page'] = [
-            'name' => $page->getName(),
-            'description' => $page->getDescription(),
-            'gamemode' => ($page->getGameMode() == 0 ? "Normal" : "Reverse"),
-            'date' => $page->getCreationDate(),
-            'imagePtr' => $imagePtr,
-            'frameId' => $frame->getId(),
-            'frameWidth' => $frame->getWidth(),
-            'frameHeight' => $frame->getHeight()
-        ];
+        if(array_key_exists($refIndex, $frames)) {
+            $frame = $frameDAO->getFrame($frames[$i]->getId());
+            $imagePtr = $frames[$refIndex]->getImagePtr();
+    
+            $out['page'] = [
+                'name' => $page->getName(),
+                'description' => $page->getDescription(),
+                'gamemode' => ($page->getGameMode() == 0 ? "Normal" : "Reverse"),
+                'date' => $page->getCreationDate(),
+                'imagePtr' => $imagePtr,
+                'user' => $userDAO->getUser($frame->getOwnerId())->getNickname(),
+                'frameId' => $frame->getId(),
+                'frameWidth' => $frame->getWidth(),
+                'frameHeight' => $frame->getHeight()
+            ];
+        }
     }
 } else {
     $out = [];

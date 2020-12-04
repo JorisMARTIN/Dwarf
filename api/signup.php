@@ -28,31 +28,42 @@ function getClientIP() {
 if (isset($data)) {
     $pseudo = $data->name;
     $birthdate = $data->date;
-    /*Permut the birthdate string*/
-    $tmp = explode('/',$birthdate);
-    $birthdate = $tmp[2] . "/" . $tmp[1] . "/" . $tmp[0];
-    
     $email = $data->email;
     $emailC = $data->emailConfirm;
     $password = $data->password;
     $passwordC = $data->passwordConfirm;
+    
+    if (($email == $emailC) && (filter_var($email, FILTER_VALIDATE_EMAIL))) {
+        if ($password == $passwordC) {
+            $signupOk = $userDAO->putUser($email, $pseudo, $password, getClientIP(), $birthdate);
+    
+            if ($signupOk) {
+                echo json_encode([
+                    'success' => true,
+                    'status' => 200,
+                    'message' => 'User added successfully'
+                ]);
+            } else {
+                echo json_encode([
+                    'success' => false,
+                    'status' => 400,
+                    'message' => 'Signup failed !'
+                ]);
+            }
+        } else {
+            echo json_encode([
+                'success' => false,
+                'status' => 400,
+                'message' => 'Password wrong !'
+            ]);
+        }
+    } else {
+        echo json_encode([
+            'success' => false,
+            'status' => 400,
+            'message' => 'Email wrong !'
+        ]);    
+    }
 }
 
-if (($email == $emailC) && ($password == $passwordC))   {
-    $signupOk = $userDAO->putUser($email, $pseudo, $password, getClientIP(), $birthdate);
-} 
 
-
-if ($signupOk) {
-    echo json_encode([
-        'success' => true,
-        'status' => 200,
-        'message' => 'User added successfully'
-    ]);
-} else {
-    echo json_encode([
-        'success' => false,
-        'status' => 400,
-        'message' => 'Signup failed !'
-    ]);
-}
