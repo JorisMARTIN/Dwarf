@@ -7,9 +7,10 @@ require_once(dirname(__FILE__) . '/model/PageDAO.class.php');
 require_once(dirname(__FILE__) . '/model/FrameDAO.class.php');
 
 $TEMPLATES = [];
-$templateFiles = scandir(dirname(__FILE__, 2) . '/cdn/templates');
+$templatePath = dirname(__FILE__, 2) . '/cdn/templates';
+$templateFiles = scandir($templatePath);
 foreach($templateFiles as $templateFile) {
-    $TEMPLATES[] = json_decode(file_get_contents($templateFile));
+    $TEMPLATES[] = json_decode(file_get_contents($templatePath . '/' . $templateFile));
 }
 
 $userId = tokenToUserId();
