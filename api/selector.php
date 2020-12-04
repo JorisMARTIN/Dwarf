@@ -40,20 +40,22 @@ if (!empty($data) && isset($data->loadedIds)) {
             $refIndex = $i + 1;
         }
 
-        $frame = $frameDAO->getFrame($frames[$i]->getId());
-        $imagePtr = $frames[$refIndex]->getImagePtr();
-
-        $out['page'] = [
-            'name' => $page->getName(),
-            'description' => $page->getDescription(),
-            'gamemode' => ($page->getGameMode() == 0 ? "Normal" : "Reverse"),
-            'date' => $page->getCreationDate(),
-            'imagePtr' => $imagePtr,
-            'user' => $userDAO->getUser($frame->getOwnerId())->getNickname(),
-            'frameId' => $frame->getId(),
-            'frameWidth' => $frame->getWidth(),
-            'frameHeight' => $frame->getHeight()
-        ];
+        if(array_key_exists($refIndex, $frames)) {
+            $frame = $frameDAO->getFrame($frames[$i]->getId());
+            $imagePtr = $frames[$refIndex]->getImagePtr();
+    
+            $out['page'] = [
+                'name' => $page->getName(),
+                'description' => $page->getDescription(),
+                'gamemode' => ($page->getGameMode() == 0 ? "Normal" : "Reverse"),
+                'date' => $page->getCreationDate(),
+                'imagePtr' => $imagePtr,
+                'user' => $userDAO->getUser($frame->getOwnerId())->getNickname(),
+                'frameId' => $frame->getId(),
+                'frameWidth' => $frame->getWidth(),
+                'frameHeight' => $frame->getHeight()
+            ];
+        }
     }
 } else {
     $out = [];
