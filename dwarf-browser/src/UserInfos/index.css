@@ -1,1 +1,3 @@
-color: var(--PrimaryText);
+.userInformations {
+    color: var(--PrimaryText);
+}
