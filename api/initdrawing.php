@@ -1,13 +1,15 @@
 <?php
+require_once(dirname(__FILE__) . '/includes/debug.inc.php');
 require_once(dirname(__FILE__) . '/includes/httpheaders.inc.php');
-require_once(dirname(__FILE__) . '/model/AuthMethods.php');
 
+require_once(dirname(__FILE__) . '/model/AuthMethods.php');
 require_once(dirname(__FILE__) . '/model/PageDAO.class.php');
 require_once(dirname(__FILE__) . '/model/FrameDAO.class.php');
 
 $TEMPLATES = [];
-foreach(scandir(dirname(__FILE__, 2) . '/cdn/templates') as $templateFile) {
-    $TEMPLATES[] = json_decode($templateFile);
+$templateFiles = scandir(dirname(__FILE__, 2) . '/cdn/templates');
+foreach($templateFiles as $templateFile) {
+    $TEMPLATES[] = json_decode(file_get_contents($templateFile));
 }
 
 $userId = tokenToUserId();
