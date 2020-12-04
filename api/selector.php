@@ -49,7 +49,7 @@ if (!empty($data) && isset($data->loadedIds)) {
             'gamemode' => ($page->getGameMode() == 0 ? "Normal" : "Reverse"),
             'date' => $page->getCreationDate(),
             'imagePtr' => $imagePtr,
-            'user' => $userDAO->getUser($page->getOwnerId())->getNickname(),
+            'user' => $userDAO->getUser($frame->getOwnerId())->getNickname(),
             'frameId' => $frame->getId(),
             'frameWidth' => $frame->getWidth(),
             'frameHeight' => $frame->getHeight()
