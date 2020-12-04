@@ -11,7 +11,7 @@ $pageDAO = new PageDAO();
 $frameDAO = new FrameDAO();
 $rateDAO = new RateDAO();
 
-$newUserId = $userDAO ->putUser('test@gmail.com', 'test-nickname', 'test-password', '192.168.1.1', "2000-01-01");
+$newUserId = $userDAO ->putUser('test.test@gmail.com', 'test-nickname', 'test-password', '192.168.1.1', "2000-01-01");
 print("Création d'un utilisateur : ".($newUserId != -1 ? "OK" : "FAILED ($newUserId)")."\n");
 $newPageId = $pageDAO->putPage('test-page', 'test-description', 0, 0, false, $newUserId);
 print("Création d'une planche : ".($newPageId != -1 ? "OK" : "FAILED ($newPageId)")."\n");
@@ -30,7 +30,7 @@ if ($user1) {
   $user1NickName = $user1->getNickName();
   print("\n - Vérification de son pseudo : ".($user1NickName === "test-nickname" ? "OK" : "FAILED"));
   $user1Email = $user1->getEmail();
-  print("\n - Vérification de son email : ".($user1Email === "test@gmail.com" ? "OK" : "FAILED"));
+  print("\n - Vérification de son email : ".($user1Email === "test.test@gmail.com" ? "OK" : "FAILED"));
   $user1CreationDate = $user1->getCreationDate();
   print("\n - Vérification de sa date de création : ".($user1CreationDate > "2000-01-01" ? "OK" : "FAILED"));
   $user1BirthDate = $user1->getBirthDate();
