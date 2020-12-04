@@ -42,6 +42,13 @@ class RateDAO extends DAO {
           ]);
     }
     
+    function removeVote(int $pageId, int $userId) : bool {
+        $query = 'DELETE FROM "Page" WHERE pageId = :pageId and userId = :userId';
+        return $this->db->prepare($query)->execute([
+        ':pageId' => $pageId,
+        ':userId' => $userId
+        ]);
+    }
     
 
 }

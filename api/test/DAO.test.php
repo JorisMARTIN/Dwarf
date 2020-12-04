@@ -4,10 +4,12 @@ require_once(dirname(__FILE__).'/../model/FrameDAO.class.php');
 require_once(dirname(__FILE__).'/../model/UserDAO.class.php');
 require_once(dirname(__FILE__).'/../model/PageDAO.class.php');
 require_once(dirname(__FILE__).'/../includes/debug.inc.php');
+require_once(dirname(__FILE__).'/../model/RateDAO.class.php');
 
 $userDAO = new UserDAO();
 $pageDAO = new PageDAO();
 $frameDAO = new FrameDAO();
+$rateDAO = new RateDAO();
 
 $newUserId = $userDAO ->putUser('test@gmail.com', 'test-nickname', 'test-password', '192.168.1.1', "2000-01-01");
 print("Création d'un utilisateur : ".($newUserId != -1 ? "OK" : "FAILED ($newUserId)")."\n");
@@ -15,6 +17,9 @@ $newPageId = $pageDAO->putPage('test-page', 'test-description', 0, 0, false, $ne
 print("Création d'une planche : ".($newPageId != -1 ? "OK" : "FAILED ($newPageId)")."\n");
 $newFrameId = $frameDAO->putFrame(True, False, 100, 100, $newPageId, $newUserId);
 print("Création d'une frame : ".($newFrameId != -1 ? "OK" : "FAILED ($newFrameId)")."\n");
+
+$newRateId = $rateDAO ->putRate($newUserId, $newPageId, true);
+print("Création d'un vote : " . ($newRateId != -1 ? "OK" : "FAILED ($newRateId)")."\n");
 
 $user1 = $userDAO->getUser($newUserId);
 print("Récupération d'un utilisateur : ");
@@ -111,5 +116,7 @@ $removed = $pageDAO->removePage($newPageId);
 print("Suppression d'une page : ".($removed ? "OK" : "FAILED")."\n");
 $removed = $userDAO->removeUser($newUserId);
 print("Suppression d'une utilisateur : ".($removed ? "OK" : "FAILED")."\n");
+$removed = $rateDAO->removeVote($newRateId);
+print("Suppression d'un vote : ".($removed ? "OK" : "FAILED")."\n");
 
 ?>
