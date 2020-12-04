@@ -18,7 +18,7 @@ print("Création d'une planche : ".($newPageId != -1 ? "OK" : "FAILED ($newPageI
 $newFrameId = $frameDAO->putFrame(True, False, 100, 100, $newPageId, $newUserId);
 print("Création d'une frame : ".($newFrameId != -1 ? "OK" : "FAILED ($newFrameId)")."\n");
 
-$newRateId = $rateDAO ->putRate($newUserId, $newPageId, true);
+$newRateId = $rateDAO ->putVote($newUserId, $newPageId, true);
 print("Création d'un vote : " . ($newRateId != -1 ? "OK" : "FAILED ($newRateId)")."\n");
 
 $user1 = $userDAO->getUser($newUserId);
