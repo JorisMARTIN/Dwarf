@@ -18,8 +18,8 @@ print("Création d'une planche : ".($newPageId != -1 ? "OK" : "FAILED ($newPageI
 $newFrameId = $frameDAO->putFrame(True, False, 100, 100, $newPageId, $newUserId);
 print("Création d'une frame : ".($newFrameId != -1 ? "OK" : "FAILED ($newFrameId)")."\n");
 
-$newRateId = $rateDAO ->putVote($newUserId, $newPageId, true);
-print("Création d'un vote : " . ($newRateId != -1 ? "OK" : "FAILED ($newRateId)")."\n");
+$isRateCreated = $rateDAO ->putVote($newUserId, $newPageId, true);
+print("Création d'un vote : " . ($isRateCreated ? "OK" : "FAILED")."\n");
 
 $user1 = $userDAO->getUser($newUserId);
 print("Récupération d'un utilisateur : ");
@@ -110,13 +110,14 @@ if ($frame1) {
 }
 print("\n\n");
 
+$removed = $rateDAO->removeVote($newPageId, $newUserId);
+print("Suppression d'un vote : ".($removed ? "OK" : "FAILED")."\n");
 $removed = $frameDAO->removeFrame($newFrameId);
 print("Suppression d'une frame : ".($removed ? "OK" : "FAILED")."\n");
 $removed = $pageDAO->removePage($newPageId);
 print("Suppression d'une page : ".($removed ? "OK" : "FAILED")."\n");
 $removed = $userDAO->removeUser($newUserId);
 print("Suppression d'une utilisateur : ".($removed ? "OK" : "FAILED")."\n");
-$removed = $rateDAO->removeVote($newRateId);
-print("Suppression d'un vote : ".($removed ? "OK" : "FAILED")."\n");
+
 
 ?>
