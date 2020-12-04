@@ -1,0 +1,33 @@
+#!/bin/bash
+
+echo "Ce script build notre appli, lancer './build client [install]' ou './build server' ou './build' pour les 2"
+
+folder='/home/dwarf/git-dwarf'
+server='/var/www/dwarf'
+
+cd $folder || exit
+git pull
+
+if [ $# -eq 0 ] || [ "$1" = "client" ]; then
+    echo "Build du client"
+    cd $folder/dwarf-browser || exit
+    if [ "$2" = "install" ]; then
+        npm install
+    fi
+    npm run build
+    cd $server
+    ls | grep -v 'api\|cdn' | xargs rm -rfv
+    cp -Rv $folder/dwarf-browser/build/* $server
+    rm -rf $folder/dwarf-browser/build
+fi
+
+if [ $# -eq 0 ] || [ "$1" = "server" ]; then
+    echo "Build du serveur"
+    rm -rfv $server/api
+    cp -Rv $folder/api $server/
+    rm -rfv $server/cdn/templates/*
+    cp -v $folder/cdn/templates/* $server/cdn/templates/
+fi
+
+cp -vf $folder/build /home/dwarf/build
+chmod +x /home/dwarf/build
