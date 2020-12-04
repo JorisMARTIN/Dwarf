@@ -37,16 +37,20 @@ class UserInfo extends Component {
     render(){
         const {isAdmin, userInfos} = this.state;
         return(
-            <div className="userInformations">
-                <h1>Name : {userInfos?.nickname}</h1>
-                <hr/>
-                <ul>
-                    <li>Id : {userInfos?.id}</li>
-                    <li>Email : {userInfos?.email}</li>
-                    <li>Account creation date : {userInfos?.creationDate}</li>
-                    <li>Birthdate : {userInfos?.birthdate}</li>
-                    <li>Account type : {isAdmin ? "Admin" : "normal"}</li>
-                </ul>
+            <div className="userPage">
+                <div className="userPageInfos">
+                    <h1 className="userPageInfosName">Name : {userInfos?.nickname}</h1>
+                    <ul className="userPageInfosOthers">
+                        <li>Id : {userInfos?.id}</li>
+                        <li>Email : {userInfos?.email}</li>
+                        <li>Account creation date : {userInfos?.creationDate}</li>
+                        <li>Birthdate : {userInfos?.birthdate}</li>
+                        <li>Account type : {isAdmin ? "Admin" : "normal"}</li>
+                    </ul>
+                </div>
+                <div className="userPageCreations">
+                    {/*A imaginer : l'affichage des différentees planches de l'utilisateur*/}
+                </div>
             </div>
         );
     }
