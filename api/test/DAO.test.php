@@ -42,14 +42,6 @@ if ($user1) {
 }
 print("\n\n");
 
-$page2 = $pageDAO->getPage($newPageId);
-print("Récupération d'une planche : ");
-if ($page2) {
-  print("OK");
-} else {
-  print("FAILED");
-}
-print("\n");
 $page1 = $pageDAO->getUserPages($newUserId)[0];
 print("Récupération d'une planche depuis un utilisateur : ");
 if ($page1) {
@@ -73,16 +65,17 @@ if ($page1) {
 } else {
   print("FAILED");
 }
-print("\n\n");
-
-$frame2 = $frameDAO->getFrame($newFrameId);
-print("Récupération d'une frame : ");
-if ($frame2) {
+print("\n");
+$page2 = $pageDAO->getPage($newPageId);
+print("Récupération d'une planche (bis) : ");
+if ($page2) {
   print("OK");
 } else {
   print("FAILED");
 }
-print("\n");
+print("\n\n");
+
+
 $frame1 = $frameDAO->getFrames($newPageId)[0];
 print("Récupération d'une frame : ");
 if ($frame1) {
@@ -108,17 +101,17 @@ if ($frame1) {
 } else {
   print("FAILED");
 }
-print("\n\n");
-
-$rate2 = $rateDAO->getVote($newPageId);
-print("Récupération d'un vote : ");
-if ($rate2) {
+print("\n");
+$frame2 = $frameDAO->getFrame($newFrameId);
+print("Récupération d'une frame (bis) : ");
+if ($frame2) {
   print("OK");
 } else {
   print("FAILED");
 }
-print("\n");
-$rate1 = $rateDAO->getUserVote($newUserId)[0];
+print("\n\n");
+
+$rate1 = $rateDAO->getUserVotes($newUserId)[0];
 print("Récupération d'un vote : ");
 if ($rate1) {
   print("OK");

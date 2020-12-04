@@ -5,27 +5,45 @@ require_once(dirname(__FILE__) . '/Page.class.php');
 class RateDAO extends DAO
 {
 
-    // Fonction retournant le nombre de votes positifs et négatifs pour une page donnée :
-    function getVote(int $pageId): int
+    // Fonction retournant pour un pageId donnée le nombre de votes positifs et négatifs :
+    function getVotes(int $pageId): array
     {
-        $query = 'SELECT count(userId) FROM "Rate" WHERE pageId = :pageId';
+        $query = 'SELECT count(userId) FROM "Rate" WHERE pageId = :pageId and vote = true';
         $tmp = $this->db->prepare($query);
         if ($tmp->execute()) {
             $res = $tmp->fetchColumn();
-            if (!$res) return -1;
-            else return $res;
+            if ($res) {
+                $positif = $res;
+            } else {
+                return NULL;
+            }
         } else {
-            return -1;
+            return NULL;
         }
+
+        $query = 'SELECT count(userId) FROM "Rate" WHERE pageId = :pageId and vote = false';
+        $tmp = $this->db->prepare($query);
+        if ($tmp->execute()) {
+            $res = $tmp->fetchColumn();
+            if ($res) {
+                $negatif = $res;
+            } else {
+                return NULL;
+            }
+        } else {
+            return NULL;
+        }
+
+        return array($positif, $negatif);
     }
 
-    // Fonction retournant pour un id utilisateur donné les pages id où il a voté :
-    function getUserVote(int $userId): array
+    // Fonction retournant pour un userId donné les votes de cet utilisateur :
+    function getUserVotes(int $userId): array
     {
-        $query = 'SELECT * FROM "Page", "Rate" WHERE "Page".pageId = "Rate".pageId and "Rate".userId = :userId';
+        $query = 'SELECT "Rate".* FROM "Page", "Rate" WHERE "Page".pageId = "Rate".pageId and "Rate".userId = :userId';
         $tmp = $this->db->prepare($query);
         if ($tmp->execute([':userId' => $userId])) {
-            return $tmp->fetchAll(PDO::FETCH_CLASS, 'Page');
+            return $tmp->fetchAll(PDO::FETCH_CLASS, 'Rate');
         } else {
             return NULL;
         }
