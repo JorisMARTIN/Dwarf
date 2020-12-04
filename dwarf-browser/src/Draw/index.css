@@ -1,1 +1,74 @@
- 
+ .drawSelector {
+    width: 50%;
+    margin: 2em auto;
+    padding: 2em;
+    background: var(--CardBackground);
+    border-radius: 25px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.drawTitle {
+    text-align: center;
+    padding: 0px;
+    margin: 0px;
+    font-size: 2em;
+    font-weight: 700;
+    color: var(--PrimaryText);
+}
+
+.drawImage {
+    margin: 2em;
+    border-radius: 25px;
+    border: 1px solid rgb(142, 142, 147);
+}
+
+.drawName, .drawDesc {
+    align-self: center;
+    border: none;
+    border-radius: 10px;
+    color: var(--SecondaryText);
+    background: var(--Background2);
+    font-size: .8em;
+    font-weight: 500;
+    padding: .5em;
+    margin: .5em;
+    resize:none
+}
+
+.drawGM {
+    align-self: center;
+    text-align: center;
+    padding: .5em 1em;
+    color: #f2f2f7;
+    background: linear-gradient(var(--ClassicButtonStart), var(--ClassicButtonEnd));
+    border-radius: 25px;
+    font-size: .8em;
+    font-weight: 600;
+    border:none
+}
+
+.drawNext {
+    align-self: center;
+    padding: .5em 1em;
+    margin-top: 2em;
+    color: var(--Background);
+    background: var(--PrimaryText);
+    border-radius: 25px;
+    font-size: .8em;
+    font-weight: 600;
+    border:none
+}
+
+.drawDraw {
+    align-self: center;
+    padding: .5em 1em;
+    margin-top: 2em;
+    color: #f2f2f7;
+    background: var(--BlueButton);
+    border-radius: 25px;
+    font-size: 1.2em;
+    font-weight: 600;
+    border:none
+}
