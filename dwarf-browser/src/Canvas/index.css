@@ -112,57 +112,16 @@
 }
 
 .canvasToolsRight {
+    min-width: 10%;
     display: flex;
     flex-direction: column;
     justify-content: center;
 }
 
 .canvasToolsRightColorPicker {
-    transform:rotate(90deg)
+    /* transform:rotate(-90deg);  */
 }
 
 .canvasToolsLeftDropDown > div, .canvasToolsRightDropDown {
     visibility:hidden
 }
-/*
-@media only screen and (max-width: 1100px) {
-    .canvasToolsLeft {
-        visibility: hidden;
-    }
-    .canvasToolsLeftDropDown {
-        visibility: visible;
-        display: block;
-    }
-    .canvasToolsLeftDropDown > div {
-        visibility: visible;
-        width: 35px;
-        height: 5px;
-        background-color: black;
-        margin: 6px 0;
-    }
-    .canvasToolsLeftDropDown:hover .canvasToolsLeft {
-        visibility: visible;
-    }
-    .canvasToolsRight {
-        visibility: hidden;
-    }
-    .canvasToolsRightDropDown {
-        visibility: visible;
-    }
-    .canvasToolsRightDropDown > div {
-        float: none;
-        text-align: left;
-        width: 35px;
-        height: 5px;
-        background-color: black;
-        margin: 6px 0;
-    }
-    /*Il reste du travail
-    .canvasToolsRight:hover  .canvasToolsRightColorPicker{
-        visibility: visible;
-        background-color: #2C2C2E;
-        color: #E5E5EA;
-        padding: 2em;
-        border-radius: 50px;
-    }
-}*/

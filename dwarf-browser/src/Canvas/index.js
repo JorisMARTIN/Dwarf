@@ -1,5 +1,5 @@
 import React from 'react';
-import { CirclePicker } from 'react-color';
+import { SliderPicker, CirclePicker } from 'react-color';
 import CanvasDraw from 'react-canvas-draw';
 import './index.css';
 import Auth from '../components/AuthHelperMethods';
@@ -165,11 +165,16 @@ class Canvas extends React.Component {
                             <div></div>
                             <div></div>
                         </div>
-                        <CirclePicker
+                        <SliderPicker
                             className="canvasToolsRightColorPicker"
                             color={this.state.color}
                             onChange={color => this.setState({ color: color.hex })}
                         />
+                        {/* <CirclePicker
+                            className="canvasToolsRightColorPicker"
+                            color={this.state.color}
+                            onChange={color => this.setState({ color: color.hex })}
+                        /> */}
                     </div>
                 </div>
             </div>
