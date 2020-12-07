@@ -49,7 +49,7 @@ if (isset($data)) {
                     ]);
                 }
             } catch (PDOException $e) {
-                string $msg = $e->getMessage();
+                // string $msg = $e->getMessage();
                 echo json_encode([
                     'success' => false,
                     'message' => 'Signup failed : ' . $msg
@@ -59,14 +59,12 @@ if (isset($data)) {
         } else {
             echo json_encode([
                 'success' => false,
-                'status' => 400,
                 'message' => 'Password wrong !'
             ]);
         }
     } else {
         echo json_encode([
             'success' => false,
-            'status' => 400,
             'message' => 'Email wrong !'
         ]);    
     }

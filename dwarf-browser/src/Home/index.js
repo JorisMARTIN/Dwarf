@@ -108,7 +108,7 @@ export default class Home extends React.Component {
                         next={this.fetchMoreData}
                         hasMore={this.state.hasMoreData}
                         loader={<h4 className="homeDivPlancheLoader">Loading ...</h4>}
-                        endMessage={<p>You have seen all the comics</p>}
+                        endMessage={<p className="homeDivPlancheLoaderEnd">You have seen all the comics</p>}
                     >
                         {this.state.pages}
                     </InfiniteScroll>
