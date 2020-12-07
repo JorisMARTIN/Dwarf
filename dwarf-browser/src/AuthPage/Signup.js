@@ -28,7 +28,11 @@ export default class Signup extends Component {
                 passwordConfirm : this.state.passwordConfirm
             })
         }).then(res => {
-            alert(res.message);
+            if (res.success) {
+                <Route path="/user" component={UserInfos} />                
+            } else {
+                alert(res.message);                
+            }
         })
     }
 

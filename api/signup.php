@@ -32,41 +32,48 @@ if (isset($data)) {
     $emailC = $data->emailConfirm;
     $password = $data->password;
     $passwordC = $data->passwordConfirm;
-    
-    if ($email == $emailC) {
-        if ($password == $passwordC) {
-            try {
-                $signupOk = $userDAO->putUser($email, $pseudo, $password, getClientIP(), $birthdate);
-                if ($signupOk) {
-                    echo json_encode([
-                        'success' => true,
-                        'message' => 'User added successfully'
-                    ]);
-                } else {
+
+    if (empty($pseudo) || empty($birthdate) || empty($email) || empty($emailC) || empty($password) || empty($passwordC)) {
+        echo json_encode([
+            'success' => false,
+            'message' => 'A field is empty !'
+        ]);
+    } else {
+        if ($email == $emailC) {
+            if ($password == $passwordC) {
+                try {
+                    $signupOk = $userDAO->putUser($email, $pseudo, $password, getClientIP(), $birthdate);
+                    if ($signupOk) {
+                        echo json_encode([
+                            'success' => true,
+                            'message' => 'User added successfully'
+                        ]);
+                    } else {
+                        echo json_encode([
+                            'success' => false,
+                            'message' => 'Signup failed !'
+                        ]);
+                    }
+                } catch (PDOException $e) {
+                    $msg = $e->getMessage();
                     echo json_encode([
                         'success' => false,
-                        'message' => 'Signup failed !'
+                        'message' => 'Signup failed : ' . $msg
                     ]);
-                }
-            } catch (PDOException $e) {
-                $msg = $e->getMessage();
+                    exit;
+                }    
+            } else {
                 echo json_encode([
                     'success' => false,
-                    'message' => 'Signup failed : ' . $msg
+                    'message' => 'Password wrong !'
                 ]);
-                exit;
-            }    
+            }
         } else {
             echo json_encode([
                 'success' => false,
-                'message' => 'Password wrong !'
-            ]);
+                'message' => 'Email wrong !'
+            ]);    
         }
-    } else {
-        echo json_encode([
-            'success' => false,
-            'message' => 'Email wrong !'
-        ]);    
     }
 }
 
