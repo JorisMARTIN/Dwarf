@@ -35,9 +35,21 @@ export default class Signup extends Component {
             })
         }).then(res => {
             if (res.success) {
-                console.log(res);
-                this.setState({ redirectToHome:true});
-                console.log(this.state);
+
+                Auth.fetch("login.php", {
+                    method: 'POST',
+                    body: JSON.stringify({
+                        'email': this.state.email,
+                        'password': this.state.password
+                    })
+                }).then(res => {
+                    if (res.token !== undefined) {
+                        Auth.setToken(res.token);
+                        this.setState({ redirectToHome: true });
+                    } else {
+                        alert("Log in failed. Try again.");
+                    }
+                })
             } else {
                 alert(res.message);
             }
