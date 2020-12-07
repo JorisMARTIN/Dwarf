@@ -5,6 +5,8 @@ echo "Ce script build notre appli, lancer './build client [install]' ou './build
 folder='/home/dwarf/git-dwarf'
 server='/var/www/dwarf'
 
+GLOBIGNORE=".:.."
+
 cd $folder || exit
 git pull
 
