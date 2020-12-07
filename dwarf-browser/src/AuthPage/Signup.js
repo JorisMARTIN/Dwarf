@@ -7,8 +7,13 @@ import { Redirect } from 'react-router-dom';
 
 export default class Signup extends Component {
     state = {
+        name : "",
+        date: "",
         email: "",
-        password: ""
+        emailConfirm: "",
+        password: "",
+        passwordConfirm: "",
+        redirectToHome : false
     };
 
     _handleChange = (e) => {
@@ -30,16 +35,32 @@ export default class Signup extends Component {
             })
         }).then(res => {
             if (res.success) {
-                this.setState({ redirectToHome: true});
+
+                Auth.fetch("login.php", {
+                    method: 'POST',
+                    body: JSON.stringify({
+                        'email': this.state.email,
+                        'password': this.state.password
+                    })
+                }).then(res => {
+                    if (res.token !== undefined) {
+                        Auth.setToken(res.token);
+                        this.setState({ redirectToHome: true });
+                    } else {
+                        alert("Log in failed. Try again.");
+                    }
+                })
             } else {
-                alert(res.message);                
+                alert(res.message);
             }
         })
     }
 
     render() {
-        if (this.state.redirectToHome) return <Redirect to='/user' />
-        else return (
+        if (this.state.redirectToHome) {
+            return <Redirect to='/user' />;
+        } else {
+            return (
             <div className="authPageSignup">
                 <h1>Create a account</h1>
                 <form className="authPageSignupForm">
@@ -113,6 +134,7 @@ export default class Signup extends Component {
                     <button onClick={this.handleFormSubmit}>Create account</button>
                 </form>
             </div>
-        );
+            );
+        }
     }
 }
