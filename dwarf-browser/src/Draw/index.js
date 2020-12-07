@@ -61,10 +61,11 @@ class Draw extends Component {
                 pageDesc={this.state.description}
                 refereeImage={this.state.img}
             />
-        ); else if(this.state.img) return (
+        ); else if(this.state.name) return (
             <div className="drawSelector">
                 <h1 className="drawTitle">Select a comic to continue based on the latest frame drawn</h1>
-                <img className="drawImage" src={"http://dwarf.jorismartin.fr" + this.state.img} alt={this.state.name} />
+                {this.state.img ? <img className="drawImage" src={"http://dwarf.jorismartin.fr" + this.state.img} alt={this.state.name} />
+                : <p className="drawImage">The author hasn't draw the first frame, so feel free to do it yourself !</p>}
                 <div className="drawInfos">
                     <textarea readOnly disabled className="drawName" value={this.state.name} />
                     <textarea readOnly disabled className="drawDesc" value={this.state.description} />

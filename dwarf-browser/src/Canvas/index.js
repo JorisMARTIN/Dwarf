@@ -78,6 +78,18 @@ class Canvas extends React.Component {
         })
     }
 
+    keydownHandler = (e) => {
+        if (e.code === 'KeyW' && e.ctrlKey) this.canvas.current.undo();
+    }
+
+    componentDidMount() {
+        document.addEventListener('keydown', this.keydownHandler);
+    }
+
+    componentWillUnmount() {
+        document.removeEventListener('keydown', this.keydownHandler);
+    }
+
     render() {
         if (this.state.redirectToHome) return <Redirect to='/' />
         else return (
@@ -95,7 +107,7 @@ class Canvas extends React.Component {
                         <div className="canvasToolsLeftOthersTools">
                             <button
                                 className="canvasToolsLeftUndo"
-                                onClick={() => this.canvas.current.undo()}>Undo</button>
+                                onClick={() => this.canvas.current.undo()}>Undo (CTRL + Z)</button>
                             <div className="canvasToolsLeftBrush">
                                 <label>Brush-Radius:</label>
                                 <input
