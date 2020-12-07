@@ -49,7 +49,7 @@ if (isset($data)) {
                     ]);
                 }
             } catch (PDOException $e) {
-                // string $msg = $e->getMessage();
+                $msg = $e->getMessage();
                 echo json_encode([
                     'success' => false,
                     'message' => 'Signup failed : ' . $msg
