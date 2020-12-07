@@ -9,8 +9,8 @@ require_once(dirname(__FILE__) . '/model/FrameDAO.class.php');
 $TEMPLATES = [];
 $templatePath = dirname(__FILE__, 2) . '/cdn/templates';
 $templateFiles = scandir($templatePath);
-foreach($templateFiles as $templateFile) {
-    if($templateFile != "." && $templateFile != "..")
+foreach ($templateFiles as $templateFile) {
+    if (strpos(strrev($templateFile), strrev(".json")) === 0)
         $TEMPLATES[] = json_decode(file_get_contents($templatePath . '/' . $templateFile));
 }
 
