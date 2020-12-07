@@ -7,8 +7,13 @@ import { Redirect } from 'react-router-dom';
 
 export default class Signup extends Component {
     state = {
+        name : "",
+        date: "",
         email: "",
-        password: ""
+        emailConfirm: "",
+        password: "",
+        passwordConfirm: "",
+        redirectToHome : false
     };
 
     _handleChange = (e) => {
@@ -30,16 +35,20 @@ export default class Signup extends Component {
             })
         }).then(res => {
             if (res.success) {
-                this.setState({ redirectToHome: true});
+                console.log(res);
+                this.setState({ redirectToHome:true});
+                console.log(this.state);
             } else {
-                alert(res.message);                
+                alert(res.message);
             }
         })
     }
 
     render() {
-        if (this.state.redirectToHome) return <Redirect to='/user' />
-        else return (
+        if (this.state.redirectToHome) {
+            return <Redirect to='/user' />;
+        } else {
+            return (
             <div className="authPageSignup">
                 <h1>Create a account</h1>
                 <form className="authPageSignupForm">
@@ -113,6 +122,7 @@ export default class Signup extends Component {
                     <button onClick={this.handleFormSubmit}>Create account</button>
                 </form>
             </div>
-        );
+            );
+        }
     }
 }
