@@ -1,29 +1,70 @@
-import { Component } from 'react';
+import React from 'react';
 import './index.css';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import Auth from '../components/AuthHelperMethods';
 
-function ComicPage(props) {
-    return (
-        <div className="homePlanche">
-            <div className="homePlancheTop">
-                <img className="homePlancheImg" src={"http://dwarf.jorismartin.fr" + props.imagePtr} alt={props.name}></img>
-                <div className="homePlancheTopInfos">
-                    <textarea readOnly disabled className="homeName" value={props.name} />
-                    <textarea readOnly disabled className="homeDescri" value={props.description} />
-                    <p className="homeMode">{props.gamemode}</p>
-                    <p className="homeUser">Auteur : {props.user}</p>
+class ComicPage extends React.Component {
+    constructor(props) {
+        super(props);
+        this.canvasRef = React.createRef();
+    }
+
+    state = {
+        canvasW: 0,
+        canvasH: 0
+    }
+
+    async componentDidMount() {
+        const canvas = this.canvasRef.current;
+        const template = await (await fetch('http://dwarf.jorismartin.fr/cdn/templates/template' + this.props.template + '.json')).json();
+        const ctx = canvas.getContext('2d');
+
+        let max_x = 0;
+        let max_y = 0;
+
+        for (const frame of template) {
+            if(frame.x + frame.w > max_x) max_x = frame.x + frame.w;
+            if(frame.y + frame.h > max_y) max_y = frame.y + frame.h;
+        }
+
+        this.setState({
+            canvasW: max_x,
+            canvasH: max_y
+        });
+
+        //todo : charger les templates de maniere lazy et pas recalculer pour chaque page !=
+
+        for(const i in this.props.images) {
+            const image = new Image();
+            image.src = 'http://dwarf.jorismartin.fr' + this.props.images[i];
+            image.onload = () => {
+                ctx.drawImage(image, template[i].x, template[i].y, template[i].w, template[i].h);
+            }
+        }
+    }
+
+    render() {
+        return (
+            <div className="homePlanche">
+                <div className="homePlancheTop">
+                    <canvas className="homePlancheImg" ref={this.canvasRef} width={this.state.canvasW} height={this.state.canvasH} />
+                    <div className="homePlancheTopInfos">
+                        <textarea readOnly disabled className="homeName" value={this.props.name} />
+                        <textarea readOnly disabled className="homeDescri" value={this.props.description} />
+                        <p className="homeMode">{this.props.gamemode}</p>
+                        <p className="homeUser">Auteur : {this.props.user}</p>
+                    </div>
+                </div>
+                <div className="homePlancheBottom">
+                    <button type="button">Like</button>
+                    <button type="button">Dislike</button>
                 </div>
             </div>
-            <div className="homePlancheBottom">
-                <button type="button">Like</button>
-                <button type="button">Dislike</button>
-            </div>
-        </div>
-    );
+        );
+    }
 }
 
-export default class Home extends Component {
+export default class Home extends React.Component {
     state = {
         pages: [],
         lastPageLoadedId: -1,
