@@ -1,6 +1,7 @@
 import { Component } from "react";
 import Auth from '../components/AuthHelperMethods';
 import './index.css'
+import { Redirect } from 'react-router-dom';
 
 //adapted from https://github.com/jinolacson/login-jwt-react-php/
 
