@@ -29,7 +29,7 @@ export default class Signup extends Component {
             })
         }).then(res => {
             if (res.success) {
-                <Route path="/user" component={UserInfos} />                
+                this.setState({ redirectToHome: true});
             } else {
                 alert(res.message);                
             }
@@ -37,7 +37,8 @@ export default class Signup extends Component {
     }
 
     render() {
-        return (
+        if (this.state.redirectToHome) return <Redirect to='/user' />
+        else return (
             <div className="authPageSignup">
                 <h1>Create a account</h1>
                 <form className="authPageSignupForm">
