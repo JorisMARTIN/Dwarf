@@ -24,6 +24,7 @@ export default class App extends Component {
     e.preventDefault();
     Auth.logout();
     this.setState({ logged: Auth.loggedIn() });
+    window.location.reload();
   };
 
   render() {

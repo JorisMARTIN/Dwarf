@@ -46,6 +46,8 @@ export default class Signup extends Component {
                     if (res.token !== undefined) {
                         Auth.setToken(res.token);
                         this.setState({ redirectToHome: true });
+                        // Refresh page afer login for update App component
+                        this.refresh();
                     } else {
                         alert("Log in failed. Try again.");
                     }
@@ -54,6 +56,10 @@ export default class Signup extends Component {
                 alert(res.message);
             }
         })
+    }
+
+    refresh = () =>{
+        window.location.reload();
     }
 
     render() {

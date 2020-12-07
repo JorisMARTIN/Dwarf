@@ -30,10 +30,16 @@ export default class Login extends Component {
             if (res.token !== undefined) {
                 Auth.setToken(res.token);
                 this.setState({ redirectToHome: true });
+                // Refresh page afer login for update App component
+                this.refresh();
             } else {
                 alert("Log in failed. Try again.");
             }
         })
+    }
+
+    refresh = () =>{
+        window.location.reload();
     }
 
     render() {
