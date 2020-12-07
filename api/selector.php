@@ -28,6 +28,19 @@ if (!empty($data) && isset($data->loadedIds)) {
     if ($page != NULL) {
         $pageId = $page->getId();
         array_push($loadedIds, $pageId);
+        $out['loadedIds'] = $loadedIds;
+
+        $out['page'] = [
+            'name' => $page->getName(),
+            'description' => $page->getDescription(),
+            'gamemode' => ($page->getGameMode() == 0 ? "Normal" : "Reverse"),
+            'date' => $page->getCreationDate(),
+            'imagePtr' => NULL,
+            'user' => NULL,
+            'frameId' => NULL,
+            'frameWidth' => NULL,
+            'frameHeight' => NULL
+        ];
 
         $frames = $frameDAO->getFrames($pageId);
         if ($page->getGameMode() == 0) {
@@ -40,21 +53,18 @@ if (!empty($data) && isset($data->loadedIds)) {
             $refIndex = $i + 1;
         }
 
-        if(array_key_exists($refIndex, $frames)) {
-            $frame = $frameDAO->getFrame($frames[$i]->getId());
-            $imagePtr = $frames[$refIndex]->getImagePtr();
-    
-            $out['page'] = [
-                'name' => $page->getName(),
-                'description' => $page->getDescription(),
-                'gamemode' => ($page->getGameMode() == 0 ? "Normal" : "Reverse"),
-                'date' => $page->getCreationDate(),
-                'imagePtr' => $imagePtr,
-                'user' => $userDAO->getUser($frame->getOwnerId())->getNickname(),
-                'frameId' => $frame->getId(),
-                'frameWidth' => $frame->getWidth(),
-                'frameHeight' => $frame->getHeight()
-            ];
+        if(array_key_exists($i, $frames)) {
+            $frame = $frames[$i];
+            $user = $userDAO->getUser($frame->getOwnerId());
+
+            if (array_key_exists($refIndex, $frames)) {
+                $out['page']['imagePtr'] = $frames[$refIndex]->getImagePtr();
+            }
+
+            $out['page']['user'] = $user->getNickname();
+            $out['page']['frameId'] = $frame->getId();
+            $out['page']['frameWidth'] = $frame->getWidth();
+            $out['page']['frameHeight'] = $frame->getHeight();
         }
     }
 } else {
