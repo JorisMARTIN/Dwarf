@@ -34,14 +34,23 @@ if(!empty($data)) {
 
     for ($i = 0; $i < count($pages); $i++) {
         $p = $pages[$i];
+
         $user = $userDAO->getUser($p->getOwnerId());
+
+        $images = [];
+        $frames = $frameDAO->getFrames($p->getId());
+        foreach($frames as $frame) {
+            $images[] = $frame->getImagePtr();
+        }
+
         $out['pages'][$i] = [
             'name' => $p->getName(),
             'description' => $p->getDescription(),
             'gamemode' => ($p->getGameMode() == 0 ? "Normal" : "Reverse"),
             'date' => $p->getCreationDate(),
-            'imagePtr' => $frameDAO->getFrames($p->getId())[0]->getImagePtr(),
-            'user' => $user->getNickname()
+            'images' => $images,
+            'user' => $user->getNickname(),
+            'template' => $p->getTemplateType(),
         ];
     }
 
