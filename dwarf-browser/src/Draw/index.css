@@ -3,6 +3,7 @@
     margin: 2em auto;
     padding: 2em;
     background: var(--CardBackground);
+    box-shadow: 0 5px 10px 10px var(--Shadow);
     border-radius: 25px;
     display: flex;
     flex-direction: column;
