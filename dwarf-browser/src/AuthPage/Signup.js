@@ -13,7 +13,7 @@ export default class Signup extends Component {
         emailConfirm: "",
         password: "",
         passwordConfirm: "",
-        redirectToHome : false
+        redirectToUser : false
     };
 
     _handleChange = (e) => {
@@ -45,7 +45,7 @@ export default class Signup extends Component {
                 }).then(res => {
                     if (res.token !== undefined) {
                         Auth.setToken(res.token);
-                        this.setState({ redirectToHome: true });
+                        this.setState({ redirectToUser: true });
                         // Refresh page afer login for update App component
                         this.refresh();
                     } else {
@@ -63,7 +63,7 @@ export default class Signup extends Component {
     }
 
     render() {
-        if (this.state.redirectToHome) {
+        if (this.state.redirectToUser) {
             return <Redirect to='/user' />;
         } else {
             return (

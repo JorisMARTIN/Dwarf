@@ -64,6 +64,21 @@ if (isset($data)) {
             'success' => false,
             'message' => 'The field "password confirm" is empty !'
         ]);
+    } else if (strlen($pseudo) > 16) {
+        echo json_encode([
+            'success' => false,
+            'message' => 'Pseudo too long ! (Must be less than 17 character)'
+        ]);            
+    } else if (strlen($email) > 64) {
+        echo json_encode([
+            'success' => false,
+            'message'=> "Email too long ! (Must be less than 65 character)"
+        ]);
+    } else if (strlen($password) > 255) {
+        echo json_encode([
+            'success' => false,
+            'message'=> "Password too long ! (Must be less than 256 character)"
+        ]);
     } else if ($email != $emailC) {
         echo json_encode([
             'success' => false,
@@ -73,21 +88,6 @@ if (isset($data)) {
         echo json_encode([
             'success' => false,
             'message' => 'Password and password confirm are different !'
-        ]);
-    } else if (sizeof($pseudo) > 16) {
-        echo json_encode([
-            'success' => false,
-            'message' => 'Pseudo too long ! (Must be less than 17 character)'
-        ]);            
-    } else if (sizeof($email) > 64) {
-        echo json_encode([
-            'success' => false,
-            'message'=> "Email too long ! (Must be less than 65 character)"
-        ]);
-    } else if (sizeof($password) > 255) {
-        echo json_encode([
-            'success' => false,
-            'message'=> "Password too long ! (Must be less than 256 character)"
         ]);
     } else {
         $signupOk = $userDAO->putUser($email, $pseudo, $password, getClientIP(), $birthdate);
