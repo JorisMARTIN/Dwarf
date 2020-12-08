@@ -2,6 +2,7 @@
 require_once(dirname(__FILE__) . '/includes/debug.inc.php');
 require_once(dirname(__FILE__) . '/includes/httpheaders.inc.php');
 
+require_once(dirname(__FILE__) . '/model/AuthMethods.php');
 require_once(dirname(__FILE__) . '/model/UserDAO.class.php');
 require_once(dirname(__FILE__) . '/model/PageDAO.class.php');
 require_once(dirname(__FILE__) . '/model/FrameDAO.class.php');
@@ -26,10 +27,21 @@ if(!empty($data)) {
 
     $endReached = count($pages) != 6;
 
+
+    // Check if the current user, if he is connect, if he is admin
+
+    $userId = tokenToUserId();
+
+    if($userId == -1) $userIsAdmin = false;
+    else{
+        $userIsAdmin = $userDAO->getUser($userId)->isAdmin();
+    }
+
     $out = [
         'lastPageLoadedId' => $lastLoadedId,
         'endReached' => $endReached,
-        'pages' => []
+        'pages' => [],
+        'userIsAdmin' => $userIsAdmin
     ];
 
     for ($i = 0; $i < count($pages); $i++) {

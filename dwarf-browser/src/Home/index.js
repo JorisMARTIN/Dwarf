@@ -78,11 +78,18 @@ class ComicPage extends React.Component {
             this.setState({ fullscreen: true });
         }
     }
+    
+    deletePage = () => {
+        const pageIdToDelete = this.props.pageId;
+        if(window.confirm("Do you realy want to delete this page ?")){
+            alert("Et non ca marche pas encore !");
+        }
+    }
 
     render() {
         if (this.state.redirectVote) return <Redirect to="/auth" />
-        else
-            return (
+        else return (
+            <div className="homePlancheWrapper">
                 <div className={`homePlanche ${this.state.rate === 1 && "plancheLike"} ${this.state.rate === 0 && "plancheDislike"}`}>
                     <div className="homePlancheTop">
                         <canvas onClick={this.toggleFullscreen} className="homePlancheImg" ref={this.canvasRef} width={this.state.canvasW} height={this.state.canvasH} />
@@ -98,11 +105,14 @@ class ComicPage extends React.Component {
                         <button type="button" onClick={() => this.handleVoteClick(0)}>Dislike</button>
                     </div>
                 </div>
-            );
+                    {this.props.userIsAdmin && <button className="homeDeleteAdminButton" type="button" onClick={this.deletePage}>Delete</button>}
+            </div>
+        );
     }
 }
 
 export default class Home extends React.Component {
+
     state = {
         pages: [],
         lastPageLoadedId: -1,
@@ -122,7 +132,7 @@ export default class Home extends React.Component {
         }).then(res => {
             this.setState({
                 pages: this.state.pages.concat(res.pages.map((page, i) =>
-                    <ComicPage key={i + this.state.pages.length} {...page} />
+                    <ComicPage key={i + this.state.pages.length} {...page} userIsAdmin={res.userIsAdmin}/>
                 )),
                 lastPageLoadedId: res.lastPageLoadedId,
                 hasMoreData: !res.endReached,
