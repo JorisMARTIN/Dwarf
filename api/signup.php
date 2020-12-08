@@ -13,6 +13,7 @@ $data = json_decode(file_get_contents("php://input"));
 //default value of signup success
 $signupOk = false;
 
+/* Get the code from here : https://stackoverflow.com/questions/3003145/how-to-get-the-client-ip-address-in-php*/
 function getClientIP() {
     $ipaddress = 'UNKNOWN';
     $keys=array('HTTP_CLIENT_IP','HTTP_X_FORWARDED_FOR','HTTP_X_FORWARDED','HTTP_FORWARDED_FOR','HTTP_FORWARDED','REMOTE_ADDR');
@@ -33,37 +34,74 @@ if (isset($data)) {
     $password = htmlentities($data->password);
     $passwordC = htmlentities($data->passwordConfirm);
 
-    if (empty($pseudo) || empty($birthdate) || empty($email) || empty($emailC) || empty($password) || empty($passwordC)) {
+    if (empty($pseudo)) {
         echo json_encode([
             'success' => false,
-            'message' => 'A field is empty !'
+            'message' => 'The field "pseudo" is empty !'
+        ]);
+    } elseif (empty($birthdate)) {
+        echo json_encode([
+            'success' => false,
+            'message' => 'The field "birthdate" is empty !'
+        ]);
+    }  elseif (empty($email)) {
+        echo json_encode([
+            'success' => false,
+            'message' => 'The field "email" is empty !'
+        ]);
+    }  elseif (empty($emailC)) {
+        echo json_encode([
+            'success' => false,
+            'message' => 'The field "email confirm" is empty !'
+        ]);
+    }  elseif (empty($password)) {
+        echo json_encode([
+            'success' => false,
+            'message' => 'The field "password" is empty !'
+        ]);
+    } elseif (empty($passwordC)) {
+        echo json_encode([
+            'success' => false,
+            'message' => 'The field "password confirm" is empty !'
+        ]);
+    } else if ($email != $emailC) {
+        echo json_encode([
+            'success' => false,
+            'message' => 'Email and email confirm are different !'
+        ]);      
+    } else if ($password != $passwordC) {
+        echo json_encode([
+            'success' => false,
+            'message' => 'Password and password confirm are different !'
+        ]);
+    } else if (sizeof($pseudo) > 16) {
+        echo json_encode([
+            'success' => false,
+            'message' => 'Pseudo too long ! (Must be less than 17 character)'
+        ]);            
+    } else if (sizeof($email) > 64) {
+        echo json_encode([
+            'success' => false,
+            'message'=> "Email too long ! (Must be less than 65 character)"
+        ]);
+    } else if (sizeof($password) > 255) {
+        echo json_encode([
+            'success' => false,
+            'message'=> "Password too long ! (Must be less than 256 character)"
         ]);
     } else {
-        if ($email == $emailC) {
-            if ($password == $passwordC) {
-                $signupOk = $userDAO->putUser($email, $pseudo, $password, getClientIP(), $birthdate);
-                if ($signupOk != -1) {
-                    echo json_encode([
-                        'success' => true,
-                        'message' => 'User added successfully'
-                    ]);
-                } else {
-                    echo json_encode([
-                        'success' => false,
-                        'message' => 'Signup failed !'
-                    ]);
-                }
-            } else {
-                echo json_encode([
-                    'success' => false,
-                    'message' => 'Password wrong !'
-                ]);
-            }
-        } else {
+        $signupOk = $userDAO->putUser($email, $pseudo, $password, getClientIP(), $birthdate);
+
+        if ($signupOk == -1) {
             echo json_encode([
                 'success' => false,
-                'message' => 'Email wrong !'
-            ]);    
+                'message' => 'Signup failed !'
+            ]);
+        } else {
+            echo json_encode([
+                'success' => true,
+                'message' => 'User added successfully !'
+            ]);
         }
     }
 }
