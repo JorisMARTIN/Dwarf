@@ -80,21 +80,23 @@ class ComicPage extends React.Component {
         if(this.state.redirectVote) return <Redirect to="/auth" />
         else
         return (
-            <div className="homePlanche">
-                <div className="homePlancheTop">
-                    <canvas className="homePlancheImg" ref={this.canvasRef} width={this.state.canvasW} height={this.state.canvasH} />
-                    <div className="homePlancheTopInfos">
-                        <textarea readOnly disabled className="homeName" value={this.props.name} />
-                        <textarea readOnly disabled className="homeDescri" value={this.props.description} />
-                        <p className="homeMode">{this.props.gamemode}</p>
-                        <p className="homeUser">Auteur : {this.props.user}</p>
+            <div className="homePlancheWrapper">
+                <div className="homePlanche">
+                    <div className="homePlancheTop">
+                        <canvas className="homePlancheImg" ref={this.canvasRef} width={this.state.canvasW} height={this.state.canvasH} />
+                        <div className="homePlancheTopInfos">
+                            <textarea readOnly disabled className="homeName" value={this.props.name} />
+                            <textarea readOnly disabled className="homeDescri" value={this.props.description} />
+                            <p className="homeMode">{this.props.gamemode}</p>
+                            <p className="homeUser">Auteur : {this.props.user}</p>
+                        </div>
+                    </div>
+                    <div className="homePlancheBottom">
+                        <button type="button" onClick={() => this.handleVoteClick(1)}>Like</button>
+                        <button type="button" onClick={() => this.handleVoteClick(0)}>Dislike</button>
                     </div>
                 </div>
-                <div className="homePlancheBottom">
-                    <button type="button" onClick={() => this.handleVoteClick(1)}>Like</button>
-                    <button type="button" onClick={() => this.handleVoteClick(0)}>Dislike</button>
-                </div>
-                {this.props.userIsAdmin && <button className="homeDeleteAdminButton" type="button" onClick={this.deletePage}>Delete</button>}
+                    {this.props.userIsAdmin && <button className="homeDeleteAdminButton" type="button" onClick={this.deletePage}>Delete</button>}
             </div>
         );
     }
