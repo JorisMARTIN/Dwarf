@@ -15,7 +15,8 @@ html {
     position: sticky;
     top: 0;
     right: 0;
-    height:50px
+    height:50px;
+    z-index: 2;
 }
 
 .dwarf {
@@ -39,7 +40,9 @@ html {
 }
 
 .link:hover {
-    background:var(--Hover)
+    background:var(--NavbarHover);
+    -webkit-backdrop-filter: saturate(1.8) blur(20px);
+    backdrop-filter: saturate(1.8) blur(20px);
 }
 
 .link:hover, .log {
