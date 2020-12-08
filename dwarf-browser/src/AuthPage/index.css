@@ -67,6 +67,7 @@
 }
 
 .authPageLoginBottom > button, .authPageSignupForm > button {
+    align-self: center;
     padding: .5em 1em;
     margin: 2em;
     color: #f2f2f7;
@@ -78,28 +79,68 @@
 }
 
 .authPageLoginBottom > button:hover, .authPageSignupForm > button:hover {
-    background: var(--BlueButtonHover);
+    background:var(--BlueButtonHover)
 }
 
 .authPageSignup {
     border-left: 1px solid var(--Background2);
     display: flex;
     flex-direction: column;
-    justify-content: space-between
+    justify-content:space-between
 }
 
 .authPageSignupForm {
     display: flex;
     flex-direction: column;
-    align-items:center
 }
 
 .authPageSignupDiv {
     display: flex;
     flex-direction: column;
-    padding: 0 2em
+    padding: 0 2em;
 }
 
 .authPage label {
-    float: left
+    float:left
+}
+
+@media only screen and (max-width: 600px) {
+    .authPage {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        border-radius: 0px;
+        background: none;
+        box-shadow: none;
+    }
+    
+    .authPageLogin > h1, .authPageSignup > h1 {
+        color: var(--PrimaryText);
+        text-align: center;
+        font-size: 2em;
+        font-weight:700;
+        padding: 0px;
+        margin: 0px;
+    }
+    
+    .authPageLogin {
+        padding: 2em;
+        background: var(--CardBackground);
+        box-shadow:0 5px 10px 10px var(--Shadow);
+        margin: 2em;
+        border-radius: 25px;
+    }
+    
+    .authPageSignup {
+        padding: 2em;
+        margin: 2em;
+        background: var(--CardBackground);
+        box-shadow:0 5px 10px 10px var(--Shadow);
+        border-radius: 25px;
+    }
+    
+    .authPageLoginBottom > button, .authPageSignupForm > button {
+        margin: 0px;
+        margin-top: 2em;
+    }
 }
