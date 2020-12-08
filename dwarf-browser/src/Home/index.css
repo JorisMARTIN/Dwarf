@@ -1,47 +1,41 @@
 .homeAll {
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    margin: auto;
-    width: 90%;
 }
 
 .homeTitle {
     text-align: center;
     color: var(--PrimaryText);
     font-size: 2em;
-    font-weight:600;
+    font-weight:600
 }
 
 .homeDivPlanche {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
-    
+    justify-content:center;
 }
 
 .homePlanche {
     margin: 2em;
     width: 250px;
-    height: 450px;
+    height: auto;
     padding: 2em;
     flex-direction: column;
     justify-content: space-between;
     background: var(--CardBackground);
     box-shadow: 0 5px 10px 10px var(--Shadow);
-    border-radius: 25px;
+    border-radius:25px
 }
 
-.homePlanche, .homePlancheTop {
+.homePlanche {
     display: flex;
-    flex-direction: column;
+    flex-direction:column
 }
 
 .homePlancheTop {
-    display: flex;
-    flex-direction: column;
     color: var(--CardBackground);
-    text-align: center;
+    text-align:center
 }
 
 .homePlancheImg {
@@ -49,76 +43,109 @@
     height: 250px;
     object-fit: cover;
     border-radius: 10px;
-    border: 1px solid rgb(142, 142, 147);
+    border:1px solid #8e8e93
 }
 
 .homePlancheTopInfos {
     display: flex;
     flex-direction: column;
-    color: var(--PrimaryText);
+    color:var(--PrimaryText)
 }
 
 .homePlancheTopInfos > textarea {
     resize: none;
     border: none;
-    background: var(--CardBackground);
+    background:var(--CardBackground)
 }
 
 .homeName {
     text-align: center;
     color: var(--PrimaryText);
     font-size: 1.5em;
-    font-weight: 600;
+    font-weight:600
 }
 
 .homeDescri {
-    color: var(--SecondaryText);
+    color:var(--SecondaryText)
+}
+
+.homeDescri, .homeUser {
     font-size: 1em;
-    font-weight: 500;
+    font-weight:500
 }
 
 .homeUser {
-    color: var(--PrimaryText);
-    font-size: 1em;
-    font-weight:500
-    
+    color:var(--PrimaryText)
 }
 
 .homeMode {
-    padding: auto;
     margin: auto;
     padding: .5em 1em;
-    color: rgb(242, 242, 247);
+    color: #f2f2f7;
     background: linear-gradient(var(--ClassicButtonStart), var(--ClassicButtonEnd));
     border-radius: 25px;
     font-size: .8em;
     font-weight: 600;
-    border:none;
+    border:none
 }
 
 .homePlancheBottom {
     display: flex;
-    justify-content: space-around;
+    justify-content:space-around
 }
 
 .homePlancheBottom > button {
     padding: .5em 1em;
-    color: rgb(242, 242, 247);
+    color: #f2f2f7;
     background: var(--BlueButton);
     border-radius: 25px;
     font-size: .8em;
     font-weight: 600;
-    border: none;
+    border:none
 }
 
 .homePlancheBottom > button:hover {
-    background: var(--BlueButtonHover);
+    background:var(--BlueButtonHover)
 }
 
-@media only screen and (max-width: 1025px) {
-    .homePlanche {
+@media only screen and (max-width: 600px) {
+    .homeDivPlanche {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: nowrap;
     }
-
+    
+    .homePlanche {
+        width: auto;
+        margin: 0 0 2em 0;
+        padding: none;
+        padding: 2em 2em 0 2em;
+        box-shadow: none;
+        border-radius: 0;
+        background: var(--CardBackground);
+    }
+    
     .homePlancheTop {
+        display: flex;
+        flex-direction: row;
+        text-align: left;
+    }
+    
+    .homePlancheTopInfos {
+        display: flex;
+        flex-direction: column;
+        color:var(--PrimaryText);
+    }
+    
+    .homePlancheTopInfos > textarea {
+        resize: none;
+        width: 100%;
+        border: none;
+        text-align: left;
+        background:var(--CardBackground);
+    }
+    
+    .homePlancheBottom > button {
+        margin: 2em;
     }
 }
