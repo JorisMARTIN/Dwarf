@@ -41,7 +41,7 @@ class FrameDAO extends DAO {
       $this->setImagePtr($frameId, "/cdn/frames/page-$pageId/frame-$frameId.png");
       return $frameId;
     } else {
-      var_dump($tmp->errorInfo());
+      //var_dump($tmp->errorInfo()); /* Pas de Var_Dump ! */
       return -1;
     }
   }

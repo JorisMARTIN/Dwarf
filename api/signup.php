@@ -26,12 +26,12 @@ function getClientIP() {
 }
 
 if (isset($data)) {
-    $pseudo = $data->name;
-    $birthdate = $data->date;
-    $email = $data->email;
-    $emailC = $data->emailConfirm;
-    $password = $data->password;
-    $passwordC = $data->passwordConfirm;
+    $pseudo = htmlentities($data->name);
+    $birthdate = htmlentities($data->date);
+    $email = htmlentities($data->email);
+    $emailC = htmlentities($data->emailConfirm);
+    $password = htmlentities($data->password);
+    $passwordC = htmlentities($data->passwordConfirm);
 
     if (empty($pseudo) || empty($birthdate) || empty($email) || empty($emailC) || empty($password) || empty($passwordC)) {
         echo json_encode([
@@ -41,27 +41,18 @@ if (isset($data)) {
     } else {
         if ($email == $emailC) {
             if ($password == $passwordC) {
-                try {
-                    $signupOk = $userDAO->putUser($email, $pseudo, $password, getClientIP(), $birthdate);
-                    if ($signupOk) {
-                        echo json_encode([
-                            'success' => true,
-                            'message' => 'User added successfully'
-                        ]);
-                    } else {
-                        echo json_encode([
-                            'success' => false,
-                            'message' => 'Signup failed !'
-                        ]);
-                    }
-                } catch (Throwable $e) {
-                    $msg = $e->getMessage();
+                $signupOk = $userDAO->putUser($email, $pseudo, $password, getClientIP(), $birthdate);
+                if ($signupOk != -1) {
+                    echo json_encode([
+                        'success' => true,
+                        'message' => 'User added successfully'
+                    ]);
+                } else {
                     echo json_encode([
                         'success' => false,
-                        'message' => 'Signup failed : ' . $msg
+                        'message' => 'Signup failed !'
                     ]);
-                    exit;
-                }    
+                }
             } else {
                 echo json_encode([
                     'success' => false,
