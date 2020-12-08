@@ -14,13 +14,18 @@ if($userId != -1){
     $data = json_decode(file_get_contents("php://input"));
     // voteType = 1 pour like et 0 pour dislike
     $voteType = $data->voteType;
+    $rateDAO = new RateDAO();
+
+    // if ($votetype = 1) {
+    //     $rateDAO->putVote()
+    // }
 
     $out = [];
 
 }else{
     // User not logged in
     $out = [
-        'message' => "You have to be logged for rate a page !\nDo you want to Log In or Sign Up ?"
+        'message' => "You have to be logged to rate a page !\nDo you want to log in or sign up ?"
     ];
 }
 

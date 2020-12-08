@@ -10,7 +10,7 @@ class RateDAO extends DAO
     {
         $query = 'SELECT count(userId) FROM "Rate" WHERE pageId = :pageId and vote = true';
         $tmp = $this->db->prepare($query);
-        if ($tmp->execute()) {
+        if ($tmp->execute([':pageId' => $pageId])) {
             $res = $tmp->fetchColumn();
             if ($res) {
                 $positif = $res;
@@ -23,7 +23,7 @@ class RateDAO extends DAO
 
         $query = 'SELECT count(userId) FROM "Rate" WHERE pageId = :pageId and vote = false';
         $tmp = $this->db->prepare($query);
-        if ($tmp->execute()) {
+        if ($tmp->execute([':pageId' => $pageId])) {
             $res = $tmp->fetchColumn();
             if ($res) {
                 $negatif = $res;

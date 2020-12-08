@@ -68,7 +68,7 @@ export default class Signup extends Component {
         } else {
             return (
             <div className="authPageSignup">
-                <h1>Create a account</h1>
+                <h1>Create an account</h1>
                 <form className="authPageSignupForm">
                     <div className="authPageSignupDiv">
                         <div className="authPageSignupUserName">
