@@ -1,3 +1,7 @@
+html {
+    background-color:var(--Background)
+}
+
 .menu {
     display: flex;
     justify-content: space-around;
