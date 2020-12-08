@@ -50,7 +50,8 @@ class ComicPage extends React.Component {
         Auth.fetch("rate.php", {
             method: "POST",
             body: JSON.stringify({
-                rateType: rate,
+                pageId: this.props.pageId,
+                rateType: rate
             })
         }).then(res => {
             if(res.userId){

@@ -44,6 +44,7 @@ if(!empty($data)) {
         }
 
         $out['pages'][$i] = [
+            'pageId' => $p->getId(),
             'name' => $p->getName(),
             'description' => $p->getDescription(),
             'gamemode' => ($p->getGameMode() == 0 ? "Normal" : "Reverse"),
