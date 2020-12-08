@@ -1,5 +1,6 @@
 import React from 'react';
 import './index.css';
+import { Redirect } from 'react-router-dom';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import Auth from '../components/AuthHelperMethods';
 
@@ -11,7 +12,8 @@ class ComicPage extends React.Component {
 
     state = {
         canvasW: 0,
-        canvasH: 0
+        canvasH: 0,
+        redirectVote: false
     }
 
     async componentDidMount() {
@@ -43,7 +45,33 @@ class ComicPage extends React.Component {
         }
     }
 
+    handleVoteClick = (rate) => {
+
+        Auth.fetch("rate.php", {
+            method: "POST",
+            body: JSON.stringify({
+                pageId: this.props.pageId,
+                rateType: rate
+            })
+        }).then(res => {
+            if(res.userId){
+                // Display message to the user
+                alert(res.message);
+            }else{
+                // User not loged In
+                if(window.confirm(res.message)){
+                    this.setState({
+                        redirectVote: true
+                    })
+                }
+            }
+
+        })
+    }
+
     render() {
+        if(this.state.redirectVote) return <Redirect to="/auth" />
+        else
         return (
             <div className="homePlanche">
                 <div className="homePlancheTop">
@@ -56,8 +84,8 @@ class ComicPage extends React.Component {
                     </div>
                 </div>
                 <div className="homePlancheBottom">
-                    <button type="button">Like</button>
-                    <button type="button">Dislike</button>
+                    <button type="button" onClick={() => this.handleVoteClick(1)}>Like</button>
+                    <button type="button" onClick={() => this.handleVoteClick(0)}>Dislike</button>
                 </div>
             </div>
         );

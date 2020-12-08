@@ -6,6 +6,7 @@ require_once(dirname(__FILE__) . '/model/AuthMethods.php');
 require_once(dirname(__FILE__) . '/model/UserDAO.class.php');
 
 $userDAO = new UserDAO();
+$pageDAO = new PageDAO();
 
 // Get current user
 $userId = tokenToUserId();
@@ -15,13 +16,17 @@ if($userId != -1){
     $user = $userDAO->getUser($userId);
     
     
-    // Users informations
+    // User informations
     $isAdmin = $user->isAdmin();
     
     $email = $user->getEmail();
     $nickname = $user->getNickname();
     $creationDate = $user->getCreationDate();
     $birthdate = $user->getBirthdate();
+
+
+    // User Pages
+    $pages = $pageDAO->getUserPages($userId);
 
     $out = [
         'userid' => $userId,

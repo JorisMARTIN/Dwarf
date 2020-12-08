@@ -46,6 +46,8 @@ export default class Signup extends Component {
                     if (res.token !== undefined) {
                         Auth.setToken(res.token);
                         this.setState({ redirectToHome: true });
+                        // Refresh page afer login for update App component
+                        this.refresh();
                     } else {
                         alert("Log in failed. Try again.");
                     }
@@ -56,13 +58,17 @@ export default class Signup extends Component {
         })
     }
 
+    refresh = () =>{
+        window.location.reload();
+    }
+
     render() {
         if (this.state.redirectToHome) {
             return <Redirect to='/user' />;
         } else {
             return (
             <div className="authPageSignup">
-                <h1>Create a account</h1>
+                <h1>Create an account</h1>
                 <form className="authPageSignupForm">
                     <div className="authPageSignupDiv">
                         <div className="authPageSignupUserName">
