@@ -14,6 +14,7 @@ if($userId != -1){
     $data = json_decode(file_get_contents("php://input"));
     // voteType = 1 pour like et 0 pour dislike
     $voteType = $data->voteType;
+    $pageId = $data->pageId;
 
     $out = [];
 
