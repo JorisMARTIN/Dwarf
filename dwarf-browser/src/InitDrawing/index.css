@@ -14,7 +14,7 @@
 .initateDrawingForm {
     background-color: var(--CardBackground);
     color: var(--SecondaryText);
-    box-shadow:0 5px 10px 10px var(--Shadow);
+    box-shadow: 0 5px 10px 10px var(--Shadow);
     display: flex;
     flex-direction: column;
     border-radius: 25px;
