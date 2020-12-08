@@ -11,7 +11,7 @@ $userDAO = new UserDAO();
 $data = json_decode(file_get_contents("php://input"));
 
 //default value of signup success
-$signupOk = false;
+$signupOk = -1;
 
 /* Get the code from here : https://stackoverflow.com/questions/3003145/how-to-get-the-client-ip-address-in-php*/
 function getClientIP() {
