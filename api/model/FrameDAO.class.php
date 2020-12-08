@@ -23,6 +23,16 @@ class FrameDAO extends DAO {
       return NULL;
     }
   }
+/*
+  function getUserFrames(int $userId) : array {
+    $query = 'SELECT * FROM "Frame" WHERE userId = :userId ORDER BY frameid';
+    $tmp = $this->db->prepare($query);
+    if ($tmp->execute([':userId' => $userId])) {
+      return $tmp->fetchAll(PDO::FETCH_CLASS, 'Frame');
+    } else {
+      return NULL;
+    }
+  }*/
 
   function putFrame(bool $drawable, bool $done, int $width, int $height, int $pageId, int $userId) : int {
     $query = 'INSERT INTO "Frame" (creationDate, drawable, done, width, height, pageId, userId)

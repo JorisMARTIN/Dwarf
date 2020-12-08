@@ -4,9 +4,11 @@ require_once(dirname(__FILE__) . '/includes/httpheaders.inc.php');
 
 require_once(dirname(__FILE__) . '/model/AuthMethods.php');
 require_once(dirname(__FILE__) . '/model/UserDAO.class.php');
+require_once(dirname(__FILE__) . '/model/FrameDAO.class.php');
 
 $userDAO = new UserDAO();
 $pageDAO = new PageDAO();
+$frameDAO = new FrameDAO();
 
 // Get current user
 $userId = tokenToUserId();
@@ -37,13 +39,20 @@ if($userId != -1){
         'isadmin' => $isAdmin
     ];
 
+    //Get pages where user is the creator
+    // $pages = $pageDAO->getUserPages($userId);
+    // array_push($out, $pages);
+
+    //Get pages where user participate
+    // $frames = $frameDAO->getUserFrames($userId);
+    // array_push($out, $frames);
+
 }else{
     $out = [
         'status' => 400,
         'message' => 'You are not logged in'
     ];
 }
-
 echo json_encode($out);
 
 ?>
