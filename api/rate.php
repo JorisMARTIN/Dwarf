@@ -14,11 +14,18 @@ if($userId != -1){
     $data = json_decode(file_get_contents("php://input"));
     // voteType = 1 pour like et 0 pour dislike
     $voteType = $data->voteType;
+    $userId = $data->userId;
+    $pageId = $data->pageId;
     $rateDAO = new RateDAO();
 
-    // if ($votetype = 1) {
-    //     $rateDAO->putVote()
-    // }
+    if ($votetype = 1) {
+        $vote = true;
+         $rateDAO->putVote($userId, $pageId, $vote);
+      }
+    else {
+        $vote = false;
+        $rateDAO->putVote($userId, $pageId, $vote);   
+    } 
 
     $out = [];
 
