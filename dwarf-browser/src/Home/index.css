@@ -1,6 +1,6 @@
 .homeAll {
     display: flex;
-    flex-direction: column;
+    flex-direction:column
 }
 
 .homeTitle {
@@ -14,31 +14,29 @@
     display: flex;
     flex-wrap: wrap;
     justify-content:center;
+    padding: 2em 0;
+}
+
+.homePlancheWrapper {
+    display: flex;
+    flex-direction: column;
+    padding: 0 2em;
 }
 
 .homePlanche {
-    margin: 2em;
     width: 250px;
     height: auto;
     padding: 2em;
-    flex-direction: column;
     justify-content: space-between;
     background: var(--CardBackground);
     box-shadow: 0 5px 10px 10px var(--Shadow);
-    border-radius:25px
-}
-
-.plancheLike {
-    box-shadow: 0 5px 10px 10px var(--LikeShadow);
-}
-
-.plancheDislike {
-    box-shadow: 0 5px 10px 10px var(--DislikeShadow);
-}
-
-.homePlanche {
+    border-radius: 25px;
     display: flex;
     flex-direction:column
+}
+
+.homePlanche:hover {
+    box-shadow: 0 10px 15px 15px var(--ShadowHover);
 }
 
 .homePlancheTop {
@@ -63,18 +61,20 @@
 .homePlancheTopInfos > textarea {
     resize: none;
     border: none;
-    background:var(--CardBackground)
+    background:var(--CardBackground);
 }
 
 .homeName {
     text-align: center;
     color: var(--PrimaryText);
-    font-size: 1.5em;
-    font-weight:600
+    font-size: 1.2em;
+    font-weight:600;
+    height: 2.4em;
 }
 
 .homeDescri {
-    color:var(--SecondaryText)
+    color:var(--SecondaryText);
+    height: 2.3em;
 }
 
 .homeDescri, .homeUser {
@@ -83,11 +83,12 @@
 }
 
 .homeUser {
-    color:var(--PrimaryText)
+    color:var(--PrimaryText);
+    margin: 0 0 0.5em 0;
 }
 
 .homeMode {
-    margin: auto;
+    margin: 0.5em auto;
     padding: .5em 1em;
     color: #f2f2f7;
     background: linear-gradient(var(--ClassicButtonStart), var(--ClassicButtonEnd));
@@ -116,44 +117,67 @@
     background:var(--BlueButtonHover)
 }
 
+.homeDeleteAdminButton {
+    z-index: 1;
+    margin: 2em;
+    padding: .5em 1em;
+    color: #f2f2f7;
+    background: var(--RedButton);
+    border-radius: 25px;
+    font-size: .8em;
+    font-weight: 600;
+    border:none
+}
+
+.homeDeleteAdminButton:hover {
+    background: var(--RedButtonHover);
+}
+
+.plancheLike {
+    box-shadow: 0 5px 10px 10px var(--LikeShadow);
+}
+
+.plancheDislike {
+    box-shadow: 0 5px 10px 10px var(--DislikeShadow);
+}
+
 @media only screen and (max-width: 600px) {
     .homeDivPlanche {
         display: flex;
         flex-direction: column;
-        flex-wrap: nowrap;
+        flex-wrap:nowrap
     }
-    
+
     .homePlanche {
         width: auto;
-        margin: 0 0 2em 0;
-        padding: none;
-        padding: 2em 2em 0 2em;
+        margin: 0 0 2em;
+        padding: 2em 2em 0;
         box-shadow: none;
         border-radius: 0;
-        background: var(--CardBackground);
+        background:var(--CardBackground)
     }
-    
+
     .homePlancheTop {
         display: flex;
         flex-direction: row;
-        text-align: left;
+        text-align:left
     }
-    
+
     .homePlancheTopInfos {
         display: flex;
         flex-direction: column;
-        color:var(--PrimaryText);
+        color:var(--PrimaryText)
     }
-    
+
     .homePlancheTopInfos > textarea {
         resize: none;
         width: 100%;
         border: none;
         text-align: left;
-        background:var(--CardBackground);
+        background:var(--CardBackground)
     }
-    
+
     .homePlancheBottom > button {
-        margin: 2em;
+        margin:2em
     }
 }
