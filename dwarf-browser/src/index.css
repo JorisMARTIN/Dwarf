@@ -13,6 +13,8 @@
         --ClassicButtonEnd: rgb(255, 59, 48);
         --ClassicButtonStart: rgb(255, 45, 85);
         --Shadow: rgb(20, 20, 24);
+        --LikeShadow: rgb(48, 209, 88);
+        --DislikeShadow: rgb(255, 69, 58);
     }
 }
 
@@ -30,7 +32,9 @@
         --BlueButtonHover: rgb(0, 64, 221);
         --ClassicButtonEnd: rgb(255, 69, 58);
         --ClassicButtonStart: rgb(255, 55, 95);
-        --Shadow:#d1d1d6
+        --Shadow: #d1d1d6;
+        --LikeShadow: rgb(48, 209, 88);
+        --DislikeShadow: rgb(255, 69, 58);
     }
 }
 

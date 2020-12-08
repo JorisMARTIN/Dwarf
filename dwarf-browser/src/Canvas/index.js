@@ -1,5 +1,5 @@
 import React from 'react';
-import { SliderPicker, CirclePicker } from 'react-color';
+import { SliderPicker } from 'react-color';
 import CanvasDraw from 'react-canvas-draw';
 import './index.css';
 import Auth from '../components/AuthHelperMethods';

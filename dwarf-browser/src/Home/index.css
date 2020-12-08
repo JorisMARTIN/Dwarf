@@ -28,6 +28,14 @@
     border-radius:25px
 }
 
+.plancheLike {
+    box-shadow: 0 5px 10px 10px var(--LikeShadow);
+}
+
+.plancheDislike {
+    box-shadow: 0 5px 10px 10px var(--DislikeShadow);
+}
+
 .homePlanche {
     display: flex;
     flex-direction:column

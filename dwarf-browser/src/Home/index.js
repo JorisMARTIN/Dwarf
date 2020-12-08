@@ -13,7 +13,9 @@ class ComicPage extends React.Component {
     state = {
         canvasW: 0,
         canvasH: 0,
-        redirectVote: false
+        redirectVote: false,
+        fullscreen: false,
+        rate: null,
     }
 
     async componentDidMount() {
@@ -25,8 +27,8 @@ class ComicPage extends React.Component {
         let max_y = 0;
 
         for (const frame of template) {
-            if(frame.x + frame.w > max_x) max_x = frame.x + frame.w;
-            if(frame.y + frame.h > max_y) max_y = frame.y + frame.h;
+            if (frame.x + frame.w > max_x) max_x = frame.x + frame.w;
+            if (frame.y + frame.h > max_y) max_y = frame.y + frame.h;
         }
 
         this.setState({
@@ -36,7 +38,7 @@ class ComicPage extends React.Component {
 
         //todo : charger les templates de maniere lazy et pas recalculer pour chaque page !=
 
-        for(const i in this.props.images) {
+        for (const i in this.props.images) {
             const image = new Image();
             image.src = 'http://dwarf.jorismartin.fr' + this.props.images[i];
             image.onload = () => {
@@ -46,6 +48,7 @@ class ComicPage extends React.Component {
     }
 
     handleVoteClick = (rate) => {
+        this.setState({ rate: rate });
 
         Auth.fetch("rate.php", {
             method: "POST",
@@ -54,41 +57,48 @@ class ComicPage extends React.Component {
                 rateType: rate
             })
         }).then(res => {
-            if(res.userId){
+            if (res.userId) {
                 // Display message to the user
                 alert(res.message);
-            }else{
+            } else {
                 // User not loged In
-                if(window.confirm(res.message)){
+                if (window.confirm(res.message)) {
                     this.setState({
                         redirectVote: true
                     })
                 }
             }
-
         })
     }
 
+    toggleFullscreen = () => {
+        if (this.state.fullscreen) {
+            this.setState({ fullscreen: false });
+        } else {
+            this.setState({ fullscreen: true });
+        }
+    }
+
     render() {
-        if(this.state.redirectVote) return <Redirect to="/auth" />
+        if (this.state.redirectVote) return <Redirect to="/auth" />
         else
-        return (
-            <div className="homePlanche">
-                <div className="homePlancheTop">
-                    <canvas className="homePlancheImg" ref={this.canvasRef} width={this.state.canvasW} height={this.state.canvasH} />
-                    <div className="homePlancheTopInfos">
-                        <textarea readOnly disabled className="homeName" value={this.props.name} />
-                        <textarea readOnly disabled className="homeDescri" value={this.props.description} />
-                        <p className="homeMode">{this.props.gamemode}</p>
-                        <p className="homeUser">Auteur : {this.props.user}</p>
+            return (
+                <div className={`homePlanche ${this.state.rate === 1 && "plancheLike"} ${this.state.rate === 0 && "plancheDislike"}`}>
+                    <div className="homePlancheTop">
+                        <canvas onClick={this.toggleFullscreen} className="homePlancheImg" ref={this.canvasRef} width={this.state.canvasW} height={this.state.canvasH} />
+                        <div className="homePlancheTopInfos">
+                            <textarea readOnly disabled className="homeName" value={this.props.name} />
+                            <textarea readOnly disabled className="homeDescri" value={this.props.description} />
+                            <p className="homeMode">{this.props.gamemode}</p>
+                            <p className="homeUser">Auteur : {this.props.user}</p>
+                        </div>
+                    </div>
+                    <div className="homePlancheBottom">
+                        <button type="button" onClick={() => this.handleVoteClick(1)}>Like</button>
+                        <button type="button" onClick={() => this.handleVoteClick(0)}>Dislike</button>
                     </div>
                 </div>
-                <div className="homePlancheBottom">
-                    <button type="button" onClick={() => this.handleVoteClick(1)}>Like</button>
-                    <button type="button" onClick={() => this.handleVoteClick(0)}>Dislike</button>
-                </div>
-            </div>
-        );
+            );
     }
 }
 
