@@ -14,7 +14,7 @@ class UserInfo extends Component {
     componentDidMount(){
 
         Auth.fetch("userinfos.php", {
-            method: 'GET'
+            method: 'POST'
         }).then(res => {
             if (res.userid) {
                 this.setState({
