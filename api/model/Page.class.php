@@ -10,6 +10,7 @@ class Page {
   private $template;
   private $completed;
   private $userid;
+  private $deleted;
 
   function getId() : int {
     return $this->pageid;
@@ -43,6 +44,9 @@ class Page {
     return $this->userid;
   }
 
+  function isDeleted() : bool {
+    return $this->deleted;
+  }
 }
 
 ?>
