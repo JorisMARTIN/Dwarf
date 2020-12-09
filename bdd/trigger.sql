@@ -26,17 +26,13 @@ FOR EACH ROW
 EXECUTE procedure f_setDeleteForPage();
 
 CREATE OR REPLACE function f_removeDeleteForPage() RETURNS trigger AS $$
-DECLARE
-
-    isInTable boolean := EXISTS (SELECT pageId FROM "DeletePage" WHERE pageId = old.pageId);
-
 BEGIN
 
-    if (isInTable) then
+    if EXISTS (SELECT pageId FROM "DeletePage" WHERE pageId = old.pageId) then
         UPDATE "Page" SET deleted = false WHERE pageId = old.pageId;
         RAISE NOTICE '(t_removeDeleteForPage) Page n° % set deleted to false', old.pageId;
     else 
-        RAISE EXCEPTION '(t_removeDeleteForPage) page n° % is already deleted', old.pageId;
+        RAISE EXCEPTION '(t_removeDeleteForPage) page n° % is not deleted', old.pageId;
     end if;
 
     RAISE NOTICE '(t_removeDeleteForPage) % in %', TG_OP, TG_TABLE_NAME;
