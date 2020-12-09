@@ -2,7 +2,6 @@ CREATE OR REPLACE function f_setDeleteForPage() RETURNS trigger AS $$
 DECLARE
 
     isDeleted boolean := (SELECT deleted FROM "Page" WHERE pageId = new.pageId);
-    isInDeletePage boolean := EXISTS (SELECT * FROM "DeletePage" WHERE pageId = new.pageId);
 
 BEGIN
 
@@ -14,7 +13,7 @@ BEGIN
             RAISE NOTICE '(t_setDeleteForPage) Page n° % set deleted to true', new.pageId;
         end if;
     else
-        if(isInDeletePage) then
+        if(EXISTS (SELECT pageId FROM "DeletePage" WHERE pageId = new.pageId)) then
             UPDATE "Page" SET deleted = true WHERE pageId = new.pageId;
             RAISE NOTICE '(t_setDeleteForPage) Page n° % set deleted to false', new.pageId;
 
