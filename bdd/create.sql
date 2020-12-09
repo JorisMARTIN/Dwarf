@@ -17,7 +17,8 @@ description varchar(512),
 gameMode int CHECK (gameMode >= 0 and gameMode <= 2) DEFAULT 0,
 template int CHECK (template >= 0 and template <= 0) DEFAULT 0,
 completed boolean DEFAULT FALSE,
-userId int NOT NULL REFERENCES "User"(userId)
+userId int NOT NULL REFERENCES "User"(userId),
+deleted boolean DEFAULT FALSE -- Edited by a trigger
 );
 
 CREATE TABLE IF NOT EXISTS "Frame" (
@@ -37,4 +38,13 @@ userId int NOT NULL REFERENCES "User"(userId),
 pageId int NOT NULL REFERENCES "Page"(pageId),
 vote boolean NOT NULL,
 PRIMARY KEY(userId, pageId)
+);
+
+-- Trigger on this table for set deleted attribute in "Page" relation
+CREATE TABLE IF NOT EXISTS "DeletePage" (
+pageId int NOT NULL REFERENCES "Page"(pageid),
+userId int NOT NULL REFERENCES "User"(userid),
+reason varchar(512),
+deleteDate date,
+PRIMARY KEY(pageId)
 );
