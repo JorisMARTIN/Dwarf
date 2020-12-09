@@ -115,7 +115,8 @@
 }
 
 .canvasToolsRightColorPicker {
-    transform:rotate(90deg)
+    /* transform:rotate(90deg); */
+    min-width: 200px;
 }
 
 .canvasToolsLeftDropDown > div, .canvasToolsRightDropDown {
