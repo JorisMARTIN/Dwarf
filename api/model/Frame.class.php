@@ -12,38 +12,83 @@ class Frame {
   private $pageid;
   private $userid;
 
+  /**
+   * Get the ID of the frame
+   * 
+   * @return int ID og the frame
+   */
   function getId() : int {
     return $this->frameid;
   }
 
+  /**
+   * Get the url of the image on the server of the frame
+   * 
+   * @return string URL of the image of the frame
+   */
   function getImagePtr() : string {
     return $this->imageptr;
   }
 
+  /**
+   * Get the creation date of the image
+   * 
+   * @return string Creation date of the frame
+   */
   function getCreationDate() : string {
     return $this->creationdate;
   }
 
+  /**
+   * Get the width of the frame
+   * 
+   * @return int Widht of the frame
+   */
   function getWidth() : int {
     return $this->width;
   }
 
+  /**
+   * Get the height of the frame
+   * 
+   * @return int Height of the frame
+   */
   function getHeight() : int {
     return $this->height;
   }
 
+  /**
+   * Get the ID of the page which includes the frame
+   * 
+   * @return int ID of the page
+   */
   function getPageId() : int {
     return $this->pageid;
   }
 
+  /**
+   * Get the ID of the user who created the frame
+   * 
+   * @return ID of the user
+   */
   function getOwnerId() : int {
     return $this->userid;
   }
 
+  /**
+   * Check if the frame can be draw
+   * 
+   * @return bool true = drawable | false = not drawable
+   */
   function isDrawable() : bool {
     return $this->drawable;
   }
 
+  /**
+   * Check if the frame is done
+   * 
+   * @return bool true = done | false = not done
+   */
   function isDone() : bool {
     return $this->done;
   }

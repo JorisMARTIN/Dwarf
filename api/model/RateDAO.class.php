@@ -5,7 +5,13 @@ require_once(dirname(__FILE__) . '/Rate.class.php');
 class RateDAO extends DAO
 {
 
-    // Fonction retournant pour un pageId donnée le nombre de votes positifs et négatifs :
+    /**
+     * Get rates of a Page
+     * 
+     * @param int $pageId ID of the page
+     * 
+     * @return array(positive,negative)|NULL positive = Number of 👍, negative = Number of 👎 | NULL = ❌
+     */
     function getVotes(int $pageId): array
     {
         $query = 'SELECT count(userId) FROM "Rate" WHERE pageId = :pageId and vote = true';
@@ -37,7 +43,13 @@ class RateDAO extends DAO
         return array($positif, $negatif);
     }
 
-    // Fonction retournant pour un userId donné les votes de cet utilisateur :
+    /**
+     * Collect all rate of an user
+     * 
+     * @param int $userId ID of the user
+     * 
+     * @return array|NULL Array of Rate Object | NULL = ❌
+     */
     function getUserVotes(int $userId): array
     {
         $query = 'SELECT "Rate".* FROM "Page", "Rate" WHERE "Page".pageId = "Rate".pageId and "Rate".userId = :userId';
@@ -50,8 +62,15 @@ class RateDAO extends DAO
     }
 
 
-    // Fonction enregistrant le vote d'un utilisateur dans la base de donnée
-    // bool $vote représente le statut du vote (like ou dislike)
+    /**
+     * Add a vote of one user
+     * 
+     * @param int $userId ID of the user who voted
+     * @param int $pageId ID of the page rated
+     * @param bool $vote The value of the vote. true = like | false = dislike
+     * 
+     * @return bool true = ✅ | false = ❌
+     */
     function putVote(int $userId, int $pageId, bool $vote): bool
     {
         $query = 'INSERT INTO "Rate" (userId, pageId, vote)
@@ -64,6 +83,14 @@ class RateDAO extends DAO
         ]);
     }
 
+    /**
+     * Delete a vote of one user on a page
+     * 
+     * @param int $pageId ID of the page rated
+     * @param int $userId ID of the user who voted
+     * 
+     * @return bool true = ✅ | false = ❌
+     */
     function removeVote(int $pageId, int $userId): bool
     {
         $query = 'DELETE FROM "Rate" WHERE pageId = :pageId and userId = :userId';
