@@ -13,14 +13,17 @@
 .homeDivPlanche {
     display: flex;
     flex-wrap: wrap;
-    justify-content:center;
-    padding: 2em 0;
+    justify-content: center;
+    padding:2em 0
 }
 
 .homePlancheWrapper {
+    padding: 2em;
+}
+
+.homePlanche, .homePlancheWrapper {
     display: flex;
-    flex-direction: column;
-    padding: 0 2em;
+    flex-direction:column
 }
 
 .homePlanche {
@@ -30,13 +33,11 @@
     justify-content: space-between;
     background: var(--CardBackground);
     box-shadow: 0 5px 10px 10px var(--Shadow);
-    border-radius: 25px;
-    display: flex;
-    flex-direction:column
+    border-radius:25px
 }
 
 .homePlanche:hover {
-    box-shadow: 0 10px 15px 15px var(--ShadowHover);
+    box-shadow:0 10px 15px 15px var(--ShadowHover)
 }
 
 .homePlancheTop {
@@ -61,20 +62,20 @@
 .homePlancheTopInfos > textarea {
     resize: none;
     border: none;
-    background:var(--CardBackground);
+    background:var(--CardBackground)
 }
 
 .homeName {
     text-align: center;
     color: var(--PrimaryText);
     font-size: 1.2em;
-    font-weight:600;
-    height: 2.4em;
+    font-weight: 600;
+    height:2.4em
 }
 
 .homeDescri {
-    color:var(--SecondaryText);
-    height: 2.3em;
+    color: var(--SecondaryText);
+    height:2.3em
 }
 
 .homeDescri, .homeUser {
@@ -83,12 +84,12 @@
 }
 
 .homeUser {
-    color:var(--PrimaryText);
-    margin: 0 0 0.5em 0;
+    color: var(--PrimaryText);
+    margin:0 0 .5em
 }
 
 .homeMode {
-    margin: 0.5em auto;
+    margin: .5em auto;
     padding: .5em 1em;
     color: #f2f2f7;
     background: linear-gradient(var(--ClassicButtonStart), var(--ClassicButtonEnd));
@@ -119,7 +120,7 @@
 
 .homeDeleteAdminButton {
     z-index: 1;
-    margin: 2em;
+    margin: 2em 2em 0 2em;
     padding: .5em 1em;
     color: #f2f2f7;
     background: var(--RedButton);
@@ -130,15 +131,15 @@
 }
 
 .homeDeleteAdminButton:hover {
-    background: var(--RedButtonHover);
+    background:var(--RedButtonHover)
 }
 
 .plancheLike {
-    box-shadow: 0 5px 10px 10px var(--LikeShadow);
+    box-shadow:0 5px 10px 10px var(--LikeShadow)
 }
 
 .plancheDislike {
-    box-shadow: 0 5px 10px 10px var(--DislikeShadow);
+    box-shadow:0 5px 10px 10px var(--DislikeShadow)
 }
 
 @media only screen and (max-width: 600px) {
