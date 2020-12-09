@@ -36,14 +36,14 @@ BEGIN
     end if;
 
     RAISE NOTICE '(t_removeDeleteForPage) % in %', TG_OP, TG_TABLE_NAME;
-    RETURN new;
+    RETURN old;
 
 
 END; $$ LANGUAGE 'plpgsql';
 
 
 CREATE TRIGGER t_removeDeleteForPage
-AFTER
+BEFORE
 DELETE
 ON "DeletePage"
 FOR EACH ROW
