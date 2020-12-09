@@ -28,7 +28,7 @@ EXECUTE procedure f_setDeleteForPage();
 CREATE OR REPLACE function f_removeDeleteForPage() RETURNS trigger AS $$
 DECLARE
 
-    isInTable boolean := EXISTS (SELECT deleted FROM "DeletePage" WHERE pageId = old.pageId);
+    isInTable boolean := EXISTS (SELECT pageId FROM "DeletePage" WHERE pageId = old.pageId);
 
 BEGIN
 
@@ -36,7 +36,7 @@ BEGIN
         UPDATE "Page" SET deleted = false WHERE pageId = old.pageId;
         RAISE NOTICE '(t_removeDeleteForPage) Page n° % set deleted to false', old.pageId;
     else 
-        RAISE EXCEPTION '(t_removeDeleteForPage) page n° % is already deleted', new.pageId;
+        RAISE EXCEPTION '(t_removeDeleteForPage) page n° % is already deleted', old.pageId;
     end if;
 
     RAISE NOTICE '(t_removeDeleteForPage) % in %', TG_OP, TG_TABLE_NAME;
@@ -47,7 +47,7 @@ END; $$ LANGUAGE 'plpgsql';
 
 
 CREATE TRIGGER t_removeDeleteForPage
-BEFORE
+AFTER
 DELETE
 ON "DeletePage"
 FOR EACH ROW
