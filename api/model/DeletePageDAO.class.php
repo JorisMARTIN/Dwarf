@@ -12,7 +12,7 @@ class DeletePageDAO extends DAO {
      * 
      * @return DeletedPag|NULL DeletePage objet | NULL = ❌
      */
-    function getDeletedPageInformation(int $pageId) : ?DeletePage {
+    function getDeletePageInfos(int $pageId) : ?DeletePage {
         $query = 'SELECT * FROM "DeletePage" WHERE pageid = :pageId';
         $tmp = $this->db->prepare($query);
         if ($tmp->execute([':pageId' => $pageId])) {

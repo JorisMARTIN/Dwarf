@@ -49,6 +49,8 @@ class RateDAO extends DAO
      * @param int $userId ID of the user
      * 
      * @return array|NULL Array of Rate Object | NULL = ❌
+     * 
+     * @todo Modif la query : Jointure inutile ??
      */
     function getUserVotes(int $userId): array
     {
