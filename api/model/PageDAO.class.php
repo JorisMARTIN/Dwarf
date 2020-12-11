@@ -12,7 +12,7 @@ class PageDAO extends DAO {
      * @return Page|NULL Page object | NULL = ❌
      */
     function getPage(int $pageId) : ?Page {
-        $query = 'SELECT * FROM "Page" WHERE pageid = :pageId';
+        $query = 'SELECT * FROM "Page" WHERE pageid = :pageId and deleted = false';
         $tmp = $this->db->prepare($query);
         if ($tmp->execute([':pageId' => $pageId])) {
             return $tmp->fetchAll(PDO::FETCH_CLASS, "Page")[0];

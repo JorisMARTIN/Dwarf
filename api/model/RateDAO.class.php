@@ -49,12 +49,10 @@ class RateDAO extends DAO
      * @param int $userId ID of the user
      * 
      * @return array|NULL Array of Rate Object | NULL = ❌
-     * 
-     * @todo Modif la query : Jointure inutile ??
      */
     function getUserVotes(int $userId): array
     {
-        $query = 'SELECT "Rate".* FROM "Page", "Rate" WHERE "Page".pageId = "Rate".pageId and "Rate".userId = :userId';
+        $query = 'SELECT * FROM "Rate" WHERE userId = :userId';
         $tmp = $this->db->prepare($query);
         if ($tmp->execute([':userId' => $userId])) {
             return $tmp->fetchAll(PDO::FETCH_CLASS, 'Rate');

@@ -20,7 +20,7 @@ class ComicPage extends React.Component {
 
     async componentDidMount() {
         const canvas = this.canvasRef.current;
-        const template = await (await fetch('http://dwarf.jorismartin.fr/cdn/templates/template' + this.props.template + '.json')).json();
+        const template = await (await fetch('https://dwarf.jorismartin.fr/cdn/templates/template' + this.props.template + '.json')).json();
         const ctx = canvas.getContext('2d');
 
         let max_x = 0;
@@ -40,7 +40,7 @@ class ComicPage extends React.Component {
 
         for (const i in this.props.images) {
             const image = new Image();
-            image.src = 'http://dwarf.jorismartin.fr' + this.props.images[i];
+            image.src = 'https://dwarf.jorismartin.fr' + this.props.images[i];
             image.onload = () => {
                 ctx.drawImage(image, template[i].x, template[i].y, template[i].w, template[i].h);
             }
