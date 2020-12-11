@@ -35,11 +35,23 @@ if (isset($data)) {
     $passwordC = htmlentities($data->passwordConfirm);
     
     /*Gestion du formatde la date*/
-    $birthdateSplit = explode("-",$birthdate);
-    
+    if ($birthdate == "*-*-*") {
+        $birthdateSplit = explode("-",$birthdate);
+    } else if ($birthdate == "*/*/*") {
+        $birthdateSplit = explode("/",$birthdate);
+    } else {
+        echo json_encode([
+            'success' => false,
+            'message' => 'Date format is no correct !'
+        ]);
+    }
+
     if (strlen($birthdateSplit[0]) != 4) {
         $birthdate = $birthdateSplit[2] . "-" . $birthdateSplit[1] . "-" . $birthdateSplit[0];
+    } else {
+        $birthdate = $birthdateSplit[0] . "-" . $birthdateSplit[1] . "-" . $birthdateSplit[2];
     }
+    
 
     if (empty($pseudo)) {
         echo json_encode([
