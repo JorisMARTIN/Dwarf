@@ -34,10 +34,11 @@ if (isset($data)) {
     $password = htmlentities($data->password);
     $passwordC = htmlentities($data->passwordConfirm);
     
-    if ($birthdate == "??-??-????" ) {
-        $birthdate = explode("-",$birthdate);
-        $birthdate = $birthdate[2] . "-" . $birthdate[1] . "-" . $birthdate[0];
-        var_dump($birthdate);
+    /*Gestion du formatde la date*/
+    $birthdateSplit = explode("-",$birthdate);
+    
+    if (strlen($birthdateSplit[0]) != 2) {
+        $birthdate = $birthdateSplit[2] . "-" . $birthdateSplit[1] . "-" . $birthdateSplit[0];
     }
 
     if (empty($pseudo)) {
@@ -94,11 +95,6 @@ if (isset($data)) {
         echo json_encode([
             'success' => false,
             'message' => 'Password and password confirm are different !'
-        ]);
-    } else if ($birthdate != "????-??-??" ) {
-        echo json_encode([
-            'success' => false,
-            'message' => 'Birthdate au mauvait format !' . $birthdate
         ]);
     } else {
         $signupOk = $userDAO->putUser($email, $pseudo, $password, getClientIP(), $birthdate);
