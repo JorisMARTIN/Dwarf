@@ -89,7 +89,14 @@ if (isset($data)) {
             'success' => false,
             'message' => 'Password and password confirm are different !'
         ]);
-    } else {
+    } else if ($birthdate != "*-*-*" ) {
+        echo json_encode([
+            'success' => false,
+            'message' => 'Birthdate au movait format !' . $birthdate
+        ]);
+    } else if ($birthdate == "*/*/*" ) {
+        $birthdate = str_remplace("/","-",$birthdate);
+    }  else {
         $signupOk = $userDAO->putUser($email, $pseudo, $password, getClientIP(), $birthdate);
 
         if ($signupOk == -1) {
