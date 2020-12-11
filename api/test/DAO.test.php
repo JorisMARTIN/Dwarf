@@ -23,7 +23,7 @@ print("\n");
 
 try {
   $user1 = $userDAO->getUser($newUserId);
-  print("Récupération d'un utilisateur : ");
+  print("Récupération d'un utilisateur (getUser) : ");
   if ($user1) {
     print("OK");
     $user1Id = $user1->getId();
@@ -38,13 +38,21 @@ try {
     print("\n - Vérification de sa date de création : ".($user1BirthDate == "2000-01-01" ? "OK" : "FAILED"));
     $user1Ip = $user1->getIps()[0];
     print("\n - Vérification de son adresse ip : ".($user1Ip === '192.168.1.1' ? "OK" : "FAILED"));
+    $user1isAdmin = $user1->isAdmin();
+    print("\n - Vérification de son statut : ".(!$user1isAdmin ? "OK" : "FAILED"));
+    $userDAO->addIp($newUserId, '192.168.1.42');
+    print("Ajout d'une adresse IP : ");
+    $user1 = $userDAO->getUser($newUserId);
+    print($user1->getIps()[1] === '192.168.1.42' ? "OK" : "FAILED");
+    $user1login = $userDAO->logUser($user1->getEmail(), 'test-password');
+    print("Authentification d'un utilisateur : ".($user1login != -1 ? "OK" : "FAILED"));
   } else {
     print("FAILED");
   }
   print("\n\n");
 
   $page1 = $pageDAO->getUserPages($newUserId)[0];
-  print("Récupération d'une planche depuis un utilisateur : ");
+  print("Récupération d'une planche depuis un utilisateur (getUserPages) : ");
   if ($page1) {
     print("OK");
     $page1Id = $page1->getId();
@@ -68,7 +76,7 @@ try {
   }
   print("\n");
   $page2 = $pageDAO->getPage($newPageId);
-  print("Récupération d'une planche (bis) : ");
+  print("Récupération d'une planche (getUser) : ");
   if ($page2) {
     print("OK");
   } else {
@@ -104,7 +112,7 @@ try {
   }
   print("\n");
   $frame2 = $frameDAO->getFrame($newFrameId);
-  print("Récupération d'une frame (bis) : ");
+  print("Récupération d'une frame (getFrame) : ");
   if ($frame2) {
     print("OK");
   } else {
@@ -113,7 +121,7 @@ try {
   print("\n\n");
 
   $rate1 = $rateDAO->getUserVotes($newUserId)[0];
-  print("Récupération d'un vote : ");
+  print("Récupération d'un vote (getUserVotes) : ");
   if ($rate1) {
     print("OK");
     $rate1PageId = $rate1->getPageId();
