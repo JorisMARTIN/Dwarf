@@ -26,7 +26,7 @@ class PageDAO extends DAO {
      * 
      * @return array|NULL All deleted pages | NULL = ❌
      */
-    function getDeletedPage(): array
+    function getDeletedPages(): array
     {
         $query = 'SELECT * FROM "Page" WHERE deleted = true';
         $tmp = $this->db->prepare($query);
