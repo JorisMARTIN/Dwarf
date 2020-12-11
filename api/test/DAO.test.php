@@ -94,6 +94,7 @@ try {
   } else {
     print("FAILED");
   }
+  print("\n");
   $lastPageId = $pageDAO->getLastPageId();
   print("Id de la dernière page : ");
   if ($newPageId = $lastPageId) {
@@ -101,6 +102,7 @@ try {
   } else {
     print("FAILED");
   }
+  print("\n");
   $newPageId2 = $pageDAO->putPage('test-page2', 'test-description2', 0, 0, false, $newUserId);
   $newPageId3 = $pageDAO->putPage('test-page3', 'test-description3', 0, 0, false, $newUserId);
   $newPageId4 = $pageDAO->putPage('test-page4', 'test-description4', 0, 0, false, $newUserId);
@@ -112,6 +114,7 @@ try {
   } else {
     print("FAILED");
   }
+  print("\n");
   $page = $pageDAO->getRandomPage([]);
   print("Récupération d'une page aléatoire : ");
   if ($page) {
@@ -119,6 +122,7 @@ try {
   } else {
     print("FAILED");
   }
+  print("\n");
   $page = $pageDAO->getRandomPage(range(0, $lastPageId));
   print("Récupération d'une page aléatoire : ");
   if (!$page) {
