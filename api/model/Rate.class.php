@@ -1,8 +1,8 @@
 <?php
 
 class Rate {
-  private $userId;
-  private $pageId;
+  private $userid;
+  private $pageid;
   private $vote;
 
   /**
@@ -11,7 +11,7 @@ class Rate {
    * @return int ID of the user
    */
   function getUserId() : int {
-    return $this->userId;
+    return $this->userid;
   }
 
   /**
@@ -20,7 +20,7 @@ class Rate {
    * @return int ID of the page
    */
   function getPageId() : int {
-    return $this->pageId;
+    return $this->pageid;
   }
 
   /**
