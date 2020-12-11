@@ -16,6 +16,7 @@ if [ $# -eq 0 ] || [ "$1" = "client" ]; then
     if [ "$2" = "install" ]; then
         npm install
     fi
+    HTTPS=true
     npm run build
     cd $server
     ls | grep -v 'api\|cdn' | xargs rm -rfv

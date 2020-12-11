@@ -26,7 +26,7 @@ class PageDAO extends DAO {
      * 
      * @return array|NULL All deleted pages | NULL = ❌
      */
-    function getDeletedPage(): array
+    function getDeletedPages(): array
     {
         $query = 'SELECT * FROM "Page" WHERE deleted = true';
         $tmp = $this->db->prepare($query);
@@ -145,6 +145,15 @@ class PageDAO extends DAO {
      * @return bool true = ✅ | false = ❌
      */
     function removePage(int $pageId) : bool {
+        $page = $this->getPage($pageId);
+        $path = dirname(__FILE__, 3).'/cdn/frames/page-'.$pageId;
+        $files = scandir($path);
+        foreach ($files as $file) {
+            if (!is_dir($file)) {
+                unlink($file);
+            }
+        }
+        rmdir($path);
         $query = 'DELETE FROM "Page" WHERE pageId = :pageId';
         return $this->db->prepare($query)->execute([
         ':pageId' => $pageId

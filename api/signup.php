@@ -33,6 +33,25 @@ if (isset($data)) {
     $emailC = htmlentities($data->emailConfirm);
     $password = htmlentities($data->password);
     $passwordC = htmlentities($data->passwordConfirm);
+    
+    /*Gestion du formatde la date*/
+    if ($birthdate == "*-*-*") {
+        $birthdateSplit = explode("-",$birthdate);
+    } else if ($birthdate == "*/*/*") {
+        $birthdateSplit = explode("/",$birthdate);
+    } else {
+        echo json_encode([
+            'success' => false,
+            'message' => 'Date format is no correct !'
+        ]);
+    }
+
+    if (strlen($birthdateSplit[0]) != 4) {
+        $birthdate = $birthdateSplit[2] . "-" . $birthdateSplit[1] . "-" . $birthdateSplit[0];
+    } else {
+        $birthdate = $birthdateSplit[0] . "-" . $birthdateSplit[1] . "-" . $birthdateSplit[2];
+    }
+    
 
     if (empty($pseudo)) {
         echo json_encode([
@@ -95,7 +114,7 @@ if (isset($data)) {
         if ($signupOk == -1) {
             echo json_encode([
                 'success' => false,
-                'message' => 'Signup failed !'
+                'message' => 'Signup failed ! An account with this email already exist'
             ]);
         } else {
             echo json_encode([

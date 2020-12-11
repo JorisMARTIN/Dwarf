@@ -1,5 +1,5 @@
 import React from 'react';
-import { SliderPicker } from 'react-color';
+import { CirclePicker } from 'react-color';
 import CanvasDraw from 'react-canvas-draw';
 import './index.css';
 import Auth from '../components/AuthHelperMethods';
@@ -7,10 +7,21 @@ import { Redirect } from 'react-router-dom';
 import withAuth from '../components/withAuth';
 
 class Canvas extends React.Component {
+    colors = [ // si ceci change, laisser la couleur par défaut en [0] et celle du background en [1]
+        "#1c1c1e", // default : noir
+        "#f2f2f7", // blanc
+        "#0a84ff", // bleu
+        "#ff453a", // rouge
+        "#30d158", // vert
+        "#ffd60a", // jaune
+        "#8944ab", // violet
+        "#ff9f0a", // orange
+    ]
+
     state = {
-        color: "#ff0000",
-        brushRadius: 10,
-        lazyRadius: 12,
+        color: this.colors[0],
+        brushRadius: 7,
+        lazyRadius: 1,
         redirectToHome: false,
         blockSubmit: false,
     }
@@ -42,7 +53,7 @@ class Canvas extends React.Component {
             context.globalCompositeOperation = "destination-over";
 
             //set background color
-            context.fillStyle = "#ffffff";
+            context.fillStyle = this.colors[1];
 
             //fill entire canvas with background colour
             context.fillRect(0, 0, width, height);
@@ -90,6 +101,12 @@ class Canvas extends React.Component {
         document.removeEventListener('keydown', this.keydownHandler);
     }
 
+    copyRefereeAsBG = () => {
+        // if(this.canvas.current !== null) {
+        //     this.canvas.current.image.src = "https://dwarf.jorismartin.fr" + this.props.refereeImage;
+        // }
+    }
+
     render() {
         if (this.state.redirectToHome) return <Redirect to='/' />
         else return (
@@ -102,7 +119,7 @@ class Canvas extends React.Component {
                             <div></div>
                         </div>
                         <div className="canvasToolsLeftImage">
-                            {this.props.refereeImage && <img src={"http://dwarf.jorismartin.fr" + this.props.refereeImage} alt="referee frame"></img>}
+                            {this.props.refereeImage && <img onClick={this.copyRefereeAsBG} src={"https://dwarf.jorismartin.fr" + this.props.refereeImage} alt="referee frame" />}
                         </div>
                         <div className="canvasToolsLeftOthersTools">
                             <button
@@ -140,8 +157,9 @@ class Canvas extends React.Component {
                         </button>
                     </div>
                     <div className="canvasDraw"
+                        onContextMenu={(e) => { e.preventDefault(); }}
                         style={{
-                            maxWidth: this.props.frameWidth //* (1.1) /*pour intégré les margin du canvas .. Corect ?*/
+                            maxWidth: this.props.frameWidth
                         }}
                     >
                         <div className="canvasDrawTitle">
@@ -156,6 +174,7 @@ class Canvas extends React.Component {
                             lazyRadius={this.state.lazyRadius}
                             canvasWidth={this.props.frameWidth}
                             canvasHeight={this.props.frameHeight}
+                            backgroundColor={this.colors[1]}
                             hideGrid
                         />
                     </div>
@@ -165,16 +184,15 @@ class Canvas extends React.Component {
                             <div></div>
                             <div></div>
                         </div>
-                        <SliderPicker
+                        <CirclePicker
                             className="canvasToolsRightColorPicker"
                             color={this.state.color}
                             onChange={color => this.setState({ color: color.hex })}
+                            width={104}
+                            circleSize={32}
+                            circleSpacing={20}
+                            colors={this.colors}
                         />
-                        {/* <CirclePicker
-                            className="canvasToolsRightColorPicker"
-                            color={this.state.color}
-                            onChange={color => this.setState({ color: color.hex })}
-                        /> */}
                     </div>
                 </div>
             </div>

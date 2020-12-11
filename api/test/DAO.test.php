@@ -23,7 +23,7 @@ print("\n");
 
 try {
   $user1 = $userDAO->getUser($newUserId);
-  print("Récupération d'un utilisateur : ");
+  print("Récupération d'un utilisateur (getUser) : ");
   if ($user1) {
     print("OK");
     $user1Id = $user1->getId();
@@ -38,13 +38,25 @@ try {
     print("\n - Vérification de sa date de création : ".($user1BirthDate == "2000-01-01" ? "OK" : "FAILED"));
     $user1Ip = $user1->getIps()[0];
     print("\n - Vérification de son adresse ip : ".($user1Ip === '192.168.1.1' ? "OK" : "FAILED"));
+    $user1isAdmin = $user1->isAdmin();
+    print("\n - Vérification de son statut : ".(!$user1isAdmin ? "OK" : "FAILED"));
+    $user1AjoutIp = $userDAO->addIp($newUserId, '192.168.1.42');
+    print("\n - Ajout d'une adresse IP : ");
+    if ($user1AjoutIp) {
+      $user1 = $userDAO->getUser($newUserId);
+      print($user1->getIps()[1] === '192.168.1.42' ? "OK" : "FAILED");
+    } else {
+      print("FAILED");
+    }
+    $user1login = $userDAO->logUser($user1->getEmail(), 'test-password');
+    print("\n - Authentification d'un utilisateur : ".($user1login != -1 ? "OK" : "FAILED"));
   } else {
     print("FAILED");
   }
   print("\n\n");
 
   $page1 = $pageDAO->getUserPages($newUserId)[0];
-  print("Récupération d'une planche depuis un utilisateur : ");
+  print("Récupération d'une planche depuis un utilisateur (getUserPages) : ");
   if ($page1) {
     print("OK");
     $page1Id = $page1->getId();
@@ -63,13 +75,57 @@ try {
     print("\n - Vérification de sa complétion : ".(!$page1Completed ? "OK" : "FAILED"));
     $page1OwnerId = $page1->getOwnerId();
     print("\n - Vérification de l'identifiant de son créateur : ".($page1OwnerId === $newUserId ? "OK" : "FAILED"));
+    $completed = $pageDAO->setCompleted($newPageId, true);
+    print("\n - modification de sa complétion : ");
+    if ($completed) {
+      $page1Completed2 = $page1->isCompleted();
+      print(($page1Completed2 ? "OK" : "FAILED"));
+    } else {
+      print("FAILED");
+    }
   } else {
     print("FAILED");
   }
   print("\n");
   $page2 = $pageDAO->getPage($newPageId);
-  print("Récupération d'une planche (bis) : ");
+  print("Récupération d'une planche (getUser) : ");
   if ($page2) {
+    print("OK");
+  } else {
+    print("FAILED");
+  }
+  print("\n");
+  $lastPageId = $pageDAO->getLastPageId();
+  print("Id de la dernière page : ");
+  if ($newPageId = $lastPageId) {
+    print("OK");
+  } else {
+    print("FAILED");
+  }
+  print("\n");
+  $newPageId2 = $pageDAO->putPage('test-page2', 'test-description2', 0, 0, false, $newUserId);
+  $newPageId3 = $pageDAO->putPage('test-page3', 'test-description3', 0, 0, false, $newUserId);
+  $newPageId4 = $pageDAO->putPage('test-page4', 'test-description4', 0, 0, false, $newUserId);
+  $newPageId5 = $pageDAO->putPage('test-page5', 'test-description5', 0, 0, false, $newUserId);
+  $pages = $pageDAO->getNPages(5, $newPageId);
+  print("Récupération de 5 pages : ");
+  if (count($pages) === 5) {
+    print("OK");
+  } else {
+    print("FAILED");
+  }
+  print("\n");
+  $page = $pageDAO->getRandomPage([]);
+  print("Récupération d'une page aléatoire : ");
+  if ($page) {
+    print("OK");
+  } else {
+    print("FAILED");
+  }
+  print("\n");
+  $page = $pageDAO->getRandomPage(range(0, $lastPageId));
+  print("Récupération d'une page aléatoire : ");
+  if (!$page) {
     print("OK");
   } else {
     print("FAILED");
@@ -104,7 +160,7 @@ try {
   }
   print("\n");
   $frame2 = $frameDAO->getFrame($newFrameId);
-  print("Récupération d'une frame (bis) : ");
+  print("Récupération d'une frame (getFrame) : ");
   if ($frame2) {
     print("OK");
   } else {
@@ -113,7 +169,7 @@ try {
   print("\n\n");
 
   $rate1 = $rateDAO->getUserVotes($newUserId)[0];
-  print("Récupération d'un vote : ");
+  print("Récupération d'un vote (getUserVotes) : ");
   if ($rate1) {
     print("OK");
     $rate1PageId = $rate1->getPageId();
@@ -140,6 +196,10 @@ $removed = $frameDAO->removeFrame($newFrameId);
 print("Suppression d'une frame : ".($removed ? "OK" : "FAILED")."\n");
 $removed = $pageDAO->removePage($newPageId);
 print("Suppression d'une page : ".($removed ? "OK" : "FAILED")."\n");
+$pageDAO->removePage($newPageId2);
+$pageDAO->removePage($newPageId3);
+$pageDAO->removePage($newPageId4);
+$pageDAO->removePage($newPageId5);
 $removed = $userDAO->removeUser($newUserId);
 print("Suppression d'une utilisateur : ".($removed ? "OK" : "FAILED")."\n");
 
