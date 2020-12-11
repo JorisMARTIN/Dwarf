@@ -33,6 +33,12 @@ if (isset($data)) {
     $emailC = htmlentities($data->emailConfirm);
     $password = htmlentities($data->password);
     $passwordC = htmlentities($data->passwordConfirm);
+    
+    if ($birthdate == "??-??-????" ) {
+        $birthdate = explode("-",$birthdate);
+        $birthdate = $birthdate[2] . "-" . $birthdate[1] . "-" . $birthdate[0];
+        var_dump($birthdate);
+    }
 
     if (empty($pseudo)) {
         echo json_encode([
@@ -92,12 +98,9 @@ if (isset($data)) {
     } else if ($birthdate != "????-??-??" ) {
         echo json_encode([
             'success' => false,
-            'message' => 'Birthdate au movait format !' . $birthdate
+            'message' => 'Birthdate au mauvait format !' . $birthdate
         ]);
-    } else if ($birthdate == "??-??-????" ) {
-        $birthdate = explode("-",$birthdate);
-        $birthdate = $birthdate[2] . "-" . $birthdate[1] . "-" . $birthdate[0];
-    }  else {
+    } else {
         $signupOk = $userDAO->putUser($email, $pseudo, $password, getClientIP(), $birthdate);
 
         if ($signupOk == -1) {
