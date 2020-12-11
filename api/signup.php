@@ -38,7 +38,6 @@ if (isset($data)) {
     $birthdateSplit = explode("-",$birthdate);
     
     if (strlen($birthdateSplit[0]) != 4) {
-        var_dump($birthdateSplit);
         $birthdate = $birthdateSplit[2] . "-" . $birthdateSplit[1] . "-" . $birthdateSplit[0];
     }
 
