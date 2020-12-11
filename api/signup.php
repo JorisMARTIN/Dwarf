@@ -33,6 +33,13 @@ if (isset($data)) {
     $emailC = htmlentities($data->emailConfirm);
     $password = htmlentities($data->password);
     $passwordC = htmlentities($data->passwordConfirm);
+    
+    /*Gestion du formatde la date*/
+    $birthdateSplit = explode("-",$birthdate);
+    
+    if (strlen($birthdateSplit[0]) != 4) {
+        $birthdate = $birthdateSplit[2] . "-" . $birthdateSplit[1] . "-" . $birthdateSplit[0];
+    }
 
     if (empty($pseudo)) {
         echo json_encode([
@@ -89,20 +96,13 @@ if (isset($data)) {
             'success' => false,
             'message' => 'Password and password confirm are different !'
         ]);
-    } else if ($birthdate != "*-*-*" ) {
-        echo json_encode([
-            'success' => false,
-            'message' => 'Birthdate au movait format !' . $birthdate
-        ]);
-    } else if ($birthdate == "*/*/*" ) {
-        $birthdate = str_remplace("/","-",$birthdate);
-    }  else {
+    } else {
         $signupOk = $userDAO->putUser($email, $pseudo, $password, getClientIP(), $birthdate);
 
         if ($signupOk == -1) {
             echo json_encode([
                 'success' => false,
-                'message' => 'Signup failed !'
+                'message' => 'Signup failed ! An account with this email already exist'
             ]);
         } else {
             echo json_encode([

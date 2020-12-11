@@ -46,7 +46,6 @@ class UserDAO extends DAO {
             $userId = $tmp->fetchColumn();
             return $userId;
         } else {
-            //var_dump($tmp->errorInfo()); /*Attention au var_dump ! */
             return -1;
         }
     }
