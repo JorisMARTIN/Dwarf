@@ -149,7 +149,9 @@ class PageDAO extends DAO {
         $path = dirname(__FILE__, 3).'/cdn/frames/page-'.$pageId;
         $files = scandir($path);
         foreach ($files as $file) {
-            unlink($file);
+            if (!is_dir($file)) {
+                unlink($file);
+            }
         }
         rmdir($path);
         $query = 'DELETE FROM "Page" WHERE pageId = :pageId';
