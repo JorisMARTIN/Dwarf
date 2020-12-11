@@ -40,12 +40,16 @@ try {
     print("\n - Vérification de son adresse ip : ".($user1Ip === '192.168.1.1' ? "OK" : "FAILED"));
     $user1isAdmin = $user1->isAdmin();
     print("\n - Vérification de son statut : ".(!$user1isAdmin ? "OK" : "FAILED"));
-    $userDAO->addIp($newUserId, '192.168.1.42');
-    print("Ajout d'une adresse IP : ");
-    $user1 = $userDAO->getUser($newUserId);
-    print($user1->getIps()[1] === '192.168.1.42' ? "OK" : "FAILED");
+    $user1AjoutIp = $userDAO->addIp($newUserId, '192.168.1.42');
+    print("\n - Ajout d'une adresse IP : ");
+    if ($user1AjoutIp) {
+      $user1 = $userDAO->getUser($newUserId);
+      print($user1->getIps()[1] === '192.168.1.42' ? "OK" : "FAILED");
+    } else {
+      print("FAILED");
+    }
     $user1login = $userDAO->logUser($user1->getEmail(), 'test-password');
-    print("Authentification d'un utilisateur : ".($user1login != -1 ? "OK" : "FAILED"));
+    print("\n - Authentification d'un utilisateur : ".($user1login != -1 ? "OK" : "FAILED"));
   } else {
     print("FAILED");
   }
