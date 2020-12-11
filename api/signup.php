@@ -37,7 +37,8 @@ if (isset($data)) {
     /*Gestion du formatde la date*/
     $birthdateSplit = explode("-",$birthdate);
     
-    if (strlen($birthdateSplit[0]) != 2) {
+    if (strlen($birthdateSplit[0]) != 4) {
+        var_dump($birthdateSplit);
         $birthdate = $birthdateSplit[2] . "-" . $birthdateSplit[1] . "-" . $birthdateSplit[0];
     }
 
@@ -102,7 +103,7 @@ if (isset($data)) {
         if ($signupOk == -1) {
             echo json_encode([
                 'success' => false,
-                'message' => 'Signup failed !'
+                'message' => 'Signup failed ! An account with this email already exist'
             ]);
         } else {
             echo json_encode([
