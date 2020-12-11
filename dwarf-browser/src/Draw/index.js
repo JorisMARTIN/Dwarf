@@ -7,9 +7,9 @@ import Canvas from '../Canvas';
 class Draw extends Component {
     state = {
         img: null,
-        name: "",
-        description: "",
-        gamemode: "",
+        name: null,
+        description: null,
+        gamemode: null,
         goToCanvas: false,
         loadedIds: [],
         frameId: null,
@@ -61,7 +61,7 @@ class Draw extends Component {
                 pageDesc={this.state.description}
                 refereeImage={this.state.img}
             />
-        ); else if(this.state.name) return (
+        ); else if(this.state.name !== null) return (
             <div className="drawSelector">
                 <h1 className="drawTitle">Select a comic to continue based on the latest frame drawn</h1>
                 {this.state.img ? <img className="drawImage" src={"http://dwarf.jorismartin.fr" + this.state.img} alt={this.state.name} />
