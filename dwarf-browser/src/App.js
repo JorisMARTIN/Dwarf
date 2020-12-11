@@ -61,6 +61,14 @@ export default class App extends Component {
             <E404 />
           </Route>
         </Switch>
+        <div className="footer">
+          <p>© DWARF. Content is available under these licenses.</p>
+          <div>
+            <h3>Infos :</h3>
+            <a href="CGU.pdf">Terms of Service</a>
+            <a href="Confidentialite.pdf">Confidentiality</a>
+          </div>
+        </div>
       </Router>
     )
   }
