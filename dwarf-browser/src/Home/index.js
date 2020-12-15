@@ -80,7 +80,7 @@ class ComicPage extends React.Component {
     }
     
     deletePage = () => {
-        const pageIdToDelete = this.props.pageId;
+        //const pageIdToDelete = this.props.pageId;
         if(window.confirm("Do you realy want to delete this page ?")){
             alert("Et non ca marche pas encore !");
         }

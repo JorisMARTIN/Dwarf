@@ -1,10 +1,56 @@
-import { Component } from 'react';
+import React from 'react';
 import './index.css';
 import Auth from '../components/AuthHelperMethods';
 import withAuth from '../components/withAuth';
 import Canvas from '../Canvas';
 
-class InitDrawing extends Component {
+class TemplateCanvas extends React.Component {
+    constructor(props) {
+        super(props);
+        this.canvasRef = React.createRef();
+    }
+
+    state = {
+        canvasW: 0,
+        canvasH: 0
+    }
+
+    async componentDidMount() {
+        const canvas = this.canvasRef.current;
+        const template = await (await fetch('https://dwarf.jorismartin.fr/cdn/templates/template' + this.props.id + '.json')).json();
+        const ctx = canvas.getContext('2d');
+
+        let max_x = 0;
+        let max_y = 0;
+
+        for (const frame of template) {
+            if (frame.x + frame.w > max_x) max_x = frame.x + frame.w;
+            if (frame.y + frame.h > max_y) max_y = frame.y + frame.h;
+        }
+        
+        this.setState({
+            canvasW: max_x,
+            canvasH: max_y
+        });
+        
+        ctx.fillStyle = "#8E8E93";
+        for (const frame of template) {
+            ctx.rect(frame.x, frame.y, frame.w, frame.h);
+        }
+        ctx.fill();
+    }
+
+    render() {
+        return (
+            <canvas style={{
+                width: 150,
+                height: 150,
+            }} width={this.state.canvasW} height={this.state.canvasH} ref={this.canvasRef} />
+        );
+    }
+}
+
+class InitDrawing extends React.Component {
 
     state = {
         title: "",
@@ -107,16 +153,16 @@ class InitDrawing extends Component {
                         <label className="labelTemplate">Template :</label>
                         <div className="initDrawingRadiosButtons">
                             <div>
-                                <input type="radio" name="template" id="template1" value="0" onChange={this._handleChange} checked />
-                                <label htmlFor="template1">1</label>
+                                <input type="radio" name="template" id="template0" value="0" onChange={this._handleChange} />
+                                <label htmlFor="template0"><TemplateCanvas id="0" /></label>
                             </div>
                             <div>
-                                <input type="radio" name="template" id="template2" value="1" onChange={this._handleChange} disabled />
-                                <label htmlFor="template2">2</label>
+                                <input type="radio" name="template" id="template1" value="1" onChange={this._handleChange} />
+                                <label htmlFor="template1"><TemplateCanvas id="1" /></label>
                             </div>
                             <div>
-                                <input type="radio" name="template" id="template3" value="2" onChange={this._handleChange} disabled />
-                                <label htmlFor="template3">3</label>
+                                <input type="radio" name="template" id="template2" value="2" onChange={this._handleChange} />
+                                <label htmlFor="template2"><TemplateCanvas id="2" /></label>
                             </div>
                         </div>
                     </fieldset>
