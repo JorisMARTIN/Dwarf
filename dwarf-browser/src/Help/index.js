@@ -1,7 +1,7 @@
 import { Component } from 'react';
 import './index.css';
 
-class Help extends Component {
+export default class Help extends Component {
     render(){
         return(
             <div className="help">
@@ -54,5 +54,3 @@ class Help extends Component {
         );
     }
 }
-
-export default withAuth(Help);
