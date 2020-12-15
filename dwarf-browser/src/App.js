@@ -37,7 +37,7 @@ export default class App extends Component {
             <Link className="link" to="/">News</Link>
             <Link className="link" to="/draw">Draw</Link>
             <Link className="link" to="/init">New Page</Link>
-            <Link className="link" to="/user">User</Link>
+            { this.state.logged ? <Link className="link" to="/user">User</Link> : ""}
           </div>
 
           <div className="logComponent">
