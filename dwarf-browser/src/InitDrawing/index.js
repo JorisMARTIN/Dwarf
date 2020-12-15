@@ -101,18 +101,18 @@ class InitDrawing extends React.Component {
             <Canvas {...this.state.initResponse} />
         ); else return (
             <div className="initateDrawingContainer">
-                <h1 className="initateDrawingTitle">Initiate a Drawing</h1>
+                <h1 className="initateDrawingTitle">Créer une BD</h1>
 
                 <form className="initateDrawingForm" >
 
                     <fieldset className="initateDrawingChoseTitle">
-                        <label htmlFor="title" className="labelTitle">Title :</label>
+                        <label htmlFor="title" className="labelTitle">Ttire :</label>
                         <input className="initateDrawingTitleFrame" type="text" maxLength="32" name="title" id="title" value={this.state.title} onChange={this._handleChange} required />
                     </fieldset>
 
                     <fieldset className="initateDrawingGameMode">
                         <div>
-                            <label className="labelTitle">Game Mode :</label>
+                            <label className="labelTitle">Mode de jeu :</label>
                             <div className="initDrawingRadiosButtons">
                                 <div>
                                     <input type="radio" name="gamemode" id="normal" value="0" onChange={this._handleChange} checked />

@@ -105,7 +105,7 @@ class ComicPage extends React.Component {
                         <button type="button" onClick={() => this.handleVoteClick(0)}>Dislike</button>
                     </div> */}
                 </div>
-                    {this.props.userIsAdmin && <button className="homeDeleteAdminButton" type="button" onClick={this.deletePage}>Delete</button>}
+                    {/* {this.props.userIsAdmin && <button className="homeDeleteAdminButton" type="button" onClick={this.deletePage}>Delete</button>} */}
             </div>
         );
     }
@@ -148,14 +148,14 @@ export default class Home extends React.Component {
     render() {
         return (
             <div className="homeAll">
-                <h1 className="homeTitle">Home</h1>
+                <h1 className="homeTitle">Accueil</h1>
                 <div className="homeMain">
                     <InfiniteScroll
                         className="homeDivPlanche"
                         dataLength={this.state.pages.length}
                         next={this.fetchMoreData}
                         hasMore={this.state.hasMoreData}
-                        loader={<h4 className="homeDivPlancheLoader">Loading ...</h4>}
+                        loader={<h4 className="homeDivPlancheLoader">Chargement ...</h4>}
                         // endMessage={<p className="homeDivPlancheLoaderEnd">You have seen all the comics</p>}
                     >
                         {this.state.pages}
