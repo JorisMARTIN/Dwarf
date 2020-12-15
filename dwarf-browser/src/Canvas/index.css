@@ -71,16 +71,16 @@
 }
 
 .canvasDraw {
-    justify-content:space-between
+    justify-content:space-around;
 }
 
 .canvasDraw, .canvasDrawTitle {
     display: flex;
-    flex-direction:column
+    flex-direction:column;
 }
 
 .canvasDrawTitle {
-    justify-content:space-between
+    justify-content:space-between;
 }
 
 .canvasDrawTitle > textarea {

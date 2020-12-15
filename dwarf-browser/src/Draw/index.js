@@ -3,6 +3,7 @@ import withAuth from '../components/withAuth';
 import { Component } from 'react';
 import Auth from '../components/AuthHelperMethods';
 import Canvas from '../Canvas';
+import { Link } from 'react-router-dom';
 
 class Draw extends Component {
     state = {
@@ -63,21 +64,28 @@ class Draw extends Component {
             />
         ); else if(this.state.name !== null) return (
             <div className="drawSelector">
-                <h1 className="drawTitle">Select a comic to continue based on the latest frame drawn</h1>
+                <h1 className="drawTitle">Choisi une BD à continuer</h1>
                 {this.state.img ? <img className="drawImage" src={"https://dwarf.jorismartin.fr" + this.state.img} alt={this.state.name} />
-                : <p className="drawImage">The author hasn't draw the first frame, so feel free to do it yourself !</p>}
+                : <p className="drawImage">L'auteur de cette BD n'as pas dessiné la première case, à toi de la réaliser ...<br></br><i>Tout en respectant les contraintes imposés par l'auteur</i></p>}
                 <div className="drawInfos">
-                    <textarea readOnly disabled className="drawName" value={this.state.name} />
-                    <textarea readOnly disabled className="drawDesc" value={this.state.description} />
+                    <div className="drawInfosPackage">
+                        <label>Titre :</label>
+                        <textarea readOnly disabled className="drawName" value={this.state.name} />
+                    </div>
+                    <div className="drawInfosPackage">
+                        <label>Descritpion :</label>
+                        <textarea readOnly disabled className="drawDesc" value={this.state.description} />
+                    </div>
                     <p className="drawGM">{this.state.gamemode}</p>
                     <p className="drawUser">Auteur : {this.state.user}</p>
                 </div>
-                <button className="drawNext" onClick={this.requestFrame}>Give me another</button>
-                <button className="drawDraw" onClick={this.drawThis}>Draw !</button>
+                <button className="drawNext" onClick={this.requestFrame}>Un autre !</button>
+                <button className="drawDraw" onClick={this.drawThis}>Dessiner !</button>
             </div>
         ); else return (
-            <div>
-                <p className="drawNothing">There is nothing to draw ! :(</p>
+            <div className="drawNothingToDraw">
+                <p className="drawNothing">Il n'y a pas de dessin à continuer.</p>
+                <Link className="drawStartNewPage" to="/init">Commence une nouvelle BD !</Link>
             </div>
         );
     }

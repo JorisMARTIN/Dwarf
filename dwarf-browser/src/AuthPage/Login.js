@@ -39,7 +39,7 @@ export default class Login extends Component {
     }
 
     refresh = () =>{
-        window.location.reload();
+        setTimeout(() => { window.location.reload(); }, 300);
     }
 
     render() {
@@ -48,10 +48,10 @@ export default class Login extends Component {
         } else {
             return (
                 <div className="authPageLogin">
-                    <h1>Login</h1>
+                    <h1>Connexion</h1>
                     <form className="authPageLoginForm">
                         <div className="authPageLoginEmail">
-                            <label htmlFor="email">Email :</label>
+                            <label htmlFor="email">E-mail :</label>
                             <input
                                 required
                                 id="email"
@@ -62,7 +62,7 @@ export default class Login extends Component {
                             />
                         </div>
                         <div className="authPageLoginPwd">
-                            <label htmlFor="pwd">Password :</label>
+                            <label htmlFor="pwd">Mot de passe :</label>
                             <input
                                 required
                                 id="pwd"
@@ -73,8 +73,8 @@ export default class Login extends Component {
                             />
                         </div>
                         <div className="authPageLoginBottom">
-                            <Link className="authPageLoginForgotPwd" to="/">Forgot password</Link>
-                            <button onClick={this.handleFormSubmit}>Log in</button>
+                            {/* <Link className="authPageLoginForgotPwd" to="/">Forgot password</Link> */}
+                            <button onClick={this.handleFormSubmit}>Connexion</button>
                         </div>
                     </form>
                 </div>

@@ -113,20 +113,17 @@ class Canvas extends React.Component {
             <div>
                 <div className="canvasMain">
                     <div className="canvasToolsLeft">
-                        <div className="canvasToolsLeftDropDown">
-                            <div></div>
-                            <div></div>
-                            <div></div>
-                        </div>
+                        <p>Image précédente :</p>
                         <div className="canvasToolsLeftImage">
                             {this.props.refereeImage && <img onClick={this.copyRefereeAsBG} src={"https://dwarf.jorismartin.fr" + this.props.refereeImage} alt="referee frame" />}
                         </div>
+                        <p>Outils :</p>
                         <div className="canvasToolsLeftOthersTools">
                             <button
                                 className="canvasToolsLeftUndo"
-                                onClick={() => this.canvas.current.undo()}>Undo (CTRL + Z)</button>
+                                onClick={() => this.canvas.current.undo()}>Annuler (CTRL + Z)</button>
                             <div className="canvasToolsLeftBrush">
-                                <label>Brush-Radius:</label>
+                                <label>Taille du pinceau :</label>
                                 <input
                                     type="range"
                                     min="1"
@@ -138,7 +135,7 @@ class Canvas extends React.Component {
                                 />
                             </div>
                             <div className="canvasToolsLeftLazy">
-                                <label>Lazy-Radius:</label>
+                                <label>Traçage assité :</label>
                                 <input
                                     type="range"
                                     min="1"
@@ -153,7 +150,7 @@ class Canvas extends React.Component {
                         <button
                             className="canvasToolsLeftSubmit"
                             onClick={this.handleSubmit}
-                            disabled={this.state.blockSubmit}>Submit
+                            disabled={this.state.blockSubmit}>Envoyer
                         </button>
                     </div>
                     <div className="canvasDraw"
@@ -166,6 +163,7 @@ class Canvas extends React.Component {
                             <textarea disabled readOnly value={this.props.pageName} />
                             <textarea disabled readOnly value={this.props.pageDesc} />
                         </div>
+
                         <CanvasDraw
                             className="canvasDrawSection"
                             ref={this.canvas}
@@ -179,11 +177,6 @@ class Canvas extends React.Component {
                         />
                     </div>
                     <div className="canvasToolsRight">
-                        <div className="canvasToolsRightDropDown">
-                            <div></div>
-                            <div></div>
-                            <div></div>
-                        </div>
                         <CirclePicker
                             className="canvasToolsRightColorPicker"
                             color={this.state.color}
