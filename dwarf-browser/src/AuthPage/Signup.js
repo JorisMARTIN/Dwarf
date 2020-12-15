@@ -59,7 +59,7 @@ export default class Signup extends Component {
     }
 
     refresh = () =>{
-        window.location.reload();
+        setTimeout(() => { window.location.reload(); }, 300);
     }
 
     render() {
@@ -68,11 +68,11 @@ export default class Signup extends Component {
         } else {
             return (
             <div className="authPageSignup">
-                <h1>Create an account</h1>
+                <h1>Créer un compte</h1>
                 <form className="authPageSignupForm">
                     <div className="authPageSignupDiv">
                         <div className="authPageSignupUserName">
-                            <label htmlFor="username">Username :</label>
+                            <label htmlFor="username">Pseudo :</label>
                             <input
                                 required
                                 id="username"
@@ -83,7 +83,7 @@ export default class Signup extends Component {
                             />
                         </div>
                         <div className="authPageSignupDate">
-                            <label htmlFor="date">Birthdate :</label>
+                            <label htmlFor="date">Date de naissance :</label>
                             <input
                                 required
                                 id="date"
@@ -93,51 +93,51 @@ export default class Signup extends Component {
                             />
                         </div>
                         <div className="authPageSignupEmail">
-                            <label htmlFor="emailS">Email :</label><br></br>
+                            <label htmlFor="emailS">E-mail :</label><br></br>
                             <input
                                 required
                                 id="emailS"
-                                placeholder="Email"
+                                placeholder="E-mail"
                                 name="email"
                                 type="email"
                                 onChange={this._handleChange}
                             />
                         </div>
                         <div className="authPageSignupConfEmail">
-                            <label htmlFor="email2">Confirm Email :</label><br></br>
+                            <label htmlFor="email2">Confirmer e-mail :</label><br></br>
                             <input
                                 required
                                 id="email2"
-                                placeholder="Confirm Email"
+                                placeholder="Confirmer e-mail"
                                 name="emailConfirm"
                                 type="email"
                                 onChange={this._handleChange}
                             />
                         </div>
                         <div className="authPageSignupPwd">
-                            <label htmlFor="pwdS">Password :</label><br></br>
+                            <label htmlFor="pwdS">Mot de passe :</label><br></br>
                             <input
                                 required
                                 id="pwdS"
-                                placeholder="Password"
+                                placeholder="Mot de passe"
                                 name="password"
                                 type="password"
                                 onChange={this._handleChange}
                             />
                         </div>
                         <div className="authPageSignupPwd2">
-                            <label htmlFor="pwd2">Confirm Password :</label><br></br>
+                            <label htmlFor="pwd2">Confirmer mot de passe :</label><br></br>
                             <input
                                 required
                                 id="pwd2"
-                                placeholder="Confirm Password"
+                                placeholder="Confirmer mot de passe"
                                 name="passwordConfirm"
                                 type="password"
                                 onChange={this._handleChange}
                             />
                         </div>
                     </div>
-                    <button onClick={this.handleFormSubmit}>Create account</button>
+                    <button onClick={this.handleFormSubmit}>Créer un compte</button>
                 </form>
             </div>
             );

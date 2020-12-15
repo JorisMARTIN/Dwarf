@@ -34,15 +34,15 @@ export default class App extends Component {
           <Link className="dwarf" to="/">Dwarf</Link>
           
           <div className="componentsMenu">
-            <Link className="link" to="/">News</Link>
-            <Link className="link" to="/draw">Draw</Link>
-            <Link className="link" to="/init">New Page</Link>
+            <Link className="link" to="/">Accueil</Link>
+            <Link className="link" to="/draw">Dessiner !</Link>
+            <Link className="link" to="/init">Nouvelle BD</Link>
             {/* this.state.logged ? <Link className="link" to="/user">User</Link> : ""*/}
           </div>
 
           <div className="logComponent">
             {this.state.logged ? <button className="log" onClick={this.logout}>Log out</button> 
-            : <Link className="log" to="/auth">Log in / Sign up</Link>}
+            : <Link className="log" to="/auth">Connexion / Inscription</Link>}
           </div>
         </div>
 
@@ -61,13 +61,15 @@ export default class App extends Component {
             <E404 />
           </Route>
         </Switch>
+
         <div className="footer">
-          <p>© DWARF. Content is available under these licenses.</p>
-          <div>
-            <h3>Infos :</h3>
-            <a href="CGU.pdf">Terms of Service</a>
-            <a href="Confidentialite.pdf">Confidentiality</a>
-          </div>
+          <p>Dwarf</p>
+          <p>{new Date().getFullYear()} &#169; Tous droits réservés.</p>
+          {/* <div>
+            <h3>Information :</h3>
+            <a href="CGU.pdf">Condition d'utilisation</a>
+            [<a href="Confidentialite.pdf">Confidentialité</a>
+          </div> */}
         </div>
       </Router>
     )
