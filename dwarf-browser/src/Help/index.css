@@ -1,3 +1,11 @@
 .help{
-/* nothing */
+
+    width: 80%;
+    margin: auto;
+    color: var(--PrimaryText);
+    text-align: center;
+}
+
+.help article{
+    text-align: left;
 }
