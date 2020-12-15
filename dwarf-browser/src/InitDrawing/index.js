@@ -153,7 +153,7 @@ class InitDrawing extends React.Component {
                         <label className="labelTemplate">Template :</label>
                         <div className="initDrawingRadiosButtons">
                             <div>
-                                <input type="radio" name="template" id="template0" value="0" onChange={this._handleChange} checked />
+                                <input type="radio" name="template" id="template0" value="0" onChange={this._handleChange} />
                                 <label htmlFor="template0"><TemplateCanvas id="0" /></label>
                             </div>
                             <div>
