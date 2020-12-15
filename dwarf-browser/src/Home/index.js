@@ -149,6 +149,7 @@ export default class Home extends React.Component {
         return (
             <div className="homeAll">
                 <h1 className="homeTitle">Home</h1>
+                <h2>Salut</h2>
                 <div className="homeMain">
                     <InfiniteScroll
                         className="homeDivPlanche"
