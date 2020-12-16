@@ -62,7 +62,7 @@ class FrameDAO extends DAO {
    * 
    * @return int ID of the new frame | -1 = ❌
    */
-  function putFrame(bool $drawable, bool $done, int $width, int $height, int $pageId, int $userId) : int {
+  function putFrame(bool $drawable, bool $done, int $width, int $height, int $pageId, ?int $userId) : int {
     $query = 'INSERT INTO "Frame" (creationDate, drawable, done, width, height, pageId, userId)
               VALUES (CURRENT_TIMESTAMP, :drawable, :done, :width, :height, :pageId, :userId)
               RETURNING frameid';
@@ -117,7 +117,7 @@ class FrameDAO extends DAO {
   }
 
   /**
-   * Change the done state of a frame, if the frame is doned
+   * Change the done state of a frame, if the frame is done
    * 
    * @param int $frameId ID of the frame
    * @param bool $done The new done state
@@ -129,6 +129,22 @@ class FrameDAO extends DAO {
     return $this->db->prepare($query)->execute([
       ':done' => $done ? 't' : 'f',
       ':frameId' => $frameId
+    ]);
+  }
+
+  /**
+   * Set the author of a frame
+   * 
+   * @param int $frameId ID of the frame
+   * @param int $userId The author ID
+   * 
+   * @return bool true = ✅ | false = ❌
+   */
+  function setAuthor(int $frameId, int $userId) : bool {
+    $query = 'UPDATE "Frame" SET userid = :userid WHERE frameid = :frameid';
+    return $this->db->prepare($query)->execute([
+      ':userid' => $userId,
+      ':frameid' => $frameId
     ]);
   }
 
