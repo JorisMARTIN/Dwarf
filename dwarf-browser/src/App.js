@@ -43,7 +43,7 @@ export default class App extends Component {
           </div>
 
           <div className="logComponent">
-            {this.state.logged ? <button className="log" onClick={this.logout}>Log out</button> 
+            {this.state.logged ? <button className="log" onClick={this.logout}>Déconnexion</button> 
             : <Link className="log" to="/auth">Connexion / Inscription</Link>}
           </div>
         </div>
