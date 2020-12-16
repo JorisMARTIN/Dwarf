@@ -73,11 +73,15 @@ input[type=text] {
     position: absolute;
     bottom: -100px;
     width: 100%;
-    padding: 1em;
+    padding: 1em 0em 1em 0em;
     color: var(--SecondaryText);
     background: var(--CardBackground);
     box-shadow: 0 5px 10px 10px var(--Shadow);
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+.footer p{
+    margin: 5px;
 }
