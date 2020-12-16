@@ -23,11 +23,14 @@ class TemplateCanvas extends React.Component {
         let max_x = 0;
         let max_y = 0;
 
+        const margeExt = 50;
+        const margeInt = 30;
+
         for (const frame of template) {
-            if (frame.x + frame.w > max_x) max_x = frame.x + frame.w;
-            if (frame.y + frame.h > max_y) max_y = frame.y + frame.h;
+            if (frame.x + frame.w > max_x) max_x = frame.x + frame.w + margeExt;
+            if (frame.y + frame.h > max_y) max_y = frame.y + frame.h + margeExt;
         }
-        
+
         this.setState({
             canvasW: max_x,
             canvasH: max_y
@@ -35,12 +38,12 @@ class TemplateCanvas extends React.Component {
 
         ctx.fillStyle = "#f2f2f7";
         ctx.fillRect(0, 0, max_x, max_y);
-        
+
         ctx.fillStyle = "#8E8E93";
         ctx.strokeStyle = "#1c1c1e";
         ctx.lineWidth = 20;
         for (const frame of template) {
-            ctx.rect(frame.x + 30, frame.y + 30, frame.w - 60, frame.h - 60);
+            ctx.rect(frame.x + margeInt + margeExt / 2, frame.y + margeInt + margeExt / 2, frame.w - margeInt * 2, frame.h - margeInt * 2);
         }
         ctx.fill();
         ctx.stroke();
@@ -49,7 +52,6 @@ class TemplateCanvas extends React.Component {
     render() {
         return (
             <canvas style={{
-                border: '5px solid #f2f2f7',
                 width: 150,
                 height: 150,
             }} width={this.state.canvasW} height={this.state.canvasH} ref={this.canvasRef} />
@@ -79,7 +81,7 @@ class InitDrawing extends React.Component {
         if (this.state.titre == null) {
             alert("Il manque le titre !");
             /*Il faut implémenter un bon CSS !*/
-        } else if (this.state.description == "") {
+        } else if (this.state.description === "") {
             alert("Il manque la description !");
         } else {
             Auth.fetch("initdrawing.php", {
@@ -129,7 +131,7 @@ class InitDrawing extends React.Component {
                             <label className="labelTitle">Mode de jeu :</label>
                             <div className="initDrawingRadiosButtons">
                                 <div>
-                                    <input type="radio" name="gamemode" id="normal" value="0" onChange={this._handleChange} checked />
+                                    <input type="radio" name="gamemode" id="normal" value="0" onChange={this._handleChange} defaultChecked />
                                     <label htmlFor="normal">Normal</label>
                                 </div>
                                 <div>
@@ -146,14 +148,14 @@ class InitDrawing extends React.Component {
 
                     <fieldset className="initateDrawingDescription">
                         <label htmlFor="description" className="labelTitle">Description :</label>
-                        <textarea name="description" rows="5" cols="60" maxLength="512" id="description" onChange={this._handleChange}></textarea>
+                        <textarea name="description" rows="5" maxLength="512" id="description" onChange={this._handleChange}></textarea>
                     </fieldset>
 
                     <fieldset className="initateDrawingGameType">
                         <label className="labelTitle">Game type :</label>
                         <div className="initDrawingRadiosButtons">
                             <div>
-                                <input type="radio" name="gametype" id="public" value="0" onChange={this._handleChange} checked />
+                                <input type="radio" name="gametype" id="public" value="0" onChange={this._handleChange} defaultChecked />
                                 <label htmlFor="public">Public</label>
                             </div>
                             <div>
@@ -164,7 +166,7 @@ class InitDrawing extends React.Component {
                     </fieldset>
 
                     <fieldset className="initateDrawingTemplate">
-                        <label className="labelTemplate">Template :</label>
+                        <label className="labelTemplate">Type de planche :</label>
                         <div className="initDrawingRadiosButtons">
                             <div>
                                 <input type="radio" name="template" id="template0" value="0" onChange={this._handleChange} defaultChecked />
