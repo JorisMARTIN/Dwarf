@@ -73,3 +73,36 @@
     font-weight: 600;
     border:none
 }
+
+.drawNothingToDraw {
+    width: 60%;
+    margin: auto;
+    background-color: var(--CardBackground);
+    box-shadow: 0 5px 10px 10px var(--Shadow);
+    border-radius: 25px;
+    padding: 2%;
+    /* text-align: center; */
+}
+
+.drawNothingToDrawTitle{
+    text-align: center;
+    font-weight: 600;
+    color: var(--PrimaryText);
+    font-size: 2em;
+}
+
+.drawStartNewPage {
+    text-align: center;
+    padding: .5em 1em;
+    text-decoration: none;
+    color: var(--PrimaryText);
+    font-size: 1.2em;
+    font-weight: 600;
+}
+
+.drawStartNewPage:hover {
+    background:var(--NavbarHover);
+    -webkit-backdrop-filter: saturate(1.8) blur(20px);
+    backdrop-filter: saturate(1.8) blur(20px);
+    border-radius: 25px;
+}

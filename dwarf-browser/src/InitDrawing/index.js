@@ -32,17 +32,24 @@ class TemplateCanvas extends React.Component {
             canvasW: max_x,
             canvasH: max_y
         });
+
+        ctx.fillStyle = "#f2f2f7";
+        ctx.fillRect(0, 0, max_x, max_y);
         
         ctx.fillStyle = "#8E8E93";
+        ctx.strokeStyle = "#1c1c1e";
+        ctx.lineWidth = 20;
         for (const frame of template) {
-            ctx.rect(frame.x, frame.y, frame.w, frame.h);
+            ctx.rect(frame.x + 30, frame.y + 30, frame.w - 60, frame.h - 60);
         }
         ctx.fill();
+        ctx.stroke();
     }
 
     render() {
         return (
             <canvas style={{
+                border: '5px solid #f2f2f7',
                 width: 150,
                 height: 150,
             }} width={this.state.canvasW} height={this.state.canvasH} ref={this.canvasRef} />
@@ -106,7 +113,7 @@ class InitDrawing extends React.Component {
                 <form className="initateDrawingForm" >
 
                     <fieldset className="initateDrawingChoseTitle">
-                        <label htmlFor="title" className="labelTitle">Ttire :</label>
+                        <label htmlFor="title" className="labelTitle">Titre :</label>
                         <input className="initateDrawingTitleFrame" type="text" maxLength="32" name="title" id="title" value={this.state.title} onChange={this._handleChange} required />
                     </fieldset>
 

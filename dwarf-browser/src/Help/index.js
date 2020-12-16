@@ -5,8 +5,8 @@ export default class Help extends Component {
     render(){
         return(
             <div className="help">
+                <h1 className="helpTitle">Aide</h1>
                 <section className="helpMain">
-                    <h1>Aide</h1>
                     <article className="helpWhatIsIt">
                         <h2>Qu'est ce que DWARF ?</h2>
                         <p>DWARF est un jeu de dessin collaboratif.<br/>

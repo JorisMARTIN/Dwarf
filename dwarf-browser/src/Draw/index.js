@@ -79,13 +79,17 @@ class Draw extends Component {
                     <p className="drawGM">{this.state.gamemode}</p>
                     <p className="drawUser">Auteur : {this.state.user}</p>
                 </div>
-                <button className="drawNext" onClick={this.requestFrame}>Un autre !</button>
+                <button className="drawNext" onClick={this.requestFrame}>Une autre !</button>
                 <button className="drawDraw" onClick={this.drawThis}>Dessiner !</button>
             </div>
         ); else return (
-            <div className="drawNothingToDraw">
-                <p className="drawNothing">Il n'y a pas de dessin à continuer.</p>
-                <Link className="drawStartNewPage" to="/init">Commence une nouvelle BD !</Link>
+            <div>
+                <h1 className="drawNothingToDrawTitle">Rien à dessiner pour le moment</h1>
+                <div className="drawNothingToDraw">
+                    <p className="drawNothing">Desolé, il n'y a <b>aucune planche de commencé</b>, tu ne peux donc pas continuer de dessin.</p>
+                    <p><b>À toi de commencer</b> une nouvelle BD !<Link className="drawStartNewPage" to="/init">Nouvelle BD</Link></p>
+                    <p>Ou retourne voir les BD déjà réalisées   <Link className="drawStartNewPage" to="/">Accueil</Link></p>
+                </div>
             </div>
         );
     }
