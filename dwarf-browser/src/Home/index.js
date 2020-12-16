@@ -8,6 +8,9 @@ class ComicPage extends React.Component {
     constructor(props) {
         super(props);
         this.canvasRef = React.createRef();
+
+        this.authors = "Authors :\n";
+        for (const author of this.props.authors) this.authors += author + "\n";
     }
 
     state = {
@@ -78,10 +81,10 @@ class ComicPage extends React.Component {
             this.setState({ fullscreen: true });
         }
     }
-    
+
     deletePage = () => {
         //const pageIdToDelete = this.props.pageId;
-        if(window.confirm("Do you realy want to delete this page ?")){
+        if (window.confirm("Do you realy want to delete this page ?")) {
             alert("Et non ca marche pas encore !");
         }
     }
@@ -92,12 +95,12 @@ class ComicPage extends React.Component {
             <div className="homePlancheWrapper">
                 <div className={`homePlanche ${this.state.rate === 1 && "plancheLike"} ${this.state.rate === 0 && "plancheDislike"}`}>
                     <div className="homePlancheTop">
-                        <canvas onClick={this.toggleFullscreen} className="homePlancheImg" ref={this.canvasRef} width={this.state.canvasW} height={this.state.canvasH} />
+                        <canvas onClick={this.toggleFullscreen} title={this.authors} className="homePlancheImg" ref={this.canvasRef} width={this.state.canvasW} height={this.state.canvasH} />
                         <div className="homePlancheTopInfos">
                             <textarea readOnly disabled className="homeName" value={this.props.name} />
                             <textarea readOnly disabled className="homeDescri" value={this.props.description} />
                             <p className="homeMode">{this.props.gamemode}</p>
-                            <p className="homeUser">Auteur : {this.props.user}</p>
+                            <p className="homeUser" title={this.authors}>Auteur : {this.props.user}</p>
                         </div>
                     </div>
                     {/* <div className="homePlancheBottom">
@@ -105,7 +108,7 @@ class ComicPage extends React.Component {
                         <button type="button" onClick={() => this.handleVoteClick(0)}>Dislike</button>
                     </div> */}
                 </div>
-                    {/* {this.props.userIsAdmin && <button className="homeDeleteAdminButton" type="button" onClick={this.deletePage}>Delete</button>} */}
+                {/* {this.props.userIsAdmin && <button className="homeDeleteAdminButton" type="button" onClick={this.deletePage}>Delete</button>} */}
             </div>
         );
     }
@@ -132,7 +135,7 @@ export default class Home extends React.Component {
         }).then(res => {
             this.setState({
                 pages: this.state.pages.concat(res.pages.map((page, i) =>
-                    <ComicPage key={i + this.state.pages.length} {...page} userIsAdmin={res.userIsAdmin}/>
+                    <ComicPage key={i + this.state.pages.length} {...page} userIsAdmin={res.userIsAdmin} />
                 )),
                 lastPageLoadedId: res.lastPageLoadedId,
                 hasMoreData: !res.endReached,
@@ -156,7 +159,7 @@ export default class Home extends React.Component {
                         next={this.fetchMoreData}
                         hasMore={this.state.hasMoreData}
                         loader={<h4 className="homeDivPlancheLoader">Chargement ...</h4>}
-                        // endMessage={<p className="homeDivPlancheLoaderEnd">You have seen all the comics</p>}
+                    // endMessage={<p className="homeDivPlancheLoaderEnd">You have seen all the comics</p>}
                     >
                         {this.state.pages}
                     </InfiniteScroll>

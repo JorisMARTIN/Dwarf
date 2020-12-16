@@ -50,9 +50,11 @@ if(!empty($data)) {
         $user = $userDAO->getUser($p->getOwnerId());
 
         $images = [];
+        $authors = [];
         $frames = $frameDAO->getFrames($p->getId());
         foreach($frames as $frame) {
             $images[] = $frame->getImagePtr();
+            $authors[] = $userDAO->getUser($frame->getOwnerId())->getNickname();
         }
 
         $out['pages'][$i] = [
@@ -62,6 +64,7 @@ if(!empty($data)) {
             'gamemode' => ($p->getGameMode() == 0 ? "Normal" : "Reverse"),
             'date' => $p->getCreationDate(),
             'images' => $images,
+            'authors' => $authors,
             'user' => $user->getNickname(),
             'template' => $p->getTemplateType(),
         ];
