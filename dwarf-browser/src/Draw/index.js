@@ -79,7 +79,7 @@ class Draw extends Component {
                     <p className="drawGM">{this.state.gamemode}</p>
                     <p className="drawUser">Auteur : {this.state.user}</p>
                 </div>
-                <button className="drawNext" onClick={this.requestFrame}>Un autre !</button>
+                <button className="drawNext" onClick={this.requestFrame}>Une autre !</button>
                 <button className="drawDraw" onClick={this.drawThis}>Dessiner !</button>
             </div>
         ); else return (
