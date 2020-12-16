@@ -55,13 +55,12 @@ if (!empty($data) && isset($data->loadedIds)) {
 
         if(array_key_exists($i, $frames)) {
             $frame = $frames[$i];
-            $user = $userDAO->getUser($frame->getOwnerId());
 
             if (array_key_exists($refIndex, $frames)) {
                 $out['page']['imagePtr'] = $frames[$refIndex]->getImagePtr();
+                $out['page']['user'] = $userDAO->getUser($frames[$refIndex]->getOwnerId())->getNickname();
             }
 
-            $out['page']['user'] = $user->getNickname();
             $out['page']['frameId'] = $frame->getId();
             $out['page']['frameWidth'] = $frame->getWidth();
             $out['page']['frameHeight'] = $frame->getHeight();
