@@ -17,6 +17,10 @@
     padding:2em 0
 }
 
+.homeDivPlancheLoader {
+    color: var(--PrimaryText);
+}
+
 .homePlancheWrapper {
     padding: 2em;
 }

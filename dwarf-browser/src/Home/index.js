@@ -9,8 +9,16 @@ class ComicPage extends React.Component {
         super(props);
         this.canvasRef = React.createRef();
 
-        this.authors = "Authors :\n";
-        for (const author of this.props.authors) this.authors += author + "\n";
+        const authors = [...this.props.authors.reduce((p, c) => p.set(c, true), new Map()).keys()];
+        this.authors = "Auteur" + (authors.length > 1 ? "s" : "") + " : ";
+        this.authorsTitle = this.authors + "\n";
+
+        for (const author of authors) {
+            this.authors += author + ", ";
+            this.authorsTitle += author + "\n";
+        }
+
+        this.authors = this.authors.slice(0, -2);
     }
 
     state = {
@@ -95,12 +103,12 @@ class ComicPage extends React.Component {
             <div className="homePlancheWrapper">
                 <div className={`homePlanche ${this.state.rate === 1 && "plancheLike"} ${this.state.rate === 0 && "plancheDislike"}`}>
                     <div className="homePlancheTop">
-                        <canvas onClick={this.toggleFullscreen} title={this.authors} className="homePlancheImg" ref={this.canvasRef} width={this.state.canvasW} height={this.state.canvasH} />
+                        <canvas onClick={this.toggleFullscreen} title={this.authorsTitle} className="homePlancheImg" ref={this.canvasRef} width={this.state.canvasW} height={this.state.canvasH} />
                         <div className="homePlancheTopInfos">
                             <textarea readOnly disabled className="homeName" value={this.props.name} />
                             <textarea readOnly disabled className="homeDescri" value={this.props.description} />
                             <p className="homeMode">{this.props.gamemode}</p>
-                            <p className="homeUser" title={this.authors}>Auteur : {this.props.user}</p>
+                            <p className="homeUser">{this.authors}</p>
                         </div>
                     </div>
                     {/* <div className="homePlancheBottom">

@@ -14,7 +14,7 @@ $frameDAO = new FrameDAO();
 
 $data = json_decode(file_get_contents("php://input"));
 
-if(!empty($data)) {
+if (!empty($data)) {
     if ($data->lastPageLoadedId == -1) {
         $lastId = ($pageDAO->getLastPageId() == -1) ? 0 : $pageDAO->getLastPageId();
     } else {
@@ -28,12 +28,12 @@ if(!empty($data)) {
     $endReached = count($pages) != 6;
 
 
-    // Check if the current user, if he is connect, if he is admin
+    // Check if the current user is connected and is admin
 
     $userId = tokenToUserId();
 
-    if($userId == -1) $userIsAdmin = false;
-    else{
+    if ($userId == -1) $userIsAdmin = false;
+    else {
         $userIsAdmin = $userDAO->getUser($userId)->isAdmin();
     }
 
@@ -50,9 +50,10 @@ if(!empty($data)) {
         $user = $userDAO->getUser($p->getOwnerId());
 
         $images = [];
-        $authors = [];
+        $authors = [$user->getNickname()];
+
         $frames = $frameDAO->getFrames($p->getId());
-        foreach($frames as $frame) {
+        foreach ($frames as $frame) {
             $images[] = $frame->getImagePtr();
             $authors[] = $userDAO->getUser($frame->getOwnerId())->getNickname();
         }
@@ -65,11 +66,9 @@ if(!empty($data)) {
             'date' => $p->getCreationDate(),
             'images' => $images,
             'authors' => $authors,
-            'user' => $user->getNickname(),
             'template' => $p->getTemplateType(),
         ];
     }
-
 } else {
     $out = [];
 }
