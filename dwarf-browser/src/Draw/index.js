@@ -30,7 +30,7 @@ class Draw extends Component {
             if(res && res.page != null) {
                 this.setState({
                     loadedIds: res.loadedIds,
-                    // name: res.page.name,
+                    name: res.page.name,
                     description: res.page.description,
                     gamemode: res.page.gamemode,
                     img: res.page.imagePtr,
