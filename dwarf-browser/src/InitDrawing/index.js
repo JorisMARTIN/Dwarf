@@ -76,31 +76,38 @@ class InitDrawing extends React.Component {
     handleFormSubmit = (e) => {
         e.preventDefault();
 
-        Auth.fetch("initdrawing.php", {
-            method: 'POST',
-            body: JSON.stringify({
-                title: this.state.title,
-                gamemode: this.state.gamemode,
-                description: this.state.description,
-                template: this.state.template,
-                gametype: this.state.gametype
-            })
-        }).then(res => {
-            if (res.frameId && res.frameId !== -1) {
-                this.setState({
-                    initResponse: {
-                        frameId: res.frameId,
-                        frameWidth: res.width,
-                        frameHeight: res.height,
-                        pageName: res.pageName,
-                        pageGM: res.gameMode,
-                        pageDesc: res.description,
-                    }
-                });
-            } else {
-                alert("Erreur dans la création de la page");
-            }
-        });
+        if (this.state.titre == "") {
+            alert("Il manque le titre !");
+            /*Il faut implémenter un bon CSS !*/
+        } else if (this.state.description == "") {
+            alert("Il manque la description !");
+        } else {
+            Auth.fetch("initdrawing.php", {
+                method: 'POST',
+                body: JSON.stringify({
+                    title: this.state.title,
+                    gamemode: this.state.gamemode,
+                    description: this.state.description,
+                    template: this.state.template,
+                    gametype: this.state.gametype
+                })
+            }).then(res => {
+                if (res.frameId && res.frameId !== -1) {
+                    this.setState({
+                        initResponse: {
+                            frameId: res.frameId,
+                            frameWidth: res.width,
+                            frameHeight: res.height,
+                            pageName: res.pageName,
+                            pageGM: res.gameMode,
+                            pageDesc: res.description,
+                        }
+                    });
+                } else {
+                    alert("Erreur dans la création de la page");
+                }
+            });
+        }
     }
 
     render() {
@@ -160,7 +167,7 @@ class InitDrawing extends React.Component {
                         <label className="labelTemplate">Template :</label>
                         <div className="initDrawingRadiosButtons">
                             <div>
-                                <input type="radio" name="template" id="template0" value="0" onChange={this._handleChange} />
+                                <input type="radio" name="template" id="template0" value="0" onChange={this._handleChange} defaultChecked />
                                 <label htmlFor="template0"><TemplateCanvas id="0" /></label>
                             </div>
                             <div>
