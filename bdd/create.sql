@@ -15,7 +15,7 @@ creationDate timestamp NOT NULL,
 name varchar(32) NOT NULL,
 description varchar(512),
 gameMode int CHECK (gameMode >= 0 and gameMode <= 2) DEFAULT 0,
-template int CHECK (template >= 0 and template <= 0) DEFAULT 0,
+template int CHECK (template >= 0 and template <= 2) DEFAULT 0,
 completed boolean DEFAULT FALSE,
 userId int NOT NULL REFERENCES "User"(userId),
 deleted boolean DEFAULT FALSE -- Edited by a trigger
