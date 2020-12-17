@@ -59,7 +59,7 @@ export default class Signup extends Component {
     }
 
     refresh = () =>{
-        setTimeout(() => { window.location.reload(); }, 300);
+        setTimeout(() => { window.location.reload(); }, 400);
     }
 
     render() {

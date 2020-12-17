@@ -68,16 +68,19 @@ class Draw extends Component {
                 {this.state.img ? <img className="drawImage" src={"https://dwarf.jorismartin.fr" + this.state.img} alt={this.state.name} />
                 : <p className="drawImage">L'auteur de cette BD n'as pas dessiné la première case, à toi de la réaliser ...<br></br><i>Tout en respectant les contraintes imposés par l'auteur</i></p>}
                 <div className="drawInfos">
-                    <div className="drawInfosPackage">
-                        <label>Titre :</label>
-                        <textarea readOnly disabled className="drawName" value={this.state.name} />
+                    <div className="drawInfosText">
+                        <div className="drawInfosTextPackage">
+                            <label>Titre :</label>
+                            <textarea readOnly disabled className="drawName" value={this.state.name} />
+                        </div>
+                        <div className="drawInfosTextPackage">
+                            <label>Description :</label>
+                            <textarea readOnly disabled className="drawDesc" value={this.state.description} />
+                        </div>
                     </div>
-                    <div className="drawInfosPackage">
-                        <label>Descritpion :</label>
-                        <textarea readOnly disabled className="drawDesc" value={this.state.description} />
-                    </div>
+
                     <p className="drawGM">{this.state.gamemode}</p>
-                    <p className="drawUser">Auteur : {this.state.user}</p>
+                    <p className="drawUser"><span>Auteur :</span> {this.state.user}</p>
                 </div>
                 <button className="drawNext" onClick={this.requestFrame}>Une autre !</button>
                 <button className="drawDraw" onClick={this.drawThis}>Dessiner !</button>

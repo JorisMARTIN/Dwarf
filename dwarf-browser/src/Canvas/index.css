@@ -18,12 +18,23 @@
     flex-direction:column
 }
 
+
 .canvasToolsLeftImage, .canvasToolsLeftOthersTools {
     margin-bottom: 2em;
     background: var(--Background2);
     height: 40%;
     border-radius: 25px;
-    display:flex
+    display:flex;
+    padding-bottom: 1em;
+}
+
+.canvasToolsLeftImage {
+    flex-direction: column;
+    align-items: center;
+    height: auto;
+}
+.canvasToolsLeftImage img {
+    width: 50%;
 }
 
 .canvasToolsLeftOthersTools {
@@ -40,23 +51,30 @@
     color: #f2f2f7;
     font-size: .8em;
     font-weight: 600;
-    border:none
+    border:none;
+}
+
+.canvasToolsLeftBrush, .canvasToolsLeftLazy{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .canvasToolsLeftBrush {
-    text-align:center
+    text-align:center;
+    margin-bottom: 0.2em;
 }
 
 .canvasToolsLeftBrush > input {
-    width:66%
+    width:66%;
 }
 
 .canvasToolsLeftLazy {
-    text-align:center
+    text-align:center;
 }
 
 .canvasToolsLeftLazy > input {
-    width:66%
+    width:66%;
 }
 
 .canvasToolsLeftSubmit {
@@ -67,7 +85,7 @@
     border-radius: 25px;
     font-size: .8em;
     font-weight: 600;
-    border:none
+    border:none;
 }
 
 .canvasDraw {

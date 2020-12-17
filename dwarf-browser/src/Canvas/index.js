@@ -16,6 +16,8 @@ class Canvas extends React.Component {
         "#ffd60a", // jaune
         "#8944ab", // violet
         "#ff9f0a", // orange
+        "#A04000", // marron
+        "#424949", // gris
     ]
 
     state = {
@@ -113,8 +115,8 @@ class Canvas extends React.Component {
             <div>
                 <div className="canvasMain">
                     <div className="canvasToolsLeft">
-                        <p>Image précédente :</p>
                         <div className="canvasToolsLeftImage">
+                            <p>Image précédente :</p>
                             {this.props.refereeImage && <img onClick={this.copyRefereeAsBG} src={"https://dwarf.jorismartin.fr" + this.props.refereeImage} alt="referee frame" />}
                         </div>
                         <p>Outils :</p>
@@ -122,31 +124,32 @@ class Canvas extends React.Component {
                             <button
                                 className="canvasToolsLeftUndo"
                                 onClick={() => this.canvas.current.undo()}>Annuler (CTRL + Z)</button>
-                            <div className="canvasToolsLeftBrush">
-                                <label>Taille du pinceau :</label>
-                                <input
-                                    type="range"
-                                    min="1"
-                                    max="60"
-                                    value={this.state.brushRadius}
-                                    onChange={e =>
-                                        this.setState({ brushRadius: parseInt(e.target.value, 10) })
-                                    }
-                                />
+                            
+                                <div className="canvasToolsLeftBrush">
+                                    <label>Taille du pinceau :</label>
+                                    <input
+                                        type="range"
+                                        min="1"
+                                        max="60"
+                                        value={this.state.brushRadius}
+                                        onChange={e =>
+                                            this.setState({ brushRadius: parseInt(e.target.value, 10) })
+                                        }
+                                        />
+                                </div>
+                                <div className="canvasToolsLeftLazy">
+                                    <label>Traçage assisté :</label>
+                                    <input
+                                        type="range"
+                                        min="1"
+                                        max="30"
+                                        value={this.state.lazyRadius}
+                                        onChange={e =>
+                                            this.setState({ lazyRadius: parseInt(e.target.value, 10) })
+                                        }
+                                        />
+                                </div>
                             </div>
-                            <div className="canvasToolsLeftLazy">
-                                <label>Traçage assité :</label>
-                                <input
-                                    type="range"
-                                    min="1"
-                                    max="30"
-                                    value={this.state.lazyRadius}
-                                    onChange={e =>
-                                        this.setState({ lazyRadius: parseInt(e.target.value, 10) })
-                                    }
-                                />
-                            </div>
-                        </div>
                         <button
                             className="canvasToolsLeftSubmit"
                             onClick={this.handleSubmit}
@@ -178,7 +181,7 @@ class Canvas extends React.Component {
                     </div>
                     <div className="canvasToolsRight">
                         <CirclePicker
-                            className="canvasToolsRightColorPicker"
+                            className="canvasToolsRightColorPicker" 
                             color={this.state.color}
                             onChange={color => this.setState({ color: color.hex })}
                             width={104}
