@@ -38,6 +38,7 @@ class Draw extends Component {
                     frameId: res.page.frameId,
                     frameWidth: res.page.frameWidth,
                     frameHeight: res.page.frameHeight,
+                    frameAuthor: res.page.frameAuthor,
                 });
             }
         });
@@ -66,7 +67,7 @@ class Draw extends Component {
             <div className="drawSelector">
                 <h1 className="drawTitle">Choisi une BD à continuer</h1>
                 {this.state.img ? <img className="drawImage" src={"https://dwarf.jorismartin.fr" + this.state.img} alt={this.state.name} />
-                : <p className="drawImage">L'auteur de cette BD n'as pas dessiné la première case, à toi de la réaliser ...<br></br><i>Tout en respectant les contraintes imposés par l'auteur</i></p>}
+                : <p className="drawImage">L'auteur de cette BD n'a pas dessiné la première case, à toi de la réaliser !</p>}
                 <div className="drawInfos">
                     <div className="drawInfosText">
                         <div className="drawInfosTextPackage">
@@ -80,7 +81,8 @@ class Draw extends Component {
                     </div>
 
                     <p className="drawGM">{this.state.gamemode}</p>
-                    <p className="drawUser"><span>Auteur :</span> {this.state.user}</p>
+                    <p className="drawUser"><span>Auteur de la BD :</span> {this.state.user}</p>
+                    {this.state.frameAuthor && <p className="drawUser"><span>Auteur de la case :</span> {this.state.frameAuthor}</p>}
                 </div>
                 <button className="drawNext" onClick={this.requestFrame}>Une autre !</button>
                 <button className="drawDraw" onClick={this.drawThis}>Dessiner !</button>

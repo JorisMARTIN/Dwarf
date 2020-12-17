@@ -35,8 +35,8 @@ if (!empty($data) && isset($data->loadedIds)) {
             'description' => $page->getDescription(),
             'gamemode' => ($page->getGameMode() == 0 ? "Normal" : "Reverse"),
             'date' => $page->getCreationDate(),
+            'user' => $userDAO->getUser($page->getOwnerId())->getNickname(),
             'imagePtr' => NULL,
-            'user' => NULL,
             'frameId' => NULL,
             'frameWidth' => NULL,
             'frameHeight' => NULL
@@ -58,7 +58,7 @@ if (!empty($data) && isset($data->loadedIds)) {
 
             if (array_key_exists($refIndex, $frames)) {
                 $out['page']['imagePtr'] = $frames[$refIndex]->getImagePtr();
-                $out['page']['user'] = $userDAO->getUser($frames[$refIndex]->getOwnerId())->getNickname();
+                $out['page']['frameAuthor'] = $userDAO->getUser($frames[$refIndex]->getOwnerId())->getNickname();
             }
 
             $out['page']['frameId'] = $frame->getId();

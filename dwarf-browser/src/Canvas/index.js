@@ -115,11 +115,10 @@ class Canvas extends React.Component {
             <div>
                 <div className="canvasMain">
                     <div className="canvasToolsLeft">
-                        <div className="canvasToolsLeftImage">
-                            <p>Image précédente :</p>
-                            {this.props.refereeImage && <img onClick={this.copyRefereeAsBG} src={"https://dwarf.jorismartin.fr" + this.props.refereeImage} alt="referee frame" />}
-                        </div>
-                        <p>Outils :</p>
+                        {this.props.refereeImage && <div className="canvasToolsLeftImage">
+                            <p>Case {this.props.pageGM === "Normal" ? "précédente" : "suivante"} :</p>
+                            <img onClick={this.copyRefereeAsBG} src={"https://dwarf.jorismartin.fr" + this.props.refereeImage} alt="referee frame" />
+                        </div>}
                         <div className="canvasToolsLeftOthersTools">
                             <button
                                 className="canvasToolsLeftUndo"
@@ -158,9 +157,9 @@ class Canvas extends React.Component {
                     </div>
                     <div className="canvasDraw"
                         onContextMenu={(e) => { e.preventDefault(); }}
-                        style={{
-                            maxWidth: this.props.frameWidth
-                        }}
+                        // style={{
+                        //     maxWidth: this.props.frameWidth
+                        // }}
                     >
                         <div className="canvasDrawTitle">
                             <textarea disabled readOnly value={this.props.pageName} />
