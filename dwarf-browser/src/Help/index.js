@@ -8,14 +8,14 @@ export default class Help extends Component {
                 <h1 className="helpTitle">Aide</h1>
                 <section className="helpMain">
                     <article className="helpWhatIsIt">
-                        <h2>Qu'est ce que DWARF ?</h2>
+                        <h2>Qu'est-ce que DWARF ?</h2>
                         <p>DWARF est un jeu de dessin collaboratif.<br/>
-                        Ce jeu consiste à créer des planches de bande dessinées à plusieurs. 
-                        Une personne va créer une planche en lui donnant un titre et une description où il pourra exprimer ce que doit raconter sa bande dessinée,
-                         et une fois cela fait, il pourra dessiner la première case.<br/>
-                        Par la suite n'importe qui peut venir réaliser la suite de la bande dessinée en n'ayant pour contexte que la dernière case dessinée !</p>
+                        Ce jeu consiste à créer des planches de bande dessinée à plusieurs. 
+                        Une personne créer une planche en lui donnant un titre et une description où il peut exprimer ce que doit raconter la bande dessinée.
+                        Une fois cela fait, il peut alors dessiner la première case.<br/>
+                        Par la suite n'importe qui peut continuer la bande dessinée en n'ayant pour contexte que la dernière case dessinée !</p>
 
-                        <p>Sur la page d'accueil, tu pourras retrouver les planches de bande dessinées finies.</p>
+                        <p>Sur la page d'accueil, tu peux retrouver les planches de bande dessinée finies.</p>
                     </article>
                     <article className="helpDraw">
                         <h2>Dessiner !</h2>
@@ -31,7 +31,7 @@ export default class Help extends Component {
                     </article>
                     <article className="helpInit">
                         <h2>Nouvelle BD</h2>
-                        <p>Tu peux commencer ici une nouvelle bande dessinée,<br/>
+                        <p>Tu peux commencer ici une nouvelle bande dessinée.<br/>
                         Pour se faire, tu dois saisir :</p>
                         <ul>
                             <li>Le nom de ta planche</li>
@@ -52,8 +52,7 @@ export default class Help extends Component {
                     </article>
                     <article className="helpConnect">
                         <h2>Se connecter / S'inscrire</h2>
-                        <p>Connecte toi avec ton compte,<br/>
-                        ou alors crée toi un compte en donnant ton pseudo, ton adresse email, ta date de naissance, ainsi qu'un mot de passe.</p>
+                        <p>Connecte toi ou créé un nouveau compte !</p>
                     </article>
                 </section>
             </div>
