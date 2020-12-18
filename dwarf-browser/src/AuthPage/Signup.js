@@ -64,7 +64,7 @@ export default class Signup extends Component {
 
     render() {
         if (this.state.redirectToUser) {
-            return <Redirect to='/user' />;
+            return <Redirect to='/' />;
         } else {
             return (
             <div className="authPageSignup">
@@ -138,6 +138,7 @@ export default class Signup extends Component {
                         </div>
                     </div>
                     <button onClick={this.handleFormSubmit}>Créer un compte</button>
+                    <p className="authPageMessage">Erreur : {this.state.messageError}</p>
                 </form>
             </div>
             );

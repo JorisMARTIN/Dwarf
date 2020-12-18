@@ -33,7 +33,9 @@ if (isset($data)) {
     $emailC = htmlentities($data->emailConfirm);
     $password = htmlentities($data->password);
     $passwordC = htmlentities($data->passwordConfirm);
-    
+
+    $birthdateSplit = [];
+
     /*Gestion du formatde la date*/
     if ($birthdate == "*-*-*") {
         $birthdateSplit = explode("-",$birthdate);
@@ -42,7 +44,7 @@ if (isset($data)) {
     } else {
         echo json_encode([
             'success' => false,
-            'message' => 'Date format is no correct !'
+            'messageError' => 'Format de date inconnu : ' . $birthdate
         ]);
     }
 
@@ -56,57 +58,57 @@ if (isset($data)) {
     if (empty($pseudo)) {
         echo json_encode([
             'success' => false,
-            'message' => 'The field "pseudo" is empty !'
+            'messageError' => 'Le champ "pseudo" est vide !'
         ]);
     } elseif (empty($birthdate)) {
         echo json_encode([
             'success' => false,
-            'message' => 'The field "birthdate" is empty !'
+            'messageError' => 'Le champ "birthdate" est vide !'
         ]);
     }  elseif (empty($email)) {
         echo json_encode([
             'success' => false,
-            'message' => 'The field "email" is empty !'
+            'messageError' => 'Le champ "email" est vide !'
         ]);
     }  elseif (empty($emailC)) {
         echo json_encode([
             'success' => false,
-            'message' => 'The field "email confirm" is empty !'
+            'messageError' => 'Le champ "email confirm" est vide !'
         ]);
     }  elseif (empty($password)) {
         echo json_encode([
             'success' => false,
-            'message' => 'The field "password" is empty !'
+            'messageError' => 'Le champ "password" est vide !'
         ]);
     } elseif (empty($passwordC)) {
         echo json_encode([
             'success' => false,
-            'message' => 'The field "password confirm" is empty !'
+            'messageError' => 'Le champ "password confirm" est vide !'
         ]);
     } else if (strlen($pseudo) > 16) {
         echo json_encode([
             'success' => false,
-            'message' => 'Pseudo too long ! (Must be less than 17 character)'
+            'messageError' => 'Ton pseudo est trop long ! (Maximum 16 caractères)'
         ]);            
     } else if (strlen($email) > 64) {
         echo json_encode([
             'success' => false,
-            'message'=> "Email too long ! (Must be less than 65 character)"
+            'messageError'=> 'Ton email est trop long ! (Maximum 64 caractères)'
         ]);
     } else if (strlen($password) > 255) {
         echo json_encode([
             'success' => false,
-            'message'=> "Password too long ! (Must be less than 256 character)"
+            'messageError'=> 'Ton mot de passe est trop long ! (Maximum 255 caractères)'
         ]);
     } else if ($email != $emailC) {
         echo json_encode([
             'success' => false,
-            'message' => 'Email and email confirm are different !'
+            'messageError' => 'L\'e-mail et l\'e-mail de confirmation sont différent !'
         ]);      
     } else if ($password != $passwordC) {
         echo json_encode([
             'success' => false,
-            'message' => 'Password and password confirm are different !'
+            'messageError' => 'Le mot de passe et mot de passe de confirmation sont différent !'
         ]);
     } else {
         $signupOk = $userDAO->putUser($email, $pseudo, $password, getClientIP(), $birthdate);
@@ -114,12 +116,11 @@ if (isset($data)) {
         if ($signupOk == -1) {
             echo json_encode([
                 'success' => false,
-                'message' => 'Signup failed ! An account with this email already exist'
+                'messageError' => 'Echec de la connexion ! Un compte existe déjà avec cette adresse e-mail.'
             ]);
         } else {
             echo json_encode([
-                'success' => true,
-                'message' => 'User added successfully !'
+                'success' => true
             ]);
         }
     }
