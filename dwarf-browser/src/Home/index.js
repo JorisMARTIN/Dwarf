@@ -42,8 +42,8 @@ class ComicPage extends React.Component {
             if (frame.y + frame.h > max_y) max_y = frame.y + frame.h;
         }
 
-        const ccbyncX = 100;
-        const ccbyncY = 35;
+        const ccbyncX = 240;
+        const ccbyncY = 84;
 
         max_y += ccbyncY; // space for cc by nc
 
