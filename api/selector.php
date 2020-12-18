@@ -56,14 +56,16 @@ if (!empty($data) && isset($data->loadedIds)) {
         if(array_key_exists($i, $frames)) {
             $frame = $frames[$i];
 
-            if (array_key_exists($refIndex, $frames)) {
-                $out['page']['imagePtr'] = $frames[$refIndex]->getImagePtr();
-                $out['page']['frameAuthor'] = $userDAO->getUser($frames[$refIndex]->getOwnerId())->getNickname();
+            if($frame->isFree()) {
+                if (array_key_exists($refIndex, $frames)) {
+                    $out['page']['imagePtr'] = $frames[$refIndex]->getImagePtr();
+                    $out['page']['frameAuthor'] = $userDAO->getUser($frames[$refIndex]->getOwnerId())->getNickname();
+                }
+    
+                $out['page']['frameId'] = $frame->getId();
+                $out['page']['frameWidth'] = $frame->getWidth();
+                $out['page']['frameHeight'] = $frame->getHeight();
             }
-
-            $out['page']['frameId'] = $frame->getId();
-            $out['page']['frameWidth'] = $frame->getWidth();
-            $out['page']['frameHeight'] = $frame->getHeight();
         }
     }
 } else {

@@ -145,7 +145,7 @@ class PageDAO extends DAO {
      * @return bool true = ✅ | false = ❌
      */
     function removePage(int $pageId) : bool {
-        $page = $this->getPage($pageId);
+        //$page = $this->getPage($pageId);
         $path = dirname(__FILE__, 3).'/cdn/frames/page-'.$pageId;
         $files = scandir($path);
         foreach ($files as $file) {
