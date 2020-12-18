@@ -19,7 +19,7 @@ export default class Help extends Component {
                     </article>
                     <article className="helpDraw">
                         <h2>Dessiner !</h2>
-                        <p>Tu peux dessiner ici la suite d'une BD commencée par un autre utilisateur. Pour cela, tu dois être connecté !<br/>
+                        <p>Tu peux dessiner ici la suite d'une BD commencée par un autre utilisateur. Pour cela, tu dois être connecté(e) !<br/>
                         Tu auras alors de nombreux outils à ta disposition :</p>
                         <ul>
                             <li>Des couleurs</li>

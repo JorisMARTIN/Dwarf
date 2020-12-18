@@ -18,7 +18,7 @@ export default class AuthPage extends Component {
             return (
                 <div className="authPageMain">
                     <h1 className="authPageTitle">Authentification</h1>
-                    <p className="authPageDescri">Connecte-toi ou inscrit-toi pour dessiner</p>
+                    <p className="authPageDescri">Connecte-toi ou inscris-toi pour dessiner</p>
                     <div className="authPage">
                         <Login />
                         <Signup />
