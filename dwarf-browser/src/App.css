@@ -43,6 +43,15 @@ html {
     display:flex
 }
 
+.componentsMenu + .link{
+    background: linear-gradient(var(--ClassicButtonStart), var(--ClassicButtonEnd));
+    border-radius:25px;
+}
+
+.componentsMenu + .link:hover{
+    background-color: #ee4239;
+}
+
 .link {
     text-align: center;
     padding: .5em 1em;
