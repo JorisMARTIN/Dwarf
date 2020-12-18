@@ -23,8 +23,6 @@ if (!empty($data)) {
 
     $pages = $pageDAO->getNPages(6, $lastId);
 
-    $lastLoadedId = count($pages) == 0 ? 0 : $pages[count($pages) - 1]->getId();
-
     $endReached = count($pages) != 6;
 
 
@@ -38,7 +36,6 @@ if (!empty($data)) {
     }
 
     $out = [
-        'lastPageLoadedId' => $lastLoadedId,
         'endReached' => $endReached,
         'pages' => [],
         'userIsAdmin' => $userIsAdmin
