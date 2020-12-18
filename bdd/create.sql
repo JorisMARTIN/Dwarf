@@ -30,7 +30,8 @@ done boolean DEFAULT FALSE,
 width int CHECK (width > 0),
 height int CHECK (height > 0),
 pageId int NOT NULL REFERENCES "Page"(pageId),
-userId int REFERENCES "User"(userId)
+userId int REFERENCES "User"(userId),
+ttl bigint
 );
 
 CREATE TABLE IF NOT EXISTS "Rate" (

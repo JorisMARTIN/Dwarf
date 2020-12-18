@@ -45,7 +45,20 @@ class Draw extends Component {
     }
 
     drawThis = () => {
-        this.setState({goToCanvas: true});
+        if (this.state.frameId) {
+            Auth.fetch("claimdrawing.php", {
+                method: 'POST',
+                body: JSON.stringify({
+                    frameid: this.state.frameId,
+                })
+            }).then(res => {
+                if(res.status === 200) {
+                    this.setState({ goToCanvas: true });
+                } else {
+                    alert(res.message);
+                }
+            });
+        }
     }
 
     componentDidMount() {
@@ -66,8 +79,11 @@ class Draw extends Component {
         ); else if(this.state.name !== null) return (
             <div className="drawSelector">
                 <h1 className="drawTitle">Choisi une BD à continuer</h1>
-                {this.state.img ? <img className="drawImage" src={"https://dwarf.jorismartin.fr" + this.state.img} alt={this.state.name} />
-                : <p className="drawImage">L'auteur de cette BD n'a pas dessiné la première case, à toi de la réaliser !</p>}
+                {this.state.img && this.state.frameId
+                ? <img className="drawImage" src={"https://dwarf.jorismartin.fr" + this.state.img} alt={this.state.name} />
+                : (this.state.frameId
+                  ? <p className="drawImage">L'auteur de cette BD n'a pas dessiné la première case, à toi de la réaliser !</p>
+                  : <p className="drawImage">Quelqu'un est déjà en train de dessiner cette case !</p>)}
                 <div className="drawInfos">
                     <div className="drawInfosText">
                         <div className="drawInfosTextPackage">
@@ -85,7 +101,7 @@ class Draw extends Component {
                     {this.state.frameAuthor && <p className="drawUser"><span>Auteur de la case :</span> {this.state.frameAuthor}</p>}
                 </div>
                 <button className="drawNext" onClick={this.requestFrame}>Une autre !</button>
-                <button className="drawDraw" onClick={this.drawThis}>Dessiner !</button>
+                {this.state.frameId && <button className="drawDraw" onClick={this.drawThis}>Dessiner !</button>}
             </div>
         ); else return (
             <div>

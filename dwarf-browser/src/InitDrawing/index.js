@@ -23,12 +23,11 @@ class TemplateCanvas extends React.Component {
         let max_x = 0;
         let max_y = 0;
 
-        const margeExt = 50;
         const margeInt = 30;
 
         for (const frame of template) {
-            if (frame.x + frame.w > max_x) max_x = frame.x + frame.w + margeExt;
-            if (frame.y + frame.h > max_y) max_y = frame.y + frame.h + margeExt;
+            if (frame.x + frame.w > max_x) max_x = frame.x + frame.w;
+            if (frame.y + frame.h > max_y) max_y = frame.y + frame.h;
         }
 
         this.setState({
@@ -36,14 +35,14 @@ class TemplateCanvas extends React.Component {
             canvasH: max_y
         });
 
-        ctx.fillStyle = "#f2f2f7";
-        ctx.fillRect(0, 0, max_x, max_y);
+        // ctx.fillStyle = "#f2f2f7";
+        // ctx.fillRect(0, 0, max_x, max_y);
 
         ctx.fillStyle = "#8E8E93";
         ctx.strokeStyle = "#1c1c1e";
         ctx.lineWidth = 20;
         for (const frame of template) {
-            ctx.rect(frame.x + margeInt + margeExt / 2, frame.y + margeInt + margeExt / 2, frame.w - margeInt * 2, frame.h - margeInt * 2);
+            ctx.rect(frame.x + margeInt, frame.y + margeInt, frame.w - margeInt * 2, frame.h - margeInt * 2);
         }
         ctx.fill();
         ctx.stroke();

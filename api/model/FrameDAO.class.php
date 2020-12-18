@@ -149,6 +149,21 @@ class FrameDAO extends DAO {
   }
 
   /**
+   * Claim a frame, aka set the TTL as time() + 15min
+   * 
+   * @param int $frameId ID of the frame
+   * 
+   * @return bool true = ✅ | false = ❌
+   */
+  function claim(int $frameId) : bool {
+    $query = 'UPDATE "Frame" SET ttl = :ttl WHERE frameid = :frameid';
+    return $this->db->prepare($query)->execute([
+      ':userid' => time() + 15 * 60,
+      ':frameid' => $frameId
+    ]);
+  }
+
+  /**
    * Remove a frame from the database
    * 
    * @param int $frameId ID of the frame to delete

@@ -124,7 +124,8 @@
 .canvasDrawSection {
     background: #f2f2f7;
     /* border-radius: 25px; */
-    border:1px solid #8e8e93
+    border:1px solid #8e8e93;
+    cursor: none;
 }
 
 .canvasToolsRight {
