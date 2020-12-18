@@ -38,6 +38,7 @@ if ($userId != -1) {
                 $frameDAO->setDone($frameid, true);
                 $frameDAO->setDrawable($frameid, false);
                 $frameDAO->setAuthor($frameid, $userId);
+                $frameDAO->unclaim($frameid);
 
                 //set next frame to drawable
                 $frames = $frameDAO->getFrames($frame->getPageId());

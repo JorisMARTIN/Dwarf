@@ -164,6 +164,20 @@ class FrameDAO extends DAO {
   }
 
   /**
+   * Unclaim a frame, aka set the TTL to NULL
+   * 
+   * @param int $frameId ID of the frame
+   * 
+   * @return bool true = ✅ | false = ❌
+   */
+  function unclaim(int $frameId): bool {
+    $query = 'UPDATE "Frame" SET ttl = NULL WHERE frameid = :frameid';
+    return $this->db->prepare($query)->execute([
+      ':frameid' => $frameId
+    ]);
+  }
+
+  /**
    * Remove a frame from the database
    * 
    * @param int $frameId ID of the frame to delete
