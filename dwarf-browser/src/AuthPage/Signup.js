@@ -14,8 +14,7 @@ export default class Signup extends Component {
         password: "",
         passwordConfirm: "",
         messageError : "",
-        redirectToUser : false,
-        errorVisible : false
+        redirectToUser : false
     };
 
     _handleChange = (e) => {
@@ -50,12 +49,11 @@ export default class Signup extends Component {
                         // Refresh page afer login for update App component
                         this.refresh();
                     } else {
-                        alert("Log in failed. Try again.");
+                        this.setState({ messageError: res.messageError });
                     }
                 })
             } else {
                 this.setState({ messageError : res.messageError});
-                this.setState({ errorVisible : true});
             }
         })
     }
@@ -71,7 +69,7 @@ export default class Signup extends Component {
             return (
             <div className="authPageSignup">
                 <h1>Créer un compte</h1>
-                {this.state.errorVisible && <p className="authPageMessage">Erreur : {this.state.messageError}</p>}
+                {this.state.messageError && <p className="authPageMessage">Erreur : {this.state.messageError}</p>}
                 <form className="authPageSignupForm">
                     <div className="authPageSignupDiv">
                         <div className="authPageSignupUserName">

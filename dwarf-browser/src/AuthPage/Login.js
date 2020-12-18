@@ -10,8 +10,7 @@ export default class Login extends Component {
         redirectToHome: false,
         email: "",
         password: "",
-        messageError : "",
-        errorVisible : false
+        messageError : ""
     };
 
     /* Fired off every time the use enters something into the input fields */
@@ -36,7 +35,6 @@ export default class Login extends Component {
                 this.refresh();
             } else {
                 this.setState({ messageError: res.messageError });
-                this.setState({ errorVisible: true });
             }
         })
     }
@@ -52,7 +50,7 @@ export default class Login extends Component {
             return (
                 <div className="authPageLogin">
                     <h1>Connexion</h1>
-                    {this.state.errorVisible && <p className="authPageMessage">Erreur : {this.state.messageError}</p>}
+                    {this.state.messageError && <p className="authPageMessage">Erreur : {this.state.messageError}</p>}
                     <form className="authPageLoginForm">
                         <div className="authPageLoginEmail">
                             <label htmlFor="email">E-mail :</label>

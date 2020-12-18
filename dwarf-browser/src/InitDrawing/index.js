@@ -78,10 +78,9 @@ class InitDrawing extends React.Component {
         e.preventDefault();
 
         if (this.state.title === "") {
-            alert("Il manque le titre !");
-            /*Il faut implémenter un bon CSS !*/
+            this.setState({ messageError: "Il manque un titre !" });
         } else if (this.state.description === "") {
-            alert("Il manque la description !");
+            this.setState({ messageError: "Il manque une description !" });
         } else {
             Auth.fetch("initdrawing.php", {
                 method: 'POST',
@@ -105,7 +104,7 @@ class InitDrawing extends React.Component {
                         }
                     });
                 } else {
-                    alert("Erreur dans la création de la page");
+                    this.setState({ messageError: "Erreur dans la création de la page !" });
                 }
             });
         }
@@ -117,7 +116,7 @@ class InitDrawing extends React.Component {
         ); else return (
             <div className="initateDrawingContainer">
                 <h1 className="initateDrawingTitle">Créer une BD</h1>
-
+                {this.state.messageError && <p className="authPageMessage">Erreur : {this.state.messageError}</p>}
                 <form className="initateDrawingForm" >
 
                     <fieldset className="initateDrawingChoseTitle">
