@@ -77,7 +77,7 @@ class InitDrawing extends React.Component {
     handleFormSubmit = (e) => {
         e.preventDefault();
 
-        if (this.state.titre == null) {
+        if (this.state.title === "") {
             alert("Il manque le titre !");
             /*Il faut implémenter un bon CSS !*/
         } else if (this.state.description === "") {

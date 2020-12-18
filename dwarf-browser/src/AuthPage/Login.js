@@ -9,7 +9,9 @@ export default class Login extends Component {
     state = {
         redirectToHome: false,
         email: "",
-        password: ""
+        password: "",
+        messageError : "",
+        errorVisible : false
     };
 
     /* Fired off every time the use enters something into the input fields */
@@ -33,7 +35,8 @@ export default class Login extends Component {
                 // Refresh page afer login for update App component
                 this.refresh();
             } else {
-                alert("Log in failed. Try again.");
+                this.setState({ messageError: res.messageError });
+                this.setState({ errorVisible: true });
             }
         })
     }
@@ -49,6 +52,7 @@ export default class Login extends Component {
             return (
                 <div className="authPageLogin">
                     <h1>Connexion</h1>
+                    {this.state.errorVisible && <p className="authPageMessage">Erreur : {this.state.messageError}</p>}
                     <form className="authPageLoginForm">
                         <div className="authPageLoginEmail">
                             <label htmlFor="email">E-mail :</label>

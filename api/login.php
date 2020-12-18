@@ -25,11 +25,11 @@ if ($userId != -1) {
     echo json_encode([
         'token' => $token,
         'status' => 200,
-        'message' => 'Login success'
+        'message' => 'Connexion réussie'
     ]);
 } else {
     echo json_encode([
         'status' => 400,
-        'message' => 'Login failed!'
+        'messageError' => 'La connexion a échoué. Veuillez réessayer.'
     ]);
 }
