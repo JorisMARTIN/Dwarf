@@ -87,7 +87,7 @@ class Canvas extends React.Component {
                 img: image
             })
         }).then(res => {
-            alert("Merci d'avoir jouer sur DWARf !\nEst-ce que tu voudrais bien répondre à ce formualaire ? Cela nous aidera à améliorer notre application ...\nhttps://frama.link/dwarfExperience");
+            // alert("Merci d'avoir jouer sur DWARf !\nEst-ce que tu voudrais bien répondre à ce formualaire ? Cela nous aidera à améliorer notre application ...\nhttps://frama.link/dwarfExperience");
             this.setState({ redirectToHome: true });
         })
     }
