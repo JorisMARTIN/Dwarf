@@ -101,6 +101,7 @@
     box-shadow: 0 5px 10px 10px var(--Shadow);
     border-radius: 25px;
     padding: 2%;
+    color: var(--PrimaryText);
     /* text-align: center; */
 }
 
