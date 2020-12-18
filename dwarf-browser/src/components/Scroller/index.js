@@ -62,7 +62,7 @@ class ComicPage extends React.Component {
         }
 
         const ccbync = new Image();
-        ccbync.src = 'https://dwarf.jorismartin.fr/cdn/cc-by-nc.svg';
+        ccbync.src = 'https://dwarf.jorismartin.fr/icons/cc-by-nc.svg';
         ccbync.onload = () => {
             ctx.drawImage(ccbync, max_x - ccbyncX, max_y - ccbyncY, ccbyncX, ccbyncY);
         }

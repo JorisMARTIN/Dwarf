@@ -26,14 +26,17 @@
     width: 40%;
 }
 
-p.drawImage{
-    padding: 1em;
+.drawImageMessage {
+    text-align: center;
+    padding: 20% 3em;
 }
 
 .drawInfosText{
     display: flex;
+    align-items: center;
     flex-direction: row;
 }
+
 .drawInfosTextPackage{
     display: flex;
     flex-direction: column;
@@ -68,28 +71,27 @@ p.drawImage{
     border:none
 }
 
-.drawNext {
+.drawNext, .drawDraw {
     align-self: center;
     padding: .5em 1em;
     margin-top: 2em;
-    color: var(--Background);
-    background: var(--PrimaryText);
-    border-radius: 25px;
-    font-size: .8em;
-    font-weight: 600;
-    border:none
-}
-
-.drawDraw {
-    align-self: center;
-    padding: .5em 1em;
-    margin-top: 2em;
-    color: #f2f2f7;
-    background: var(--BlueButton);
     border-radius: 25px;
     font-size: 1.2em;
     font-weight: 600;
-    border:none
+    border:none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}
+
+.drawNext {
+    color: var(--Background);
+    background: var(--PrimaryText);
+}
+
+.drawDraw {
+    color: #f2f2f7;
+    background: var(--BlueButton);
 }
 
 .drawNothingToDraw {
@@ -123,4 +125,15 @@ p.drawImage{
     -webkit-backdrop-filter: saturate(1.8) blur(20px);
     backdrop-filter: saturate(1.8) blur(20px);
     border-radius: 25px;
+}
+
+.drawButtons {
+    width: 50%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.drawButtons img {
+    height: 1.2em;
 }

@@ -13,19 +13,6 @@ $data = json_decode(file_get_contents("php://input"));
 //default value of signup success
 $signupOk = -1;
 
-/* Get the code from here : https://stackoverflow.com/questions/3003145/how-to-get-the-client-ip-address-in-php*/
-function getClientIP() {
-    $ipaddress = 'UNKNOWN';
-    $keys=array('HTTP_CLIENT_IP','HTTP_X_FORWARDED_FOR','HTTP_X_FORWARDED','HTTP_FORWARDED_FOR','HTTP_FORWARDED','REMOTE_ADDR');
-    foreach($keys as $k) {
-        if (isset($_SERVER[$k]) && !empty($_SERVER[$k]) && filter_var($_SERVER[$k], FILTER_VALIDATE_IP)) {
-            $ipaddress = $_SERVER[$k];
-            break;
-        }
-    }
-    return $ipaddress;
-}
-
 if (isset($data)) {
     $pseudo = htmlentities($data->name);
     $birthdate = htmlentities($data->date);

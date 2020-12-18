@@ -82,8 +82,8 @@ class Draw extends Component {
                 {this.state.img && this.state.frameId
                 ? <img className="drawImage" src={"https://dwarf.jorismartin.fr" + this.state.img} alt={this.state.name} />
                 : (this.state.frameId
-                  ? <p className="drawImage">L'auteur de cette BD n'a pas dessiné la première case, à toi de la réaliser !</p>
-                  : <p className="drawImage">Quelqu'un est déjà en train de dessiner cette case !</p>)}
+                ? <p className="drawImage drawImageMessage">L'auteur de cette BD n'a pas dessiné la première case, à toi de la réaliser !</p>
+                : <p className="drawImage drawImageMessage">Quelqu'un est déjà en train de dessiner cette case !</p>)}
                 <div className="drawInfos">
                     <div className="drawInfosText">
                         <div className="drawInfosTextPackage">
@@ -100,8 +100,10 @@ class Draw extends Component {
                     <p className="drawUser"><span>Auteur de la BD :</span> {this.state.user}</p>
                     {this.state.frameAuthor && <p className="drawUser"><span>Auteur de la case :</span> {this.state.frameAuthor}</p>}
                 </div>
-                <button className="drawNext" onClick={this.requestFrame}>Une autre !</button>
-                {this.state.frameId && <button className="drawDraw" onClick={this.drawThis}>Dessiner !</button>}
+                <div className="drawButtons">
+                    <button className="drawNext" onClick={this.requestFrame}><span>Une autre</span> <img src="https://dwarf.jorismartin.fr/icons/arrow.svg" alt=""/></button>
+                    {this.state.frameId && <button className="drawDraw" onClick={this.drawThis}><span>Dessiner</span> <img src="https://dwarf.jorismartin.fr/icons/crayon.svg" alt="" /></button>}
+                </div>
             </div>
         ); else return (
             <div>
