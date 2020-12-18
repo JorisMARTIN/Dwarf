@@ -35,7 +35,6 @@ export default class Signup extends Component {
             })
         }).then(res => {
             if (res.success) {
-
                 Auth.fetch("login.php", {
                     method: 'POST',
                     body: JSON.stringify({

@@ -37,21 +37,22 @@ if (isset($data)) {
     $birthdateSplit = [];
 
     /*Gestion du formatde la date*/
-    if ($birthdate == "*-*-*") {
-        $birthdateSplit = explode("-",$birthdate);
-    } else if ($birthdate == "*/*/*") {
-        $birthdateSplit = explode("/",$birthdate);
-    } else {
+    if ($birthdate != "*-*-*" && $birthdate != "*/*/*") {
         echo json_encode([
             'success' => false,
             'messageError' => 'Format de date inconnu : ' . $birthdate
         ]);
-    }
-
-    if (strlen($birthdateSplit[0]) != 4) {
-        $birthdate = $birthdateSplit[2] . "-" . $birthdateSplit[1] . "-" . $birthdateSplit[0];
     } else {
-        $birthdate = $birthdateSplit[0] . "-" . $birthdateSplit[1] . "-" . $birthdateSplit[2];
+        $birthdateSplit = explode("/",$birthdate);
+        if ($birthdate == "*-*-*") {
+            $birthdateSplit = explode("-",$birthdate);
+        }
+       
+        if (strlen($birthdateSplit[0]) != 4) {
+            $birthdate = $birthdateSplit[2] . "-" . $birthdateSplit[1] . "-" . $birthdateSplit[0];
+        } else {
+            $birthdate = $birthdateSplit[0] . "-" . $birthdateSplit[1] . "-" . $birthdateSplit[2];
+        }
     }
     
 
