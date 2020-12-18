@@ -18,21 +18,14 @@ if($userId != -1){
     $pageId = $data->pageId;
     $rateDAO = new RateDAO();
 
-    if ($votetype = 1) {
-        $vote = true;
-         $rateDAO->putVote($userId, $pageId, $vote);
-      }
-    else {
-        $vote = false;
-        $rateDAO->putVote($userId, $pageId, $vote);   
-    } 
+    $rateDAO->putVote($userId, $pageId, ($voteType == 1) ? true : false);
 
     $out = [];
 
 }else{
     // User not logged in
     $out = [
-        'message' => "You have to be logged to rate a page !\nDo you want to log in or sign up ?"
+        'message' => "Tu dois être connecté pour voter !\nVeux tu te connecter ou t'inscrire ?"
     ];
 }
 

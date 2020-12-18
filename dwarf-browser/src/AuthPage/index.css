@@ -13,6 +13,13 @@
     font-size:1.2em
 }
 
+.authPageMessage {
+    color: var(--SecondaryText);
+    font-size:1.2em;
+    text-align: center;
+    color: var(--ClassicButtonStart);
+}
+
 .authPage {
     display: flex;
     flex-direction: row;

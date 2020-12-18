@@ -39,19 +39,28 @@ if ($userId != -1) {
                     $frameId = $fid;
                 }
             }
+
             $frameDAO->setDrawable($frameId, true); // set first frame to drawable
             $page = $pageDAO->getPage($pageId);
             $frame = $frameDAO->getFrame($frameId);
 
-            $out = [
-                'status' => 200,
-                'frameId' => $frameId,
-                'width' => $frame->getWidth(),
-                'height' => $frame->getHeight(),
-                'pageName' => $page->getName(),
-                'gameMode' => $page->getGameMode(),
-                'description' => $page->getDescription()
-            ];
+            if($frameDAO->claim($frameId)) { // claim first frame
+                $out = [
+                    'status' => 200,
+                    'frameId' => $frameId,
+                    'width' => $frame->getWidth(),
+                    'height' => $frame->getHeight(),
+                    'pageName' => $page->getName(),
+                    'gameMode' => $page->getGameMode(),
+                    'description' => $page->getDescription()
+                ];
+            } else {
+                $out = [
+                    'status' => 400,
+                    'message' => "Failed to claim $frameId"
+                ];
+            }
+
         } else {
             $out = [
                 'status' => 400,

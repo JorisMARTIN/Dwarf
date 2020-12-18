@@ -13,7 +13,9 @@ export default class Signup extends Component {
         emailConfirm: "",
         password: "",
         passwordConfirm: "",
-        redirectToUser : false
+        messageError : "",
+        redirectToUser : false,
+        errorVisible : false
     };
 
     _handleChange = (e) => {
@@ -35,7 +37,6 @@ export default class Signup extends Component {
             })
         }).then(res => {
             if (res.success) {
-
                 Auth.fetch("login.php", {
                     method: 'POST',
                     body: JSON.stringify({
@@ -53,7 +54,8 @@ export default class Signup extends Component {
                     }
                 })
             } else {
-                alert(res.message);
+                this.setState({ messageError : res.messageError});
+                this.setState({ errorVisible : true});
             }
         })
     }
@@ -64,11 +66,12 @@ export default class Signup extends Component {
 
     render() {
         if (this.state.redirectToUser) {
-            return <Redirect to='/user' />;
+            return <Redirect to='/' />;
         } else {
             return (
             <div className="authPageSignup">
                 <h1>Créer un compte</h1>
+                {this.state.errorVisible && <p className="authPageMessage">Erreur : {this.state.messageError}</p>}
                 <form className="authPageSignupForm">
                     <div className="authPageSignupDiv">
                         <div className="authPageSignupUserName">
