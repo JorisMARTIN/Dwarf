@@ -54,6 +54,12 @@ export default class Help extends Component {
                         <h2>Se connecter / S'inscrire</h2>
                         <p>Connecte toi ou créé un nouveau compte !</p>
                     </article>
+                    <article className="helpAvis">
+                        <h2>Ton avis nous intérésse !</h2>
+                        <p>Afin que nous puissions améliorer notre application, ton avis nous intérésse !
+                            Laisse le nous <a href="https://www.frama.link/dwarfExperience">ici</a>.
+                        </p>                        
+                    </article>
                 </section>
             </div>
         );

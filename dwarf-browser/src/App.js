@@ -32,7 +32,10 @@ export default class App extends Component {
     return (
       <Router>
         <div className="menu">
-          <Link className="dwarf" to="/">Dwarf</Link>
+          <div className="dwarfDiv">
+            <img className="dwarfLogo" src="https://dwarf.jorismartin.fr/icons/dwarf.svg"></img>
+            <Link className="dwarf" to="/">Dwarf</Link>
+          </div>
           
           <div className="componentsMenu">
             <Link className="link" to="/">Accueil</Link>
@@ -41,7 +44,7 @@ export default class App extends Component {
             <Link className="link" to="/help">Aide</Link>
             {/* this.state.logged ? <Link className="link" to="/user">User</Link> : ""*/}
           </div>
-
+          <a className="link" target="_blank" href="https://www.frama.link/dwarfExperience">Ton avis nous intéresse !</a>
           <div className="logComponent">
             {this.state.logged ? <button className="log" onClick={this.logout}>Déconnexion</button> 
             : <Link className="log" to="/auth">Connexion / Inscription</Link>}

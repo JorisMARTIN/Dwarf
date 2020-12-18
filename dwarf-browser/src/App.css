@@ -21,11 +21,22 @@ html {
     z-index: 2;
 }
 
+.dwarfDiv{
+    display: flex;
+    align-items: center;
+}
+
+.dwarfLogo{
+    height: 50px;
+    width: auto;
+    margin: auto;
+}
+
 .dwarf {
     text-decoration: none;
     color: var(--PrimaryText);
     font-size: 2em;
-    font-weight:700
+    font-weight:700;
 }
 
 .componentsMenu {
