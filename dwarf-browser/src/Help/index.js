@@ -56,7 +56,7 @@ export default class Help extends Component {
                     </article>
                     <article className="helpAvis">
                         <h2>Ton avis nous intérésse !</h2>
-                        <p>Afin que nous puissions améliorer notre application, ton avis nous intérésse !
+                        <p>Afin que nous puissions améliorer notre application, ton avis nous intéresse !
                             Laisse le nous <a href="https://www.frama.link/dwarfExperience">ici</a>.
                         </p>                        
                     </article>

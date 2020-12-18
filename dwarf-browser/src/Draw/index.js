@@ -78,7 +78,7 @@ class Draw extends Component {
             />
         ); else if(this.state.name !== null) return (
             <div className="drawSelector">
-                <h1 className="drawTitle">Choisi une BD à continuer</h1>
+                <h1 className="drawTitle">Choisis une BD à continuer</h1>
                 {this.state.img && this.state.frameId
                 ? <img className="drawImage" src={"https://dwarf.jorismartin.fr" + this.state.img} alt={this.state.name} />
                 : (this.state.frameId
