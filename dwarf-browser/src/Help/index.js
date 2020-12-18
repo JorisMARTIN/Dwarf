@@ -11,7 +11,7 @@ export default class Help extends Component {
                         <h2>Qu'est-ce que DWARF ?</h2>
                         <p>DWARF est un jeu de dessin collaboratif.<br/>
                         Ce jeu consiste à créer des planches de bande dessinée à plusieurs. 
-                        Une personne créer une planche en lui donnant un titre et une description où il peut exprimer ce que doit raconter la bande dessinée.
+                        Une personne crée une planche en lui donnant un titre et une description où il peut exprimer ce que doit raconter la bande dessinée.
                         Une fois cela fait, il peut alors dessiner la première case.<br/>
                         Par la suite n'importe qui peut continuer la bande dessinée en n'ayant pour contexte que la dernière case dessinée !</p>
 
