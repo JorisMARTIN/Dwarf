@@ -1,8 +1,14 @@
+/* .canvas {
+    display: flex;
+    width: 80%;
+    margin: auto;
+} */
 .canvasMain {
     margin: 2em;
     display: flex;
     flex-direction: row;
-    justify-content:space-between
+    justify-content:space-around;
+    max-width: 2000px;
 }
 
 .canvasDraw, .canvasToolsLeft, .canvasToolsRight {
@@ -17,6 +23,7 @@
     display: flex;
     flex-direction:column;
     width: 20%;
+    max-width: 250px;
 }
 
 
@@ -91,6 +98,7 @@
 
 .canvasDraw {
     justify-content:space-around;
+    max-width: ;
 }
 
 .canvasDraw, .canvasDrawTitle {
