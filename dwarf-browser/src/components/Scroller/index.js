@@ -41,6 +41,11 @@ class ComicPage extends React.Component {
             if (frame.y + frame.h > max_y) max_y = frame.y + frame.h;
         }
 
+        const ccbyncX = 240;
+        const ccbyncY = 84;
+
+        max_y += ccbyncY; // space for cc by nc
+
         this.setState({
             canvasW: max_x,
             canvasH: max_y
@@ -54,6 +59,12 @@ class ComicPage extends React.Component {
             image.onload = () => {
                 ctx.drawImage(image, template[i].x, template[i].y, template[i].w, template[i].h);
             }
+        }
+
+        const ccbync = new Image();
+        ccbync.src = 'https://dwarf.jorismartin.fr/cdn/cc-by-nc.svg';
+        ccbync.onload = () => {
+            ctx.drawImage(ccbync, max_x - ccbyncX, max_y - ccbyncY, ccbyncX, ccbyncY);
         }
     }
 
