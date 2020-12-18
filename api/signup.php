@@ -40,6 +40,7 @@ if (isset($data)) {
     /* Format par défault : "../../...." */
     $birthdateSplit1 = explode("/",$birthdate);
     $birthdateSplit2 = explode("-",$birthdate);
+    
     if (count($birthdateSplit1) == 1 && count($birthdateSplit2) == 1) {
         echo json_encode([
             'success' => false,
