@@ -63,3 +63,16 @@ function generateToken(int $userId, int $expiration) : string {
 
     return $jwt;
 }
+
+/* from https://stackoverflow.com/questions/3003145/how-to-get-the-client-ip-address-in-php*/
+function getClientIP() {
+    $ipaddress = 'UNKNOWN';
+    $keys = array('HTTP_CLIENT_IP', 'HTTP_X_FORWARDED_FOR', 'HTTP_X_FORWARDED', 'HTTP_FORWARDED_FOR', 'HTTP_FORWARDED', 'REMOTE_ADDR');
+    foreach ($keys as $k) {
+        if (isset($_SERVER[$k]) && !empty($_SERVER[$k]) && filter_var($_SERVER[$k], FILTER_VALIDATE_IP)) {
+            $ipaddress = $_SERVER[$k];
+            break;
+        }
+    }
+    return $ipaddress;
+}
