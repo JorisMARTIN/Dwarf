@@ -32,7 +32,6 @@
 
 .homePlanche {
     width: 250px;
-    height: auto;
     padding: 2em;
     justify-content: space-between;
     background: var(--CardBackground);
@@ -51,10 +50,10 @@
 
 .homePlancheImg {
     width: 250px;
-    height: 250px;
     object-fit: cover;
     /* border-radius: 10px; */
-    border:1px solid #8e8e93
+    border:1px solid #8e8e93;
+    background-color: #AAB2AB;
 }
 
 .homePlancheTopInfos {
