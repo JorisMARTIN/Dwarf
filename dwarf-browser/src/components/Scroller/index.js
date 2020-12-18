@@ -148,36 +148,40 @@ export default class Scroller extends React.Component {
             
             const lastPage = this.state.pages[this.state.pages.length - 1];
             const curPage = lastPage.pageId;
-            this.getPages(curPage);
+            if(this.state.lastPageLoadedId !== curPage){
+                this.getPages(curPage);
+            }
 
-            this.setState({ prevY: y });
+            this.setState({
+                prevY: y,
+                lastPageLoadedId: curPage
+            });
         }
     }
 
-    getPages = (lastPageLoadedId) => {
+    getPages = (id) => {
 
-        if(this.state.endReached == false){
+        if(this.state.endReached === false){
             
             this.setState({ loading : true });
             Auth.fetch("home.php", {
                 method: "POST",
                 body: JSON.stringify({
-                    lastPageLoadedId: lastPageLoadedId,
+                    lastPageLoadedId: id,
                 })
             }).then(res => {
-                
-                this.setState({ pages: this.state.pages.concat(res.pages)})
                 this.setState({ 
                     loading : false,
                     endReached: res.endReached
                  });
+                this.setState({ pages: this.state.pages.concat(res.pages)})
             })
         }
 
     }
 
     render(){
-
+        console.log(this.state.lastPageLoadedId);
         return(
             <div className="scrollerMain">
                 <div className="scrollerContainer">
