@@ -75,7 +75,8 @@ class ComicPage extends React.Component {
             method: "POST",
             body: JSON.stringify({
                 pageId: this.props.pageId,
-                rateType: rate
+                rateType: rate,
+                userId: this.props.userId
             })
         }).then(res => {
             if (res.userId) {

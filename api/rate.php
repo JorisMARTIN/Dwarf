@@ -4,6 +4,7 @@ require_once(dirname(__FILE__) . '/includes/httpheaders.inc.php');
 
 require_once(dirname(__FILE__) . '/model/AuthMethods.php');
 require_once(dirname(__FILE__) . '/model/PageDAO.class.php');
+require_once(dirname(__FILE__) . '/model/RateDAO.class.php');
 
 
 $userId = tokenToUserId();
@@ -13,12 +14,12 @@ if($userId != -1){
     
     $data = json_decode(file_get_contents("php://input"));
     // voteType = 1 pour like et 0 pour dislike
-    $voteType = $data->voteType;
+    $voteType = $data->rateType;
     $userId = $data->userId;
     $pageId = $data->pageId;
     $rateDAO = new RateDAO();
 
-    $rateDAO->putVote($userId, $pageId, ($voteType == 1) ? true : false);
+    $rateDAO->putVote($userId, $pageId, (($voteType == 1) ? true : false));
 
     $out = [];
 
