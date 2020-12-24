@@ -13,7 +13,7 @@ import AuthPage from './AuthPage';
 import E404 from './E404';
 import Auth from './components/AuthHelperMethods';
 import Help from './Help';
-//import UserInfos from './UserInfos';
+import UserInfos from './UserInfos';
 
 export default class App extends Component {
 

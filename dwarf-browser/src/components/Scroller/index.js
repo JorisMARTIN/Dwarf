@@ -121,12 +121,12 @@ class ComicPage extends React.Component {
                             <p className="homeUser">{this.authors}</p>
                         </div>
                     </div>
-                    {/* <div className="homePlancheBottom">
+                    <div className="homePlancheBottom">
                         <button type="button" onClick={() => this.handleVoteClick(1)}>Like</button>
                         <button type="button" onClick={() => this.handleVoteClick(0)}>Dislike</button>
-                    </div> */}
+                    </div>
                 </div>
-                {/* {this.props.userIsAdmin && <button className="homeDeleteAdminButton" type="button" onClick={this.deletePage}>Delete</button>} */}
+                {this.props.userIsAdmin && <button className="homeDeleteAdminButton" type="button" onClick={this.deletePage}>Delete</button>}
             </div>
         );
     }
