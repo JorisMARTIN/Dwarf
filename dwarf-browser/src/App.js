@@ -62,7 +62,7 @@ export default class App extends Component {
 
           <Route path="/help" component={Help} />
 
-          {/* <Route path="/user" component={UserInfos} /> */}
+          <Route path="/user" component={UserInfos} />
 
           <Route path="*">
             <E404 />
