@@ -70,7 +70,7 @@ class ComicPage extends React.Component {
 
     handleVoteClick = (rate) => {
         this.setState({ rate: rate });
-
+        console.log(this.props);
         Auth.fetch("rate.php", {
             method: "POST",
             body: JSON.stringify({
