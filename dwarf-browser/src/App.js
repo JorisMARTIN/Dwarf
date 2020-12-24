@@ -33,7 +33,7 @@ export default class App extends Component {
       <Router>
         <div className="menu">
           <div className="dwarfDiv">
-            <img className="dwarfLogo" src="https://dwarf.jorismartin.fr/icons/dwarf.svg"></img>
+            <img className="dwarfLogo" src="https://dev-dwarf.jorismartin.fr/icons/dwarf.svg"></img>
             <Link className="dwarf" to="/">Dwarf</Link>
           </div>
           
