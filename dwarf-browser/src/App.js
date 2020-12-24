@@ -42,7 +42,7 @@ export default class App extends Component {
             <Link className="link" to="/draw">Dessiner !</Link>
             <Link className="link" to="/init">Nouvelle BD</Link>
             <Link className="link" to="/help">Aide</Link>
-            {/* this.state.logged ? <Link className="link" to="/user">User</Link> : ""*/}
+            {this.state.logged ? <Link className="link" to="/user">User</Link> : ""}
           </div>
           <a className="link" target="_blank" href="https://www.frama.link/dwarfExperience">Ton avis nous intéresse !</a>
           <div className="logComponent">
@@ -62,7 +62,7 @@ export default class App extends Component {
 
           <Route path="/help" component={Help} />
 
-          {/* <Route path="/user" component={UserInfos} /> */}
+          <Route path="/user" component={UserInfos} />
 
           <Route path="*">
             <E404 />
