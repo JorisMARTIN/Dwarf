@@ -1,8 +1,14 @@
+/* .canvas {
+    display: flex;
+    width: 80%;
+    margin: auto;
+} */
 .canvasMain {
     margin: 2em;
     display: flex;
     flex-direction: row;
-    justify-content:space-between
+    justify-content:space-around;
+    max-width: 2000px;
 }
 
 .canvasDraw, .canvasToolsLeft, .canvasToolsRight {
@@ -15,15 +21,28 @@
 
 .canvasToolsLeft {
     display: flex;
-    flex-direction:column
+    flex-direction:column;
+    width: 20%;
+    max-width: 250px;
 }
+
 
 .canvasToolsLeftImage, .canvasToolsLeftOthersTools {
     margin-bottom: 2em;
     background: var(--Background2);
     height: 40%;
     border-radius: 25px;
-    display:flex
+    display:flex;
+    padding-bottom: 1em;
+}
+
+.canvasToolsLeftImage {
+    flex-direction: column;
+    align-items: center;
+    height: auto;
+}
+.canvasToolsLeftImage img {
+    width: 90%;
 }
 
 .canvasToolsLeftOthersTools {
@@ -40,23 +59,30 @@
     color: #f2f2f7;
     font-size: .8em;
     font-weight: 600;
-    border:none
+    border:none;
+}
+
+.canvasToolsLeftBrush, .canvasToolsLeftLazy{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .canvasToolsLeftBrush {
-    text-align:center
+    text-align:center;
+    margin-bottom: 0.2em;
 }
 
 .canvasToolsLeftBrush > input {
-    width:66%
+    width:66%;
 }
 
 .canvasToolsLeftLazy {
-    text-align:center
+    text-align:center;
 }
 
 .canvasToolsLeftLazy > input {
-    width:66%
+    width:66%;
 }
 
 .canvasToolsLeftSubmit {
@@ -67,20 +93,21 @@
     border-radius: 25px;
     font-size: .8em;
     font-weight: 600;
-    border:none
+    border:none;
 }
 
 .canvasDraw {
-    justify-content:space-between
+    justify-content:space-around;
+    max-width: ;
 }
 
 .canvasDraw, .canvasDrawTitle {
     display: flex;
-    flex-direction:column
+    flex-direction:column;
 }
 
 .canvasDrawTitle {
-    justify-content:space-between
+    justify-content:space-between;
 }
 
 .canvasDrawTitle > textarea {
@@ -104,8 +131,9 @@
 
 .canvasDrawSection {
     background: #f2f2f7;
-    border-radius: 25px;
-    border:1px solid #8e8e93
+    /* border-radius: 25px; */
+    border:1px solid #8e8e93;
+    cursor: none;
 }
 
 .canvasToolsRight {

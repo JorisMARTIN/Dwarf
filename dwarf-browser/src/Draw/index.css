@@ -8,6 +8,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    color: var(--PrimaryText);
 }
 
 .drawTitle {
@@ -16,13 +17,33 @@
     margin: 0px;
     font-size: 2em;
     font-weight: 700;
-    color: var(--PrimaryText);
 }
 
 .drawImage {
     margin: 2em;
-    border-radius: 25px;
+    /* border-radius: 25px; */
     border: 1px solid rgb(142, 142, 147);
+    width: 40%;
+}
+
+.drawImageMessage {
+    text-align: center;
+    padding: 20% 3em;
+}
+
+.drawInfosText{
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+}
+
+.drawInfosTextPackage{
+    display: flex;
+    flex-direction: column;
+}
+
+.drawInfosTextPackage > label, .drawUser > span{
+    font-weight: bold;
 }
 
 .drawName, .drawDesc {
@@ -31,7 +52,7 @@
     border-radius: 10px;
     color: var(--SecondaryText);
     background: var(--Background2);
-    font-size: .8em;
+    font-size: 1em;
     font-weight: 500;
     padding: .5em;
     margin: .5em;
@@ -50,26 +71,70 @@
     border:none
 }
 
-.drawNext {
+.drawNext, .drawDraw {
     align-self: center;
     padding: .5em 1em;
     margin-top: 2em;
-    color: var(--Background);
-    background: var(--PrimaryText);
-    border-radius: 25px;
-    font-size: .8em;
-    font-weight: 600;
-    border:none
-}
-
-.drawDraw {
-    align-self: center;
-    padding: .5em 1em;
-    margin-top: 2em;
-    color: #f2f2f7;
-    background: var(--BlueButton);
     border-radius: 25px;
     font-size: 1.2em;
     font-weight: 600;
-    border:none
+    border:none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}
+
+.drawNext {
+    color: var(--Background);
+    background: var(--PrimaryText);
+}
+
+.drawDraw {
+    color: #f2f2f7;
+    background: var(--BlueButton);
+}
+
+.drawNothingToDraw {
+    width: 60%;
+    margin: auto;
+    background-color: var(--CardBackground);
+    box-shadow: 0 5px 10px 10px var(--Shadow);
+    border-radius: 25px;
+    padding: 2%;
+    color: var(--PrimaryText);
+    /* text-align: center; */
+}
+
+.drawNothingToDrawTitle{
+    text-align: center;
+    font-weight: 600;
+    color: var(--PrimaryText);
+    font-size: 2em;
+}
+
+.drawStartNewPage {
+    text-align: center;
+    padding: .5em 1em;
+    text-decoration: none;
+    color: var(--PrimaryText);
+    font-size: 1.2em;
+    font-weight: 600;
+}
+
+.drawStartNewPage:hover {
+    background:var(--NavbarHover);
+    -webkit-backdrop-filter: saturate(1.8) blur(20px);
+    backdrop-filter: saturate(1.8) blur(20px);
+    border-radius: 25px;
+}
+
+.drawButtons {
+    width: 50%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.drawButtons img {
+    height: 1.2em;
 }

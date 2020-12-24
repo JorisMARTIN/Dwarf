@@ -3,6 +3,7 @@ import withAuth from '../components/withAuth';
 import { Component } from 'react';
 import Auth from '../components/AuthHelperMethods';
 import Canvas from '../Canvas';
+import { Link } from 'react-router-dom';
 
 class Draw extends Component {
     state = {
@@ -37,13 +38,27 @@ class Draw extends Component {
                     frameId: res.page.frameId,
                     frameWidth: res.page.frameWidth,
                     frameHeight: res.page.frameHeight,
+                    frameAuthor: res.page.frameAuthor,
                 });
             }
         });
     }
 
     drawThis = () => {
-        this.setState({goToCanvas: true});
+        if (this.state.frameId) {
+            Auth.fetch("claimdrawing.php", {
+                method: 'POST',
+                body: JSON.stringify({
+                    frameid: this.state.frameId,
+                })
+            }).then(res => {
+                if(res.status === 200) {
+                    this.setState({ goToCanvas: true });
+                } else {
+                    alert(res.message);
+                }
+            });
+        }
     }
 
     componentDidMount() {
@@ -63,21 +78,41 @@ class Draw extends Component {
             />
         ); else if(this.state.name !== null) return (
             <div className="drawSelector">
-                <h1 className="drawTitle">Select a comic to continue based on the latest frame drawn</h1>
-                {this.state.img ? <img className="drawImage" src={"https://dwarf.jorismartin.fr" + this.state.img} alt={this.state.name} />
-                : <p className="drawImage">The author hasn't draw the first frame, so feel free to do it yourself !</p>}
+                <h1 className="drawTitle">Choisis une BD à continuer</h1>
+                {this.state.img && this.state.frameId
+                ? <img className="drawImage" src={"https://dwarf.jorismartin.fr" + this.state.img} alt={this.state.name} />
+                : (this.state.frameId
+                ? <p className="drawImage drawImageMessage">L'auteur de cette BD n'a pas dessiné la première case, à toi de la réaliser !</p>
+                : <p className="drawImage drawImageMessage">Quelqu'un est déjà en train de dessiner cette case !</p>)}
                 <div className="drawInfos">
-                    <textarea readOnly disabled className="drawName" value={this.state.name} />
-                    <textarea readOnly disabled className="drawDesc" value={this.state.description} />
+                    <div className="drawInfosText">
+                        <div className="drawInfosTextPackage">
+                            <label>Titre :</label>
+                            <textarea readOnly disabled className="drawName" value={this.state.name} />
+                        </div>
+                        <div className="drawInfosTextPackage">
+                            <label>Description :</label>
+                            <textarea readOnly disabled className="drawDesc" value={this.state.description} />
+                        </div>
+                    </div>
+
                     <p className="drawGM">{this.state.gamemode}</p>
-                    <p className="drawUser">Auteur : {this.state.user}</p>
+                    <p className="drawUser"><span>Auteur de la BD :</span> {this.state.user}</p>
+                    {this.state.frameAuthor && <p className="drawUser"><span>Auteur de la case :</span> {this.state.frameAuthor}</p>}
                 </div>
-                <button className="drawNext" onClick={this.requestFrame}>Give me another</button>
-                <button className="drawDraw" onClick={this.drawThis}>Draw !</button>
+                <div className="drawButtons">
+                    <button className="drawNext" onClick={this.requestFrame}><span>Une autre</span> <img src="https://dwarf.jorismartin.fr/icons/arrow.svg" alt=""/></button>
+                    {this.state.frameId && <button className="drawDraw" onClick={this.drawThis}><span>Dessiner</span> <img src="https://dwarf.jorismartin.fr/icons/crayon.svg" alt="" /></button>}
+                </div>
             </div>
         ); else return (
             <div>
-                <p className="drawNothing">There is nothing to draw ! :(</p>
+                <h1 className="drawNothingToDrawTitle">Rien à dessiner pour le moment</h1>
+                <div className="drawNothingToDraw">
+                    <p className="drawNothing">Desolé, il n'y a <b>aucune planche de commencé</b>, tu ne peux donc pas continuer de dessin.</p>
+                    <p><b>À toi de commencer</b> une nouvelle BD !<Link className="drawStartNewPage" to="/init">Nouvelle BD</Link></p>
+                    <p>Ou retourne voir les BD déjà réalisées   <Link className="drawStartNewPage" to="/">Accueil</Link></p>
+                </div>
             </div>
         );
     }

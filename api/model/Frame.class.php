@@ -11,6 +11,7 @@ class Frame {
   private $height;
   private $pageid;
   private $userid;
+  private $ttl;
 
   /**
    * Get the ID of the frame
@@ -76,7 +77,7 @@ class Frame {
   }
 
   /**
-   * Check if the frame can be draw
+   * Check if the frame can be drawn
    * 
    * @return bool true = drawable | false = not drawable
    */
@@ -91,6 +92,15 @@ class Frame {
    */
   function isDone() : bool {
     return $this->done;
+  }
+
+  /**
+   * Check if frame is free to use (no ongoing ttl)
+   * 
+   * @return bool true = free | false = not free
+   */
+  function isFree() : bool {
+    return empty($this->ttl) || $this->ttl < time();
   }
 
 }

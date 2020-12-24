@@ -14,7 +14,7 @@ $frameDAO = new FrameDAO();
 
 $data = json_decode(file_get_contents("php://input"));
 
-if(!empty($data)) {
+if (!empty($data)) {
     if ($data->lastPageLoadedId == -1) {
         $lastId = ($pageDAO->getLastPageId() == -1) ? 0 : $pageDAO->getLastPageId();
     } else {
@@ -23,22 +23,19 @@ if(!empty($data)) {
 
     $pages = $pageDAO->getNPages(6, $lastId);
 
-    $lastLoadedId = count($pages) == 0 ? 0 : $pages[count($pages) - 1]->getId();
-
     $endReached = count($pages) != 6;
 
 
-    // Check if the current user, if he is connect, if he is admin
+    // Check if the current user is connected and is admin
 
     $userId = tokenToUserId();
 
-    if($userId == -1) $userIsAdmin = false;
-    else{
+    if ($userId == -1) $userIsAdmin = false;
+    else {
         $userIsAdmin = $userDAO->getUser($userId)->isAdmin();
     }
 
     $out = [
-        'lastPageLoadedId' => $lastLoadedId,
         'endReached' => $endReached,
         'pages' => [],
         'userIsAdmin' => $userIsAdmin
@@ -50,9 +47,12 @@ if(!empty($data)) {
         $user = $userDAO->getUser($p->getOwnerId());
 
         $images = [];
+        $authors = [$user->getNickname()];
+
         $frames = $frameDAO->getFrames($p->getId());
-        foreach($frames as $frame) {
+        foreach ($frames as $frame) {
             $images[] = $frame->getImagePtr();
+            $authors[] = $userDAO->getUser($frame->getOwnerId())->getNickname();
         }
 
         $out['pages'][$i] = [
@@ -62,11 +62,10 @@ if(!empty($data)) {
             'gamemode' => ($p->getGameMode() == 0 ? "Normal" : "Reverse"),
             'date' => $p->getCreationDate(),
             'images' => $images,
-            'user' => $user->getNickname(),
+            'authors' => $authors,
             'template' => $p->getTemplateType(),
         ];
     }
-
 } else {
     $out = [];
 }

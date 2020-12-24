@@ -34,12 +34,14 @@ if ($userId != -1) {
             $tmpSize = count($TEMPLATES[$template]);
             for ($i = 0; $i < $tmpSize; $i++) {
                 $box = $TEMPLATES[$template][$i];
-                $fid = $frameDAO->putFrame(false, false, $box->w, $box->h, $pageId, $userId);
+                $fid = $frameDAO->putFrame(false, false, $box->w, $box->h, $pageId, NULL);
                 if (($gamemode == 0 && $i == 0) || ($gamemode == 1 && $i = $tmpSize)) {
                     $frameId = $fid;
                 }
             }
+
             $frameDAO->setDrawable($frameId, true); // set first frame to drawable
+            $frameDAO->claim($frameId); // claim first frame
             $page = $pageDAO->getPage($pageId);
             $frame = $frameDAO->getFrame($frameId);
 

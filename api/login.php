@@ -22,14 +22,20 @@ if ($userId != -1) {
     $expiration = time() + 24 * 60 * 60; //token valide 24h   int time() = timestamp UNIX en secondes
     $token = generateToken($userId, $expiration);
 
+    $user = $userDAO->getUser($userId);
+    $ip = getClientIP();
+    if(!in_array($ip, $user->getIps())) {
+        $userDAO->addIp($userId, $ip);
+    }
+
     echo json_encode([
         'token' => $token,
         'status' => 200,
-        'message' => 'Login success'
+        'message' => 'Connexion réussie'
     ]);
 } else {
     echo json_encode([
         'status' => 400,
-        'message' => 'Login failed!'
+        'messageError' => 'La connexion a échoué. Veuillez réessayer.'
     ]);
 }

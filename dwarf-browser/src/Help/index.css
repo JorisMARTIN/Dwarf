@@ -1,0 +1,35 @@
+.help{
+    color: var(--PrimaryText);
+    text-align: center;
+    width: 80%;
+    margin: auto;
+}
+
+.help article{
+    text-align: left;
+}
+
+.helpMain {
+    width: 90%;
+    height: 90%;
+    margin: auto;
+    background-color: var(--CardBackground);
+    box-shadow: 0 5px 10px 10px var(--Shadow);
+    border-radius: 25px;
+    padding: 2%;
+}
+.helpMain:last-child{
+    padding-bottom: 2%;
+}
+
+.helpTitle{
+    text-align: center;
+    font-weight: 600;
+    color: var(--PrimaryText);
+    font-size: 2em;
+}
+
+.helpAvis a {
+    text-decoration: none;
+    color: var(--BlueButton);
+}

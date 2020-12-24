@@ -15,7 +15,7 @@ creationDate timestamp NOT NULL,
 name varchar(32) NOT NULL,
 description varchar(512),
 gameMode int CHECK (gameMode >= 0 and gameMode <= 2) DEFAULT 0,
-template int CHECK (template >= 0 and template <= 0) DEFAULT 0,
+template int CHECK (template >= 0 and template <= 2) DEFAULT 0,
 completed boolean DEFAULT FALSE,
 userId int NOT NULL REFERENCES "User"(userId),
 deleted boolean DEFAULT FALSE -- Edited by a trigger
@@ -30,7 +30,8 @@ done boolean DEFAULT FALSE,
 width int CHECK (width > 0),
 height int CHECK (height > 0),
 pageId int NOT NULL REFERENCES "Page"(pageId),
-userId int REFERENCES "User"(userId)
+userId int REFERENCES "User"(userId),
+ttl bigint
 );
 
 CREATE TABLE IF NOT EXISTS "Rate" (

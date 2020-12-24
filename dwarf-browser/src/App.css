@@ -1,5 +1,7 @@
 html {
-    background-color:var(--Background)
+    background-color:var(--Background);
+    position: relative;
+    min-height: 100%;
 }
 
 .menu {
@@ -19,15 +21,35 @@ html {
     z-index: 2;
 }
 
+.dwarfDiv{
+    display: flex;
+    align-items: center;
+}
+
+.dwarfLogo{
+    height: 50px;
+    width: auto;
+    margin: auto;
+}
+
 .dwarf {
     text-decoration: none;
     color: var(--PrimaryText);
     font-size: 2em;
-    font-weight:700
+    font-weight:700;
 }
 
 .componentsMenu {
     display:flex
+}
+
+.componentsMenu + .link{
+    background: linear-gradient(var(--ClassicButtonStart), var(--ClassicButtonEnd));
+    border-radius:25px;
+}
+
+.componentsMenu + .link:hover{
+    background-color: #ee4239;
 }
 
 .link {
@@ -65,4 +87,21 @@ html {
 
 input[type=text] {
     resize:none
+}
+
+.footer {
+    position: absolute;
+    bottom: -100px;
+    width: 100%;
+    padding: 1em 0em 1em 0em;
+    color: var(--SecondaryText);
+    background: var(--CardBackground);
+    box-shadow: 0 5px 10px 10px var(--Shadow);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.footer p{
+    margin: 5px;
 }

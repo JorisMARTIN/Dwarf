@@ -59,7 +59,7 @@ class UserDAO extends DAO {
      * @return bool true = ✅ | false = ❌
      */
     function addIp(int $userId, string $ip) : bool {
-        $query = 'UPDATE "User" SET ips = ips || :ip WHERE userid=:userId';
+        $query = 'UPDATE "User" SET ips = array_append(ips, :ip) WHERE userid=:userId';
         return $this->db->prepare($query)->execute([':userId' => $userId, ':ip' => $ip]);
     }
 

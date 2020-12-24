@@ -9,7 +9,8 @@ export default class Login extends Component {
     state = {
         redirectToHome: false,
         email: "",
-        password: ""
+        password: "",
+        messageError : ""
     };
 
     /* Fired off every time the use enters something into the input fields */
@@ -33,13 +34,13 @@ export default class Login extends Component {
                 // Refresh page afer login for update App component
                 this.refresh();
             } else {
-                alert("Log in failed. Try again.");
+                this.setState({ messageError: res.messageError });
             }
         })
     }
 
     refresh = () =>{
-        window.location.reload();
+        setTimeout(() => { window.location.reload(); }, 400);
     }
 
     render() {
@@ -48,10 +49,11 @@ export default class Login extends Component {
         } else {
             return (
                 <div className="authPageLogin">
-                    <h1>Login</h1>
+                    <h1>Connexion</h1>
+                    {this.state.messageError && <p className="authPageMessage">Erreur : {this.state.messageError}</p>}
                     <form className="authPageLoginForm">
                         <div className="authPageLoginEmail">
-                            <label htmlFor="email">Email :</label>
+                            <label htmlFor="email">E-mail :</label>
                             <input
                                 required
                                 id="email"
@@ -62,7 +64,7 @@ export default class Login extends Component {
                             />
                         </div>
                         <div className="authPageLoginPwd">
-                            <label htmlFor="pwd">Password :</label>
+                            <label htmlFor="pwd">Mot de passe :</label>
                             <input
                                 required
                                 id="pwd"
@@ -73,8 +75,8 @@ export default class Login extends Component {
                             />
                         </div>
                         <div className="authPageLoginBottom">
-                            <Link className="authPageLoginForgotPwd" to="/">Forgot password</Link>
-                            <button onClick={this.handleFormSubmit}>Log in</button>
+                            {/* <Link className="authPageLoginForgotPwd" to="/">Forgot password</Link> */}
+                            <button onClick={this.handleFormSubmit}>Connexion</button>
                         </div>
                     </form>
                 </div>
