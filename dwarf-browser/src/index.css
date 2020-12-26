@@ -1,7 +1,7 @@
 @media (prefers-color-scheme: dark) {
     :root {
-        --Navbar: rgba(44, 44, 46, 0.8);
-        --NavbarHover: rgba(28, 28, 30, 0.8);
+        --Navbar: rgba(44, 44, 46);
+        --NavbarHover: rgba(28, 28, 30);
         --Background: #1c1c1e;
         --Background2: #1c1c1e;
         --CardBackground: #2c2c2e;
@@ -12,24 +12,23 @@
         --BlueButton: #0a84ff;
         --BlueButtonHover: #409cff;
         --RedButton: #ff3b30;
-        --RedButtonHover: rgb(255, 105, 97);
+        --RedButtonHover: #ff6961;
         --ClassicButtonEnd: #ff3b30;
         --ClassicButtonStart: #ff2d55;
-        --Shadow:#141418;
-        --ShadowHover: rgb(18, 18, 22);
-        --LikeShadow: rgb(48, 209, 88);
-        --DislikeShadow: rgb(255, 69, 58);
-
+        --Shadow: #141418;
+        --ShadowHover: #121216;
+        --LikeShadow: #30d158;
+        --DislikeShadow:#ff453a
     }
 }
 
 @media (prefers-color-scheme: light) {
     :root {
-        --Navbar: rgba(255, 255, 255, 0.8);
-        --NavbarHover: rgba(229, 229, 234, 0.8);
-        --Background: rgb(255, 255, 255);
+        --Navbar: hsla(0, 0%, 100%);
+        --NavbarHover: rgba(229, 229, 234);
+        --Background: #faf9f8;
         --Background2: #e5e5ea;
-        --CardBackground: #ffffff;
+        --CardBackground: #fff;
         --Hover: #e5e5ea;
         --PrimaryText: #1c1c1e;
         --SecondaryText: #2c2c2e;
@@ -37,20 +36,28 @@
         --BlueButton: #007aff;
         --BlueButtonHover: #0040dd;
         --RedButton: #ff453a;
-        --RedButtonHover: rgb(215, 0, 21);
+        --RedButtonHover: #d70015;
         --ClassicButtonEnd: #ff453a;
         --ClassicButtonStart: #ff375f;
-        --Shadow:#d1d1d6;
-        --ShadowHover: rgb(199, 199, 204);
-        --LikeShadow: rgb(52, 199, 89);
-        --DislikeShadow: rgb(255, 59, 48);
+        --Shadow: #d1d1d6;
+        --ShadowHover: #c7c7cc;
+        --LikeShadow: #34c759;
+        --DislikeShadow:#ff3b30
+    }
+}
 
+@keyframes PopAnimation {
+    from {
+        transform:scale3d(.98, .98, 1)
+    }
+
+    to {
+        transform:scale3d(1, 1, 1)
     }
 }
 
 body {
-    margin: 0;
-    margin-bottom: 100px;
+    margin: 0 0 100px;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing:grayscale
