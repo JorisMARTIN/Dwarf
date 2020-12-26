@@ -1,26 +1,34 @@
-.scrollerMain{
-    color: var(--PrimaryText);
+.homeAll {
+    display: flex;
+    flex-direction:column
 }
 
-.scrollerContainer{
+.homeTitle {
+    text-align: center;
+    font-size: 2em;
+    font-weight:600
+}
+
+.homeTitle, .scrollerMain {
+    color:var(--PrimaryText)
+}
+
+.homeDivPlanche, .scrollerContainer {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
 }
 
 .homeDivPlanche {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
     padding:2em 0
 }
 
 .homeDivPlancheLoader {
-    color: var(--PrimaryText);
+    color:var(--PrimaryText)
 }
 
 .homePlancheWrapper {
-    padding: 2em;
+    padding:1em
 }
 
 .homePlanche, .homePlancheWrapper {
@@ -33,12 +41,15 @@
     padding: 2em;
     justify-content: space-between;
     background: var(--CardBackground);
-    box-shadow: 0 5px 10px 10px var(--Shadow);
-    border-radius:25px
+    /*box-shadow: 0 5px 10px 10px var(--Shadow);*/
+    box-shadow: 0 3.2px 7.2px 0 rgba(0,0,0,.132),0 .6px 1.8px 0 rgba(0,0,0,.108);
+    border-radius: 25px;
+    animation: PopAnimation 0.25s;
 }
 
 .homePlanche:hover {
-    box-shadow:0 10px 15px 15px var(--ShadowHover)
+    /*box-shadow:0 10px 15px 15px var(--ShadowHover);*/
+    box-shadow: 0 6.4px 14.4px 0 rgba(0,0,0,.132),0 1.2px 3.6px 0 rgba(0,0,0,.108);
 }
 
 .homePlancheTop {
@@ -49,9 +60,8 @@
 .homePlancheImg {
     width: 250px;
     object-fit: cover;
-    /* border-radius: 10px; */
-    border:1px solid #8e8e93;
-    background-color: #AAB2AB;
+    border: 1px solid #8e8e93;
+    background-color:#aab2ab
 }
 
 .homePlancheTopInfos {
@@ -63,6 +73,7 @@
 .homePlancheTopInfos > textarea {
     resize: none;
     border: none;
+    text-align: center;
     background:var(--CardBackground)
 }
 
@@ -121,7 +132,7 @@
 
 .homeDeleteAdminButton {
     z-index: 1;
-    margin: 2em 2em 0 2em;
+    margin: 2em 2em 0;
     padding: .5em 1em;
     color: #f2f2f7;
     background: var(--RedButton);
