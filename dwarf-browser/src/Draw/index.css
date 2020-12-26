@@ -3,50 +3,50 @@
     margin: 2em auto;
     padding: 2em;
     background: var(--CardBackground);
-    box-shadow: 0 5px 10px 10px var(--Shadow);
+    box-shadow: 0 3.2px 7.2px 0 rgba(0,0,0,.132),0 .6px 1.8px 0 rgba(0,0,0,.108);
     border-radius: 25px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    color: var(--PrimaryText);
+    color:var(--PrimaryText);
+    animation: PopAnimation 0.25s;
 }
 
 .drawTitle {
     text-align: center;
-    padding: 0px;
-    margin: 0px;
+    padding: 0;
+    margin: 0;
     font-size: 2em;
-    font-weight: 700;
+    font-weight:700
 }
 
 .drawImage {
     margin: 2em;
-    /* border-radius: 25px; */
-    border: 1px solid rgb(142, 142, 147);
-    width: 40%;
+    border: 1px solid #8e8e93;
+    width:40%
 }
 
 .drawImageMessage {
     text-align: center;
-    padding: 20% 3em;
+    padding:20% 3em
 }
 
-.drawInfosText{
+.drawInfosText {
     display: flex;
     align-items: center;
-    flex-direction: row;
+    flex-direction:row
 }
 
-.drawInfosTextPackage{
+.drawInfosTextPackage {
     display: flex;
-    flex-direction: column;
+    flex-direction:column
 }
 
-.drawInfosTextPackage > label, .drawUser > span{
-    font-weight: bold;
+.drawInfosTextPackage > label, .drawUser > span {
+    font-weight:700
 }
 
-.drawName, .drawDesc {
+.drawDesc, .drawName {
     align-self: center;
     border: none;
     border-radius: 10px;
@@ -60,38 +60,46 @@
 }
 
 .drawGM {
-    align-self: center;
     text-align: center;
-    padding: .5em 1em;
     color: #f2f2f7;
     background: linear-gradient(var(--ClassicButtonStart), var(--ClassicButtonEnd));
+    font-size:.8em
+}
+
+.drawDraw, .drawGM, .drawNext {
+    align-self: center;
+    padding: .5em 1em;
     border-radius: 25px;
-    font-size: .8em;
     font-weight: 600;
     border:none
 }
 
-.drawNext, .drawDraw {
-    align-self: center;
-    padding: .5em 1em;
+.drawDraw, .drawNext {
     margin-top: 2em;
-    border-radius: 25px;
     font-size: 1.2em;
-    font-weight: 600;
-    border:none;
     cursor: pointer;
     display: flex;
-    align-items: center;
+    align-items:center
 }
 
 .drawNext {
     color: var(--Background);
-    background: var(--PrimaryText);
+    background:var(--PrimaryText)
+}
+
+@media (prefers-color-scheme: light) {
+    .drawNext > img {
+        filter: invert(1);
+    }
 }
 
 .drawDraw {
     color: #f2f2f7;
-    background: var(--BlueButton);
+    background:var(--BlueButton);
+}
+
+.drawDraw > img {
+    filter: invert(1);
 }
 
 .drawNothingToDraw {
@@ -101,40 +109,39 @@
     box-shadow: 0 5px 10px 10px var(--Shadow);
     border-radius: 25px;
     padding: 2%;
-    color: var(--PrimaryText);
-    /* text-align: center; */
+    color:var(--PrimaryText)
 }
 
-.drawNothingToDrawTitle{
+.drawNothingToDrawTitle {
+    font-size:2em
+}
+
+.drawNothingToDrawTitle, .drawStartNewPage {
     text-align: center;
     font-weight: 600;
-    color: var(--PrimaryText);
-    font-size: 2em;
+    color:var(--PrimaryText)
 }
 
 .drawStartNewPage {
-    text-align: center;
     padding: .5em 1em;
     text-decoration: none;
-    color: var(--PrimaryText);
-    font-size: 1.2em;
-    font-weight: 600;
+    font-size:1.2em
 }
 
 .drawStartNewPage:hover {
-    background:var(--NavbarHover);
+    background: var(--NavbarHover);
     -webkit-backdrop-filter: saturate(1.8) blur(20px);
     backdrop-filter: saturate(1.8) blur(20px);
-    border-radius: 25px;
+    border-radius:25px
 }
 
 .drawButtons {
     width: 50%;
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items:center
 }
 
 .drawButtons img {
-    height: 1.2em;
+    height:1.2em
 }
