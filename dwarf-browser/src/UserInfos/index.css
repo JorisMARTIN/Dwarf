@@ -1,20 +1,21 @@
 .userPageInfos {
-    padding: 2em;
+    padding:2em;
+    animation: PopAnimation 0.25s;
 }
 
 .userPageInfosName {
     color: var(--PrimaryText);
     background: var(--CardBackground);
-    box-shadow: 0 5px 10px 10px var(--Shadow);
+    box-shadow: 0 3.2px 7.2px 0 rgba(0,0,0,.132),0 .6px 1.8px 0 rgba(0,0,0,.108);
     border-radius: 25px;
-    padding: 0.5em 1em;
+    padding: .5em 1em;
     font-size: 2.2em;
-    font-weight: 700;
+    font-weight:700;
 }
 
 .userPageInfosOthers {
     color: var(--SecondaryText);
     font-size: 1.2em;
-    font-weight: 500;
-    list-style: none;
+    font-weight: 400;
+    list-style: none
 }
