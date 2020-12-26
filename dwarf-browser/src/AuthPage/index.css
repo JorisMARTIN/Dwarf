@@ -15,9 +15,9 @@
 
 .authPageMessage {
     color: var(--SecondaryText);
-    font-size:1.2em;
+    font-size: 1.2em;
     text-align: center;
-    color: var(--ClassicButtonStart);
+    color:var(--ClassicButtonStart)
 }
 
 .authPage {
@@ -25,7 +25,9 @@
     flex-direction: row;
     border-radius: 25px;
     background-color: var(--CardBackground);
-    box-shadow:0 5px 10px 10px var(--Shadow)
+    /*box-shadow:0 5px 10px 10px var(--Shadow);*/
+    box-shadow: 0 3.2px 7.2px 0 rgba(0,0,0,.132),0 .6px 1.8px 0 rgba(0,0,0,.108);
+    animation: PopAnimation 0.25s;
 }
 
 .authPage, .authPageLogin, .authPageSignup {
@@ -62,7 +64,7 @@
 .authPageLoginEmail > input[type=email], .authPageLoginPwd > input[type=password], .authPageSignupConfEmail > input[type=email], .authPageSignupDate > input[type=date], .authPageSignupEmail > input[type=email], .authPageSignupPwd2 > input[type=password], .authPageSignupPwd > input[type=password], .authPageSignupUserName > input[type=text] {
     border-radius: 25px;
     color: var(--SecondaryText);
-    background: var(--Background2);
+    background: var(--Background);
     padding: .5em;
     margin: .5em;
     float: right;
@@ -91,20 +93,16 @@
 
 .authPageSignup {
     border-left: 1px solid var(--Background2);
-    display: flex;
-    flex-direction: column;
     justify-content:space-between
 }
 
-.authPageSignupForm {
+.authPageSignup, .authPageSignupDiv, .authPageSignupForm {
     display: flex;
-    flex-direction: column;
+    flex-direction:column
 }
 
 .authPageSignupDiv {
-    display: flex;
-    flex-direction: column;
-    padding: 0 2em;
+    padding:0 2em
 }
 
 .authPage label {
@@ -116,38 +114,29 @@
         width: 100%;
         display: flex;
         flex-direction: column;
-        border-radius: 0px;
+        border-radius: 0;
         background: none;
-        box-shadow: none;
+        box-shadow:none
     }
-    
+
     .authPageLogin > h1, .authPageSignup > h1 {
         color: var(--PrimaryText);
         text-align: center;
         font-size: 2em;
-        font-weight:700;
-        padding: 0px;
-        margin: 0px;
+        font-weight: 700;
+        padding: 0;
+        margin:0
     }
-    
-    .authPageLogin {
+
+    .authPageLogin, .authPageSignup {
         padding: 2em;
         background: var(--CardBackground);
-        box-shadow:0 5px 10px 10px var(--Shadow);
+        box-shadow: 0 5px 10px 10px var(--Shadow);
         margin: 2em;
-        border-radius: 25px;
+        border-radius:25px
     }
-    
-    .authPageSignup {
-        padding: 2em;
-        margin: 2em;
-        background: var(--CardBackground);
-        box-shadow:0 5px 10px 10px var(--Shadow);
-        border-radius: 25px;
-    }
-    
+
     .authPageLoginBottom > button, .authPageSignupForm > button {
-        margin: 0px;
-        margin-top: 2em;
+        margin:2em 0 0
     }
 }
