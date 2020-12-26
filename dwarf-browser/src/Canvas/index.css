@@ -7,42 +7,43 @@
     margin: 2em;
     display: flex;
     flex-direction: row;
-    justify-content:space-around;
-    max-width: 2000px;
+    justify-content: space-around;
+    max-width:2000px
 }
 
 .canvasDraw, .canvasToolsLeft, .canvasToolsRight {
     background-color: var(--CardBackground);
-    box-shadow: 0 5px 10px 10px var(--Shadow);
+    box-shadow: 0 3.2px 7.2px 0 rgba(0,0,0,.132),0 .6px 1.8px 0 rgba(0,0,0,.108);
     color: var(--PrimaryText);
     padding: 2em;
-    border-radius:25px
+    border-radius:25px;
+    animation: PopAnimation 0.25s;
 }
 
 .canvasToolsLeft {
     display: flex;
-    flex-direction:column;
+    flex-direction: column;
     width: 20%;
-    max-width: 250px;
+    max-width:250px
 }
-
 
 .canvasToolsLeftImage, .canvasToolsLeftOthersTools {
     margin-bottom: 2em;
     background: var(--Background2);
     height: 40%;
     border-radius: 25px;
-    display:flex;
-    padding-bottom: 1em;
+    display: flex;
+    padding-bottom:1em
 }
 
 .canvasToolsLeftImage {
     flex-direction: column;
     align-items: center;
-    height: auto;
+    height:auto
 }
+
 .canvasToolsLeftImage img {
-    width: 90%;
+    width:90%
 }
 
 .canvasToolsLeftOthersTools {
@@ -59,30 +60,30 @@
     color: #f2f2f7;
     font-size: .8em;
     font-weight: 600;
-    border:none;
+    border:none
 }
 
-.canvasToolsLeftBrush, .canvasToolsLeftLazy{
+.canvasToolsLeftBrush, .canvasToolsLeftLazy {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items:center
 }
 
 .canvasToolsLeftBrush {
-    text-align:center;
-    margin-bottom: 0.2em;
+    text-align: center;
+    margin-bottom:.2em
 }
 
 .canvasToolsLeftBrush > input {
-    width:66%;
+    width:66%
 }
 
 .canvasToolsLeftLazy {
-    text-align:center;
+    text-align:center
 }
 
 .canvasToolsLeftLazy > input {
-    width:66%;
+    width:66%
 }
 
 .canvasToolsLeftSubmit {
@@ -93,21 +94,21 @@
     border-radius: 25px;
     font-size: .8em;
     font-weight: 600;
-    border:none;
+    border:none
 }
 
 .canvasDraw {
-    justify-content:space-around;
-    max-width: ;
+    justify-content: space-around;
+    max-width:
 }
 
 .canvasDraw, .canvasDrawTitle {
     display: flex;
-    flex-direction:column;
+    flex-direction:column
 }
 
 .canvasDrawTitle {
-    justify-content:space-between;
+    justify-content:space-between
 }
 
 .canvasDrawTitle > textarea {
@@ -131,20 +132,14 @@
 
 .canvasDrawSection {
     background: #f2f2f7;
-    /* border-radius: 25px; */
-    border:1px solid #8e8e93;
-    cursor: none;
+    border: 1px solid #8e8e93;
+    cursor:none
 }
 
 .canvasToolsRight {
     display: flex;
     flex-direction: column;
     justify-content:center
-}
-
-.canvasToolsRightColorPicker {
-    /* transform: rotate(90deg); */
-    /* min-width: 200px; */
 }
 
 .canvasToolsLeftDropDown > div, .canvasToolsRightDropDown {
