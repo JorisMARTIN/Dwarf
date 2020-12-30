@@ -26,6 +26,7 @@ class ComicPage extends React.Component {
         redirectVote: false,
         fullscreen: false,
         rate: null,
+        userId : 0
     }
 
     async componentDidMount() {
@@ -66,6 +67,16 @@ class ComicPage extends React.Component {
         ccbync.onload = () => {
             ctx.drawImage(ccbync, max_x - ccbyncX, max_y - ccbyncY, ccbyncX, ccbyncY);
         }
+        // Get user id for rate system
+        Auth.fetch("userinfos.php", {
+            method: 'POST'
+        }).then(res => {
+            if (res.userid) {
+                this.setState({userId: res.userid});
+            } else {
+                alert(res.message);
+            }
+        });
     }
 
     handleVoteClick = (rate) => {
@@ -76,13 +87,10 @@ class ComicPage extends React.Component {
             body: JSON.stringify({
                 pageId: this.props.pageId,
                 rateType: rate,
-                userId: this.props.userId
+                userId: this.state.userId
             })
         }).then(res => {
-            if (res.userId) {
-                // Display message to the user
-                alert(res.message);
-            } else {
+            if (res.message) {
                 // User not loged In
                 if (window.confirm(res.message)) {
                     this.setState({

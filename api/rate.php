@@ -22,7 +22,7 @@ if($userId != -1){
     $rateDAO->putVote($userId, $pageId, (($voteType == 1) ? true : false));
 
     $out = [];
-
+    
 }else{
     // User not logged in
     $out = [
