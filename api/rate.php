@@ -15,7 +15,6 @@ if($userId != -1){
     $data = json_decode(file_get_contents("php://input"));
     // voteType = 1 pour like et 0 pour dislike
     $voteType = $data->rateType;
-    $userId = $data->userId;
     $pageId = $data->pageId;
     $rateDAO = new RateDAO();
 
