@@ -14,13 +14,14 @@
 .initateDrawingForm {
     background-color: var(--CardBackground);
     color: var(--SecondaryText);
-    box-shadow: 0 5px 10px 10px var(--Shadow);
+    box-shadow: 0 3.2px 7.2px 0 rgba(0,0,0,.132),0 .6px 1.8px 0 rgba(0,0,0,.108);
     display: flex;
     flex-direction: column;
     border-radius: 25px;
     padding: 2em;
     font-size: 1em;
-    font-weight:500
+    font-weight:500;
+    animation: PopAnimation 0.25s;
 }
 
 .initateDrawingChoseTitle, .initateDrawingDescription, .initateDrawingGameMode, .initateDrawingGameType, .initateDrawingTemplate {
@@ -58,7 +59,7 @@
     color: var(--SecondaryText);
     background: var(--Background2);
     font-size: 1em;
-    font-weight: 500;
+    font-weight: 400;
     padding: .5em;
     margin: .5em;
     resize:none
@@ -69,8 +70,8 @@
     flex-direction:column
 }
 
-.initateDrawingGameType, .initateDrawingGameMode{
-    display: none;
+.initateDrawingGameMode, .initateDrawingGameType {
+    display:none
 }
 
 .initDrawingRadiosButtons {
@@ -78,31 +79,27 @@
     align-self: center;
     display: flex;
     flex-direction: row;
-    justify-content:space-between;
-    margin-top: 2%;
+    justify-content: space-between;
+    margin-top:2%
 }
 
-.initDrawingRadiosButtons [type="radio"]:checked,
-.initDrawingRadiosButtons [type="radio"]:not(:checked){
-	width: 0;
-	height: 0;
-    visibility: hidden;
+.initDrawingRadiosButtons [type=radio]:checked, .initDrawingRadiosButtons [type=radio]:not(:checked) {
+    width: 0;
+    height: 0;
+    visibility:hidden
 }
 
-.initDrawingRadiosButtons label:hover{
+.initDrawingRadiosButtons label:hover {
     display: inline-block;
     height: 150px;
-    cursor: pointer;
+    cursor:pointer
 }
 
-.initDrawingRadiosButtons [type="radio"]:checked + label{
+.initDrawingRadiosButtons [type=radio]:checked + label {
     display: inline-block;
     height: 150px;
-    /* box-shadow: 0px 0px 40px var(--BlueButton); */
-    border: 2px solid var(--BlueButton);
+    border:2px solid var(--BlueButton)
 }
-
-
 
 .initateDrawingSubmitButton {
     padding: .5em 1em;
@@ -113,6 +110,6 @@
     font-size: 1.2em;
     font-weight: 600;
     border: none;
-    align-self:center;
-    cursor: pointer;
+    align-self: center;
+    cursor:pointer
 }

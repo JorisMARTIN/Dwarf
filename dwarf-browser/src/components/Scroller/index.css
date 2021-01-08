@@ -12,19 +12,37 @@
     text-align: center;
 }
 
+.homeAll {
+    display: flex;
+    flex-direction:column
+}
+
+.homeTitle {
+    text-align: center;
+    font-size: 2em;
+    font-weight:600
+}
+
+.homeTitle, .scrollerMain {
+    color:var(--PrimaryText)
+}
+
 .homeDivPlanche {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+}
+
+.homeDivPlanche {
     padding:2em 0
 }
 
 .homeDivPlancheLoader {
-    color: var(--PrimaryText);
+    color:var(--PrimaryText)
 }
 
 .homePlancheWrapper {
-    padding: 2em;
+
 }
 
 .homePlancheFullscreenWrapper {
@@ -67,16 +85,20 @@
 .homePlanche {
     display: flex;
     flex-direction:column;
+    margin: 20px;
     width: 250px;
     padding: 2em;
     justify-content: space-between;
     background: var(--CardBackground);
-    box-shadow: 0 5px 10px 10px var(--Shadow);
-    border-radius:25px
+    /*box-shadow: 0 5px 10px 10px var(--Shadow);*/
+    box-shadow: 0 3.2px 7.2px 0 rgba(0,0,0,.132),0 .6px 1.8px 0 rgba(0,0,0,.108);
+    border-radius: 25px;
+    animation: PopAnimation 0.25s;
 }
 
 .homePlanche:hover {
-    box-shadow:0 10px 15px 15px var(--ShadowHover)
+    /*box-shadow:0 10px 15px 15px var(--ShadowHover);*/
+    box-shadow: 0 6.4px 14.4px 0 rgba(0,0,0,.132),0 1.2px 3.6px 0 rgba(0,0,0,.108);
 }
 
 .homePlancheTop {
@@ -85,9 +107,8 @@
 }
 
 .homePlancheImg {
-    width: 250px;
+    width: 100%;
     object-fit: cover;
-    /* border-radius: 10px; */
     border:1px solid #8e8e93;
     background-color: #AAB2AB;
     cursor: pointer;
@@ -102,6 +123,7 @@
 .homePlancheTopInfos > textarea {
     resize: none;
     border: none;
+    text-align: center;
     background:var(--CardBackground)
 }
 
@@ -160,7 +182,7 @@
 
 .homeDeleteAdminButton {
     z-index: 1;
-    margin: 2em 2em 0 2em;
+    margin: 2em 2em 0;
     padding: .5em 1em;
     color: #f2f2f7;
     background: var(--RedButton);
@@ -183,42 +205,30 @@
 }
 
 @media only screen and (max-width: 600px) {
-    .homeDivPlanche {
-        display: flex;
-        flex-direction: column;
-        flex-wrap:nowrap
+    .homeTitle {
+        margin: 20px;
+        text-align: left;
     }
-
+    
     .homePlanche {
+        margin: 20px;
+        padding: 0;
         width: auto;
-        margin: 0 0 2em;
-        padding: 2em 2em 0;
-        box-shadow: none;
-        border-radius: 0;
-        background:var(--CardBackground)
+        justify-content: space-between;
+        background: var(--CardBackground);
+        box-shadow: 0 10px 20px var(--Shadow);
+        /*box-shadow: 0 3.2px 7.2px 0 rgba(0,0,0,.132),0 .6px 1.8px 0 rgba(0,0,0,.108);*/
+        border-radius: 20px;
+        animation: PopAnimation 0.25s;
     }
-
-    .homePlancheTop {
-        display: flex;
-        flex-direction: row;
-        text-align:left
-    }
-
-    .homePlancheTopInfos {
-        display: flex;
-        flex-direction: column;
-        color:var(--PrimaryText)
-    }
-
-    .homePlancheTopInfos > textarea {
-        resize: none;
+    
+    .homePlancheImg {
         width: 100%;
         border: none;
-        text-align: left;
-        background:var(--CardBackground)
+        border-radius: 20px 20px 0 0;
     }
-
-    .homePlancheBottom > button {
-        margin:2em
+    
+    .homePlancheTopInfos, .homePlancheBottom {
+        padding: 20px;
     }
 }

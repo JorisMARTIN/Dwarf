@@ -72,15 +72,15 @@ class ComicPage extends React.Component {
         }
     }
 
+    /* VOTE */
+
     handleVoteClick = (rate) => {
         this.setState({ rate: rate });
-        console.log(this.props);
         Auth.fetch("rate.php", {
             method: "POST",
             body: JSON.stringify({
                 pageId: this.props.pageId,
-                rateType: rate,
-                userId: this.state.userId
+                rateType: rate
             })
         }).then(res => {
             if (res.message) {
@@ -94,6 +94,8 @@ class ComicPage extends React.Component {
         })
     }
 
+    /* Agrandissement Page */
+
     toggleFullscreen = () => {
         if (this.state.fullscreen) {
             this.setState({ fullscreen: false });
@@ -105,11 +107,25 @@ class ComicPage extends React.Component {
     componentDidUpdate() {
         this.drawPlanche();
     }
+    /* Supression page */
 
     deletePage = () => {
-        //const pageIdToDelete = this.props.pageId;
         if (window.confirm("Do you realy want to delete this page ?")) {
-            alert("Et non ca marche pas encore !");
+            const reason = window.prompt("Please mention the reason of the detele : ");
+            if(reason){
+                Auth.fetch("delete.php", {
+                    method: "POST",
+                    body: JSON.stringify({
+                        pageId: this.props.pageId,
+                        action: "delete",
+                        reason: reason
+                    })
+                }).then(res => {
+                    if (window.confirm(res.message + "\nConfirm to continue : ")) {
+                        window.location.reload();
+                    }
+                })
+            }
         }
     }
 
@@ -152,16 +168,16 @@ class ComicPage extends React.Component {
 }
 
 export default class Scroller extends React.Component {
-
     state = {
         pages: [],
         loading: false,
         lastPageLoadedId: -1,
         prevY: 0,
-        endReached: false
+        endReached: false,
+        userIsAdmin: false
     };
 
-    componentDidMount() {
+    componentDidMount(){
         this.getPages(this.state.lastPageLoadedId);
 
         window.addEventListener('scroll', this.handleScroll);
@@ -200,27 +216,28 @@ export default class Scroller extends React.Component {
                     lastPageLoadedId: id,
                 })
             }).then(res => {
-                this.setState({
-                    loading: false,
-                    endReached: res.endReached
-                });
-                this.setState({ pages: this.state.pages.concat(res.pages) })
+                this.setState({ 
+                    loading : false,
+                    endReached: res.endReached,
+                    userIsAdmin: res.userIsAdmin
+                 });
+                this.setState({ pages: this.state.pages.concat(res.pages)})
             })
         }
 
     }
 
-    render() {
-        console.log(this.state.lastPageLoadedId);
-        return (
+    render(){
+        const {pages, loading, userIsAdmin} = this.state;
+        return(
             <div className="scrollerMain">
                 <div className="scrollerContainer">
-                    {this.state.pages.map((page, i) => (
-                        <ComicPage key={i} {...page} userIsAdmin={page.userIsAdmin} />
-                    ))}
+                    {pages.map((page,i) => (
+                        <ComicPage key={i} {...page} userIsAdmin={userIsAdmin} />
+                    ))} 
                 </div>
                 <div>
-                    {this.state.loading && <p class="scrollerLoading">Chargement ...</p>}
+                    {loading && <p class="scrollerLoading">Chargement ...</p>}
                 </div>
             </div>
         )

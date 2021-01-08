@@ -158,7 +158,7 @@ class FrameDAO extends DAO {
   function claim(int $frameId) : bool {
     $query = 'UPDATE "Frame" SET ttl = :ttl WHERE frameid = :frameid';
     return $this->db->prepare($query)->execute([
-      ':ttl' => time() + 15 * 60,
+      ':ttl' => time() + 25 * 60,
       ':frameid' => $frameId
     ]);
   }
