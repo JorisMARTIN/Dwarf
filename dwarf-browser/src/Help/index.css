@@ -1,12 +1,12 @@
-.help{
+.help {
     color: var(--PrimaryText);
     text-align: center;
     width: 80%;
-    margin: auto;
+    margin:auto
 }
 
-.help article{
-    text-align: left;
+.help article {
+    text-align:left
 }
 
 .helpMain {
@@ -14,22 +14,25 @@
     height: 90%;
     margin: auto;
     background-color: var(--CardBackground);
-    box-shadow: 0 5px 10px 10px var(--Shadow);
+    box-shadow: 0 3.2px 7.2px 0 rgba(0,0,0,.132),0 .6px 1.8px 0 rgba(0,0,0,.108);
     border-radius: 25px;
-    padding: 2%;
-}
-.helpMain:last-child{
-    padding-bottom: 2%;
+    padding:2%;
+    animation: PopAnimation 0.25s;
 }
 
-.helpTitle{
+.helpMain:last-child {
+    padding-bottom:2%
+}
+
+.helpTitle {
     text-align: center;
-    font-weight: 600;
+    font-weight: 700;
     color: var(--PrimaryText);
-    font-size: 2em;
+    font-size:2em
 }
 
 .helpAvis a {
     text-decoration: none;
-    color: var(--BlueButton);
+    color:var(--BlueButton);
+    font-weight: 400;
 }
