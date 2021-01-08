@@ -16,6 +16,7 @@ class Draw extends Component {
         frameId: null,
         frameWidth: null,
         frameHeight: null,
+        timeout: 0,
     }
 
 
@@ -63,6 +64,7 @@ class Draw extends Component {
 
     componentDidMount() {
         this.requestFrame();
+        this.setState({timeout: Date.now() + 1000});
     }
 
     render() {
@@ -105,7 +107,7 @@ class Draw extends Component {
                     {this.state.frameId && <button className="drawDraw" onClick={this.drawThis}><span>Dessiner</span> <img src={Auth.url + "/icons/crayon.svg"} alt="" /></button>}
                 </div>
             </div>
-        ); else return (
+        ); else if(this.state.timeout < Date.now()) return (
             <div>
                 <h1 className="drawNothingToDrawTitle">Rien à dessiner pour le moment</h1>
                 <div className="drawNothingToDraw">
@@ -113,6 +115,10 @@ class Draw extends Component {
                     <p><b>À toi de commencer</b> une nouvelle BD !<Link className="drawStartNewPage" to="/init">Nouvelle BD</Link></p>
                     <p>Ou retourne voir les BD déjà réalisées   <Link className="drawStartNewPage" to="/">Accueil</Link></p>
                 </div>
+            </div>
+        ); else return (
+            <div className="drawSelector">
+                <h1 className="drawTitle">Chargement...</h1>
             </div>
         );
     }
