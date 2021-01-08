@@ -69,9 +69,9 @@
     flex-direction:column
 }
 
-.initateDrawingGameType, .initateDrawingGameMode{
+/* .initateDrawingGameType, .initateDrawingGameMode{
     display: none;
-}
+} */
 
 .initDrawingRadiosButtons {
     align-items: center;
