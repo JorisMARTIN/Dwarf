@@ -1,55 +1,62 @@
 html {
-    background-color:var(--Background);
+    background-color: var(--Background);
     position: relative;
-    min-height: 100%;
+    min-height:100%
 }
 
 .menu {
-    display: flex;
     justify-content: space-around;
-    align-items: center;
     padding: .5em;
     background-color: var(--Navbar);
-    border-bottom: 1px solid #8e8e93;
+    /*border-bottom: 1px solid #8e8e93;*/
+    box-shadow: 0 3.2px 7.2px 0 rgba(0,0,0,.132),0 .6px 1.8px 0 rgba(0,0,0,.108);
     -webkit-backdrop-filter: saturate(1.8) blur(20px);
     backdrop-filter: saturate(1.8) blur(20px);
     position: -webkit-sticky;
     position: sticky;
     top: 0;
     right: 0;
-    height:50px;
-    z-index: 2;
+    height: 50px;
+    z-index:2
 }
 
-.dwarfDiv{
+.dwarfDiv, .menu {
     display: flex;
-    align-items: center;
+    align-items:center
 }
 
-.dwarfLogo{
+.dwarfLogo {
     height: 50px;
     width: auto;
-    margin: auto;
+    margin:auto;
+}
+
+@media (prefers-color-scheme: dark) {
+    .dwarfLogo {
+        filter: invert(1);
+    }
 }
 
 .dwarf {
     text-decoration: none;
     color: var(--PrimaryText);
     font-size: 2em;
-    font-weight:700;
+    font-weight:700
 }
 
 .componentsMenu {
     display:flex
 }
 
-.componentsMenu + .link{
+.componentsMenu + .link {
     background: linear-gradient(var(--ClassicButtonStart), var(--ClassicButtonEnd));
     border-radius:25px;
+    color: rgb(242, 242, 247);
+    font-size: 1em;
 }
 
-.componentsMenu + .link:hover{
-    background-color: #ee4239;
+.componentsMenu + .link:hover {
+    background-color:#ee4239
 }
 
 .link {
@@ -62,9 +69,9 @@ html {
 }
 
 .link:hover {
-    background:var(--NavbarHover);
+    background: var(--NavbarHover);
     -webkit-backdrop-filter: saturate(1.8) blur(20px);
-    backdrop-filter: saturate(1.8) blur(20px);
+    backdrop-filter:saturate(1.8) blur(20px)
 }
 
 .link:hover, .log {
@@ -93,15 +100,54 @@ input[type=text] {
     position: absolute;
     bottom: -100px;
     width: 100%;
-    padding: 1em 0em 1em 0em;
+    padding: 1em 0;
     color: var(--SecondaryText);
     background: var(--CardBackground);
-    box-shadow: 0 5px 10px 10px var(--Shadow);
+    box-shadow: 0 3.2px 7.2px 0 rgba(0,0,0,.132),0 .6px 1.8px 0 rgba(0,0,0,.108);
+    font-size: 1em;
+    font-weight: 600;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items:center
 }
 
-.footer p{
-    margin: 5px;
+.footer p {
+    margin:5px
+}
+
+@media only screen and (max-width: 600px) {
+    .menu {
+        position: fixed;
+        top: auto;
+        bottom: 0;
+        left: 0;
+        margin: 0;
+        box-shadow: none;
+        -webkit-backdrop-filter: saturate(1.8) blur(20px);
+        backdrop-filter: saturate(1.8) blur(20px);*
+        justify-content: space-around;
+    }
+    
+    .dwarfDiv {
+        display: none;
+    }
+    
+    .menu > a {
+        display: none;
+    }
+    
+    .log {
+        text-align: center;
+        text-decoration: none;
+        padding: .5em 1em;
+        color: var(--PrimaryText);
+        background-color: transparent;
+        font-size: 10px;
+        font-weight: normal;
+    }
+    
+    .link {
+        font-size: 10px;
+        font-weight: normal;
+    }
 }
