@@ -124,7 +124,7 @@ input[type=text] {
         margin: 0;
         box-shadow: none;
         -webkit-backdrop-filter: saturate(1.8) blur(20px);
-        backdrop-filter: saturate(1.8) blur(20px);*
+        backdrop-filter: saturate(1.8) blur(20px);
         justify-content: space-around;
     }
     
