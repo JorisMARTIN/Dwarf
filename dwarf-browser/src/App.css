@@ -32,7 +32,7 @@ html {
 }
 
 @media (prefers-color-scheme: dark) {
-    .dwarfLogo {
+    .dwarfLogo, .logButton{
         filter: invert(1);
     }
 }
@@ -53,10 +53,6 @@ html {
     border-radius:25px;
     color: rgb(242, 242, 247);
     font-size: 1em;
-}
-
-.componentsMenu + .link:hover {
-    background-color:#ee4239
 }
 
 .link {
@@ -82,6 +78,57 @@ html {
     display: none;
 }
 
+.log:hover {
+    background:var(--BlueButtonHover)
+}
+
+.logComponent:hover .logCoponentDropDown{
+    display: flex;
+    flex-direction: column;
+}
+
+.logButton{
+    background-color: transparent;
+    border: none;
+}
+
+.logCoponentDropDown{
+    display: none;
+    position: absolute;
+    background-color: var(--CardBackground);
+    min-width: 140px;
+    border-radius: 25px;
+    margin: 1em;
+}
+
+.logLink{
+    background-color: var(--CardBackground);
+    color: var(--PrimaryText);
+    border: none;
+    text-align: left;
+    padding: .5em 1em;
+    text-decoration: none;
+}
+
+button.logLink{
+    background-color: var(--RedButton);
+}
+
+button.logLink:hover {
+    cursor: pointer;
+    background-color: var(--RedButtonHover);
+}
+
+button.logLink, a.logLink{
+    font-size: 1.2em;
+    margin: 1em;
+    border-radius:25px;
+}
+
+
+.logLink:hover {background-color: var(--NavbarHover);}
+
+
 .log {
     text-decoration: none;
     border: none;
@@ -90,10 +137,6 @@ html {
     background-color: var(--BlueButton);
     font-size: 1em;
     font-weight:600
-}
-
-.log:hover {
-    background:var(--BlueButtonHover)
 }
 
 input[type=text] {
