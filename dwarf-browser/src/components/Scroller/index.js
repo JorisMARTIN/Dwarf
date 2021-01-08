@@ -28,9 +28,13 @@ class ComicPage extends React.Component {
         rate: null
     }
 
-    async componentDidMount() {
+    componentDidMount() {
+        this.drawPlanche();
+    }
+
+    drawPlanche = async () => {
         const canvas = this.canvasRef.current;
-        const template = await (await fetch('https://dev-dwarf.jorismartin.fr/cdn/templates/template' + this.props.template + '.json')).json();
+        const template = await (await fetch(Auth.url + '/cdn/templates/template' + this.props.template + '.json')).json();
         const ctx = canvas.getContext('2d');
 
         let max_x = 0;
@@ -55,14 +59,14 @@ class ComicPage extends React.Component {
 
         for (const i in this.props.images) {
             const image = new Image();
-            image.src = 'https://dev-dwarf.jorismartin.fr' + this.props.images[i];
+            image.src = Auth.url + this.props.images[i];
             image.onload = () => {
                 ctx.drawImage(image, template[i].x, template[i].y, template[i].w, template[i].h);
             }
         }
 
         const ccbync = new Image();
-        ccbync.src = 'https://dev-dwarf.jorismartin.fr/icons/cc-by-nc.svg';
+        ccbync.src = Auth.url + '/icons/cc-by-nc.svg';
         ccbync.onload = () => {
             ctx.drawImage(ccbync, max_x - ccbyncX, max_y - ccbyncY, ccbyncX, ccbyncY);
         }
@@ -98,6 +102,10 @@ class ComicPage extends React.Component {
         }
     }
 
+    componentDidUpdate() {
+        this.drawPlanche();
+    }
+
     deletePage = () => {
         //const pageIdToDelete = this.props.pageId;
         if (window.confirm("Do you realy want to delete this page ?")) {
@@ -107,9 +115,22 @@ class ComicPage extends React.Component {
 
     render() {
         if (this.state.redirectVote) return <Redirect to="/auth" />
+        else if (this.state.fullscreen) return (
+            <div className="homePlancheFullscreenWrapper">
+                <div className={`homePlancheFullscreen ${this.state.rate === 1 ? "plancheLike" : ""} ${this.state.rate === 0 ? "plancheDislike" : ""}`}>
+                    <canvas onClick={this.toggleFullscreen} title={this.authorsTitle} className="homePlancheFullscreenImg" ref={this.canvasRef} width={this.state.canvasW} height={this.state.canvasH} />
+                    <div className="homePlancheTopInfos homePlancheFullscreenInfos">
+                        <textarea readOnly disabled className="homeName" value={this.props.name} />
+                        <textarea readOnly disabled className="homeDescriFullscreen" value={this.props.description} />
+                        <p className="homeMode">{this.props.gamemode}</p>
+                        <p className="homeUser">{this.authors}</p>
+                    </div>
+                </div>
+            </div>
+        );
         else return (
             <div className="homePlancheWrapper">
-                <div className={`homePlanche ${this.state.rate === 1 && "plancheLike"} ${this.state.rate === 0 && "plancheDislike"}`}>
+                <div className={`homePlanche ${this.state.rate === 1 ? "plancheLike" : ""} ${this.state.rate === 0 ? "plancheDislike" : ""}`}>
                     <div className="homePlancheTop">
                         <canvas onClick={this.toggleFullscreen} title={this.authorsTitle} className="homePlancheImg" ref={this.canvasRef} width={this.state.canvasW} height={this.state.canvasH} />
                         <div className="homePlancheTopInfos">
@@ -132,15 +153,15 @@ class ComicPage extends React.Component {
 
 export default class Scroller extends React.Component {
 
-        state = {
-            pages: [],
-            loading: false,
-            lastPageLoadedId: -1,
-            prevY: 0,
-            endReached: false
-        };
+    state = {
+        pages: [],
+        loading: false,
+        lastPageLoadedId: -1,
+        prevY: 0,
+        endReached: false
+    };
 
-    componentDidMount(){
+    componentDidMount() {
         this.getPages(this.state.lastPageLoadedId);
 
         window.addEventListener('scroll', this.handleScroll);
@@ -153,11 +174,11 @@ export default class Scroller extends React.Component {
     handleScroll = () => {
         const y = window.scrollY;
 
-        if (this.state.prevY+300 < y) {
-            
+        if (this.state.prevY + 300 < y) {
+
             const lastPage = this.state.pages[this.state.pages.length - 1];
             const curPage = lastPage.pageId;
-            if(this.state.lastPageLoadedId !== curPage){
+            if (this.state.lastPageLoadedId !== curPage) {
                 this.getPages(curPage);
             }
 
@@ -170,36 +191,36 @@ export default class Scroller extends React.Component {
 
     getPages = (id) => {
 
-        if(this.state.endReached === false){
-            
-            this.setState({ loading : true });
+        if (this.state.endReached === false) {
+
+            this.setState({ loading: true });
             Auth.fetch("home.php", {
                 method: "POST",
                 body: JSON.stringify({
                     lastPageLoadedId: id,
                 })
             }).then(res => {
-                this.setState({ 
-                    loading : false,
+                this.setState({
+                    loading: false,
                     endReached: res.endReached
-                 });
-                this.setState({ pages: this.state.pages.concat(res.pages)})
+                });
+                this.setState({ pages: this.state.pages.concat(res.pages) })
             })
         }
 
     }
 
-    render(){
+    render() {
         console.log(this.state.lastPageLoadedId);
-        return(
+        return (
             <div className="scrollerMain">
                 <div className="scrollerContainer">
-                    {this.state.pages.map((page,i) => (
+                    {this.state.pages.map((page, i) => (
                         <ComicPage key={i} {...page} userIsAdmin={page.userIsAdmin} />
-                    ))} 
+                    ))}
                 </div>
                 <div>
-                    {this.state.loading && <p>Chargement ...</p>}
+                    {this.state.loading && <p class="scrollerLoading">Chargement ...</p>}
                 </div>
             </div>
         )

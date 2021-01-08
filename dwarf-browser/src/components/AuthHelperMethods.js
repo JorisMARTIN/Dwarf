@@ -3,7 +3,8 @@ import decode from 'jwt-decode';
 //adapted from https://github.com/jinolacson/login-jwt-react-php/
 
 class AuthHelperMethods {
-    apiURL = "https://dev-dwarf.jorismartin.fr/api/";
+    url = "https://dev-dwarf.jorismartin.fr";
+    apiURL = this.url + "/api/";
 
     loggedIn = () => {
         // Checks if there is a saved token and it's still valid

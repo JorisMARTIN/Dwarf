@@ -33,21 +33,21 @@ export default class App extends Component {
       <Router>
         <div className="menu">
           <div className="dwarfDiv">
-            <img className="dwarfLogo" src="https://dev-dwarf.jorismartin.fr/icons/dwarf.svg"></img>
+            <img className="dwarfLogo" src={Auth.url + "/icons/dwarf.svg"} alt="logo" />
             <Link className="dwarf" to="/">Dwarf</Link>
           </div>
-          
+
           <div className="componentsMenu">
-            <Link className="link" to="/">Accueil</Link>
-            <Link className="link" to="/draw">Dessiner !</Link>
-            <Link className="link" to="/init">Nouvelle BD</Link>
-            <Link className="link" to="/help">Aide</Link>
+            <Link className="link" to="/"><img src={Auth.url + "/icons/Accueil.svg"} alt="" /><span>Accueil</span></Link>
+            <Link className="link" to="/draw"><img src={Auth.url + "/icons/Dessiner.svg"} alt="" /><span>Dessiner !</span></Link>
+            <Link className="link" to="/init"><img src={Auth.url + "/icons/NouvelleBD.svg"} alt="" /><span>Nouvelle BD</span></Link>
+            <Link className="link" to="/help"><img src={Auth.url + "/icons/Aide.svg"} alt="" /><span>Aide</span></Link>
             {this.state.logged ? <Link className="link" to="/user">User</Link> : ""}
           </div>
-          <a className="link" target="_blank" href="https://www.frama.link/dwarfExperience">Ton avis nous intéresse !</a>
+          <a className="link" rel="noreferrer" target="_blank" href="https://www.frama.link/dwarfExperience">Ton avis nous intéresse !</a>
           <div className="logComponent">
-            {this.state.logged ? <button className="log" onClick={this.logout}>Déconnexion</button> 
-            : <Link className="log" to="/auth">Connexion / Inscription</Link>}
+            {this.state.logged ? <button className="log" onClick={this.logout}>Déconnexion</button>
+              : <Link className="log" to="/auth">Connexion / Inscription</Link>}
           </div>
         </div>
 
