@@ -1,9 +1,8 @@
 import React from 'react';
-import './index.css';
-import Auth from '../AuthHelperMethods';
 import { Redirect } from 'react-router-dom';
+import Auth from './AuthHelperMethods';
 
-class ComicPage extends React.Component {
+export default class ComicPage extends React.Component {
     constructor(props) {
         super(props);
         this.canvasRef = React.createRef();
@@ -28,13 +27,9 @@ class ComicPage extends React.Component {
         rate: null
     }
 
-    componentDidMount() {
-        this.drawPlanche();
-    }
-
-    drawPlanche = async () => {
+    async componentDidMount() {
         const canvas = this.canvasRef.current;
-        const template = await (await fetch(Auth.url + '/cdn/templates/template' + this.props.template + '.json')).json();
+        const template = await (await fetch('https://dev-dwarf.jorismartin.fr/cdn/templates/template' + this.props.template + '.json')).json();
         const ctx = canvas.getContext('2d');
 
         let max_x = 0;
@@ -59,14 +54,14 @@ class ComicPage extends React.Component {
 
         for (const i in this.props.images) {
             const image = new Image();
-            image.src = Auth.url + this.props.images[i];
+            image.src = 'https://dev-dwarf.jorismartin.fr' + this.props.images[i];
             image.onload = () => {
                 ctx.drawImage(image, template[i].x, template[i].y, template[i].w, template[i].h);
             }
         }
 
         const ccbync = new Image();
-        ccbync.src = Auth.url + '/icons/cc-by-nc.svg';
+        ccbync.src = 'https://dev-dwarf.jorismartin.fr/icons/cc-by-nc.svg';
         ccbync.onload = () => {
             ctx.drawImage(ccbync, max_x - ccbyncX, max_y - ccbyncY, ccbyncX, ccbyncY);
         }
@@ -97,8 +92,6 @@ class ComicPage extends React.Component {
     /* Agrandissement Page */
 
     toggleFullscreen = () => {
-        if (window.innerWidth <= 600) return;
-
         if (this.state.fullscreen) {
             this.setState({ fullscreen: false });
         } else {
@@ -106,15 +99,12 @@ class ComicPage extends React.Component {
         }
     }
 
-    componentDidUpdate() {
-        this.drawPlanche();
-    }
     /* Supression page */
 
     deletePage = () => {
         if (window.confirm("Do you realy want to delete this page ?")) {
             const reason = window.prompt("Please mention the reason of the detele : ");
-            if(reason){
+            if (reason) {
                 Auth.fetch("delete.php", {
                     method: "POST",
                     body: JSON.stringify({
@@ -133,26 +123,9 @@ class ComicPage extends React.Component {
 
     render() {
         if (this.state.redirectVote) return <Redirect to="/auth" />
-        else if (this.state.fullscreen) return (
-            <div>
-            <div onClick={this.toggleFullscreen} className="homePlancheFullscreenAround"/>
-            <div className="homePlancheFullscreenWrapper">
-                <img onClick={this.toggleFullscreen} className="homePlancheFullscreenClose" src={Auth.url + "/icons/cancel.svg"} alt="X"/>
-                <div className={`homePlancheFullscreen ${this.state.rate === 1 ? "plancheLike" : ""} ${this.state.rate === 0 ? "plancheDislike" : ""}`}>
-                    <canvas onClick={this.toggleFullscreen} title={this.authorsTitle} className="homePlancheFullscreenImg" ref={this.canvasRef} width={this.state.canvasW} height={this.state.canvasH} />
-                    <div className="homePlancheTopInfos homePlancheFullscreenInfos">
-                        <textarea readOnly disabled className="homeName" value={this.props.name} />
-                        <textarea readOnly disabled className="homeDescriFullscreen" value={this.props.description} />
-                        <p className="homeMode">{this.props.gamemode}</p>
-                        <p className="homeUser">{this.authors}</p>
-                    </div>
-                </div>
-            </div>
-            </div>
-        );
         else return (
             <div className="homePlancheWrapper">
-                <div className={`homePlanche ${this.state.rate === 1 ? "plancheLike" : ""} ${this.state.rate === 0 ? "plancheDislike" : ""}`}>
+                <div className={`homePlanche ${this.state.rate === 1 && "plancheLike"} ${this.state.rate === 0 && "plancheDislike"}`}>
                     <div className="homePlancheTop">
                         <canvas onClick={this.toggleFullscreen} title={this.authorsTitle} className="homePlancheImg" ref={this.canvasRef} width={this.state.canvasW} height={this.state.canvasH} />
                         <div className="homePlancheTopInfos">
@@ -170,82 +143,5 @@ class ComicPage extends React.Component {
                 {this.props.userIsAdmin && <button className="homeDeleteAdminButton" type="button" onClick={this.deletePage}>Delete</button>}
             </div>
         );
-    }
-}
-
-export default class Scroller extends React.Component {
-    state = {
-        pages: [],
-        loading: false,
-        lastPageLoadedId: -1,
-        prevY: 0,
-        endReached: false,
-        userIsAdmin: false
-    };
-
-    componentDidMount(){
-        this.getPages(this.state.lastPageLoadedId);
-
-        window.addEventListener('scroll', this.handleScroll);
-    }
-
-    componentWillUnmount() {
-        window.removeEventListener('scroll', this.handleScroll);
-    }
-
-    handleScroll = () => {
-        const y = window.scrollY;
-
-        if (this.state.prevY + 300 < y) {
-
-            const lastPage = this.state.pages[this.state.pages.length - 1];
-            const curPage = lastPage.pageId;
-            if (this.state.lastPageLoadedId !== curPage) {
-                this.getPages(curPage);
-            }
-
-            this.setState({
-                prevY: y,
-                lastPageLoadedId: curPage
-            });
-        }
-    }
-
-    getPages = (id) => {
-
-        if (this.state.endReached === false) {
-
-            this.setState({ loading: true });
-            Auth.fetch("home.php", {
-                method: "POST",
-                body: JSON.stringify({
-                    lastPageLoadedId: id,
-                })
-            }).then(res => {
-                this.setState({ 
-                    loading : false,
-                    endReached: res.endReached,
-                    userIsAdmin: res.userIsAdmin
-                 });
-                this.setState({ pages: this.state.pages.concat(res.pages)})
-            })
-        }
-
-    }
-
-    render(){
-        const {pages, loading, userIsAdmin} = this.state;
-        return(
-            <div className="scrollerMain">
-                <div className="scrollerContainer">
-                    {pages.map((page,i) => (
-                        <ComicPage key={i} {...page} userIsAdmin={userIsAdmin} />
-                    ))} 
-                </div>
-                <div>
-                    {loading && <p class="scrollerLoading">Chargement ...</p>}
-                </div>
-            </div>
-        )
     }
 }

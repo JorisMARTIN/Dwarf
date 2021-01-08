@@ -39,7 +39,14 @@ class FrameDAO extends DAO {
     }
   }
 
-/*
+
+  /**
+   * Collect all frames of a user
+   *
+   * @param int $userId ID of the page
+   * 
+   * @return array|NULL Array of Frame Object | NULL = ❌
+   */
   function getUserFrames(int $userId) : array {
     $query = 'SELECT * FROM "Frame" WHERE userId = :userId ORDER BY frameid';
     $tmp = $this->db->prepare($query);
@@ -48,7 +55,7 @@ class FrameDAO extends DAO {
     } else {
       return NULL;
     }
-  }*/
+  }
 
   /**
    * Add a new frame in the database

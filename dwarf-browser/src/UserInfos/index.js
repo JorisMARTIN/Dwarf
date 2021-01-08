@@ -2,10 +2,13 @@ import { Component } from 'react';
 import './index.css';
 import Auth from '../components/AuthHelperMethods';
 import withAuth from '../components/withAuth';
+import ComicPage from '../components/ComicPage.js';
+import ComicFrame from '../components/ComicFrame.js';
 
 class UserInfo extends Component {
 
     state = {
+        pages : [],
         isAdmin: false,
         userInfos: null,
     }
@@ -26,7 +29,8 @@ class UserInfo extends Component {
                         birthdate: res.birthdate
                     }
                 });
-                this.setState({isAdmin: res.isadmin})
+                this.setState({pages: res.pages});
+                this.setState({ isAdmin: res.isadmin})
             } else {
                 alert(res.message);
             }
@@ -35,7 +39,7 @@ class UserInfo extends Component {
     }
 
     render(){
-        const {isAdmin, userInfos} = this.state;
+        const {pages, isAdmin, userInfos} = this.state;
         return(
             <div className="userPage">
                 <div className="userPageInfos">
@@ -51,12 +55,20 @@ class UserInfo extends Component {
                 <div className="userPageCreationsFinish">
                     <h1 className="userPageInfosPagesDone">BD déjà réalisé :</h1>
                     {/* Afffichage des planches fini où l'utilisateur à participé */}
-                    {/* Utilisation du scroller .. */}
+                    <div className="userPageCreationsFinishContainer">
+                        {pages.map((page, i) => (
+                            <ComicPage key={i} {...page} userIsAdmin={isAdmin} />
+                        ))}
+                    </div>
                 </div>
                 <div className="userPageCreationsCurrent">
                     <h1 className="userPageInfosPagesNotDone">BD en cours de réalisation :</h1>
                     {/* Affichage des planches en cours où l'utilisateur à participé */}
-                    {/* Utilisation du scroller .. */}
+                    <div className="userPageCreationsFinishContainer">
+                        {frames.map((frame, i) => (
+                            <ComicFrame key={i} {...frame}/>
+                        ))}
+                    </div>
                 </div>
             </div>
         );

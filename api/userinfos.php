@@ -5,9 +5,11 @@ require_once(dirname(__FILE__) . '/includes/httpheaders.inc.php');
 require_once(dirname(__FILE__) . '/model/AuthMethods.php');
 require_once(dirname(__FILE__) . '/model/UserDAO.class.php');
 require_once(dirname(__FILE__) . '/model/PageDAO.class.php');
+require_once(dirname(__FILE__) . '/model/FrameDAO.class.php');
 
 $userDAO = new UserDAO();
 $pageDAO = new PageDAO();
+$frameDAO = new FrameDAO();
 
 // Get current user
 $userId = tokenToUserId();
@@ -34,33 +36,49 @@ if($userId != -1){
         'isadmin' => $isAdmin
     ];
 
-    // $userPages = $pageDAO->getUserPages($userId);
+    $userPages = $pageDAO->getUserPages($userId);
 
-    // for ($i = 0; $i < count($userPages); $i++) {
-    //     $p = $userPages[$i];
+    for ($i = 0; $i < count($userPages); $i++) {
+        $p = $userPages[$i];
 
-    //     $user = $userDAO->getUser($p->getOwnerId());
+        $user = $userDAO->getUser($p->getOwnerId());
 
-    //     $images = [];
-    //     $authors = [$user->getNickname()];
+        $images = [];
+        $authors = [$user->getNickname()];
 
-    //     $frames = $frameDAO->getFrames($p->getId());
-    //     foreach ($frames as $frame) {
-    //         $images[] = $frame->getImagePtr();
-    //         $authors[] = $userDAO->getUser($frame->getOwnerId())->getNickname();
-    //     }
+        $frames = $frameDAO->getFrames($p->getId());
+        foreach ($frames as $frame) {
+            $images[] = $frame->getImagePtr();
+            $authors[] = $userDAO->getUser($frame->getOwnerId())->getNickname();
+        }
 
-    //     $out['pages'][$i] = [
-    //         'pageId' => $p->getId(),
-    //         'name' => $p->getName(),
-    //         'description' => $p->getDescription(),
-    //         'gamemode' => ($p->getGameMode() == 0 ? "Normal" : "Reverse"),
-    //         'date' => $p->getCreationDate(),
-    //         'images' => $images,
-    //         'authors' => $authors,
-    //         'template' => $p->getTemplateType(),
-    //     ];
-    // }
+        $out['pages'][$i] = [
+            'pageId' => $p->getId(),
+            'name' => $p->getName(),
+            'description' => $p->getDescription(),
+            'gamemode' => ($p->getGameMode() == 0 ? "Normal" : "Reverse"),
+            'date' => $p->getCreationDate(),
+            'images' => $images,
+            'authors' => $authors,
+            'template' => $p->getTemplateType(),
+        ];
+    }
+
+    $userDraw = $frameDAO->getUserFrames($userId);
+    $i = 0;
+
+    foreach ($userDraw as $f) {
+        $p = $pageDAO->getPage($f->getPageId());
+
+        $out['frames'][$i] = [
+            'name' => $p->getName(),
+            'description' => $p->getDescription(),
+            'gamemode' => ($p->getGameMode() == 0 ? "Normal" : "Reverse"),
+            'images' => $f->getImaagePtr()
+        ];
+        
+        $i++;
+    }
 
 }else{
     $out = [

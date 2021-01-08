@@ -19,3 +19,9 @@
     font-weight: 400;
     list-style: none
 }
+
+.userPageCreationsFinishContainer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
