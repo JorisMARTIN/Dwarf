@@ -8,6 +8,10 @@
     justify-content: center;
 }
 
+.scrollerLoading {
+    text-align: center;
+}
+
 .homeAll {
     display: flex;
     flex-direction:column
@@ -23,7 +27,7 @@
     color:var(--PrimaryText)
 }
 
-.homeDivPlanche, .scrollerContainer {
+.homeDivPlanche {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -41,12 +45,46 @@
 
 }
 
-.homePlanche, .homePlancheWrapper {
+.homePlancheFullscreenWrapper {
+    padding: 2em;
+    z-index: 3;
+    position: absolute;
+    width: 80vw;
+    height: 70vh;
+    left: 5vw;
+    top: 5vh;
+}
+
+.homePlancheFullscreen {
     display: flex;
-    flex-direction:column
+    flex-direction: row;
+    width: 90%;
+    padding: 2em;
+    justify-content: space-around;
+    background: var(--CardBackground);
+    box-shadow: 0 5px 10px 10px var(--Shadow);
+    border-radius:25px;
+}
+
+.homePlancheFullscreenInfos {
+    justify-content: space-around;
+}
+
+.homePlancheFullscreenImg {
+    width: 50%;
+    border:1px solid #8e8e93;
+    background-color: #AAB2AB;
+    cursor: pointer;
+}
+
+.homeDescriFullscreen {
+    color: var(--SecondaryText);
+    height:20em;
 }
 
 .homePlanche {
+    display: flex;
+    flex-direction:column;
     margin: 20px;
     width: 250px;
     padding: 2em;
@@ -64,15 +102,16 @@
 }
 
 .homePlancheTop {
-    color: var(--CardBackground);
+    /* color: var(--CardBackground); */
     text-align:center
 }
 
 .homePlancheImg {
     width: 100%;
     object-fit: cover;
-    border: 1px solid #8e8e93;
-    background-color:#aab2ab
+    border:1px solid #8e8e93;
+    background-color: #AAB2AB;
+    cursor: pointer;
 }
 
 .homePlancheTopInfos {

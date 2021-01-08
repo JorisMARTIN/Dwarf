@@ -78,6 +78,10 @@ html {
     border-radius:25px
 }
 
+.link > img {
+    display: none;
+}
+
 .log {
     text-decoration: none;
     border: none;

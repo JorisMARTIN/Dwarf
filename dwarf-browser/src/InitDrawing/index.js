@@ -17,7 +17,7 @@ class TemplateCanvas extends React.Component {
 
     async componentDidMount() {
         const canvas = this.canvasRef.current;
-        const template = await (await fetch('https://dev-dwarf.jorismartin.fr/cdn/templates/template' + this.props.id + '.json')).json();
+        const template = await (await fetch(Auth.url + '/cdn/templates/template' + this.props.id + '.json')).json();
         const ctx = canvas.getContext('2d');
 
         let max_x = 0;

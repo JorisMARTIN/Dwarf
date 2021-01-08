@@ -4,15 +4,14 @@ import Auth from '../AuthHelperMethods';
 import ComicPage from '../ComicPage.js';
 
 export default class Scroller extends React.Component {
-
-        state = {
-            pages: [],
-            loading: false,
-            lastPageLoadedId: -1,
-            prevY: 0,
-            endReached: false,
-            userIsAdmin: false
-        };
+    state = {
+        pages: [],
+        loading: false,
+        lastPageLoadedId: -1,
+        prevY: 0,
+        endReached: false,
+        userIsAdmin: false
+    };
 
     componentDidMount(){
         this.getPages(this.state.lastPageLoadedId);
@@ -27,11 +26,11 @@ export default class Scroller extends React.Component {
     handleScroll = () => {
         const y = window.scrollY;
 
-        if (this.state.prevY+300 < y) {
-            
+        if (this.state.prevY + 300 < y) {
+
             const lastPage = this.state.pages[this.state.pages.length - 1];
             const curPage = lastPage.pageId;
-            if(this.state.lastPageLoadedId !== curPage){
+            if (this.state.lastPageLoadedId !== curPage) {
                 this.getPages(curPage);
             }
 
@@ -44,9 +43,9 @@ export default class Scroller extends React.Component {
 
     getPages = (id) => {
 
-        if(this.state.endReached === false){
-            
-            this.setState({ loading : true });
+        if (this.state.endReached === false) {
+
+            this.setState({ loading: true });
             Auth.fetch("home.php", {
                 method: "POST",
                 body: JSON.stringify({
@@ -74,7 +73,7 @@ export default class Scroller extends React.Component {
                     ))} 
                 </div>
                 <div>
-                    {loading && <p>Chargement ...</p>}
+                    {loading && <p class="scrollerLoading">Chargement ...</p>}
                 </div>
             </div>
         )

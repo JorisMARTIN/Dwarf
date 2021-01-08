@@ -105,7 +105,7 @@ class Canvas extends React.Component {
 
     copyRefereeAsBG = () => {
         // if(this.canvas.current !== null) {
-        //     this.canvas.current.image.src = "https://dwarf.jorismartin.fr" + this.props.refereeImage;
+        //     this.canvas.current.image.src = Auth.url + this.props.refereeImage;
         // }
     }
 
@@ -117,7 +117,7 @@ class Canvas extends React.Component {
                     <div className="canvasToolsLeft">
                         {this.props.refereeImage && <div className="canvasToolsLeftImage">
                             <p>Case {this.props.pageGM === "Normal" ? "précédente" : "suivante"} :</p>
-                            <img onClick={this.copyRefereeAsBG} src={"https://dev-dwarf.jorismartin.fr" + this.props.refereeImage} alt="referee frame" />
+                            <img onClick={this.copyRefereeAsBG} src={Auth.url + this.props.refereeImage} alt="referee frame" />
                         </div>}
                         <div className="canvasToolsLeftOthersTools">
                             <button
