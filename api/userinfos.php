@@ -74,7 +74,7 @@ if($userId != -1){
             'name' => $p->getName(),
             'description' => $p->getDescription(),
             'gamemode' => ($p->getGameMode() == 0 ? "Normal" : "Reverse"),
-            'images' => $f->getImaagePtr()
+            'images' => $f->getImagePtr()
         ];
         
         $i++;

@@ -8,7 +8,8 @@ import ComicFrame from '../components/ComicFrame.js';
 class UserInfo extends Component {
 
     state = {
-        pages : [],
+        pages: [],
+        frames: [],
         isAdmin: false,
         userInfos: null,
     }
@@ -39,7 +40,7 @@ class UserInfo extends Component {
     }
 
     render(){
-        const {pages, isAdmin, userInfos} = this.state;
+        const {pages, frames, isAdmin, userInfos} = this.state;
         return(
             <div className="userPage">
                 <div className="userPageInfos">
