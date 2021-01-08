@@ -43,13 +43,20 @@ class UserInfo extends Component {
                     <ul className="userPageInfosOthers">
                         <li>Id : {userInfos?.id}</li>
                         <li>Email : {userInfos?.email}</li>
-                        <li>Account creation date : {userInfos?.creationDate}</li>
-                        <li>Birthdate : {userInfos?.birthdate}</li>
-                        <li>Account type : {isAdmin ? "Admin" : "normal"}</li>
+                        <li>Date de création : {userInfos?.creationDate}</li>
+                        <li>Anniversaire : {userInfos?.birthdate}</li>
+                        <li>Type de compte : {isAdmin ? "Admin" : "Normal"}</li>
                     </ul>
                 </div>
-                <div className="userPageCreations">
-                    {/*A imaginer : l'affichage des différentees planches de l'utilisateur*/}
+                <div className="userPageCreationsFinish">
+                    <h1 className="userPageInfosPagesDone">BD déjà réalisé :</h1>
+                    {/* Afffichage des planches fini où l'utilisateur à participé */}
+                    {/* Utilisation du scroller .. */}
+                </div>
+                <div className="userPageCreationsCurrent">
+                    <h1 className="userPageInfosPagesNotDone">BD en cours de réalisation :</h1>
+                    {/* Affichage des planches en cours où l'utilisateur à participé */}
+                    {/* Utilisation du scroller .. */}
                 </div>
             </div>
         );
