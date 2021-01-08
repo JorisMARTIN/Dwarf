@@ -97,6 +97,8 @@ class ComicPage extends React.Component {
     /* Agrandissement Page */
 
     toggleFullscreen = () => {
+        if (window.innerWidth <= 600) return;
+
         if (this.state.fullscreen) {
             this.setState({ fullscreen: false });
         } else {
@@ -132,7 +134,10 @@ class ComicPage extends React.Component {
     render() {
         if (this.state.redirectVote) return <Redirect to="/auth" />
         else if (this.state.fullscreen) return (
+            <div>
+            <div onClick={this.toggleFullscreen} className="homePlancheFullscreenAround"/>
             <div className="homePlancheFullscreenWrapper">
+                <img onClick={this.toggleFullscreen} className="homePlancheFullscreenClose" src={Auth.url + "/icons/cancel.svg"} alt="X"/>
                 <div className={`homePlancheFullscreen ${this.state.rate === 1 ? "plancheLike" : ""} ${this.state.rate === 0 ? "plancheDislike" : ""}`}>
                     <canvas onClick={this.toggleFullscreen} title={this.authorsTitle} className="homePlancheFullscreenImg" ref={this.canvasRef} width={this.state.canvasW} height={this.state.canvasH} />
                     <div className="homePlancheTopInfos homePlancheFullscreenInfos">
@@ -142,6 +147,7 @@ class ComicPage extends React.Component {
                         <p className="homeUser">{this.authors}</p>
                     </div>
                 </div>
+            </div>
             </div>
         );
         else return (

@@ -45,21 +45,28 @@
 
 }
 
-.homePlancheFullscreenWrapper {
-    padding: 2em;
+.homePlancheFullscreenAround {
     z-index: 3;
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    left: 0;
+    top: 0;
+}
+
+.homePlancheFullscreenWrapper {
+    z-index: 4;
     position: absolute;
     width: 80vw;
     height: 70vh;
     left: 5vw;
-    top: 5vh;
+    top: 10vh;
 }
 
 .homePlancheFullscreen {
     display: flex;
     flex-direction: row;
-    width: 90%;
-    padding: 2em;
+    width: 100%;
     justify-content: space-around;
     background: var(--CardBackground);
     box-shadow: 0 5px 10px 10px var(--Shadow);
@@ -80,6 +87,19 @@
 .homeDescriFullscreen {
     color: var(--SecondaryText);
     height:20em;
+}
+
+.homePlancheFullscreenClose {
+    position: absolute;
+    top: 25px;
+    left: 25px;
+    cursor: pointer;
+}
+
+@media (prefers-color-scheme: dark) {
+    .homePlancheFullscreenClose {
+        filter: invert(1);
+    }
 }
 
 .homePlanche {
