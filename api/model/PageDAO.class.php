@@ -63,7 +63,7 @@ class PageDAO extends DAO {
      * @return array Page Object array | Empty array = ❌
      */
     function getNPages(int $nb, int $firstId) : array {
-        $query = 'SELECT * FROM "Page" WHERE pageid <= :firstId and completed = true ORDER BY pageid DESC LIMIT :nb';
+        $query = 'SELECT * FROM "Page" WHERE pageid <= :firstId and completed = true and deleted = false ORDER BY pageid DESC LIMIT :nb';
         $tmp = $this->db->prepare($query);
         if ($tmp->execute([':firstId' => $firstId, ':nb' => $nb])) {
             return $tmp->fetchAll(PDO::FETCH_CLASS, "Page");
