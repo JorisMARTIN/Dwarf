@@ -3,22 +3,9 @@ import { Redirect } from 'react-router-dom';
 import Auth from './AuthHelperMethods';
 
 export default class ComicFrame extends React.Component {
-    constructor(props) {
-        super(props);
-    }
-
     state = {
         fullscreen: false
     }
-
-    async componentDidMount() {
-        const image = new Image();
-        image.src = 'https://dev-dwarf.jorismartin.fr' + this.props.image;
-        image.onload = () => {
-            ctx.drawImage(image, 0, 0);
-        }
-    }
-
     /* Agrandissement Page */
 
     toggleFullscreen = () => {
@@ -35,7 +22,7 @@ export default class ComicFrame extends React.Component {
             <div className="homePlancheWrapper">
                 <div className="homePlancheNone">
                     <div className="homePlancheTop">
-                        <canvas onClick={this.toggleFullscreen} className="homePlancheImg"/>
+                        <img src={Auth.url+this.props.image}> </img>
                         <div className="homePlancheTopInfos">
                             <textarea readOnly disabled className="homeName" value={this.props.name} />
                             <textarea readOnly disabled className="homeDescri" value={this.props.description} />
