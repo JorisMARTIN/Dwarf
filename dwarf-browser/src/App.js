@@ -48,8 +48,10 @@ export default class App extends Component {
           <div className="logComponent">
             <img className="logButton" src={Auth.url + "/icons/Compte.svg"} alt="" />
             <div className="logCoponentDropDown">
-              <button className="logLink" onClick={this.logout}>Déconnexion</button>
-              <Link className="logLink" to="/user">Informations</Link>
+              <div>
+                <Link className="logLink" to="/user">Informations</Link>
+                <button className="logLink" onClick={this.logout}>Déconnexion</button>
+              </div>
             </div>
           </div>
 

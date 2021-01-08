@@ -39,7 +39,7 @@ class UserInfo extends Component {
     }
 
     render(){
-        const {pages, isAdmin, userInfos} = this.state;
+        const {pages, isAdmin, userInfos, frames} = this.state;
         return(
             <div className="userPage">
                 <div className="userPageInfos">
