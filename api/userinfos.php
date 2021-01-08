@@ -4,8 +4,10 @@ require_once(dirname(__FILE__) . '/includes/httpheaders.inc.php');
 
 require_once(dirname(__FILE__) . '/model/AuthMethods.php');
 require_once(dirname(__FILE__) . '/model/UserDAO.class.php');
+require_once(dirname(__FILE__) . '/model/PageDAO.class.php');
 
 $userDAO = new UserDAO();
+$pageDAO = new PageDAO();
 
 // Get current user
 $userId = tokenToUserId();
@@ -31,6 +33,34 @@ if($userId != -1){
         'birthdate' => $birthdate,
         'isadmin' => $isAdmin
     ];
+
+    $userPages = $pageDAO->getUserPages($userId);
+
+    for ($i = 0; $i < count($userPages); $i++) {
+        $p = $userPages[$i];
+
+        $user = $userDAO->getUser($p->getOwnerId());
+
+        $images = [];
+        $authors = [$user->getNickname()];
+
+        $frames = $frameDAO->getFrames($p->getId());
+        foreach ($frames as $frame) {
+            $images[] = $frame->getImagePtr();
+            $authors[] = $userDAO->getUser($frame->getOwnerId())->getNickname();
+        }
+
+        $out['pages'][$i] = [
+            'pageId' => $p->getId(),
+            'name' => $p->getName(),
+            'description' => $p->getDescription(),
+            'gamemode' => ($p->getGameMode() == 0 ? "Normal" : "Reverse"),
+            'date' => $p->getCreationDate(),
+            'images' => $images,
+            'authors' => $authors,
+            'template' => $p->getTemplateType(),
+        ];
+    }
 
 }else{
     $out = [

@@ -1,8 +1,8 @@
-.userPageInfos {
+.userPage > div {
     padding: 2em;
 }
 
-.userPageInfosName {
+.userPage > div > h1 {
     color: var(--PrimaryText);
     background: var(--CardBackground);
     box-shadow: 0 5px 10px 10px var(--Shadow);
