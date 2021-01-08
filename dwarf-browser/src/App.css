@@ -74,6 +74,9 @@ html {
     border-radius:25px
 }
 
+.link > img {
+    display: none;
+}
 
 .log:hover {
     background:var(--BlueButtonHover)
@@ -88,7 +91,6 @@ html {
     background-color: transparent;
     border: none;
 }
-
 
 .logCoponentDropDown{
     display: none;
@@ -125,6 +127,7 @@ button.logLink, a.logLink{
 
 
 .logLink:hover {background-color: var(--NavbarHover);}
+
 
 .log {
     text-decoration: none;
