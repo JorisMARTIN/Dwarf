@@ -9,7 +9,7 @@ export default class Home extends React.Component {
             <div className="homeAll">
                 <h1 className="homeTitle">Home</h1>
                 <div className="homeMain">
-                    <Scroller></Scroller>
+                    <Scroller />
                 </div>
             </div>
         );

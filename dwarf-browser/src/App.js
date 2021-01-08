@@ -42,13 +42,19 @@ export default class App extends Component {
             <Link className="link" to="/draw"><img src={Auth.url + "/icons/Dessiner.svg"} alt="" /><span>Dessiner !</span></Link>
             <Link className="link" to="/init"><img src={Auth.url + "/icons/NouvelleBD.svg"} alt="" /><span>Nouvelle BD</span></Link>
             <Link className="link" to="/help"><img src={Auth.url + "/icons/Aide.svg"} alt="" /><span>Aide</span></Link>
-            {this.state.logged ? <Link className="link" to="/user"><img src={Auth.url + "/icons/Compte.svg"} alt="" /><span>Compte</span></Link> : ""}
           </div>
-          <a className="link" rel="noreferrer" target="_blank" href="https://www.frama.link/dwarfExperience">Ton avis nous intéresse !</a>
+
+          {this.state.logged ? 
           <div className="logComponent">
-            {this.state.logged ? <button className="log" onClick={this.logout}>Déconnexion</button>
-              : <Link className="log" to="/auth">Connexion / Inscription</Link>}
+            <img className="logButton" src={Auth.url + "/icons/Compte.svg"} alt="" />
+            <div className="logCoponentDropDown">
+              <button className="logLink" onClick={this.logout}>Déconnexion</button>
+              <Link className="logLink" to="/user">Informations</Link>
+            </div>
           </div>
+
+          : <Link className="log" to="/auth">Connexion / Inscription</Link>
+          }
         </div>
 
         <Switch>
