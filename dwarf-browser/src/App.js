@@ -42,7 +42,7 @@ export default class App extends Component {
             <Link className="link" to="/draw"><img src={Auth.url + "/icons/Dessiner.svg"} alt="" /><span>Dessiner !</span></Link>
             <Link className="link" to="/init"><img src={Auth.url + "/icons/NouvelleBD.svg"} alt="" /><span>Nouvelle BD</span></Link>
             <Link className="link" to="/help"><img src={Auth.url + "/icons/Aide.svg"} alt="" /><span>Aide</span></Link>
-            {this.state.logged ? <Link className="link" to="/user">User</Link> : ""}
+            {this.state.logged ? <Link className="link" to="/user"><img src={Auth.url + "/icons/Compte.svg"} alt="" /><span>Compte</span></Link> : ""}
           </div>
           <a className="link" rel="noreferrer" target="_blank" href="https://www.frama.link/dwarfExperience">Ton avis nous intéresse !</a>
           <div className="logComponent">
