@@ -36,7 +36,7 @@ if($userId != -1){
         'isadmin' => $isAdmin
     ];
 
-    $userPages = $pageDAO->getUserPages($userId);
+    $userPages = $pageDAO->getUserPagesDone($userId);
 
     for ($i = 0; $i < count($userPages); $i++) {
         $p = $userPages[$i];

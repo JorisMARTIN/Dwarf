@@ -66,7 +66,9 @@ class UserInfo extends Component {
                     <h1 className="userPageInfosPagesNotDone">BD en cours de réalisation :</h1>
                     {/* Affichage des planches en cours où l'utilisateur à participé */}
                     <div className="userPageCreationsFinishContainer">
+                        {console.log(frames)}
                         {frames.map((frame, i) => (
+                            // J'arrive pas à savoir pq ça s'affiche pas ... À continuer 
                             <ComicFrame key={i} {...frame}/>
                         ))}
                     </div>

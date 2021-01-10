@@ -127,8 +127,8 @@ class PageDAO extends DAO {
      * 
      * @return array|NULL Array of page object | NULL = ❌
      */
-    function getUserPages(int $userId) : array {
-        $query = 'SELECT * FROM "Page" WHERE userid=:userId';
+    function getUserPagesDone(int $userId) : array {
+        $query = 'SELECT * FROM "Page" WHERE userid=:userId AND completed=\'t\'';
         $tmp = $this->db->prepare($query);
         if($tmp->execute([':userId' => $userId])) {
             return $tmp->fetchAll(PDO::FETCH_CLASS, "Page");

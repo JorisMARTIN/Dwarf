@@ -22,7 +22,7 @@ export default class ComicFrame extends React.Component {
             <div className="homePlancheWrapper">
                 <div className="homePlancheNone">
                     <div className="homePlancheTop">
-                        <img src={Auth.url+this.props.images}> </img>
+                        <img className="homePlancheImg" src={Auth.url+this.props.images}> </img>
                         <div className="homePlancheTopInfos">
                             <textarea readOnly disabled className="homeName" value={this.props.name} />
                             <textarea readOnly disabled className="homeDescri" value={this.props.description} />
