@@ -1,6 +1,7 @@
 import React from 'react';
 import { Redirect } from 'react-router-dom';
-import Auth from './AuthHelperMethods';
+import Auth from '../AuthHelperMethods';
+import './index.css';
 
 export default class ComicPage extends React.Component {
     constructor(props) {
@@ -27,9 +28,13 @@ export default class ComicPage extends React.Component {
         rate: null
     }
 
-    async componentDidMount() {
+    componentDidMount() {
+        this.drawPlanche();
+    }
+
+    drawPlanche = async () => {
         const canvas = this.canvasRef.current;
-        const template = await (await fetch('https://dev-dwarf.jorismartin.fr/cdn/templates/template' + this.props.template + '.json')).json();
+        const template = await (await fetch(Auth.url + '/cdn/templates/template' + this.props.template + '.json')).json();
         const ctx = canvas.getContext('2d');
 
         let max_x = 0;
@@ -54,14 +59,14 @@ export default class ComicPage extends React.Component {
 
         for (const i in this.props.images) {
             const image = new Image();
-            image.src = 'https://dev-dwarf.jorismartin.fr' + this.props.images[i];
+            image.src = Auth.url + this.props.images[i];
             image.onload = () => {
                 ctx.drawImage(image, template[i].x, template[i].y, template[i].w, template[i].h);
             }
         }
 
         const ccbync = new Image();
-        ccbync.src = 'https://dev-dwarf.jorismartin.fr/icons/cc-by-nc.svg';
+        ccbync.src = Auth.url + '/icons/cc-by-nc.svg';
         ccbync.onload = () => {
             ctx.drawImage(ccbync, max_x - ccbyncX, max_y - ccbyncY, ccbyncX, ccbyncY);
         }
@@ -92,6 +97,8 @@ export default class ComicPage extends React.Component {
     /* Agrandissement Page */
 
     toggleFullscreen = () => {
+        if (window.innerWidth <= 600) return;
+
         if (this.state.fullscreen) {
             this.setState({ fullscreen: false });
         } else {
@@ -99,6 +106,9 @@ export default class ComicPage extends React.Component {
         }
     }
 
+    componentDidUpdate() {
+        this.drawPlanche();
+    }
     /* Supression page */
 
     deletePage = () => {
@@ -123,9 +133,26 @@ export default class ComicPage extends React.Component {
 
     render() {
         if (this.state.redirectVote) return <Redirect to="/auth" />
+        else if (this.state.fullscreen) return (
+            <div>
+                <div onClick={this.toggleFullscreen} className="homePlancheFullscreenAround" />
+                <div className="homePlancheFullscreenWrapper">
+                    <img onClick={this.toggleFullscreen} className="homePlancheFullscreenClose" src={Auth.url + "/icons/cancel.svg"} alt="X" />
+                    <div className={`homePlancheFullscreen ${this.state.rate === 1 ? "plancheLike" : ""} ${this.state.rate === 0 ? "plancheDislike" : ""}`}>
+                        <canvas onClick={this.toggleFullscreen} title={this.authorsTitle} className="homePlancheFullscreenImg" ref={this.canvasRef} width={this.state.canvasW} height={this.state.canvasH} />
+                        <div className="homePlancheTopInfos homePlancheFullscreenInfos">
+                            <textarea readOnly disabled className="homeName" value={this.props.name} />
+                            <textarea readOnly disabled className="homeDescriFullscreen" value={this.props.description} />
+                            <p className="homeMode">{this.props.gamemode}</p>
+                            <p className="homeUser">{this.authors}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        );
         else return (
             <div className="homePlancheWrapper">
-                <div className={`homePlanche ${this.state.rate === 1 && "plancheLike"} ${this.state.rate === 0 && "plancheDislike"}`}>
+                <div className={`homePlanche ${this.state.rate === 1 ? "plancheLike" : ""} ${this.state.rate === 0 ? "plancheDislike" : ""}`}>
                     <div className="homePlancheTop">
                         <canvas onClick={this.toggleFullscreen} title={this.authorsTitle} className="homePlancheImg" ref={this.canvasRef} width={this.state.canvasW} height={this.state.canvasH} />
                         <div className="homePlancheTopInfos">

@@ -2,8 +2,8 @@ import { Component } from 'react';
 import './index.css';
 import Auth from '../components/AuthHelperMethods';
 import withAuth from '../components/withAuth';
-import ComicPage from '../components/ComicPage.js';
-import ComicFrame from '../components/ComicFrame.js';
+import ComicPage from '../components/ComicPage/ComicPage.js';
+import ComicFrame from '../components/ComicFrame/ComicFrame.js';
 
 class UserInfo extends Component {
 
@@ -30,8 +30,9 @@ class UserInfo extends Component {
                         birthdate: res.birthdate
                     }
                 });
-                this.setState({pages: res.pages});
-                this.setState({ isAdmin: res.isadmin})
+                this.setState({ pages: res.pages });
+                this.setState({ frames: res.frames });
+                this.setState({ isAdmin: res.isadmin })
             } else {
                 alert(res.message);
             }
@@ -45,34 +46,6 @@ class UserInfo extends Component {
             <div className="userPage">
                 <div className="userPageInfos">
                     <h1 className="userPageInfosName">Informations :</h1>
-                    {/* C'est une idée ... <form>
-                        <div className="">
-                            <label htmlFor="name">Nom :</label>
-                            <input
-                                required
-                                id="name"
-                                placeholder={userInfos?.nickname}
-                                name="name"
-                                type="text"
-                                onChange={this._handleChange}
-                            />
-                        </div>
-                        <div className="">
-                            <label htmlFor="email">E-mail :</label>
-                            <input
-                                required
-                                id="email"
-                                placeholder={userInfos?.email}
-                                name="email"
-                                type="email"
-                                onChange={this._handleChange}
-                            />
-                        </div>
-                        <div className="">
-                            <button >Sauvegarder</button>
-                            {/* <button onClick={this.handleFormSubmit}>Sauvegarder</button> /}
-                        </div>
-                    </form> */}
                     <ul className="userPageInfosOthers">
                         <li>Nom : {userInfos?.nickname}</li>
                         <li>Id : {userInfos?.id}</li>
@@ -95,9 +68,7 @@ class UserInfo extends Component {
                     <h1 className="userPageInfosPagesNotDone">BD en cours de réalisation :</h1>
                     {/* Affichage des planches en cours où l'utilisateur à participé */}
                     <div className="userPageCreationsFinishContainer">
-                        {console.log(frames)}
                         {frames.map((frame, i) => (
-                            // J'arrive pas à savoir pq ça s'affiche pas ... À continuer 
                             <ComicFrame key={i} {...frame}/>
                         ))}
                     </div>
