@@ -166,8 +166,8 @@ export default class ComicPage extends React.Component {
                         <button type="button" onClick={() => this.handleVoteClick(1)}>Like</button>
                         <button type="button" onClick={() => this.handleVoteClick(0)}>Dislike</button>
                     </div>
+                    {this.props.userIsAdmin && <button className="homeDeleteAdminButton" type="button" onClick={this.deletePage}>Delete</button>}
                 </div>
-                {this.props.userIsAdmin && <button className="homeDeleteAdminButton" type="button" onClick={this.deletePage}>Delete</button>}
             </div>
         );
     }

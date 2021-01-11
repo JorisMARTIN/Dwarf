@@ -14,6 +14,7 @@ import E404 from './E404';
 import Auth from './components/AuthHelperMethods';
 import Help from './Help';
 import UserInfos from './UserInfos';
+import Moderation from './Moderation';
 
 export default class App extends Component {
 
@@ -50,6 +51,7 @@ export default class App extends Component {
             <div className="logCoponentDropDown">
               <div>
                 <Link className="logLink" to="/user">Informations</Link>
+                <Link className="logLink" to="/moderation">Moderation</Link>
                 <button className="logLink" onClick={this.logout}>Déconnexion</button>
               </div>
             </div>
@@ -71,6 +73,8 @@ export default class App extends Component {
           <Route path="/help" component={Help} />
 
           <Route path="/user" component={UserInfos} />
+
+          <Route path="/moderation" component={Moderation} />
 
           <Route path="*">
             <E404 />

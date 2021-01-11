@@ -2,10 +2,10 @@
 
 class DeletePage {
 
-    private $pageId;
-    private $userId;
+    private $pageid;
+    private $userid;
     private $reason;
-    private $date;
+    private $deletedate;
 
     /**
      * Get the ID of the deleted page
@@ -13,7 +13,7 @@ class DeletePage {
      * @return int ID of the page deleted
      */
     function getPageId() : int {
-        return $this->pageId;
+        return $this->pageid;
     }
 
     /**
@@ -22,7 +22,7 @@ class DeletePage {
      * @return int ID of the user who deleted the page
      */
     function getUserIdWhoDelete() : int {
-        return $this->userId;
+        return $this->userid;
     }
 
     /**
@@ -40,6 +40,7 @@ class DeletePage {
      * @return string Date of the delete
      */
     function getDeleteDate() : string {
-        return $this->date;
+        return $this->deletedate;
     }
 }
+?>
