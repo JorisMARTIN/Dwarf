@@ -44,7 +44,7 @@ class UserInfo extends Component {
         return(
             <div className="userPage">
                 <div className="userPageInfos">
-                    <h1 className="userPageInfosName">Informations</h1>
+                    <h1 className="userPageInfosName">Informations :</h1>
                     {/* C'est une idée ... <form>
                         <div className="">
                             <label htmlFor="name">Nom :</label>
@@ -68,11 +68,11 @@ class UserInfo extends Component {
                                 onChange={this._handleChange}
                             />
                         </div>
+                        <div className="">
+                            <button >Sauvegarder</button>
+                            {/* <button onClick={this.handleFormSubmit}>Sauvegarder</button> /}
+                        </div>
                     </form> */}
-                    <div className="">
-                        <button >Sauvegarder</button>
-                        {/* <button onClick={this.handleFormSubmit}>Sauvegarder</button> */}
-                    </div>
                     <ul className="userPageInfosOthers">
                         <li>Nom : {userInfos?.nickname}</li>
                         <li>Id : {userInfos?.id}</li>

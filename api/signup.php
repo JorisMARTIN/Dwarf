@@ -75,17 +75,17 @@ if (isset($data)) {
                 'success' => false,
                 'messageError' => 'Le champ "password confirm" est vide !'
             ]);
-        } else if (strlen($pseudo) > 16) {
+        } else if (strlen($pseudo) >= 16) {
             echo json_encode([
                 'success' => false,
                 'messageError' => 'Ton pseudo est trop long ! (Maximum 16 caractères)'
             ]);            
-        } else if (strlen($email) > 64) {
+        } else if (strlen($email) >= 64) {
             echo json_encode([
                 'success' => false,
                 'messageError'=> 'Ton email est trop long ! (Maximum 64 caractères)'
             ]);
-        } else if (strlen($password) > 255) {
+        } else if (strlen($password) >= 255) {
             echo json_encode([
                 'success' => false,
                 'messageError'=> 'Ton mot de passe est trop long ! (Maximum 255 caractères)'
