@@ -1,0 +1,75 @@
+.framePlanche {
+    text-align: center;
+    margin: 20px;
+    width: 250px;
+    padding: 2em;
+    justify-content: space-between;
+    background: var(--CardBackground);
+    box-shadow: 0 3.2px 7.2px 0 rgba(0,0,0,.132),0 .6px 1.8px 0 rgba(0,0,0,.108);
+    border-radius: 25px;
+    animation: PopAnimation 0.25s;
+    display: flex;
+    flex-direction:column
+}
+.frameInfosName {
+    text-align: center;
+    color: var(--PrimaryText);
+    font-size: 1.2em;
+    font-weight: 600;
+    height:2.4em
+}
+
+.frameInfosDescri {
+    color: var(--SecondaryText);
+    height:2.3em;
+    font-size: 1em;
+    font-weight:500
+}
+
+.frameInfosMode {
+    margin: .5em auto;
+    padding: .5em 1em;
+    color: #f2f2f7;
+    background: linear-gradient(var(--ClassicButtonStart), var(--ClassicButtonEnd));
+    border-radius: 25px;
+    font-size: .8em;
+    font-weight: 600;
+    border:none
+}
+
+.framePlancheInfos {
+    display: flex;
+    flex-direction: column;
+    color:var(--PrimaryText)
+}
+
+.framePlancheInfos > textarea {
+    resize: none;
+    border: none;
+    text-align: center;
+    background:var(--CardBackground)
+}
+
+@media only screen and (max-width: 600px) {
+    .framePlanche {
+        margin: 20px;
+        padding: 0;
+        width: auto;
+        justify-content: space-between;
+        background: var(--CardBackground);
+        box-shadow: 0 10px 20px var(--Shadow);
+        /*box-shadow: 0 3.2px 7.2px 0 rgba(0,0,0,.132),0 .6px 1.8px 0 rgba(0,0,0,.108);*/
+        border-radius: 20px;
+        animation: PopAnimation 0.25s;
+    }
+    
+    .framePlancheImg {
+        width: 100%;
+        border: none;
+        border-radius: 20px 20px 0 0;
+    }
+    
+    .framePlancheInfos {
+        padding: 20px;
+    }
+}
