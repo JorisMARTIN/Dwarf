@@ -90,7 +90,7 @@ if($userId != -1){
 }else{
     $out = [
         'status' => 400,
-        'message' => 'You are not logged in'
+        'message' => 'Vous n\'etes pas connecté'
     ];
 }
 echo json_encode($out);
