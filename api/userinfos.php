@@ -38,48 +38,55 @@ if($userId != -1){
 
     $userPages = $pageDAO->getUserPagesDone($userId);
 
-    for ($i = 0; $i < count($userPages); $i++) {
-        $p = $userPages[$i];
+    if (!$userPages) {
+        $out['pages']=[];
+    } else {
+        for ($i = 0; $i < count($userPages); $i++) {
+            $p = $userPages[$i];
 
-        $user = $userDAO->getUser($p->getOwnerId());
+            $user = $userDAO->getUser($p->getOwnerId());
 
-        $images = [];
-        $authors = [$user->getNickname()];
+            $images = [];
+            $authors = [$user->getNickname()];
 
-        $frames = $frameDAO->getFrames($p->getId());
-        foreach ($frames as $frame) {
-            $images[] = $frame->getImagePtr();
-            $authors[] = $userDAO->getUser($frame->getOwnerId())->getNickname();
+            $frames = $frameDAO->getFrames($p->getId());
+            foreach ($frames as $frame) {
+                $images[] = $frame->getImagePtr();
+                $authors[] = $userDAO->getUser($frame->getOwnerId())->getNickname();
+            }
+
+            $out['pages'][$i] = [
+                'pageId' => $p->getId(),
+                'name' => $p->getName(),
+                'description' => $p->getDescription(),
+                'gamemode' => ($p->getGameMode() == 0 ? "Normal" : "Reverse"),
+                'date' => $p->getCreationDate(),
+                'images' => $images,
+                'authors' => $authors,
+                'template' => $p->getTemplateType(),
+            ];
         }
-
-        $out['pages'][$i] = [
-            'pageId' => $p->getId(),
-            'name' => $p->getName(),
-            'description' => $p->getDescription(),
-            'gamemode' => ($p->getGameMode() == 0 ? "Normal" : "Reverse"),
-            'date' => $p->getCreationDate(),
-            'images' => $images,
-            'authors' => $authors,
-            'template' => $p->getTemplateType(),
-        ];
     }
 
     $userDraw = $frameDAO->getUserFrames($userId);
     $i = 0;
 
-    foreach ($userDraw as $f) {
-        $p = $pageDAO->getPage($f->getPageId());
+    if (!$userDraw) {
+        $out['frames']=[];
+    } else {
+        foreach ($userDraw as $f) {
+            $p = $pageDAO->getPage($f->getPageId());
 
-        $out['frames'][$i] = [
-            'name' => $p->getName(),
-            'description' => $p->getDescription(),
-            'gamemode' => ($p->getGameMode() == 0 ? "Normal" : "Reverse"),
-            'images' => $f->getImagePtr()
-        ];
-        
-        $i++;
+            $out['frames'][$i] = [
+                'name' => $p->getName(),
+                'description' => $p->getDescription(),
+                'gamemode' => ($p->getGameMode() == 0 ? "Normal" : "Reverse"),
+                'images' => $f->getImagePtr()
+            ];
+            
+            $i++;
+        }
     }
-
 }else{
     $out = [
         'status' => 400,

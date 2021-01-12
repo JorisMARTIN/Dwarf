@@ -59,18 +59,26 @@ class UserInfo extends Component {
                     <h1 className="userPageInfosPagesDone">BD déjà réalisé :</h1>
                     {/* Afffichage des planches fini où l'utilisateur à participé */}
                     <div className="userPageCreationsFinishContainer">
-                        {pages.map((page, i) => (
-                            <ComicPage key={i} {...page} userIsAdmin={isAdmin} />
-                        ))}
+                        {pages.length > 0 ?           
+                            pages.map((page, i) => (
+                                <ComicPage key={i} {...page} userIsAdmin={isAdmin} />
+                            ))
+                        :
+                            <h2>Il n'y a aucune BD fini où vous avez participé ...</h2>
+                        }
                     </div>
                 </div>
                 <div className="userPageCreationsCurrent">
                     <h1 className="userPageInfosPagesNotDone">BD en cours de réalisation :</h1>
                     {/* Affichage des planches en cours où l'utilisateur à participé */}
                     <div className="userPageCreationsFinishContainer">
-                        {frames.map((frame, i) => (
-                            <ComicFrame key={i} {...frame}/>
-                        ))}
+                        {frames.length > 0 ?
+                            frames.map((frame, i) => (
+                                <ComicFrame key={i} {...frame}/>
+                            ))
+                        :
+                            <h2>Vous n'avez aucun dessin dans une BD non finie ....</h2>
+                        }
                     </div>
                 </div>
             </div>
