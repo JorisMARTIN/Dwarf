@@ -112,9 +112,9 @@ export default class ComicPage extends React.Component {
     /* Supression page */
 
     deletePage = (action) => {
-        if (window.confirm("Do you realy want to " + action + " this page ?")) {
-            if(action == "delete"){
-                const reason = window.prompt("Please mention the reason of the detele : ");
+        if (window.confirm("Voulez vous vraiment " + ((action === "delete") ? "supprimer" : "restaurer") + " cette page ?")) {
+            if(action === "delete"){
+                const reason = window.prompt("Veuillez mentionner la raison de suppression : ");
                 if (reason) {
                     Auth.fetch("delete.php", {
                         method: "POST",
@@ -124,23 +124,23 @@ export default class ComicPage extends React.Component {
                             reason: reason
                         })
                     }).then(res => {
-                        if (window.confirm(res.message + "\nConfirm to continue : ")) {
+                        if (window.confirm(res.message + "\nConfirmer pour continuer : ")) {
                             window.location.reload();
                         }
                     })
                 }
             }else{
                 Auth.fetch("delete.php", {
-                        method: "POST",
-                        body: JSON.stringify({
-                            pageId: this.props.pageId,
-                            action: action
-                        })
-                    }).then(res => {
-                        if (window.confirm(res.message + "\nConfirm to continue : ")) {
-                            window.location.reload();
-                        }
+                    method: "POST",
+                    body: JSON.stringify({
+                        pageId: this.props.pageId,
+                        action: action
                     })
+                }).then(res => {
+                    if (window.confirm(res.message + "\nConfirmer pour continuer : ")) {
+                        window.location.reload();
+                    }
+                })
             }
         }
     }
@@ -179,14 +179,16 @@ export default class ComicPage extends React.Component {
                     {this.props.deleteInfos 
                     ? 
                     <section>
-                        <div className="">
+                        <hr/>
+                        <p className="homeDeleteInfosTitle">Information de supression : </p>
+                        <div className="homeDeleteInfos">
                             <ul>
-                                <li>User who delete this frame : {this.props.deleteInfos.userWhoDelete}</li>
-                                <li>Reason : {this.props.deleteInfos.reason}</li>
+                                <li>Utilisateur : {this.props.deleteInfos.userWhoDelete}</li>
+                                <li>Raison : {this.props.deleteInfos.reason}</li>
                                 <li>Date : {this.props.deleteInfos.date}</li>
                             </ul>
                         </div>
-                        <button className="homeDeleteAdminButton" type="button" onClick={() => this.deletePage("unDelete")}>UnDelete</button>
+                        <button className="homeDeleteAdminButton" type="button" onClick={() => this.deletePage("unDelete")}>Restaurer</button>
                     </section> 
                     :
                     <section>
@@ -194,7 +196,7 @@ export default class ComicPage extends React.Component {
                             <button type="button" onClick={() => this.handleVoteClick(1)}>Like</button>
                             <button type="button" onClick={() => this.handleVoteClick(0)}>Dislike</button>
                         </div>
-                        {this.props.userIsAdmin && <button className="homeDeleteAdminButton" type="button" onClick={() => this.deletePage("delete")}>Delete</button>}
+                        {this.props.userIsAdmin && <button className="homeDeleteAdminButton" type="button" onClick={() => this.deletePage("delete")}>Supprimer</button>}
                     </section>
                     }
                 </div>

@@ -1,0 +1,11 @@
+.homeDeleteInfosTitle{
+    margin: 0% 0% 2% 0%;
+    color: var(--PrimaryText);
+}
+
+.homeDeleteInfos{
+    color: var(--PrimaryText);
+    background-color: var(--Background2);
+    border-radius: 25px;
+    padding: 0.25em;
+}
