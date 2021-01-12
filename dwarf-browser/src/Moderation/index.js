@@ -34,8 +34,9 @@ class Moderation extends React.Component {
 
     render() {
         const {isAdmin, deletedPages} = this.state;
-        //if(!isAdmin) return <Redirect to="/" />
-        //else {
+        // if(isAdmin === false){
+        //     return <Redirect to="/" />;
+        // }else{
             return (
                 <div className="moderationMain">
                     <h2>DeletedPages</h2>
