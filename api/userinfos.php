@@ -71,7 +71,7 @@ if($userId != -1){
     $userDraw = $frameDAO->getUserFrames($userId);
     $i = 0;
 
-    if (!$userDAO) {
+    if (!$userDraw) {
         $out['frames']=[];
     } else {
         foreach ($userDraw as $f) {
