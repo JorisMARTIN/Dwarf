@@ -38,8 +38,8 @@ class Moderation extends React.Component {
         //else {
             return (
                 <div className="moderationMain">
+                    <h2>DeletedPages</h2>
                     <div className="moderationDeletedPages">
-                        <h2>DeletedPages</h2>
                         {deletedPages.map((page, i) => (
                             <ComicPage key={i} {...page} isAdmin={false} />
                         ))}

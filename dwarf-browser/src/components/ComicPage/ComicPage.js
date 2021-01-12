@@ -111,22 +111,36 @@ export default class ComicPage extends React.Component {
     }
     /* Supression page */
 
-    deletePage = () => {
-        if (window.confirm("Do you realy want to delete this page ?")) {
-            const reason = window.prompt("Please mention the reason of the detele : ");
-            if (reason) {
-                Auth.fetch("delete.php", {
-                    method: "POST",
-                    body: JSON.stringify({
-                        pageId: this.props.pageId,
-                        action: "delete",
-                        reason: reason
+    deletePage = (action) => {
+        if (window.confirm("Do you realy want to " + action + " this page ?")) {
+            if(action == "delete"){
+                const reason = window.prompt("Please mention the reason of the detele : ");
+                if (reason) {
+                    Auth.fetch("delete.php", {
+                        method: "POST",
+                        body: JSON.stringify({
+                            pageId: this.props.pageId,
+                            action: action,
+                            reason: reason
+                        })
+                    }).then(res => {
+                        if (window.confirm(res.message + "\nConfirm to continue : ")) {
+                            window.location.reload();
+                        }
                     })
-                }).then(res => {
-                    if (window.confirm(res.message + "\nConfirm to continue : ")) {
-                        window.location.reload();
-                    }
-                })
+                }
+            }else{
+                Auth.fetch("delete.php", {
+                        method: "POST",
+                        body: JSON.stringify({
+                            pageId: this.props.pageId,
+                            action: action
+                        })
+                    }).then(res => {
+                        if (window.confirm(res.message + "\nConfirm to continue : ")) {
+                            window.location.reload();
+                        }
+                    })
             }
         }
     }
@@ -162,11 +176,27 @@ export default class ComicPage extends React.Component {
                             <p className="homeUser">{this.authors}</p>
                         </div>
                     </div>
-                    <div className="homePlancheBottom">
-                        <button type="button" onClick={() => this.handleVoteClick(1)}>Like</button>
-                        <button type="button" onClick={() => this.handleVoteClick(0)}>Dislike</button>
-                    </div>
-                    {this.props.userIsAdmin && <button className="homeDeleteAdminButton" type="button" onClick={this.deletePage}>Delete</button>}
+                    {this.props.deleteInfos 
+                    ? 
+                    <section>
+                        <div className="">
+                            <ul>
+                                <li>User who delete this frame : {this.props.deleteInfos.userWhoDelete}</li>
+                                <li>Reason : {this.props.deleteInfos.reason}</li>
+                                <li>Date : {this.props.deleteInfos.date}</li>
+                            </ul>
+                        </div>
+                        <button className="homeDeleteAdminButton" type="button" onClick={() => this.deletePage("unDelete")}>UnDelete</button>
+                    </section> 
+                    :
+                    <section>
+                        <div className="homePlancheBottom">
+                            <button type="button" onClick={() => this.handleVoteClick(1)}>Like</button>
+                            <button type="button" onClick={() => this.handleVoteClick(0)}>Dislike</button>
+                        </div>
+                        {this.props.userIsAdmin && <button className="homeDeleteAdminButton" type="button" onClick={() => this.deletePage("delete")}>Delete</button>}
+                    </section>
+                    }
                 </div>
             </div>
         );
