@@ -6,7 +6,7 @@ export default class ComicFrame extends React.Component {
     render() {
         return (
             <div className="framePlanche">
-                <img className="framePlancheImg" src={Auth.url+this.props.images}/>
+                <img className="framePlancheImg" alt={this.props.name} src={Auth.url+this.props.images}/>
                 <div className="framePlancheInfos">
                     <textarea readOnly disabled className="frameInfosName" value={this.props.name} />
                     <textarea readOnly disabled className="frameInfosDescri" value={this.props.description} />

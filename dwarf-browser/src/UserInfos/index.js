@@ -15,9 +15,9 @@ class UserInfo extends Component {
         emailUser: "",
         passwordUser: "",
         passwordConfirmUser: "",
-        datedUser: "",
+        dateUser: "",
         modify : false,
-        action : "",
+        messageError : "",
         section : 0 //section 0 => User information || 1 => Pages done || 2 => Frames done
     }
 
@@ -27,19 +27,22 @@ class UserInfo extends Component {
     
 //le save marche avec apitester mais pas en real pq ????
     handleAccount = (action) => {
-        this.setState({ action: action });
-        console.log(this.state);
+        this.setState({ messageError: "" });
         Auth.fetch("account.php", {
             method: "POST",
             body: JSON.stringify({
                 email: this.state.emailUser,
-                date: this.state.datedUser,
+                date: this.state.dateUser,
                 password: this.state.passwordUser,
                 passwordConfirm: this.state.passwordConfirmUser,
-                action: this.state.action
+                action: action
             })
         }).then(res => {
-            console.log(res);
+            if (!res.success) {
+                this.setState({ messageError: res.messageError});
+            } else {
+                this.setState({section:0});
+            }
         })
     }
 
@@ -57,26 +60,16 @@ class UserInfo extends Component {
                         nickname: res.nickname,
                         creationDate: res.creationdate,
                         birthdate: res.birthdate
-                    }
-                });
-                this.setState({ pages: res.pages });
-                this.setState({ frames: res.frames });
-                this.setState({ isAdmin: res.isadmin })
+                    },
+                    pages: res.pages,
+                    frames: res.frames,
+                    isAdmin: res.isadmin })
             } else {
                 alert(res.message);
             }
         });
     }
 
-//     {
-//     "email": "test@gmail.com",
-//         "date": "1111-11-11",
-//             "password": "123",
-//                 "passwordConfirm": "123",
-//                     "action": "save"
-// }
-// Authorization
-// Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1aWQiOjMsImV4cCI6MTYxMDU1MjQ5NywiaXNzIjoiZHdhcmYuam9yaXNtYXJ0aW4uZnIifQ.fTEYkXcsB9NHs2T37Ud - BGdeDJrUv2gHQ3Il06_A1TM
     render() {
         const { pages, frames, isAdmin, userInfos } = this.state;
         return (
@@ -87,14 +80,15 @@ class UserInfo extends Component {
                     <button className="userPageMenuLink" onClick={() => this.setState({section : 2})}>Case déssiné.s</button>
                 </section>
                 <section className="userPageDisplay">
-                    {this.state.section == 0 &&
+                    {this.state.section === 0 &&
                         <article className="userPageInfos">
                             <div className="userPageTop">
                                 <h1 className="userPageInfosTopName">{userInfos?.nickname}</h1>
-                                {isAdmin && <p className="userPageInfosYopIsadmin">Admin</p>}
+                                {isAdmin && <p className="userPageInfosTopIsadmin">Admin</p>}
                             </div>
                             {!this.state.modify ?
                             <div className="userForm">
+                                {this.state.messageError && <p className="authPageMessage">Erreur : {this.state.messageError}</p>}
                                 <div className="userPageInfosOthers">
                                     <p>Email : {userInfos?.email}</p>
                                     <p>Date de naissance : {userInfos?.birthdate}</p>
@@ -110,7 +104,8 @@ class UserInfo extends Component {
                                 </div>
                             </div>
                             :
-                            <form className="userForm">
+                            <div className="userForm">
+                                {this.state.messageError && <p className="authPageMessage">Erreur : {this.state.messageError}</p>}
                                 <div className="userFormEmail">
                                     <label htmlFor="emailUser">E-mail :</label>
                                     <input
@@ -127,9 +122,9 @@ class UserInfo extends Component {
                                     <input
                                         required
                                         id="dateUser"
-                                        placeholder="date"
+                                        placeholder="dd-mm-yyyy"
                                         name="dateUser"
-                                        type="date"
+                                        type="text"
                                         onChange={this._handleChange}
                                     />
                                 </div>
@@ -166,11 +161,11 @@ class UserInfo extends Component {
                                     }
                                     <button onClick={() => this.handleAccount("delete")} className="userPageButton">Supprimer le compte</button>
                                 </div>
-                            </form>
+                            </div>
                             }
                         </article>
                     }
-                    {this.state.section == 1 &&
+                    {this.state.section === 1 &&
                         <article className="userPageCreationsFinish">
                             <div className="userPageTop">
                                 <h1 className="userPageInfosPagesDone">BD déjà réalisé :</h1>
@@ -187,7 +182,7 @@ class UserInfo extends Component {
                             </div>
                         </article>
                     }
-                    {this.state.section == 2 &&
+                    {this.state.section === 2 &&
                         <article className="userPageCreationsCurrent">
                             <div className="userPageTop">
                                 <h1 className="userPageInfosPagesNotDone">BD en cours de réalisation :</h1>
