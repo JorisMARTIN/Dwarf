@@ -55,7 +55,7 @@ const UserFormComponent = ({userInfos, save,toDelete,toFalse,unChange, messageEr
             />
         </div>
         <div className="userFormPwd">
-            <label htmlFor="pwdUser">Mot de passe <a>*</a> :</label>
+            <label htmlFor="pwdUser">Mot de passe <span>*</span> :</label>
             <input
                 required
                 id="pwdUser"
@@ -66,7 +66,7 @@ const UserFormComponent = ({userInfos, save,toDelete,toFalse,unChange, messageEr
             />
         </div>
         <div className="userFormPwdConfirm">
-            <label htmlFor="pwdConfirmUser">Confirmation du mot de passe <a>*</a> :</label>
+            <label htmlFor="pwdConfirmUser">Confirmation du mot de passe <span>*</span> :</label>
             <input
                 required
                 id="pwdConfirmUser"

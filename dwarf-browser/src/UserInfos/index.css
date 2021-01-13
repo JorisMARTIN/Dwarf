@@ -106,7 +106,7 @@
     background:var(--BlueButtonHover)
 }
 
-.userForm > div > label > a, .userForm > p > span {
+.userForm > div > label > span, .userForm > p > span {
     font-weight: bold;
 }
 
