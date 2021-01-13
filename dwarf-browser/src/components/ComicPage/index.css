@@ -1,11 +1,243 @@
-.homeDeleteInfosTitle{
-    margin: 0% 0% 2% 0%;
-    color: var(--PrimaryText);
+/* Full screen comic styles */
+
+.comicPlancheFullscreenAround {
+    z-index: 3;
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    left: 0;
+    top: 0;
+    max-width:100%
 }
 
-.homeDeleteInfos{
-    color: var(--PrimaryText);
-    background-color: var(--Background2);
+.comicPlancheFullscreenWrapper {
+    z-index: 4;
+    position: absolute;
+    width: 80vw;
+    height: 70vh;
+    left: 5vw;
+    top: 10vh;
+}
+
+.comicPlancheFullscreenClose {
+    position: absolute;
+    top: 25px;
+    left: 25px;
+    cursor: pointer;
+    width: 25px;
+}
+
+.comicPlancheFullscreen {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-around;
+    background: var(--CardBackground);
+    box-shadow: 0 5px 10px 10px var(--Shadow);
+    border-radius:25px;
+}
+.comicPlancheFullscreenImg {
+    width: 50%;
+    border:1px solid #8e8e93;
+    background-color: #AAB2AB;
+    cursor: pointer;
+}
+
+.comicPlancheFullscreenInfos {
+    justify-content: space-around;
+}
+
+.comicDescriFullscreen {
+    color: var(--SecondaryText);
+    height:20em;
+}
+
+@media (prefers-color-scheme: dark) {
+    .comicPlancheFullscreenClose {
+        filter: invert(1);
+    }
+}
+/* Enf Full screen comic styles */
+
+/* Comic Wrapper */
+.comicPlanche, .comicPlancheWrapper {
+    display: flex;
+    flex-direction:column
+}
+
+.comicPlanche {
+    margin: 20px;
+    width: 250px;
+    padding: 2em;
+    justify-content: space-between;
+    background: var(--CardBackground);
+    /*box-shadow: 0 5px 10px 10px var(--Shadow);*/
+    box-shadow: 0 3.2px 7.2px 0 rgba(0,0,0,.132),0 .6px 1.8px 0 rgba(0,0,0,.108);
     border-radius: 25px;
-    padding: 0.25em;
+    animation: PopAnimation 0.25s;
+}
+
+.comicPlanche:hover {
+    /*box-shadow:0 10px 15px 15px var(--ShadowHover);*/
+    box-shadow: 0 6.4px 14.4px 0 rgba(0,0,0,.132),0 1.2px 3.6px 0 rgba(0,0,0,.108);
+}
+
+.plancheLike {
+    box-shadow:0 5px 10px 10px var(--LikeShadow)
+}
+
+.plancheDislike {
+    box-shadow:0 5px 10px 10px var(--DislikeShadow)
+}
+
+/* Top part of the card */
+
+    .comicPlancheTop {
+        color: var(--CardBackground);
+        text-align:center
+    }
+
+    .comicPlancheImg {
+        width: 100%;
+        object-fit: cover;
+        border: 1px solid #8e8e93;
+        background-color:#aab2ab
+    }
+
+    .comicPlancheTopInfos {
+        display: flex;
+        flex-direction: column;
+        color:var(--PrimaryText)
+    }
+
+    .comicPlancheTopInfos > textarea {
+        resize: none;
+        border: none;
+        text-align: center;
+        background:var(--CardBackground)
+    }
+
+    .comicName {
+        text-align: center;
+        color: var(--PrimaryText);
+        font-size: 1.2em;
+        font-weight: 600;
+        height:2.4em
+    }
+
+    .comicDescri {
+        color: var(--SecondaryText);
+        height:2.3em
+    }
+
+    .comicMode {
+        margin: .5em auto;
+        padding: .5em 1em;
+        color: #f2f2f7;
+        background: linear-gradient(var(--ClassicButtonStart), var(--ClassicButtonEnd));
+        border-radius: 25px;
+        font-size: .8em;
+        font-weight: 600;
+        border:none
+    }
+
+    .comicDescri, .comicUser {
+        font-size: 1em;
+        font-weight:500
+    }
+
+    .comicUser {
+        color: var(--PrimaryText);
+        margin:0 0 .5em
+    }
+
+/* Bottom part */
+
+    .comicPlancheBottom {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .comicPlancheBottom > hr{
+        width: 50%;
+        background-color: var(--PrimaryText);
+    }
+
+    /* Admin part */
+    .comicDeleteInfosTitle{
+        margin: 0% 0% 2% 0%;
+        color: var(--PrimaryText);
+    }
+
+    .comicDeleteInfos{
+        color: var(--PrimaryText);
+        background-color: var(--Background2);
+        border-radius: 25px;
+        padding: 0.25em;
+    }
+
+    /* Common part */
+    .comicPlancheVote {
+        display: flex;
+        justify-content:space-around;
+    }
+
+    .comicPlancheVote > button {
+        padding: .5em 1em;
+        color: #f2f2f7;
+        background: var(--BlueButton);
+        border-radius: 25px;
+        font-size: .8em;
+        font-weight: 600;
+        border:none;
+    }
+
+    .comicPlancheVote > button:hover {
+        background:var(--BlueButtonHover);
+    }
+
+    /* Admin button used in these 2 parts */
+    .comicDeleteAdminButton {
+        z-index: 1;
+        margin: 2em 2em 0;
+        padding: .5em 1em;
+        color: #f2f2f7;
+        background: var(--RedButton);
+        border-radius: 25px;
+        font-size: .8em;
+        font-weight: 600;
+        border:none
+    }
+
+    .comicDeleteAdminButton:hover {
+        background:var(--RedButtonHover)
+    }
+
+@media only screen and (max-width: 600px) {
+    .comicTitle {
+        margin: 20px;
+        text-align: left;
+    }
+    
+    .comicPlanche {
+        margin: 20px;
+        padding: 0;
+        width: auto;
+        justify-content: space-between;
+        background: var(--CardBackground);
+        box-shadow: 0 10px 20px var(--Shadow);
+        /*box-shadow: 0 3.2px 7.2px 0 rgba(0,0,0,.132),0 .6px 1.8px 0 rgba(0,0,0,.108);*/
+        border-radius: 20px;
+        animation: PopAnimation 0.25s;
+    }
+    
+    .comicPlancheImg {
+        width: 100%;
+        border: none;
+        border-radius: 20px 20px 0 0;
+    }
+    
+    .comicPlancheTopInfos, .comicPlancheBottom {
+        padding: 20px;
+    }
 }

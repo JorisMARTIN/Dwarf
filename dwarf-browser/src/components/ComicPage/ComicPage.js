@@ -149,54 +149,54 @@ export default class ComicPage extends React.Component {
         if (this.state.redirectVote) return <Redirect to="/auth" />
         else if (this.state.fullscreen) return (
             <div>
-                <div onClick={this.toggleFullscreen} className="homePlancheFullscreenAround" />
-                <div className="homePlancheFullscreenWrapper">
-                    <img onClick={this.toggleFullscreen} className="homePlancheFullscreenClose" src={Auth.url + "/icons/cancel.svg"} alt="X" />
-                    <div className={`homePlancheFullscreen ${this.state.rate === 1 ? "plancheLike" : ""} ${this.state.rate === 0 ? "plancheDislike" : ""}`}>
-                        <canvas onClick={this.toggleFullscreen} title={this.authorsTitle} className="homePlancheFullscreenImg" ref={this.canvasRef} width={this.state.canvasW} height={this.state.canvasH} />
-                        <div className="homePlancheTopInfos homePlancheFullscreenInfos">
-                            <textarea readOnly disabled className="homeName" value={this.props.name} />
-                            <textarea readOnly disabled className="homeDescriFullscreen" value={this.props.description} />
-                            <p className="homeMode">{this.props.gamemode}</p>
-                            <p className="homeUser">{this.authors}</p>
+                <div onClick={this.toggleFullscreen} className="comicPlancheFullscreenAround" />
+                <div className="comicPlancheFullscreenWrapper">
+                    <img onClick={this.toggleFullscreen} className="comicPlancheFullscreenClose" src={Auth.url + "/icons/cancel.svg"} alt="X" />
+                    <div className={`comicPlancheFullscreen ${this.state.rate === 1 ? "plancheLike" : ""} ${this.state.rate === 0 ? "plancheDislike" : ""}`}>
+                        <canvas onClick={this.toggleFullscreen} title={this.authorsTitle} className="comicPlancheFullscreenImg" ref={this.canvasRef} width={this.state.canvasW} height={this.state.canvasH} />
+                        <div className="comicPlancheTopInfos comicPlancheFullscreenInfos">
+                            <textarea readOnly disabled className="comicName" value={this.props.name} />
+                            <textarea readOnly disabled className="comicDescriFullscreen" value={this.props.description} />
+                            <p className="comicMode">{this.props.gamemode}</p>
+                            <p className="comicUser">{this.authors}</p>
                         </div>
                     </div>
                 </div>
             </div>
         );
         else return (
-            <div className="homePlancheWrapper">
-                <div className={`homePlanche ${this.state.rate === 1 ? "plancheLike" : ""} ${this.state.rate === 0 ? "plancheDislike" : ""}`}>
-                    <div className="homePlancheTop">
-                        <canvas onClick={this.toggleFullscreen} title={this.authorsTitle} className="homePlancheImg" ref={this.canvasRef} width={this.state.canvasW} height={this.state.canvasH} />
-                        <div className="homePlancheTopInfos">
-                            <textarea readOnly disabled className="homeName" value={this.props.name} />
-                            <textarea readOnly disabled className="homeDescri" value={this.props.description} />
-                            <p className="homeMode">{this.props.gamemode}</p>
-                            <p className="homeUser">{this.authors}</p>
+            <div className="comicPlancheWrapper">
+                <div className={`comicPlanche ${this.state.rate === 1 ? "plancheLike" : ""} ${this.state.rate === 0 ? "plancheDislike" : ""}`}>
+                    <div className="comicPlancheTop">
+                        <canvas onClick={this.toggleFullscreen} title={this.authorsTitle} className="comicPlancheImg" ref={this.canvasRef} width={this.state.canvasW} height={this.state.canvasH} />
+                        <div className="comicPlancheTopInfos">
+                            <textarea readOnly disabled className="comicName" value={this.props.name} />
+                            <textarea readOnly disabled className="comicDescri" value={this.props.description} />
+                            <p className="comicMode">{this.props.gamemode}</p>
+                            <p className="comicUser">{this.authors}</p>
                         </div>
                     </div>
                     {this.props.deleteInfos 
                     ? 
-                    <section>
+                    <section className="comicPlancheBottom">
                         <hr/>
-                        <p className="homeDeleteInfosTitle">Information de supression : </p>
-                        <div className="homeDeleteInfos">
+                        <p className="comicDeleteInfosTitle">Information de supression : </p>
+                        <div className="comicDeleteInfos">
                             <ul>
                                 <li>Utilisateur : {this.props.deleteInfos.userWhoDelete}</li>
                                 <li>Raison : {this.props.deleteInfos.reason}</li>
                                 <li>Date : {this.props.deleteInfos.date}</li>
                             </ul>
                         </div>
-                        <button className="homeDeleteAdminButton" type="button" onClick={() => this.deletePage("unDelete")}>Restaurer</button>
+                        <button className="comicDeleteAdminButton" type="button" onClick={() => this.deletePage("unDelete")}>Restaurer</button>
                     </section> 
                     :
-                    <section>
-                        <div className="homePlancheBottom">
+                    <section className="comicPlancheBottom">
+                        <div className="comicPlancheVote">
                             <button type="button" onClick={() => this.handleVoteClick(1)}>Like</button>
                             <button type="button" onClick={() => this.handleVoteClick(0)}>Dislike</button>
                         </div>
-                        {this.props.userIsAdmin && <button className="homeDeleteAdminButton" type="button" onClick={() => this.deletePage("delete")}>Supprimer</button>}
+                        {this.props.userIsAdmin && <button className="comicDeleteAdminButton" type="button" onClick={() => this.deletePage("delete")}>Supprimer</button>}
                     </section>
                     }
                 </div>

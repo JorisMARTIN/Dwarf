@@ -29,7 +29,7 @@ if (!empty($data)) {
             $pages = $pageDAO->getDeletedPages();
 
             $out = [
-                'isAdmin' => 'true',
+                'isAdmin' => true,
                 'deletedPages' => []
             ];
 
@@ -73,7 +73,7 @@ if (!empty($data)) {
         }
     } else {
         $out = [
-            'isAdmin' => 'false',
+            'isAdmin' => false,
             'deletedPages' => []
         ];
     }
