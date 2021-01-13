@@ -42,16 +42,16 @@ if($userId != -1){
             $birthdateSplit2 = explode("-",$birthdate);
             
             if (count($birthdateSplit1) == 1 && count($birthdateSplit2) == 1) {
-                echo json_encode([
+                $out = [
                     'success' => false,
                     'messageError' => 'Format de date inconnu : ' . $birthdate
-                ]);
+                ];
             } else {
                 if (empty($birthdate)) {
-                    echo json_encode([
+                    $out = [
                         'success' => false,
                         'messageError' => 'Le champ "birthdate" est vide !'
-                    ]);
+                    ];
                 }
 
                 $birthdateSplit = explode("/",$birthdate);
