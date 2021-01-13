@@ -27,8 +27,13 @@ if (isset($data)) {
     /* Format par défault : "../../...." */
     $birthdateSplit1 = explode("/",$birthdate);
     $birthdateSplit2 = explode("-",$birthdate);
-    
-    if (count($birthdateSplit1) == 1 && count($birthdateSplit2) == 1) {
+
+    if (empty($birthdate)) {
+        echo json_encode([
+            'success' => false,
+            'messageError' => 'Le champ "birthdate" est vide !'
+        ]);
+    } elseif (count($birthdateSplit1) == 1 && count($birthdateSplit2) == 1) {
         echo json_encode([
             'success' => false,
             'messageError' => 'Format de date inconnu : ' . $birthdate
@@ -50,12 +55,7 @@ if (isset($data)) {
                 'success' => false,
                 'messageError' => 'Le champ "pseudo" est vide !'
             ]);
-        } elseif (empty($birthdate)) {
-            echo json_encode([
-                'success' => false,
-                'messageError' => 'Le champ "birthdate" est vide !'
-            ]);
-        }  elseif (empty($email)) {
+        } elseif (empty($email)) {
             echo json_encode([
                 'success' => false,
                 'messageError' => 'Le champ "email" est vide !'

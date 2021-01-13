@@ -5,7 +5,7 @@ import withAuth from '../components/withAuth';
 import ComicPage from '../components/ComicPage/ComicPage.js';
 import ComicFrame from '../components/ComicFrame/ComicFrame.js';
 
-const UserInfoComponent = (messageError) => (
+const UserInfoComponent = ({userInfos, toDelete, toTrue, messageError}) => (
     <div className="userForm">
         {messageError && <p className="authPageMessage">Erreur : {messageError}</p>}
         <div className="userPageInfosOthers">
@@ -14,70 +14,79 @@ const UserInfoComponent = (messageError) => (
             <p>Date de création : {userInfos?.creationDate}</p>
         </div>
         <div className="userPageInfosBottom">
-            <button onClick={() => this.setState({ modify: true })} className="userPageDeleteAccount">Modifier</button>
-            <button onClick={() => this.handleAccount("delete")} className="userPageDeleteAccount">Supprimer le compte</button>
+            <button onClick={toTrue} className="userPageDeleteAccount">Modifier</button>
+            <button onClick={toDelete} className="userPageDeleteAccount">Supprimer le compte</button>
         </div>
     </div>
-);
+)
 
-const UserFormComponent = (messageError) => (
+const UserFormComponent = ({userInfos, save,toDelete,toFalse,unChange, messageError})=> (
     <div className="userForm">
         {messageError && <p className="authPageMessage">Erreur : {messageError}</p>}
+        <p id="obli"><span>*</span> : Champ obligatoire</p>
+        <div className="userFormEmail">
+            <label htmlFor="pseudoUser">Pseudo :</label>
+            <input
+                id="pseudoUser"
+                placeholder="Pseudo"
+                name="pseudoUser"
+                type="text"
+                onChange={unChange}
+            />
+        </div>
         <div className="userFormEmail">
             <label htmlFor="emailUser">E-mail :</label>
             <input
-                required
                 id="emailUser"
                 placeholder="Email"
                 name="emailUser"
                 type="email"
-                onChange={this._handleChange}
+                onChange={unChange}
             />
         </div>
         <div className="userFormBirthdate">
             <label htmlFor="dateUser">Date de naissance :</label>
             <input
-                required
                 id="dateUser"
                 placeholder="dd-mm-yyyy"
                 name="dateUser"
                 type="text"
-                onChange={this._handleChange}
+                onChange={unChange}
             />
         </div>
         <div className="userFormPwd">
-            <label htmlFor="pwdUser">Mot de passe :</label>
+            <label htmlFor="pwdUser">Mot de passe <a>*</a> :</label>
             <input
                 required
                 id="pwdUser"
                 placeholder="Mot de passe"
                 name="passwordUser"
                 type="password"
-                onChange={this._handleChange}
+                onChange={unChange}
             />
         </div>
         <div className="userFormPwdConfirm">
-            <label htmlFor="pwdConfirmUser">Confirmation du mot de passe :</label>
+            <label htmlFor="pwdConfirmUser">Confirmation du mot de passe <a>*</a> :</label>
             <input
                 required
                 id="pwdConfirmUser"
                 placeholder="Confirmation du mot de passe"
                 name="passwordConfirmUser"
                 type="password"
-                onChange={this._handleChange}
+                onChange={unChange}
             />
         </div>
         <div className="userPageInfosBottom">
             <div>
-                <button onClick={() => this.setState({ modify: false })} className="userPageButton">Annuler</button>
-                <button onClick={() => this.handleAccount("save")} className="userPageButton">Enregistrer</button>
+                <button onClick={toFalse} className="userPageButton">Annuler</button>
+                <button onClick={save} className="userPageButton">Enregistrer</button>
             </div>
-            <button onClick={() => this.handleAccount("delete")} className="userPageButton">Supprimer le compte</button>
+            <button onClick={toDelete} className="userPageButton">Supprimer le compte</button>
         </div>
     </div>
-);
+)
 
-const UserPagesComponent = (pages) => (
+const UserPagesComponent = ({pages, isAdmin}) => (
     <article className="userPageCreationsFinish">
         <div className="userPageTop">
             <h1 className="userPageInfosPagesDone">BD déjà réalisé :</h1>
@@ -93,9 +102,9 @@ const UserPagesComponent = (pages) => (
             }
         </div>
     </article>
-);
+)
 
-const UserFramesComponent = (frames) => (
+const UserFramesComponent = ({frames}) => (
     <article className="userPageCreationsCurrent">
         <div className="userPageTop">
             <h1 className="userPageInfosPagesNotDone">BD en cours de réalisation :</h1>
@@ -111,7 +120,7 @@ const UserFramesComponent = (frames) => (
             }
         </div>
     </article>
-);
+)
 
 class UserInfo extends Component {
 
@@ -124,6 +133,7 @@ class UserInfo extends Component {
         passwordUser: "",
         passwordConfirmUser: "",
         dateUser: "",
+        pseudoUser: "",
         modify : false,
         messageError : "",
         section : 0 //section 0 => User information || 1 => Pages done || 2 => Frames done
@@ -133,12 +143,12 @@ class UserInfo extends Component {
         this.setState({ [e.target.name]: e.target.value });
     }
     
-//le save marche avec apitester mais pas en real pq ????
     handleAccount = (action) => {
         this.setState({ messageError: "" });
         Auth.fetch("account.php", {
             method: "POST",
             body: JSON.stringify({
+                pseudo: this.state.pseudoUser,
                 email: this.state.emailUser,
                 date: this.state.dateUser,
                 password: this.state.passwordUser,
@@ -147,16 +157,17 @@ class UserInfo extends Component {
             })
         }).then(res => {
             if (!res.success) {
-                this.setState({ messageError: res.messageError});
+                this.setState({messageError: res.messageError});
             } else {
-                this.setState({section:0});
+                this.callUser();
+                this.setState({ modify: false });
             }
         })
     }
+    
 
     // Get user informations
-    componentDidMount() {
-
+    callUser() {
         Auth.fetch("userinfos.php", {
             method: 'POST'
         }).then(res => {
@@ -171,15 +182,19 @@ class UserInfo extends Component {
                     },
                     pages: res.pages,
                     frames: res.frames,
-                    isAdmin: res.isadmin })
+                    isAdmin: res.isadmin
+                })
             } else {
                 alert(res.message);
             }
         });
     }
 
+    componentDidMount() {
+        this.callUser();
+    }
+
     render() {
-        const {userInfos} = this.state;
         return (
             <div className="userPage">
                 <section className="userPageMenu">
@@ -192,13 +207,24 @@ class UserInfo extends Component {
                     {this.state.section === 0 &&
                         <article className="userPageInfos">
                             <div className="userPageTop">
-                                <h1 className="userPageInfosTopName">{userInfos?.nickname}</h1>
-                                {isAdmin && <p className="userPageInfosTopIsadmin">Admin</p>}
+                                <h1 className="userPageInfosTopName">{this.state.userInfos?.nickname}</h1>
+                                {this.state.isAdmin && <p className="userPageInfosTopIsadmin">Admin</p>}
                             </div>
                             {!this.state.modify ?
-                                <UserInfoComponent userInfos={userInfos} messageError={this.state.messageError}/>
+                                <UserInfoComponent
+                                    userInfos={this.state.userInfos}
+                                    toDelete={() => this.handleAccount("delete")}
+                                    toTrue={()=>this.setState({modify: true})}
+                                    messageError={this.state.messageError}
+                                />
                             :
-                                <UserFormComponent messageError={this.state.messageError} />
+                                <UserFormComponent
+                                    save={() => this.handleAccount("save")}
+                                    toDelete={() => this.handleAccount("delete")}
+                                    toFalse={()=>this.setState({modify: false})}
+                                    unChange={this._handleChange}
+                                    messageError={this.state.messageError}
+                                />
                             }
                         </article>
                     }

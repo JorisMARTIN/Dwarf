@@ -23,6 +23,7 @@ if($userId != -1){
     switch ($action) {
         case 'save':
             if (isset($data)) {
+                $pseudo = htmlentities($data->pseudo);
                 $email = htmlentities($data->email);
                 $password = htmlentities($data->password);
                 $passwordC = htmlentities($data->passwordConfirm);
@@ -40,20 +41,18 @@ if($userId != -1){
             /* Format par défault : "../../...." */
             $birthdateSplit1 = explode("/",$birthdate);
             $birthdateSplit2 = explode("-",$birthdate);
-            
-            if (count($birthdateSplit1) == 1 && count($birthdateSplit2) == 1) {
+
+            if (empty($birthdate)) {
+                $birthdate = $userDAO->getUser($userId)->getBirthdate();
+                $out = [
+                    'warning' => 'Le champ "birthdate" est vide ! Il a été remplacé par '.$birthdate
+                ];
+            } elseif (count($birthdateSplit1) == 1 && count($birthdateSplit2) == 1) {
                 $out = [
                     'success' => false,
                     'messageError' => 'Format de date inconnu : ' . $birthdate
                 ];
             } else {
-                if (empty($birthdate)) {
-                    $out = [
-                        'success' => false,
-                        'messageError' => 'Le champ "birthdate" est vide !'
-                    ];
-                }
-
                 $birthdateSplit = explode("/",$birthdate);
                 if (count($birthdateSplit1) == 1) {
                     $birthdateSplit = explode("-",$birthdate);
@@ -64,49 +63,62 @@ if($userId != -1){
                 } else {
                     $birthdate = $birthdateSplit[0] . "-" . $birthdateSplit[1] . "-" . $birthdateSplit[2];
                 }
+            }
 
-                if (empty($email)) {
+            if (empty($pseudo)) {
+                $pseudo = $userDAO->getUser($userId)->getNickname();
+                $out = [
+                    'warning' => 'Le champ "pseudo" est vide ! Il a été remplacé par '.$pseudo
+                ];
+            }
+            if (empty($email)) {
+                $email = $userDAO->getUser($userId)->getEmail();
+                $out = [
+                    'warning' => 'Le champ "email" est vide ! Il a été emplacé par ' . $email
+                ];
+            }
+            
+            if (empty($password)) {
+                $out = [
+                    'success' => false,
+                    'messageError' => 'Le champ "password" est vide !'
+                ];
+            } elseif (empty($passwordC)) {
+                $out = [
+                    'success' => false,
+                    'messageError' => 'Le champ "password confirm" est vide !'
+                ];
+            } else if (strlen($pseudo) >= 16) {
+                $out = [
+                    'success' => false,
+                    'messageError' => 'Ton pseudo est trop long ! (Maximum 16 caractères)'
+                ];            
+            } else if (strlen($email) >= 64) {
+                $out = [
+                    'success' => false,
+                    'messageError'=> 'Ton email est trop long ! (Maximum 64 caractères)'
+                ];
+            } else if (strlen($password) >= 255) {
+                $out = [
+                    'success' => false,
+                    'messageError'=> 'Ton mot de passe est trop long ! (Maximum 255 caractères)'
+                ];
+            } else if ($password != $passwordC) {
+                $out = [
+                    'success' => false,
+                    'messageError' => 'Le mot de passe et mot de passe de confirmation sont différent !'
+                ];
+            } else {
+                $majOk = $userDAO->updateUser(strval($userId), $pseudo, $email,$password,$birthdate);
+                if ($majOk) {
                     $out = [
-                        'success' => false,
-                        'messageError' => 'Le champ "email" est vide !'
-                    ];
-                }  elseif (empty($password)) {
-                    $out = [
-                        'success' => false,
-                        'messageError' => 'Le champ "password" est vide !'
-                    ];
-                } elseif (empty($passwordC)) {
-                    $out = [
-                        'success' => false,
-                        'messageError' => 'Le champ "password confirm" est vide !'
-                    ];
-                } else if (strlen($email) >= 64) {
-                    $out = [
-                        'success' => false,
-                        'messageError'=> 'Ton email est trop long ! (Maximum 64 caractères)'
-                    ];
-                } else if (strlen($password) >= 255) {
-                    $out = [
-                        'success' => false,
-                        'messageError'=> 'Ton mot de passe est trop long ! (Maximum 255 caractères)'
-                    ];
-                } else if ($password != $passwordC) {
-                    $out = [
-                        'success' => false,
-                        'messageError' => 'Le mot de passe et mot de passe de confirmation sont différent !'
+                        'success' => true
                     ];
                 } else {
-                    $majOk = $userDAO->updateUser(strval($userId), $email,$password,$birthdate);
-                    if ($majOk) {
-                        $out = [
-                            'success' => true
-                        ];
-                    } else {
-                        $out = [
-                            'success' => false,
-                            'messageError' => 'La mise à jour à échoué.'
-                        ];
-                    }
+                    $out = [
+                        'success' => false,
+                        'messageError' => 'La mise à jour à échoué.'
+                    ];
                 }
             }
             break;

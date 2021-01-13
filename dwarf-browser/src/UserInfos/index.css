@@ -106,6 +106,10 @@
     background:var(--BlueButtonHover)
 }
 
+.userForm > div > label > a, .userForm > p > span {
+    font-weight: bold;
+}
+
 .userForm > div {
     width: 70%;
 }

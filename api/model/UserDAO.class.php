@@ -110,10 +110,11 @@ class UserDAO extends DAO {
      * 
      * @return int true = ✅ | false = ❌
      */
-    function updateUser(string $userId, string $email, string $password, string $birthdate) : bool {
-        $query = "UPDATE \"User\" SET email = :email, password = :password, birthdate = TO_DATE(:birthdate, 'YYYY-MM-DD') WHERE userid = :userid";
+    function updateUser(string $userId, string $pseudo, string $email, string $password, string $birthdate) : bool {
+        $query = "UPDATE \"User\" SET nickname = :pseudo, email = :email, password = :password, birthdate = TO_DATE(:birthdate, 'YYYY-MM-DD') WHERE userid = :userid";
         $tmp = $this->db->prepare($query);
         if ($tmp->execute([
+            ':pseudo' => $pseudo,
             ':email' => $email,
             ':password' => password_hash($password, PASSWORD_DEFAULT),
             ':birthdate' => $birthdate,
