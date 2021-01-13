@@ -51,7 +51,6 @@ export default class App extends Component {
             <div className="logCoponentDropDown">
               <div>
                 <Link className="logLink" to="/user">Informations</Link>
-                <Link className="logLink" to="/moderation">Moderation</Link>
                 <button className="logLink" onClick={this.logout}>Déconnexion</button>
               </div>
             </div>

@@ -8,22 +8,18 @@ import ComicPage from '../components/ComicPage/ComicPage.js';
 class Moderation extends React.Component {
     
     state = {
-        isAdmin: false,
+        isAdmin: true,
         deletedPages: []
     };
 
     componentDidMount(){
-        this.getDeletedPages();
-    }
-
-    getDeletedPages = () => {
         Auth.fetch("moderation.php", {
             method: "POST",
             body: JSON.stringify({
                 action: "getDeletedPages",
             })
         }).then(res => {
-            if(res.isAdmin){
+            if(res.isAdmin !== undefined){
                 this.setState({
                     isAdmin: res.isAdmin,
                     deletedPages: res.deletedPages
@@ -34,20 +30,25 @@ class Moderation extends React.Component {
 
     render() {
         const {isAdmin, deletedPages} = this.state;
-        // if(isAdmin === false){
-        //     return <Redirect to="/" />;
-        // }else{
+        if(isAdmin === false){
+            return <Redirect to="/" />;
+        }else{
             return (
                 <div className="moderationMain">
-                    <h2>DeletedPages</h2>
-                    <div className="moderationDeletedPages">
-                        {deletedPages.map((page, i) => (
-                            <ComicPage key={i} {...page} isAdmin={false} />
-                        ))}
-                    </div>
+                    <h1 className="moderationTitle">Accueil</h1>
+
+                    <h2 className="moderation2ndTitle">Pages suprimées :</h2>
+                    <section className="moderationDeletedPages">
+                        <div className="moderationDeletedComic">
+                            {deletedPages.map((page, i) => (
+                                <ComicPage key={i} {...page} isAdmin={false} />
+                            ))}
+                        </div>
+                    </section>
+
                 </div>
             );
-        //}
+        }
     }
 }
 

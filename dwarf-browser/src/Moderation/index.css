@@ -1,4 +1,28 @@
+.moderationTitle{
+    color: var(--PrimaryText);
+    text-align: center;
+}
+
+.moderation2ndTitle{
+    color: var(--PrimaryText);
+    margin: 1em;
+}
+
 .moderationDeletedPages{
+    margin: 1em;
+    background-color: var(--Background2);
+    color: var(--SecondaryText);
+    box-shadow: 0 3.2px 7.2px 0 rgba(0,0,0,.132),0 .6px 1.8px 0 rgba(0,0,0,.108);
+    border-radius: 25px;
+    padding: 2em;
+    font-size: 1em;
+    font-weight:500;
+    animation: PopAnimation 0.25s;
+}
+
+.moderationDeletedComic{
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: row;
+    overflow-x: auto;
+    white-space: nowrap;
 }
