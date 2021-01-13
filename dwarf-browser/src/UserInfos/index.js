@@ -4,6 +4,7 @@ import Auth from '../components/AuthHelperMethods';
 import withAuth from '../components/withAuth';
 import ComicPage from '../components/ComicPage/ComicPage.js';
 import ComicFrame from '../components/ComicFrame/ComicFrame.js';
+import Moderation from '../Moderation';
 
 const UserInfoComponent = ({userInfos, toDelete, toTrue, messageError}) => (
     <div className="userForm">
@@ -20,7 +21,7 @@ const UserInfoComponent = ({userInfos, toDelete, toTrue, messageError}) => (
     </div>
 )
 
-const UserFormComponent = ({userInfos, save,toDelete,toFalse,unChange, messageError})=> (
+const UserFormComponent = ({save,toDelete,toFalse,unChange, messageError})=> (
     <div className="userForm">
         {messageError && <p className="authPageMessage">Erreur : {messageError}</p>}
         <p id="obli"><span>*</span> : Champ obligatoire</p>
@@ -200,7 +201,8 @@ class UserInfo extends Component {
                 <section className="userPageMenu">
                     <button className="userPageMenuLink" onClick={() => this.setState({section : 0})}>Compte</button>
                     <button className="userPageMenuLink" onClick={() => this.setState({section : 1})}>BD publié.s</button>
-                    <button className="userPageMenuLink" onClick={() => this.setState({section : 2})}>Case déssiné.s</button>
+                    <button className="userPageMenuLink" onClick={() => this.setState({ section: 2})}>Case déssiné.s</button>
+                    <button className="userPageMenuLink" onClick={() => this.setState({ section: 3})}>Modération</button>
                 </section>
                 <section className="userPageDisplay">
                     {/* Comment on gère les fonction dans les composant ??? A FAIRE ! */}
@@ -229,7 +231,8 @@ class UserInfo extends Component {
                         </article>
                     }
                     {this.state.section === 1 && <UserPagesComponent isAdmin={this.state.isAdmin} pages={this.state.pages}/>}
-                    {this.state.section === 2 && <UserFramesComponent frames={this.state.frames} /> }
+                    {this.state.section === 2 && <UserFramesComponent frames={this.state.frames} />}
+                    {this.state.section === 3 && <Moderation />}
                 </section>
             </div>
         );
