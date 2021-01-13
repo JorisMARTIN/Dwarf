@@ -188,6 +188,7 @@ class UserInfo extends Component {
                     <button className="userPageMenuLink" onClick={() => this.setState({section : 2})}>Case déssiné.s</button>
                 </section>
                 <section className="userPageDisplay">
+                    {/* Comment on gère les fonction dans les composant ??? A FAIRE ! */}
                     {this.state.section === 0 &&
                         <article className="userPageInfos">
                             <div className="userPageTop">
@@ -195,9 +196,9 @@ class UserInfo extends Component {
                                 {isAdmin && <p className="userPageInfosTopIsadmin">Admin</p>}
                             </div>
                             {!this.state.modify ?
-                            <UserInfoComponent userInfos={userInfos} messageError={this.state.messageError}/>
+                                <UserInfoComponent userInfos={userInfos} messageError={this.state.messageError}/>
                             :
-                            <UserFormComponent messageError={this.state.messageError} />
+                                <UserFormComponent messageError={this.state.messageError} />
                             }
                         </article>
                     }
