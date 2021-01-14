@@ -202,7 +202,7 @@ class UserInfo extends Component {
                     <button className="userPageMenuLink" onClick={() => this.setState({section : 0})}>Compte</button>
                     <button className="userPageMenuLink" onClick={() => this.setState({section : 1})}>BD publié.s</button>
                     <button className="userPageMenuLink" onClick={() => this.setState({ section: 2})}>Case déssiné.s</button>
-                    <button className="userPageMenuLink" onClick={() => this.setState({ section: 3})}>Modération</button>
+                    {this.state.isAdmin && <button className="userPageMenuLink" onClick={() => this.setState({ section: 3})}>Modération</button>}
                 </section>
                 <section className="userPageDisplay">
                     {/* Comment on gère les fonction dans les composant ??? A FAIRE ! */}
@@ -210,7 +210,7 @@ class UserInfo extends Component {
                         <article className="userPageInfos">
                             <div className="userPageTop">
                                 <h1 className="userPageInfosTopName">{this.state.userInfos?.nickname}</h1>
-                                {this.state.isAdmin && <p className="userPageInfosTopIsadmin">Admin</p>}
+                                {this.state.isAdmin && <p className="userPageInfosTopIsadmin">Modrateur</p>}
                             </div>
                             {!this.state.modify ?
                                 <UserInfoComponent
@@ -232,7 +232,7 @@ class UserInfo extends Component {
                     }
                     {this.state.section === 1 && <UserPagesComponent isAdmin={this.state.isAdmin} pages={this.state.pages}/>}
                     {this.state.section === 2 && <UserFramesComponent frames={this.state.frames} />}
-                    {this.state.isAdmin && (this.state.section === 3 && <Moderation />)}
+                    {this.state.section === 3 && <Moderation />}
                 </section>
             </div>
         );
