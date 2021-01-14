@@ -22,7 +22,7 @@
 .comicPlancheFullscreenClose {
     position: absolute;
     top: 25px;
-    left: 25px;
+    right: 25px;
     cursor: pointer;
     width: 25px;
 }
