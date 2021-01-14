@@ -232,7 +232,7 @@ class UserInfo extends Component {
                     }
                     {this.state.section === 1 && <UserPagesComponent isAdmin={this.state.isAdmin} pages={this.state.pages}/>}
                     {this.state.section === 2 && <UserFramesComponent frames={this.state.frames} />}
-                    {this.state.section === 3 && <Moderation />}
+                    {this.state.isAdmin && (this.state.section === 3 && <Moderation />)}
                 </section>
             </div>
         );
