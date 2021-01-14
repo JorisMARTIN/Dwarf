@@ -28,22 +28,17 @@
     text-decoration: none;
     border: none;
     background: none;
+    cursor: pointer;
 }
 
 .userPageMenuLink:hover {
-    background: var(--NavbarHover);
-    -webkit-backdrop-filter: saturate(1.8) blur(20px);
-    backdrop-filter:saturate(1.8) blur(20px);
-    border-radius:25px;
+    background-color: var(--Navbar);
 }
 
 .userPageDisplay{
     width: 80%;
     margin: auto;
     height: 60%;
-}
-
-.userPageInfos {
 }
 
 .userPageTop{
@@ -90,7 +85,7 @@
     justify-content: space-around;
 }
 
-.userPageInfosBottom > button, .userPageInfosBottom > div > button {
+.userPageButton {
     align-self: center;
     padding: .5em 1em;
     margin: 2em;
@@ -102,11 +97,19 @@
     border:none
 }
 
-.userPageInfosBottom > button:hover, .userPageInfosBottom > div > button:hover {
+.userPageButton:hover {
     background:var(--BlueButtonHover)
 }
 
-.userForm > div > label > span, .userForm > p > span {
+.userPageRedButton {
+    background: var(--RedButton);
+}
+
+.userPageRedButton:hover {
+    background: var(--RedButtonHover);
+}
+
+.userForm > div > label > span, .userForm > p > span, .userPageInfosOthers > p > span {
     font-weight: bold;
 }
 
@@ -122,4 +125,8 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+}
+
+.userPageCreationsFinishMessage {
+    color: var(--PrimaryText);
 }

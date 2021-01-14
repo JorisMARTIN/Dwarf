@@ -10,13 +10,13 @@ const UserInfoComponent = ({userInfos, toDelete, toTrue, messageError}) => (
     <div className="userForm">
         {messageError && <p className="authPageMessage">Erreur : {messageError}</p>}
         <div className="userPageInfosOthers">
-            <p>Email : {userInfos?.email}</p>
-            <p>Date de naissance : {userInfos?.birthdate}</p>
-            <p>Date de création : {userInfos?.creationDate}</p>
+            <p><span>Email : </span>{userInfos?.email}</p>
+            <p><span>Date de naissance : </span>{userInfos?.birthdate}</p>
+            <p><span>Date de création : </span>{userInfos?.creationDate}</p>
         </div>
         <div className="userPageInfosBottom">
-            <button onClick={toTrue} className="userPageDeleteAccount">Modifier</button>
-            <button onClick={toDelete} className="userPageDeleteAccount">Supprimer le compte</button>
+            <button onClick={toTrue} className="userPageButton">Modifier</button>
+            <button onClick={toDelete} className="userPageButton userPageRedButton">Supprimer le compte</button>
         </div>
     </div>
 )
@@ -79,7 +79,7 @@ const UserFormComponent = ({save,toDelete,toFalse,unChange, messageError})=> (
         </div>
         <div className="userPageInfosBottom">
             <div>
-                <button onClick={toFalse} className="userPageButton">Annuler</button>
+                <button onClick={toFalse} className="userPageButton userPageRedButton">Annuler</button>
                 <button onClick={save} className="userPageButton">Enregistrer</button>
             </div>
             <button onClick={toDelete} className="userPageButton">Supprimer le compte</button>
@@ -90,7 +90,7 @@ const UserFormComponent = ({save,toDelete,toFalse,unChange, messageError})=> (
 const UserPagesComponent = ({pages, isAdmin}) => (
     <article className="userPageCreationsFinish">
         <div className="userPageTop">
-            <h1 className="userPageInfosPagesDone">BD déjà réalisé :</h1>
+            <h1 className="userPageInfosPagesDone">BD publiées</h1>
         </div>
         {/* Afffichage des planches fini où l'utilisateur à participé */}
         <div className="userPageCreationsFinishContainer">
@@ -99,7 +99,7 @@ const UserPagesComponent = ({pages, isAdmin}) => (
                     <ComicPage key={i} {...page} userIsAdmin={isAdmin} />
                 ))
                 :
-                <h2>Il n'y a aucune BD fini où vous avez participé ...</h2>
+                <h2 className="userPageCreationsFinishMessage">Il n'y a aucune BD terminée à laquelle vous avez participé</h2>
             }
         </div>
     </article>
@@ -108,7 +108,7 @@ const UserPagesComponent = ({pages, isAdmin}) => (
 const UserFramesComponent = ({frames}) => (
     <article className="userPageCreationsCurrent">
         <div className="userPageTop">
-            <h1 className="userPageInfosPagesNotDone">BD en cours de réalisation :</h1>
+            <h1 className="userPageInfosPagesNotDone">BD en cours de réalisation</h1>
         </div>
         {/* Affichage des planches en cours où l'utilisateur à participé */}
         <div className="userPageCreationsFinishContainer">
@@ -117,7 +117,7 @@ const UserFramesComponent = ({frames}) => (
                     <ComicFrame key={i} {...frame} />
                 ))
                 :
-                <h2>Vous n'avez aucun dessin dans une BD non finie ....</h2>
+                <h2 className="userPageCreationsFinishMessage">Vous n'avez aucun dessin dans une BD en cours de réalisation</h2>
             }
         </div>
     </article>
@@ -200,8 +200,8 @@ class UserInfo extends Component {
             <div className="userPage">
                 <section className="userPageMenu">
                     <button className="userPageMenuLink" onClick={() => this.setState({section : 0})}>Compte</button>
-                    <button className="userPageMenuLink" onClick={() => this.setState({section : 1})}>BD publié.s</button>
-                    <button className="userPageMenuLink" onClick={() => this.setState({ section: 2})}>Case déssiné.s</button>
+                    <button className="userPageMenuLink" onClick={() => this.setState({section : 1})}>BD publiées</button>
+                    <button className="userPageMenuLink" onClick={() => this.setState({ section: 2})}>Cases dessinées</button>
                     {this.state.isAdmin && <button className="userPageMenuLink" onClick={() => this.setState({ section: 3})}>Modération</button>}
                 </section>
                 <section className="userPageDisplay">
@@ -210,7 +210,7 @@ class UserInfo extends Component {
                         <article className="userPageInfos">
                             <div className="userPageTop">
                                 <h1 className="userPageInfosTopName">{this.state.userInfos?.nickname}</h1>
-                                {this.state.isAdmin && <p className="userPageInfosTopIsadmin">Modrateur</p>}
+                                {this.state.isAdmin && <p className="userPageInfosTopIsadmin">Modérateur</p>}
                             </div>
                             {!this.state.modify ?
                                 <UserInfoComponent
