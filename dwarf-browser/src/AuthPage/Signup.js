@@ -15,12 +15,14 @@ export default class Signup extends Component {
         emailConfirm: "",
         password: "",
         passwordConfirm: "",
+        cgu: "off",
         messageError: "",
         redirectToUser: false
     };
 
     _handleChange = (e) => {
-        this.setState({ [e.target.name]: e.target.value });
+        if (e.target.name === "name") this.setState({ [e.target.name]: e.target.checked });
+        else this.setState({ [e.target.name]: e.target.value });
     }
 
     handleFormSubmit = (e) => {
@@ -44,7 +46,8 @@ export default class Signup extends Component {
                 email: this.state.email,
                 emailConfirm: this.state.emailConfirm,
                 password: this.state.password,
-                passwordConfirm: this.state.passwordConfirm
+                passwordConfirm: this.state.passwordConfirm,
+                cgu: this.state.cgu
             })
         }).then(res => {
             if (res.success) {
