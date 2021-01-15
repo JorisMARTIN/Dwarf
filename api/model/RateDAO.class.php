@@ -70,9 +70,9 @@ class RateDAO extends DAO
             ':userId' => $userId,
             ':pageId' => $pageId
         ])) {
-            $res = $tmp->fetchColumn();
+            $res = $tmp->fetch(PDO::FETCH_ASSOC);
             if (!$res) return -1;
-            else return $res ? 1 : 0;
+            else return $res['vote'] ? 1 : 0;
         } else {
             return -1;
         }
