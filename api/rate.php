@@ -18,9 +18,15 @@ if($userId != -1){
     $pageId = $data->pageId;
     $rateDAO = new RateDAO();
 
+    $rateDAO->removeVote($pageId, $userId);
     $rateDAO->putVote($userId, $pageId, (($voteType == 1) ? true : false));
 
-    $out = [];
+    $votes = $rateDAO->getUserVotePage($userId, $pageId);
+
+    $out = [
+        'likes' => $votes[0],
+        'dislikes' => $votes[1]
+    ];
     
 }else{
     // User not logged in
