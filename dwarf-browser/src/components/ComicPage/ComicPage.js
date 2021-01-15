@@ -120,7 +120,7 @@ export default class ComicPage extends React.Component {
     /* Supression page */
 
     deletePage = (action) => {
-        if (window.confirm("Voulez vous vraiment " + action + " cette page ?")) {
+        if (window.confirm("Voulez vous vraiment " + (action === "unDelete" ? "restaurer" : "supprimer") + " cette page ?")) {
 
             switch(action) {
                 case "delete":
