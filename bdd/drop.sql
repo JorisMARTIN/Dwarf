@@ -1,4 +1,5 @@
 -- DELETE TRIGGER
+DROP FUNCTION f_erasePage() CASCADE;
 DROP FUNCTION f_removeDeleteForPage() CASCADE;
 DROP FUNCTION f_setDeleteForPage() CASCADE;
 

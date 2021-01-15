@@ -150,7 +150,7 @@ class PageDAO extends DAO {
         $files = scandir($path);
         foreach ($files as $file) {
             if (!is_dir($file)) {
-                unlink($file);
+                unlink($path.'/'.$file);
             }
         }
         rmdir($path);

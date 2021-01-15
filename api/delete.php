@@ -25,22 +25,23 @@ if (!empty($data)) {
         switch($action){
 
             // Suppression d'une page
-            case 'delete':
+            case "delete":
                 $reason = $data->reason;
 
-                $deletePageDAO->putDeletePage($pageId, $userId, $reason);
+                $deletePageDAO->putDeletePage($pageId, $user->getId(), $reason);
                 $out = ['message' => 'Page suprimée'];
 
             break;
 
             // Restauration d'une page supporimée
-            case 'unDelete':
+            case "unDelete":
                 $deletePageDAO->removeDeletePage($pageId);
                 $out = ['message' => 'Page restaurer'];
             break;
 
             // Suppression définitive d'une page supprimée
-            case 'erase':
+            case "erase":
+                $deletePageDAO->removeDeletePage($pageId);
                 if($pageDAO->removePage($pageId)){
                     $out = ['message' => 'Suppression définitive éxécutée'];
                 }else{
