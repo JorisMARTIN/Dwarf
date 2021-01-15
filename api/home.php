@@ -11,6 +11,7 @@ require_once(dirname(__FILE__) . '/model/FrameDAO.class.php');
 $userDAO = new UserDAO();
 $pageDAO = new PageDAO();
 $frameDAO = new FrameDAO();
+$rateDAO = new RateDAO();
 
 $data = json_decode(file_get_contents("php://input"));
 
@@ -31,9 +32,7 @@ if (!empty($data)) {
     $userId = tokenToUserId();
 
     if ($userId == -1) $userIsAdmin = false;
-    else {
-        $userIsAdmin = $userDAO->getUser($userId)->isAdmin();
-    }
+    else $userIsAdmin = $userDAO->getUser($userId)->isAdmin();
 
     $out = [
         'endReached' => $endReached,
@@ -55,6 +54,11 @@ if (!empty($data)) {
             $authors[] = $userDAO->getUser($frame->getOwnerId())->getNickname();
         }
 
+        $votes = $rateDAO->getVotes($p->getId());
+
+        $userRate = -1; //no rate
+        if($userId != -1) $userRate = $rateDAO->getUserVotePage($userId, $p->getId());
+
         $out['pages'][$i] = [
             'pageId' => $p->getId(),
             'name' => $p->getName(),
@@ -64,6 +68,9 @@ if (!empty($data)) {
             'images' => $images,
             'authors' => $authors,
             'template' => $p->getTemplateType(),
+            'likes' => $votes[0],
+            'dislikes' => $votes[1],
+            'userRate' => $userRate
         ];
     }
 } else {
