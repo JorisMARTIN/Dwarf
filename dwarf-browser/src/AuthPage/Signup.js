@@ -21,7 +21,7 @@ export default class Signup extends Component {
     };
 
     _handleChange = (e) => {
-        if (e.target.name === "name") this.setState({ [e.target.name]: e.target.checked });
+        if (e.target.name === "cgu") this.setState({ [e.target.name]: e.target.checked });
         else this.setState({ [e.target.name]: e.target.value });
     }
 

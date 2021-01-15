@@ -84,7 +84,7 @@ if (isset($data)) {
             'success' => false,
             'messageError' => 'Le mot de passe et mot de passe de confirmation sont différent !'
         ]);
-    } else if ($cgu != 'off') {
+    } else if ($cgu == 'off') {
         echo json_encode([
             'success' => false,
             'messageError' => 'Les conditions générales d\'utilisations doivent être accépté pour se creer un compte.'
