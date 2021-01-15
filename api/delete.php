@@ -3,37 +3,63 @@ require_once(dirname(__FILE__) . '/includes/debug.inc.php');
 require_once(dirname(__FILE__) . '/includes/httpheaders.inc.php');
 
 require_once(dirname(__FILE__) . '/model/AuthMethods.php');
+require_once(dirname(__FILE__) . '/model/UserDAO.class.php');
+require_once(dirname(__FILE__) . '/model/PageDAO.class.php');
 require_once(dirname(__FILE__) . '/model/DeletePageDAO.class.php');
-
-$deletePageDAO = new DeletePageDAO();
 
 $data = json_decode(file_get_contents("php://input"));
 
 if (!empty($data)) {
-
-    $userId = tokenToUserId();
+    
+    $userDAO = new UserDAO();
+    
+    $user = $userDAO->getUser(tokenToUserId());
     $pageId = $data->pageId;
     $action = $data->action;
+    
+    if($user->isAdmin()){
 
-    // Cas pour supprimer un page
-    if($action == 'delete'){
-        $reason = $data->reason;
-        
-        $deletePageDAO->putDeletePage($pageId, $userId, $reason);
-        $out = ['message' => 'Page deleted'];
+        $deletePageDAO = new DeletePageDAO();
+        $pageDAO = new PageDAO();
 
-    // Cas pour restaurer une page
-    }else if($action == 'unDelete'){
+        switch($action){
 
-        $deletePageDAO->removeDeletePage($pageId);
-        $out = ['message' => 'Page unDeleted'];
-    // Cas ou l'action est non spécifier ou non valid
+            // Suppression d'une page
+            case 'delete':
+                $reason = $data->reason;
+
+                $deletePageDAO->putDeletePage($pageId, $userId, $reason);
+                $out = ['message' => 'Page suprimée'];
+
+            break;
+
+            // Restauration d'une page supporimée
+            case 'unDelete':
+                $deletePageDAO->removeDeletePage($pageId);
+                $out = ['message' => 'Page restaurer'];
+            break;
+
+            // Suppression définitive d'une page supprimée
+            case 'erase':
+                if($pageDAO->removePage($pageId)){
+                    $out = ['message' => 'Suppression définitive éxécutée'];
+                }else{
+                    $out = ['message' => 'Erreur dans la suppression définitive de la page'];
+                }
+            break;
+
+            default:
+                $out = ['message' => 'Action non-valid'];
+            break;
+        }
+
     }else{
-        $out = ['message' => 'Action non-valid'];
+        $out = ['message' => 'Vous n\'avez pas la permition de faire cela !'];
     }
 
+
 } else {
-    $out = ['message' => 'Error !'];
+    $out = ['message' => 'Error aucune données passée en entré !'];
 }
 
 echo json_encode($out);
