@@ -21,98 +21,80 @@ if (isset($data)) {
     $password = htmlentities($data->password);
     $passwordC = htmlentities($data->passwordConfirm);
 
-    $birthdateSplit = [];
-
-    /*Gestion du format de la date*/
-    /* Format par défault : "../../...." */
-    $birthdateSplit1 = explode("/",$birthdate);
-    $birthdateSplit2 = explode("-",$birthdate);
+    $birthdateExp = explode('-', $birthdate);
 
     if (empty($birthdate)) {
         echo json_encode([
             'success' => false,
-            'messageError' => 'Le champ "birthdate" est vide !'
+            'messageError' => 'Le champ "date de naissance" est vide !'
         ]);
-    } elseif (count($birthdateSplit1) == 1 && count($birthdateSplit2) == 1) {
+    } else if (!(count($birthdateExp) === 3 && checkdate($birthdateExp[1], $birthdateExp[2], $birthdateExp[0]))) {
         echo json_encode([
             'success' => false,
-            'messageError' => 'Format de date inconnu : ' . $birthdate
+            'messageError' => 'La date de naissance est invalide'
+        ]);
+    } else if (empty($pseudo)) {
+        echo json_encode([
+            'success' => false,
+            'messageError' => 'Le champ "pseudo" est vide !'
+        ]);
+    } else if (empty($email)) {
+        echo json_encode([
+            'success' => false,
+            'messageError' => 'Le champ "e-mail" est vide !'
+        ]);
+    } else if (empty($emailC)) {
+        echo json_encode([
+            'success' => false,
+            'messageError' => 'Le champ "confirmation de l\'e-mail" est vide !'
+        ]);
+    } else if (empty($password)) {
+        echo json_encode([
+            'success' => false,
+            'messageError' => 'Le champ "mot de passe" est vide !'
+        ]);
+    } else if (empty($passwordC)) {
+        echo json_encode([
+            'success' => false,
+            'messageError' => 'Le champ "confirmation du mot de passe" est vide !'
+        ]);
+    } else if (strlen($pseudo) >= 16) {
+        echo json_encode([
+            'success' => false,
+            'messageError' => 'Ton pseudo est trop long ! (Maximum 16 caractères)'
+        ]);
+    } else if (strlen($email) >= 64) {
+        echo json_encode([
+            'success' => false,
+            'messageError' => 'Ton email est trop long ! (Maximum 64 caractères)'
+        ]);
+    } else if (strlen($password) >= 255) {
+        echo json_encode([
+            'success' => false,
+            'messageError' => 'Ton mot de passe est trop long ! (Maximum 255 caractères)'
+        ]);
+    } else if ($email != $emailC) {
+        echo json_encode([
+            'success' => false,
+            'messageError' => 'L\'e-mail et l\'e-mail de confirmation sont différent !'
+        ]);
+    } else if ($password != $passwordC) {
+        echo json_encode([
+            'success' => false,
+            'messageError' => 'Le mot de passe et mot de passe de confirmation sont différent !'
         ]);
     } else {
-        $birthdateSplit = explode("/",$birthdate);
-        if (count($birthdateSplit1) == 1) {
-            $birthdateSplit = explode("-",$birthdate);
-        }
-        
-        if (strlen($birthdateSplit[0]) != 4) {
-            $birthdate = $birthdateSplit[2] . "-" . $birthdateSplit[1] . "-" . $birthdateSplit[0];
-        } else {
-            $birthdate = $birthdateSplit[0] . "-" . $birthdateSplit[1] . "-" . $birthdateSplit[2];
-        }
+        $signupOk = $userDAO->putUser($email, $pseudo, $password, getClientIP(), $birthdate);
 
-        if (empty($pseudo)) {
+        if ($signupOk == -1) {
             echo json_encode([
                 'success' => false,
-                'messageError' => 'Le champ "pseudo" est vide !'
-            ]);
-        } elseif (empty($email)) {
-            echo json_encode([
-                'success' => false,
-                'messageError' => 'Le champ "email" est vide !'
-            ]);
-        }  elseif (empty($emailC)) {
-            echo json_encode([
-                'success' => false,
-                'messageError' => 'Le champ "email confirm" est vide !'
-            ]);
-        }  elseif (empty($password)) {
-            echo json_encode([
-                'success' => false,
-                'messageError' => 'Le champ "password" est vide !'
-            ]);
-        } elseif (empty($passwordC)) {
-            echo json_encode([
-                'success' => false,
-                'messageError' => 'Le champ "password confirm" est vide !'
-            ]);
-        } else if (strlen($pseudo) >= 16) {
-            echo json_encode([
-                'success' => false,
-                'messageError' => 'Ton pseudo est trop long ! (Maximum 16 caractères)'
-            ]);            
-        } else if (strlen($email) >= 64) {
-            echo json_encode([
-                'success' => false,
-                'messageError'=> 'Ton email est trop long ! (Maximum 64 caractères)'
-            ]);
-        } else if (strlen($password) >= 255) {
-            echo json_encode([
-                'success' => false,
-                'messageError'=> 'Ton mot de passe est trop long ! (Maximum 255 caractères)'
-            ]);
-        } else if ($email != $emailC) {
-            echo json_encode([
-                'success' => false,
-                'messageError' => 'L\'e-mail et l\'e-mail de confirmation sont différent !'
-            ]);      
-        } else if ($password != $passwordC) {
-            echo json_encode([
-                'success' => false,
-                'messageError' => 'Le mot de passe et mot de passe de confirmation sont différent !'
+                'messageError' => 'Echec de la connexion ! Un compte existe déjà avec cette adresse e-mail.'
             ]);
         } else {
-            $signupOk = $userDAO->putUser($email, $pseudo, $password, getClientIP(), $birthdate);
-
-            if ($signupOk == -1) {
-                echo json_encode([
-                    'success' => false,
-                    'messageError' => 'Echec de la connexion ! Un compte existe déjà avec cette adresse e-mail.'
-                ]);
-            } else {
-                echo json_encode([
-                    'success' => true
-                ]);
-            }
+            echo json_encode([
+                'success' => true
+            ]);
         }
     }
 }
