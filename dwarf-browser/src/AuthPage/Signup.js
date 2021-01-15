@@ -137,6 +137,17 @@ export default class Signup extends Component {
                                 onChange={this._handleChange}
                             />
                         </div>
+                        <div className="authPageSignupCGU">
+                            <input
+                                required
+                                id="cgu"
+                                placeholder="Confirmer mot de passe"
+                                name="cgu"
+                                type="checkbox"
+                                onChange={this._handleChange}
+                            />
+                            <label htmlFor="cgu">J'ai lu et accépté les <a href="/docs/Redaction/CGU.pdf" >Conditions Générale d'Utilisation</a></label>
+                        </div>
                     </div>
                     <button onClick={this.handleFormSubmit}>Créer un compte</button>
                 </form>
