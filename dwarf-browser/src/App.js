@@ -14,7 +14,6 @@ import E404 from './E404';
 import Auth from './components/AuthHelperMethods';
 import Help from './Help';
 import UserInfos from './UserInfos';
-// import Moderation from './Moderation';
 
 export default class App extends Component {
 
@@ -73,18 +72,13 @@ export default class App extends Component {
 
           <Route path="/user" component={UserInfos} />
 
-          {/* <Route path="/moderation" component={Moderation} /> */}
-
           <Route path="*" component={E404} />
         </Switch>
 
         <div className="footer">
           <p>Dwarf</p>
           <p>{new Date().getFullYear()} &#169; Tous droits réservés.</p>
-          <div>
-            <a href="CGU.pdf">Condition d'utilisation</a>
-            <a href="Confidentialite.pdf">Confidentialité</a>
-          </div>
+          <a href={Auth.url + "/cgu.pdf"}>Conditions d'utilisations</a>
         </div>
       </Router>
     )

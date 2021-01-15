@@ -1,11 +1,11 @@
 import { Component } from "react";
-import { Redirect } from 'react-router-dom';
+import { Redirect, withRouter } from 'react-router-dom';
 import Auth from '../components/AuthHelperMethods';
 import './index.css'
 
 //adapted from https://github.com/jinolacson/login-jwt-react-php/
 
-export default class Login extends Component {
+class Login extends Component {
     state = {
         redirectToHome: false,
         email: "",
@@ -45,7 +45,8 @@ export default class Login extends Component {
 
     render() {
         if (this.state.redirectToHome) {
-            return <Redirect to='/' />
+            const url = this.props.location.search.substring(1);
+            return <Redirect to={'/' + url} />
         } else {
             return (
                 <div className="authPageLogin">
@@ -84,3 +85,5 @@ export default class Login extends Component {
         }
     }
 }
+
+export default withRouter(Login);

@@ -76,7 +76,7 @@ export default class Signup extends Component {
 
     render() {
         if (this.state.redirectToUser) {
-            return <Redirect to='/' />;
+            return <Redirect to='/user' />;
         } else {
             const months = ["janvier", "février", "mars", "avril", "mai", "juin", "juillet", "septembre", "août", "octobre", "novembre", "décembre"].map((month, i) => <option key={i} value={i+1}>{month}</option>);
 
@@ -100,9 +100,6 @@ export default class Signup extends Component {
                             <div className="authPageSignupDate">
                                 <label htmlFor="date_month">Date de naissance :</label>
                                 <div>
-                                    <select required id="date_month" name="date_month" onChange={this._handleChange}>
-                                        {months}
-                                    </select>
                                     <input
                                         required
                                         id="date_day"
@@ -113,6 +110,9 @@ export default class Signup extends Component {
                                         min="1"
                                         max="31"
                                     />
+                                    <select required id="date_month" name="date_month" onChange={this._handleChange}>
+                                        {months}
+                                    </select>
                                     <input
                                         required
                                         id="date_year"
