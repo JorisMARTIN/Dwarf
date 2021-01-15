@@ -10,7 +10,7 @@ class RateDAO extends DAO
      * 
      * @param int $pageId ID of the page
      * 
-     * @return array(positive,negative)|NULL positive = Number of 👍, negative = Number of 👎 | NULL = ❌
+     * @return array(positive,negative) positive = Number of 👍, negative = Number of 👎 | 0 on error
      */
     function getVotes(int $pageId): array
     {

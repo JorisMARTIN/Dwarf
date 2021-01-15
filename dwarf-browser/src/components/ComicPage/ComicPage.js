@@ -228,8 +228,8 @@ export default class ComicPage extends React.Component {
                     :
                     <section className="comicPlancheBottom">
                         <div className="comicPlancheVote">
-                            <button className={this.state.rate === 1 && "comicPlancheButtonLike"} onClick={() => this.handleVoteClick(1)}>+{this.state.likes}</button>
-                            <button className={this.state.rate === 0 && "comicPlancheButtonDislike"} onClick={() => this.handleVoteClick(0)}>-{this.state.dislikes}</button>
+                            <button className={this.state.rate === 1 ? "comicPlancheButtonLike" : ""} onClick={() => this.handleVoteClick(1)}>+{this.state.likes}</button>
+                            <button className={this.state.rate === 0 ? "comicPlancheButtonDislike" : ""} onClick={() => this.handleVoteClick(0)}>-{this.state.dislikes}</button>
                         </div>
                         {this.props.userIsAdmin && <button className="comicDeleteAdminButton" type="button" onClick={() => this.deletePage("delete")}>Supprimer</button>}
                     </section>

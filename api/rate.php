@@ -21,7 +21,7 @@ if($userId != -1){
     $rateDAO->removeVote($pageId, $userId);
     $rateDAO->putVote($userId, $pageId, (($voteType == 1) ? true : false));
 
-    $votes = $rateDAO->getUserVotePage($userId, $pageId);
+    $votes = $rateDAO->getVotes($pageId);
 
     $out = [
         'likes' => $votes[0],
