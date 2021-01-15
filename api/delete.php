@@ -41,6 +41,7 @@ if (!empty($data)) {
 
             // Suppression définitive d'une page supprimée
             case "erase":
+                $deletePageDAO->removeDeletePage($pageId);
                 if($pageDAO->removePage($pageId)){
                     $out = ['message' => 'Suppression définitive éxécutée'];
                 }else{
