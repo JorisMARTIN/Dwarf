@@ -14,17 +14,16 @@ class RateDAO extends DAO
      */
     function getVotes(int $pageId): array
     {
+        $positif = 0;
+        $negatif = 0;
+
         $query = 'SELECT count(userId) FROM "Rate" WHERE pageId = :pageId and vote = true';
         $tmp = $this->db->prepare($query);
         if ($tmp->execute([':pageId' => $pageId])) {
             $res = $tmp->fetchColumn();
             if ($res) {
                 $positif = $res;
-            } else {
-                return $positif = 0;
             }
-        } else {
-            return $positif = 0;
         }
 
         $query = 'SELECT count(userId) FROM "Rate" WHERE pageId = :pageId and vote = false';
@@ -33,11 +32,7 @@ class RateDAO extends DAO
             $res = $tmp->fetchColumn();
             if ($res) {
                 $negatif = $res;
-            } else {
-                return $negatif = 0;
             }
-        } else {
-            return $negatif = 0;
         }
 
         return array($positif, $negatif);
