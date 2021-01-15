@@ -6,6 +6,7 @@ require_once(dirname(__FILE__) . '/model/AuthMethods.php');
 require_once(dirname(__FILE__) . '/model/UserDAO.class.php');
 require_once(dirname(__FILE__) . '/model/PageDAO.class.php');
 require_once(dirname(__FILE__) . '/model/FrameDAO.class.php');
+require_once(dirname(__FILE__) . '/model/RateDAO.class.php');
 // Renvoie une liste de BDs
 
 $userDAO = new UserDAO();
