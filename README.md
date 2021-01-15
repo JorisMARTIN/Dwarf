@@ -1,28 +1,35 @@
-# Projet M3301 (dépôt de rendu)
+# DWARF : Draw With Amazing Random Friends
 
-Ce dépôt est le dépôt de référence de votre équipe pour le module M3301.
-Vos rendus se feront en déposant tous les fichiers pertinents pour chaque itération ici.
+## Equipe 7 - Membres :
+- REMY Emeryck
+- INZOUDDINE Ayache
+- JHISTARRY Thomas
+- SIGNORET Tanguy
+- MARTIN Joris
+- PAPPALARDO Mattéo
 
-Ce dépôt est initialement organisé comme suit :
+## DWARF :
+L'application est dissponible sur <a href="https://dev-dwarf.jorismartin.fr">dev-dwarf.jorismartin.fr</a>
+
+Sur ce site web, vous trouverez la dernière version compilé et tester de notre projet.
+Le fonctionnement de l'application est détaillé sur <a href="https://dev-dwarf.jorismartin.fr/help">l'aide</a>.
+
+## Organisation du git
+Notre git est organisé comme suit :
 ```console
 rendus
+├── api/
+|   ├── Ensemble des controleurs-classes utilisé par notre api
+├── cdn/templates/
+|   ├── Ensemble des templates utilisés (fichiers json)
 ├── docs/
+|   ├── Documents des différentes ittérations
 │   └── README.md
+├── dwarf-browser/
+|   ├── Ensemble des composants utilisé par React pour la front-end
 ├── .gitattributes
 ├── .gitignore
 ├── .gitlab
-│   └── …
+├──  …
 └── README.md
 ```
-
-**Vous déposerez vos rendus textuel au format `pdf` dans le dossier `docs/`.<br>
-Tout document textuel dans un autre format ne sera pas considéré.**
-
-
-##### Fichiers particuliers
-
-Les deux fichiers `.gitattributes` et `.gitignore` sont liés à la configuration de git.<br>
-Vous pouvez modifier le fichier `.gitignore` en fonction des technologies utilisées et de l'organisation du dépôt choisie.<br>
-Il est vivement déconseillé de modifier le fichier `.gitattributes`.
-
-Le dossier `.gitlab` contient la configuration spécifique à GitLab.

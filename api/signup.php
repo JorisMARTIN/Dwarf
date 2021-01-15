@@ -20,6 +20,7 @@ if (isset($data)) {
     $emailC = htmlspecialchars($data->emailConfirm);
     $password = htmlspecialchars($data->password);
     $passwordC = htmlspecialchars($data->passwordConfirm);
+    $cgu = htmlspecialchars($data->cgu);
 
     $birthdateExp = explode('-', $birthdate);
 
@@ -83,7 +84,12 @@ if (isset($data)) {
             'success' => false,
             'messageError' => 'Le mot de passe et mot de passe de confirmation sont différent !'
         ]);
-    } else {
+    } else if ($cgu == 'off') {
+        echo json_encode([
+            'success' => false,
+            'messageError' => 'Les conditions générales d\'utilisations doivent être accépté pour se creer un compte.'
+            ]);
+    }else {
         $signupOk = $userDAO->putUser($email, $pseudo, $password, getClientIP(), $birthdate);
 
         if ($signupOk == -1) {

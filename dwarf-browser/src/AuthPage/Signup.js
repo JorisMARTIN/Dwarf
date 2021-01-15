@@ -15,12 +15,14 @@ export default class Signup extends Component {
         emailConfirm: "",
         password: "",
         passwordConfirm: "",
+        cgu: "off",
         messageError: "",
         redirectToUser: false
     };
 
     _handleChange = (e) => {
-        this.setState({ [e.target.name]: e.target.value });
+        if (e.target.name === "cgu") this.setState({ [e.target.name]: e.target.checked });
+        else this.setState({ [e.target.name]: e.target.value });
     }
 
     handleFormSubmit = (e) => {
@@ -44,7 +46,8 @@ export default class Signup extends Component {
                 email: this.state.email,
                 emailConfirm: this.state.emailConfirm,
                 password: this.state.password,
-                passwordConfirm: this.state.passwordConfirm
+                passwordConfirm: this.state.passwordConfirm,
+                cgu: this.state.cgu
             })
         }).then(res => {
             if (res.success) {
@@ -76,7 +79,7 @@ export default class Signup extends Component {
 
     render() {
         if (this.state.redirectToUser) {
-            return <Redirect to='/' />;
+            return <Redirect to='/user' />;
         } else {
             const months = ["janvier", "février", "mars", "avril", "mai", "juin", "juillet", "septembre", "août", "octobre", "novembre", "décembre"].map((month, i) => <option key={i} value={i+1}>{month}</option>);
 
@@ -100,9 +103,6 @@ export default class Signup extends Component {
                             <div className="authPageSignupDate">
                                 <label htmlFor="date_month">Date de naissance :</label>
                                 <div>
-                                    <select required id="date_month" name="date_month" onChange={this._handleChange}>
-                                        {months}
-                                    </select>
                                     <input
                                         required
                                         id="date_day"
@@ -113,6 +113,9 @@ export default class Signup extends Component {
                                         min="1"
                                         max="31"
                                     />
+                                    <select required id="date_month" name="date_month" onChange={this._handleChange}>
+                                        {months}
+                                    </select>
                                     <input
                                         required
                                         id="date_year"
@@ -169,6 +172,17 @@ export default class Signup extends Component {
                                     onChange={this._handleChange}
                                 />
                             </div>
+                        </div>
+                        <div className="authPageSignupCGU">
+                            <input
+                                required
+                                id="cgu"
+                                placeholder="Confirmer mot de passe"
+                                name="cgu"
+                                type="checkbox"
+                                onChange={this._handleChange}
+                            />
+                            <label htmlFor="cgu">J'ai lu et accepté les <a href="/docs/Redaction/CGU.pdf" >Conditions Générales d'Utilisations</a></label>
                         </div>
                         <button onClick={this.handleFormSubmit}>Créer un compte</button>
                     </form>
