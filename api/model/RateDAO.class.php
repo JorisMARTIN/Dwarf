@@ -64,7 +64,7 @@ class RateDAO extends DAO
      * @return int 1 = positive vote | 0 = negative | -1 = no vote
      */
     function getUserVotePage(int $userId, int $pageId): int {
-        $query = 'SELECT * FROM "Rate" WHERE userid = :userId AND pageid = :pageId';
+        $query = 'SELECT vote FROM "Rate" WHERE userid = :userId AND pageid = :pageId';
         $tmp = $this->db->prepare($query);
         if ($tmp->execute([
             ':userId' => $userId,
