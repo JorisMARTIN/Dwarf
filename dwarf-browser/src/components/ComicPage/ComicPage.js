@@ -112,35 +112,60 @@ export default class ComicPage extends React.Component {
     /* Supression page */
 
     deletePage = (action) => {
-        if (window.confirm("Voulez vous vraiment " + ((action === "delete") ? "supprimer" : "restaurer") + " cette page ?")) {
-            if(action === "delete"){
-                const reason = window.prompt("Veuillez mentionner la raison de suppression : ");
-                if (reason) {
+        if (window.confirm("Voulez vous vraiment " + action + " cette page ?")) {
+
+            switch(action) {
+                case "delete":
+                    const reason = window.prompt("Veuillez mentionner la raison de suppression : ");
+                    if (reason) {
+                        Auth.fetch("delete.php", {
+                            method: "POST",
+                            body: JSON.stringify({
+                                pageId: this.props.pageId,
+                                action: action,
+                                reason: reason
+                            })
+                        }).then(res => {
+                            if (window.confirm(res.message + "\nConfirmer pour continuer : ")) {
+                                window.location.reload();
+                            }
+                        });
+                    }
+                break;
+
+                case "unDelete":
                     Auth.fetch("delete.php", {
                         method: "POST",
                         body: JSON.stringify({
                             pageId: this.props.pageId,
-                            action: action,
-                            reason: reason
+                            action: action
                         })
                     }).then(res => {
                         if (window.confirm(res.message + "\nConfirmer pour continuer : ")) {
                             window.location.reload();
                         }
-                    })
-                }
-            }else{
-                Auth.fetch("delete.php", {
-                    method: "POST",
-                    body: JSON.stringify({
-                        pageId: this.props.pageId,
-                        action: action
-                    })
-                }).then(res => {
-                    if (window.confirm(res.message + "\nConfirmer pour continuer : ")) {
-                        window.location.reload();
+                    });
+                break;
+
+                case "erase":
+                    if (window.confirm("Cette action est irréversible, êtes-vous sur de vouloir supprimer définitivement cette page ?")){
+                        Auth.fetch("delete.php", {
+                            method: "POST",
+                            body: JSON.stringify({
+                                pageId: this.props.pageId,
+                                action: action
+                            })
+                        }).then(res => {
+                            if (window.confirm(res.message + "\nConfirmer pour continuer : ")) {
+                                window.location.reload();
+                            }
+                        })
                     }
-                })
+                break;
+
+                default: 
+                    alert("ERROR : action " + action + " does not exist !");
+                break;
             }
         }
     }
@@ -189,6 +214,8 @@ export default class ComicPage extends React.Component {
                             </ul>
                         </div>
                         <button className="comicDeleteAdminButton" type="button" onClick={() => this.deletePage("unDelete")}>Restaurer</button>
+                        <button className="comicEraseAdminButton" type="button" onClick={() => this.deletePage("erase")}>Supprimer définitivement</button>
+
                     </section> 
                     :
                     <section className="comicPlancheBottom">
