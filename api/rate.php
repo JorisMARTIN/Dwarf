@@ -19,7 +19,10 @@ if($userId != -1){
     $rateDAO = new RateDAO();
 
     $rateDAO->removeVote($pageId, $userId);
-    $rateDAO->putVote($userId, $pageId, (($voteType == 1) ? true : false));
+
+    if($voteType !== $rateDAO->getUserVotePage($userId, $pageId)) {
+        $rateDAO->putVote($userId, $pageId, (($voteType == 1) ? true : false));
+    }
 
     $votes = $rateDAO->getVotes($pageId);
 

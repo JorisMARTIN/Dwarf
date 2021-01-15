@@ -25,7 +25,7 @@ export default class ComicPage extends React.Component {
         canvasH: 0,
         redirectVote: false,
         fullscreen: false,
-        rate: -1,
+        rate: this.props.userRate,
         likes: this.props.likes,
         dislikes: this.props.dislikes
     }

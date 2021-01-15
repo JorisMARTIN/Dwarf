@@ -200,11 +200,11 @@
     }
 
     .comicPlancheButtonDislike {
-        background: var(--Dislike);
+        background-color: var(--Dislike) !important;
     }
 
     .comicPlancheButtonLike {
-        background: var(--Like);
+        background-color: var(--Like) !important;
     }
 
     /* Admin button used in these 2 parts */
