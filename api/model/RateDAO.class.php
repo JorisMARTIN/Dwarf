@@ -21,10 +21,10 @@ class RateDAO extends DAO
             if ($res) {
                 $positif = $res;
             } else {
-                return NULL;
+                return $positif = 0;
             }
         } else {
-            return NULL;
+            return $positif = 0;
         }
 
         $query = 'SELECT count(userId) FROM "Rate" WHERE pageId = :pageId and vote = false';
@@ -34,10 +34,10 @@ class RateDAO extends DAO
             if ($res) {
                 $negatif = $res;
             } else {
-                return NULL;
+                return $negatif = 0;
             }
         } else {
-            return NULL;
+            return $negatif = 0;
         }
 
         return array($positif, $negatif);
@@ -50,7 +50,7 @@ class RateDAO extends DAO
      * 
      * @return array|NULL Array of Rate Object | NULL = ❌
      */
-    function getUserVotes(int $userId): array
+    function getUserVotes(int $userId): ?array
     {
         $query = 'SELECT * FROM "Rate" WHERE userId = :userId';
         $tmp = $this->db->prepare($query);
