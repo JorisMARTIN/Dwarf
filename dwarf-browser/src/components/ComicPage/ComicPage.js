@@ -184,7 +184,7 @@ export default class ComicPage extends React.Component {
                         <div className="comicDeleteInfos">
                             <ul>
                                 <li>Utilisateur : {this.props.deleteInfos.userWhoDelete}</li>
-                                <li>Raison : {this.props.deleteInfos.reason}</li>
+                                <li>Raison :<br/><textarea readOnly disabled className="comicDescri" value={this.props.deleteInfos.reason} /></li>
                                 <li>Date : {this.props.deleteInfos.date}</li>
                             </ul>
                         </div>
