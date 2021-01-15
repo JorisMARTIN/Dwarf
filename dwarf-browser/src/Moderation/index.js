@@ -35,8 +35,6 @@ class Moderation extends React.Component {
         }else{
             return (
                 <div className="moderationMain">
-                    <h1 className="moderationTitle">Accueil</h1>
-
                     <h2 className="moderation2ndTitle">Pages suprimées :</h2>
                     <section className="moderationDeletedPages">
                         <div className="moderationDeletedComic">
