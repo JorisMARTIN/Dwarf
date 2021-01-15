@@ -20,8 +20,8 @@ if ($userId != -1) {
     $data = json_decode(file_get_contents("php://input"));
 
     if (!empty($data)) {
-        $title = (string) ($data->title ?? "Comic page");
-        $description = (string) ($data->description ?? "Default description");
+        $title = (string) htmlspecialchars($data->title ?? "Comic page");
+        $description = (string) htmlspecialchars($data->description ?? "Default description");
         $gamemode = (int) ($data->gamemode ?? 0);
         $template = (int) ($data->template ?? 0);
 

@@ -14,12 +14,12 @@ $data = json_decode(file_get_contents("php://input"));
 $signupOk = -1;
 
 if (isset($data)) {
-    $pseudo = htmlentities($data->name);
-    $birthdate = htmlentities($data->date);
-    $email = htmlentities($data->email);
-    $emailC = htmlentities($data->emailConfirm);
-    $password = htmlentities($data->password);
-    $passwordC = htmlentities($data->passwordConfirm);
+    $pseudo = htmlspecialchars($data->name);
+    $birthdate = htmlspecialchars($data->date);
+    $email = htmlspecialchars($data->email);
+    $emailC = htmlspecialchars($data->emailConfirm);
+    $password = htmlspecialchars($data->password);
+    $passwordC = htmlspecialchars($data->passwordConfirm);
 
     $birthdateExp = explode('-', $birthdate);
 
