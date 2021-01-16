@@ -11,8 +11,8 @@
 ## DWARF :
 L'application est dissponible sur [dwarf.jorismartin.fr](https://dwarf.jorismartin.fr).
 
-Sur ce site web, vous trouverez la dernière version compilé et tester de notre projet.
-Le fonctionnement de l'application est détaillé sur [l'aide](https://dwarf.jorismartin.fr/help).
+Sur ce site web, vous trouverez la dernière version compilée et testée de notre projet.
+Le fonctionnement de l'application est détaillée sur [l'aide](https://dwarf.jorismartin.fr/help) en ligne.
 
 ## VPS :
 ### Accès :
@@ -27,8 +27,7 @@ Le fonctionnement de l'application est détaillé sur [l'aide](https://dwarf.jor
 ```console
 /var/www/dwarf/
 ├── api
-|   ├── API de dwarf
-|   └──Ensemble des controleurs-classes utilisé par l'api
+|   └── API de dwarf
 ├── cdn
 |   ├── frames
 |   |   └── Ensemble des images des pageset cases déssinés
@@ -44,14 +43,14 @@ Notre git est organisé comme suit :
 ```console
 rendus
 ├── api/
-|   ├── Ensemble des controleurs-classes utilisé par notre api
+|   └── Ensemble des controleurs-classes utilisé par notre api
 ├── cdn/templates/
-|   ├── Ensemble des templates utilisés (fichiers json)
+|   └── Ensemble des templates utilisés (fichiers json)
 ├── docs/
 |   ├── Documents des différentes ittérations
 │   └── README.md
 ├── dwarf-browser/
-|   ├── Ensemble des composants utilisé par React pour la front-end
+|   └── Ensemble des composants utilisé par React pour la front-end
 ├── .gitattributes
 ├── .gitignore
 ├── .gitlab
