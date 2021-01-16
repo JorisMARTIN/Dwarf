@@ -62,9 +62,6 @@ EXECUTE procedure f_removeDeleteForPage();
 CREATE OR REPLACE function f_erasePage() RETURNS trigger AS $$
 BEGIN
 
-    -- Remove page form DeletePage
-    DELETE FROM "DeletePage" WHERE pageId = old.pageId;
-
     -- Remove all rates if exists
     if EXISTS (SELECT pageId FROM "Rate" WHERE pageId = old.pageId) then 
         DELETE FROM "Rate" WHERE pageId = old.pageId;
@@ -74,6 +71,9 @@ BEGIN
     -- Remove Frames associated to the Page
     DELETE FROM "Frame" WHERE pageId = old.pageId;
     RAISE NOTICE '(t_erasePage) Frames associated to page n° % -> Deleted', old.pageId;
+
+    RAISE NOTICE '(t_erasePage) % in %', TG_OP, TG_TABLE_NAME;
+    RETURN old;
 
 END; $$ LANGUAGE 'plpgsql';
 

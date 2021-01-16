@@ -55,7 +55,7 @@ export default class App extends Component {
             </div>
           </div>
 
-          : <Link className="log" to="/auth">Connexion / Inscription</Link>
+            : <Link className="log" to="/auth"><img src={Auth.url + "/icons/Compte.svg"} alt="" /><span>Connexion / Inscription</span></Link>
           }
         </div>
 

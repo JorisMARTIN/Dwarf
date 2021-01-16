@@ -17,8 +17,8 @@
         --ClassicButtonStart: #ff2d55;
         --Shadow: none;
         --ShadowHover: #121216;
-        --LikeShadow: #30d158;
-        --DislikeShadow:#ff453a
+        --Like: #30d158;
+        --Dislike: #ff453a;
     }
     
     @media only screen and (max-width: 600px) {
@@ -48,8 +48,8 @@
         --ClassicButtonStart: #ff375f;
         --Shadow: #d1d1d6;
         --ShadowHover: #c7c7cc;
-        --LikeShadow: #34c759;
-        --DislikeShadow:#ff3b30
+        --Like: #34c759;
+        --Dislike: #ff3b30;
     }
 }
 

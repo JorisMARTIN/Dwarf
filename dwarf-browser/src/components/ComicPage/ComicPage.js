@@ -25,7 +25,9 @@ export default class ComicPage extends React.Component {
         canvasH: 0,
         redirectVote: false,
         fullscreen: false,
-        rate: null
+        rate: this.props.userRate,
+        likes: this.props.likes,
+        dislikes: this.props.dislikes
     }
 
     componentDidMount() {
@@ -76,6 +78,7 @@ export default class ComicPage extends React.Component {
 
     handleVoteClick = (rate) => {
         this.setState({ rate: rate });
+
         Auth.fetch("rate.php", {
             method: "POST",
             body: JSON.stringify({
@@ -90,6 +93,11 @@ export default class ComicPage extends React.Component {
                         redirectVote: true
                     })
                 }
+            } else {
+                this.setState({
+                    likes: res.likes,
+                    dislikes: res.dislikes
+                })
             }
         })
     }
@@ -112,7 +120,7 @@ export default class ComicPage extends React.Component {
     /* Supression page */
 
     deletePage = (action) => {
-        if (window.confirm("Voulez vous vraiment " + action + " cette page ?")) {
+        if (window.confirm("Voulez vous vraiment " + (action === "unDelete" ? "restaurer" : "supprimer") + " cette page ?")) {
 
             switch(action) {
                 case "delete":
@@ -191,7 +199,7 @@ export default class ComicPage extends React.Component {
         );
         else return (
             <div className="comicPlancheWrapper">
-                <div className={`comicPlanche ${this.state.rate === 1 ? "plancheLike" : ""} ${this.state.rate === 0 ? "plancheDislike" : ""}`}>
+                <div className="comicPlanche">
                     <div className="comicPlancheTop">
                         <canvas onClick={this.toggleFullscreen} title={this.authorsTitle} className="comicPlancheImg" ref={this.canvasRef} width={this.state.canvasW} height={this.state.canvasH} />
                         <div className="comicPlancheTopInfos">
@@ -220,8 +228,8 @@ export default class ComicPage extends React.Component {
                     :
                     <section className="comicPlancheBottom">
                         <div className="comicPlancheVote">
-                            <button type="button" onClick={() => this.handleVoteClick(1)}>Like</button>
-                            <button type="button" onClick={() => this.handleVoteClick(0)}>Dislike</button>
+                            <button className={this.state.rate === 1 ? "comicPlancheButtonLike" : ""} onClick={() => this.handleVoteClick(1)}>+{this.state.likes}</button>
+                            <button className={this.state.rate === 0 ? "comicPlancheButtonDislike" : ""} onClick={() => this.handleVoteClick(0)}>-{this.state.dislikes}</button>
                         </div>
                         {this.props.userIsAdmin && <button className="comicDeleteAdminButton" type="button" onClick={() => this.deletePage("delete")}>Supprimer</button>}
                     </section>

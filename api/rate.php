@@ -3,7 +3,7 @@ require_once(dirname(__FILE__) . '/includes/debug.inc.php');
 require_once(dirname(__FILE__) . '/includes/httpheaders.inc.php');
 
 require_once(dirname(__FILE__) . '/model/AuthMethods.php');
-require_once(dirname(__FILE__) . '/model/PageDAO.class.php');
+// require_once(dirname(__FILE__) . '/model/PageDAO.class.php');
 require_once(dirname(__FILE__) . '/model/RateDAO.class.php');
 
 
@@ -18,9 +18,17 @@ if($userId != -1){
     $pageId = $data->pageId;
     $rateDAO = new RateDAO();
 
+    $rateDAO->removeVote($pageId, $userId);
+
+    // if($voteType !== $rateDAO->getUserVotePage($userId, $pageId)) peut etre à faire fonctionner un jour
     $rateDAO->putVote($userId, $pageId, (($voteType == 1) ? true : false));
 
-    $out = [];
+    $votes = $rateDAO->getVotes($pageId);
+
+    $out = [
+        'likes' => $votes[0],
+        'dislikes' => $votes[1]
+    ];
     
 }else{
     // User not logged in

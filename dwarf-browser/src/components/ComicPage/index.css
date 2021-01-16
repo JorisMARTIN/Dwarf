@@ -82,14 +82,6 @@
     box-shadow: 0 6.4px 14.4px 0 rgba(0,0,0,.132),0 1.2px 3.6px 0 rgba(0,0,0,.108);
 }
 
-.plancheLike {
-    box-shadow:0 5px 10px 10px var(--LikeShadow)
-}
-
-.plancheDislike {
-    box-shadow:0 5px 10px 10px var(--DislikeShadow)
-}
-
 /* Top part of the card */
 
     .comicPlancheTop {
@@ -205,6 +197,14 @@
 
     .comicPlancheVote > button:hover {
         background:var(--BlueButtonHover);
+    }
+
+    .comicPlancheButtonDislike {
+        background-color: var(--Dislike) !important;
+    }
+
+    .comicPlancheButtonLike {
+        background-color: var(--Like) !important;
     }
 
     /* Admin button used in these 2 parts */
