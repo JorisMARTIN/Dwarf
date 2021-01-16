@@ -78,7 +78,7 @@ export default class App extends Component {
         <div className="footer">
           <p>Dwarf</p>
           <p>{new Date().getFullYear()} &#169; Tous droits réservés.</p>
-          <a href={Auth.url + "/cgu.pdf"}>Conditions d'utilisations</a>
+          <a href={Auth.url + "/docs/CGU.pdf"}>Conditions Générales d'utilisations</a>
         </div>
       </Router>
     )

@@ -182,7 +182,7 @@ export default class Signup extends Component {
                                 type="checkbox"
                                 onChange={this._handleChange}
                             />
-                            <label htmlFor="cgu">J'ai lu et accepté les <a href="/docs/Redaction/CGU.pdf" >Conditions Générales d'Utilisations</a></label>
+                            <label htmlFor="cgu">J'ai lu et accepté les <a href={Auth.url + "/docs/CGU.pdf"} >Conditions Générales d'Utilisations</a></label>
                         </div>
                         <button onClick={this.handleFormSubmit}>Créer un compte</button>
                     </form>
