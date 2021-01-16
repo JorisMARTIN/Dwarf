@@ -153,6 +153,10 @@ button.logLink:hover {
     font-weight:600
 }
 
+.log > img{
+    display: none;
+}
+
 input[type=text] {
     resize:none
 }
