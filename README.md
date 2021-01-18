@@ -14,7 +14,8 @@ L'application est dissponible sur [dwarf.jorismartin.fr](https://dwarf.jorismart
 Sur ce site web, vous trouverez la dernière version compilée et testée de notre projet.
 Le fonctionnement de l'application est détaillée sur [l'aide](https://dwarf.jorismartin.fr/help) en ligne.
 
-## VPS :
+<!--## VPS :
+*Inutile car vous n'avez pas souhaité une accès*
 ### Accès :
 > Pour accéder au VPS qui héberge notre application, il vous faut vous connecter à **jorismartin.fr** avec comme utilisateur **dwarf**.
 > Le mot de passe vous a été donné lors de l'entretien de la troisième ittération.
@@ -36,7 +37,7 @@ Le fonctionnement de l'application est détaillée sur [l'aide](https://dwarf.jo
 ├── icons
 |   └── Ensemble des icones utilisés par l'application
 └── …
-```
+```-->
 
 ## Organisation du git
 Notre git est organisé comme suit :
