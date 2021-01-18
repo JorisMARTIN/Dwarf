@@ -3,7 +3,7 @@
         --Navbar: rgba(44, 44, 46);
         --NavbarHover: rgba(28, 28, 30);
         --Background: #1c1c1e;
-        --Background2: #1c1c1e;
+        --Background2: #202022;
         --CardBackground: #2c2c2e;
         --Hover: #1c1c1e;
         --PrimaryText: #f2f2f7;
@@ -15,17 +15,24 @@
         --RedButtonHover: #ff6961;
         --ClassicButtonEnd: #ff3b30;
         --ClassicButtonStart: #ff2d55;
-        --Shadow: #141418;
+        --Shadow: none;
         --ShadowHover: #121216;
-        --LikeShadow: #30d158;
-        --DislikeShadow:#ff453a
+        --Like: #30d158;
+        --Dislike: #ff453a;
+    }
+    
+    @media only screen and (max-width: 600px) {
+        :root {
+            --Background: #000000;
+            --Background2: #000000;
+        }   
     }
 }
 
 @media (prefers-color-scheme: light) {
     :root {
-        --Navbar: hsla(0, 0%, 100%);
-        --NavbarHover: rgba(229, 229, 234);
+        --Navbar: hsla(0, 0%, 100%, 80%);
+        --NavbarHover: rgba(229, 229, 234, 0.8);
         --Background: #faf9f8;
         --Background2: #e5e5ea;
         --CardBackground: #fff;
@@ -41,8 +48,8 @@
         --ClassicButtonStart: #ff375f;
         --Shadow: #d1d1d6;
         --ShadowHover: #c7c7cc;
-        --LikeShadow: #34c759;
-        --DislikeShadow:#ff3b30
+        --Like: #34c759;
+        --Dislike: #ff3b30;
     }
 }
 

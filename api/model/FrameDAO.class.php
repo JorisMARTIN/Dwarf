@@ -39,16 +39,23 @@ class FrameDAO extends DAO {
     }
   }
 
-/*
+
+  /**
+   * Collect all frames of a user
+   *
+   * @param int $userId ID of the page
+   * 
+   * @return array|NULL Array of Frame Object | NULL = ❌
+   */
   function getUserFrames(int $userId) : array {
-    $query = 'SELECT * FROM "Frame" WHERE userId = :userId ORDER BY frameid';
+    $query = 'SELECT * FROM "Frame" WHERE userId = :userId AND pageid IN (SELECT pageid FROM "Page" where userid =:userId and completed=\'f\') ORDER BY frameid';
     $tmp = $this->db->prepare($query);
     if ($tmp->execute([':userId' => $userId])) {
       return $tmp->fetchAll(PDO::FETCH_CLASS, 'Frame');
     } else {
-      return NULL;
+      return [];
     }
-  }*/
+  }
 
   /**
    * Add a new frame in the database
@@ -158,7 +165,7 @@ class FrameDAO extends DAO {
   function claim(int $frameId) : bool {
     $query = 'UPDATE "Frame" SET ttl = :ttl WHERE frameid = :frameid';
     return $this->db->prepare($query)->execute([
-      ':ttl' => time() + 15 * 60,
+      ':ttl' => time() + 25 * 60,
       ':frameid' => $frameId
     ]);
   }

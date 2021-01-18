@@ -37,6 +37,7 @@ try {
     $user1BirthDate = $user1->getBirthDate();
     print("\n - Vérification de sa date de création : ".($user1BirthDate == "2000-01-01" ? "OK" : "FAILED"));
     $user1Ip = $user1->getIps()[0];
+
     print("\n - Vérification de son adresse ip : ".($user1Ip === '192.168.1.1' ? "OK" : "FAILED"));
     $user1isAdmin = $user1->isAdmin();
     print("\n - Vérification de son statut : ".(!$user1isAdmin ? "OK" : "FAILED"));
@@ -50,6 +51,9 @@ try {
     }
     $user1login = $userDAO->logUser($user1->getEmail(), 'test-password');
     print("\n - Authentification d'un utilisateur : ".($user1login != -1 ? "OK" : "FAILED"));
+
+    // $res = $userDAO->updateUser(strval(3), 'test@gmail.com', '123', '3333-22-11');
+    // print("\n - MAJ des infos de l'un utilisateur : ". $res);
   } else {
     print("FAILED");
   }

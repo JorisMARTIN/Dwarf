@@ -10,21 +10,20 @@ class RateDAO extends DAO
      * 
      * @param int $pageId ID of the page
      * 
-     * @return array(positive,negative)|NULL positive = Number of 👍, negative = Number of 👎 | NULL = ❌
+     * @return array(positive,negative) positive = Number of 👍, negative = Number of 👎 | 0 on error
      */
     function getVotes(int $pageId): array
     {
+        $positif = 0;
+        $negatif = 0;
+
         $query = 'SELECT count(userId) FROM "Rate" WHERE pageId = :pageId and vote = true';
         $tmp = $this->db->prepare($query);
         if ($tmp->execute([':pageId' => $pageId])) {
             $res = $tmp->fetchColumn();
             if ($res) {
                 $positif = $res;
-            } else {
-                return NULL;
             }
-        } else {
-            return NULL;
         }
 
         $query = 'SELECT count(userId) FROM "Rate" WHERE pageId = :pageId and vote = false';
@@ -33,11 +32,7 @@ class RateDAO extends DAO
             $res = $tmp->fetchColumn();
             if ($res) {
                 $negatif = $res;
-            } else {
-                return NULL;
             }
-        } else {
-            return NULL;
         }
 
         return array($positif, $negatif);
@@ -50,7 +45,7 @@ class RateDAO extends DAO
      * 
      * @return array|NULL Array of Rate Object | NULL = ❌
      */
-    function getUserVotes(int $userId): array
+    function getUserVotes(int $userId): ?array
     {
         $query = 'SELECT * FROM "Rate" WHERE userId = :userId';
         $tmp = $this->db->prepare($query);
@@ -58,6 +53,28 @@ class RateDAO extends DAO
             return $tmp->fetchAll(PDO::FETCH_CLASS, 'Rate');
         } else {
             return NULL;
+        }
+    }
+
+    /**
+     * Collect 1 rate of 1 user
+     * 
+     * @param int $userId ID of the user
+     * 
+     * @return int 1 = positive vote | 0 = negative | -1 = no vote
+     */
+    function getUserVotePage(int $userId, int $pageId): int {
+        $query = 'SELECT vote FROM "Rate" WHERE userid = :userId AND pageid = :pageId';
+        $tmp = $this->db->prepare($query);
+        if ($tmp->execute([
+            ':userId' => $userId,
+            ':pageId' => $pageId
+        ])) {
+            $res = $tmp->fetch(PDO::FETCH_ASSOC);
+            if (!$res) return -1;
+            else return $res['vote'] ? 1 : 0;
+        } else {
+            return -1;
         }
     }
 

@@ -99,7 +99,6 @@
 
 .canvasDraw {
     justify-content: space-around;
-    max-width:
 }
 
 .canvasDraw, .canvasDrawTitle {
@@ -144,4 +143,28 @@
 
 .canvasToolsLeftDropDown > div, .canvasToolsRightDropDown {
     visibility:hidden
+}
+
+.canvasToolsRightMoreColors {
+    margin-top: 1em;
+    border-radius: 20000px;
+    font-size: 1em;
+    background-color: var(--BlueButton);
+    border: none;
+    color: #f2f2f7;
+}
+
+.canvasToolsRightMoreColors:hover {
+    background-color: var(--BlueButtonHover);
+}
+
+.canvasToolsAdvancedColorPickerShow {
+    display: block;
+    position: absolute;
+    transform: translate(-25%, 120%);
+    z-index: 3;
+}
+
+.canvasToolsAdvancedColorPickerHidden {
+    display: none;
 }

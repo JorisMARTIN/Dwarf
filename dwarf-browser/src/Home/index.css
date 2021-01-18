@@ -4,8 +4,8 @@
 }
 
 .homeTitle {
+    color:var(--PrimaryText);
     text-align: center;
-    color: var(--PrimaryText);
     font-size: 2em;
     font-weight:600
 }

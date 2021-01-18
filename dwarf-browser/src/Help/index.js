@@ -52,7 +52,7 @@ export default class Help extends Component {
                     </article>
                     <article className="helpConnect">
                         <h2>Se connecter / S'inscrire</h2>
-                        <p>Connecte toi ou créé un nouveau compte !</p>
+                        <p>Connecte-toi ou créé un nouveau compte !</p>
                     </article>
                     <article className="helpAvis">
                         <h2>Ton avis nous intérésse !</h2>

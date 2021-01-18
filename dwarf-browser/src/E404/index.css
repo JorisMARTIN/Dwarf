@@ -1,1 +1,6 @@
- 
+ .erreur404Title{
+     color: var(--PrimaryText);
+     text-align: center;
+
+     margin-top: 10%;
+ }

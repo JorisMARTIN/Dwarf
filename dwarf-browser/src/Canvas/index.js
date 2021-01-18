@@ -1,5 +1,5 @@
 import React from 'react';
-import { CirclePicker } from 'react-color';
+import { ChromePicker, CirclePicker } from 'react-color';
 import CanvasDraw from 'react-canvas-draw';
 import './index.css';
 import Auth from '../components/AuthHelperMethods';
@@ -26,6 +26,7 @@ class Canvas extends React.Component {
         lazyRadius: 1,
         redirectToHome: false,
         blockSubmit: false,
+        showPicker: false
     }
 
     constructor(props) {
@@ -87,8 +88,6 @@ class Canvas extends React.Component {
                 img: image
             })
         }).then(res => {
-            /*Faire avec une div et tout ..*/
-            // alert("Merci d'avoir jouer sur DWARf !\nEst-ce que tu voudrais bien répondre à ce formulaire ? Cela nous aidera à améliorer notre application ...\nhttps://frama.link/dwarfExperience");
             this.setState({ redirectToHome: true });
         })
     }
@@ -107,7 +106,7 @@ class Canvas extends React.Component {
 
     copyRefereeAsBG = () => {
         // if(this.canvas.current !== null) {
-        //     this.canvas.current.image.src = "https://dwarf.jorismartin.fr" + this.props.refereeImage;
+        //     this.canvas.current.image.src = Auth.url + this.props.refereeImage;
         // }
     }
 
@@ -119,38 +118,38 @@ class Canvas extends React.Component {
                     <div className="canvasToolsLeft">
                         {this.props.refereeImage && <div className="canvasToolsLeftImage">
                             <p>Case {this.props.pageGM === "Normal" ? "précédente" : "suivante"} :</p>
-                            <img onClick={this.copyRefereeAsBG} src={"https://dwarf.jorismartin.fr" + this.props.refereeImage} alt="referee frame" />
+                            <img onClick={this.copyRefereeAsBG} src={Auth.url + this.props.refereeImage} alt="referee frame" />
                         </div>}
                         <div className="canvasToolsLeftOthersTools">
                             <button
                                 className="canvasToolsLeftUndo"
                                 onClick={() => this.canvas.current.undo()}>Annuler (CTRL + Z)</button>
-                            
-                                <div className="canvasToolsLeftBrush">
-                                    <label>Taille du pinceau :</label>
-                                    <input
-                                        type="range"
-                                        min="1"
-                                        max="60"
-                                        value={this.state.brushRadius}
-                                        onChange={e =>
-                                            this.setState({ brushRadius: parseInt(e.target.value, 10) })
-                                        }
-                                        />
-                                </div>
-                                <div className="canvasToolsLeftLazy">
-                                    <label>Traçage assisté :</label>
-                                    <input
-                                        type="range"
-                                        min="1"
-                                        max="30"
-                                        value={this.state.lazyRadius}
-                                        onChange={e =>
-                                            this.setState({ lazyRadius: parseInt(e.target.value, 10) })
-                                        }
-                                        />
-                                </div>
+
+                            <div className="canvasToolsLeftBrush">
+                                <label>Taille du pinceau : {this.state.brushRadius}</label>
+                                <input
+                                    type="range"
+                                    min="1"
+                                    max="60"
+                                    value={this.state.brushRadius}
+                                    onChange={e =>
+                                        this.setState({ brushRadius: parseInt(e.target.value, 10) })
+                                    }
+                                />
                             </div>
+                            <div className="canvasToolsLeftLazy">
+                                <label>Traçage assisté : {this.state.lazyRadius}</label>
+                                <input
+                                    type="range"
+                                    min="1"
+                                    max="30"
+                                    value={this.state.lazyRadius}
+                                    onChange={e =>
+                                        this.setState({ lazyRadius: parseInt(e.target.value, 10) })
+                                    }
+                                />
+                            </div>
+                        </div>
                         <button
                             className="canvasToolsLeftSubmit"
                             onClick={this.handleSubmit}
@@ -159,9 +158,9 @@ class Canvas extends React.Component {
                     </div>
                     <div className="canvasDraw"
                         onContextMenu={(e) => { e.preventDefault(); }}
-                        // style={{
-                        //     maxWidth: this.props.frameWidth
-                        // }}
+                    // style={{
+                    //     maxWidth: this.props.frameWidth
+                    // }}
                     >
                         <div className="canvasDrawTitle">
                             <textarea disabled readOnly value={this.props.pageName} />
@@ -182,13 +181,24 @@ class Canvas extends React.Component {
                     </div>
                     <div className="canvasToolsRight">
                         <CirclePicker
-                            className="canvasToolsRightColorPicker" 
+                            className="canvasToolsRightColorPicker"
                             color={this.state.color}
                             onChange={color => this.setState({ color: color.hex })}
                             width={104}
                             circleSize={32}
                             circleSpacing={20}
                             colors={this.colors}
+                        />
+                        <button
+                            type="button"
+                            className="canvasToolsRightMoreColors"
+                            onClick={() => this.setState({ showPicker: !this.state.showPicker })}
+                        >+</button>
+                        <ChromePicker
+                            color={this.state.color}
+                            onChange={color => this.setState({ color: color.hex })}
+                            className={this.state.showPicker ? "canvasToolsAdvancedColorPickerShow" : "canvasToolsAdvancedColorPickerHidden"}
+                            disableAlpha={true}
                         />
                     </div>
                 </div>

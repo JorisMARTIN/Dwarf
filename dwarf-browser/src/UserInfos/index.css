@@ -1,21 +1,132 @@
-.userPageInfos {
+.userPage {
     padding:2em;
     animation: PopAnimation 0.25s;
+    display: flex;
+    flex-direction: row;
 }
 
-.userPageInfosName {
+.userPageMenu{
+    display: flex;
+    flex-direction: column;
+    width: 15%;
+}
+
+.userPageMenu {
+    justify-content: space-around;
+    padding: .5em;
+    border-right: .1em solid var(--PrimaryText);
+    background: none;
+    height: 100%;
+}
+
+.userPageMenuLink {
+    text-align: center;
+    padding: .5em 1em;
+    color: var(--PrimaryText);
+    font-size: 1.1em;
+    font-weight:600;
+    text-decoration: none;
+    border: none;
+    background: none;
+    cursor: pointer;
+}
+
+.userPageMenuLink:hover {
+    background-color: var(--Navbar);
+}
+
+.userPageDisplay{
+    width: 80%;
+    margin: auto;
+    height: 60%;
+}
+
+.userPageTop{
+    display: flex;
+    flex-direction: row;
+    border-radius: 10px;
+    justify-content: space-around;
     color: var(--PrimaryText);
     background: var(--CardBackground);
     box-shadow: 0 3.2px 7.2px 0 rgba(0,0,0,.132),0 .6px 1.8px 0 rgba(0,0,0,.108);
     border-radius: 25px;
     padding: .5em 1em;
-    font-size: 2.2em;
-    font-weight:700;
 }
 
-.userPageInfosOthers {
+.userForm {
+    margin-top: 2em;
+    display: flex;
+    flex-direction: column;
+    padding:2em;
+    color: var(--PrimaryText);
+    border-radius: 25px;
+    background: var(--CardBackground);
+    box-shadow: 0 3.2px 7.2px 0 rgba(0,0,0,.132),0 .6px 1.8px 0 rgba(0,0,0,.108);
+}
+
+.userForm > div > input {
+    border-radius: 25px;
     color: var(--SecondaryText);
-    font-size: 1.2em;
-    font-weight: 400;
-    list-style: none
+    background: var(--Background);
+    padding: .5em;
+    margin: .5em;
+    float: right;
+    border:none;
+}
+
+.userPageInfosBottom {
+    width: 90%;
+    margin-top: 2em;
+    margin-right: auto;
+    margin-left: auto;
+    bottom : 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.userPageButton {
+    align-self: center;
+    padding: .5em 1em;
+    margin: 2em;
+    color: #f2f2f7;
+    background: var(--BlueButton);
+    border-radius: 25px;
+    font-size: .8em;
+    font-weight: 600;
+    border:none
+}
+
+.userPageButton:hover {
+    background:var(--BlueButtonHover)
+}
+
+.userPageRedButton {
+    background: var(--RedButton);
+}
+
+.userPageRedButton:hover {
+    background: var(--RedButtonHover);
+}
+
+.userForm > div > label > span, .userForm > p > span, .userPageInfosOthers > p > span {
+    font-weight: bold;
+}
+
+.userForm > div {
+    width: 70%;
+}
+
+.userForm > div:last-of-type {
+    width: 100%;
+}
+
+.userPageCreationsFinishContainer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.userPageCreationsFinishMessage {
+    color: var(--PrimaryText);
 }

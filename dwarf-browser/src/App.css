@@ -10,8 +10,8 @@ html {
     background-color: var(--Navbar);
     /*border-bottom: 1px solid #8e8e93;*/
     box-shadow: 0 3.2px 7.2px 0 rgba(0,0,0,.132),0 .6px 1.8px 0 rgba(0,0,0,.108);
-    /*-webkit-backdrop-filter: saturate(1.8) blur(20px);
-    backdrop-filter: saturate(1.8) blur(20px);*/
+    -webkit-backdrop-filter: saturate(1.8) blur(20px);
+    backdrop-filter: saturate(1.8) blur(20px);
     position: -webkit-sticky;
     position: sticky;
     top: 0;
@@ -32,7 +32,7 @@ html {
 }
 
 @media (prefers-color-scheme: dark) {
-    .dwarfLogo {
+    .dwarfLogo, .logButton{
         filter: invert(1);
     }
 }
@@ -55,10 +55,6 @@ html {
     font-size: 1em;
 }
 
-.componentsMenu + .link:hover {
-    background-color:#ee4239
-}
-
 .link {
     text-align: center;
     padding: .5em 1em;
@@ -77,6 +73,75 @@ html {
 .link:hover, .log {
     border-radius:25px
 }
+.link > img {
+    display: none;
+}
+
+.log:hover {
+    background:var(--BlueButtonHover)
+}
+
+.logComponent{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.logComponent:hover .logCoponentDropDown{
+    display: block;
+}
+
+.logButton{
+    background-color: transparent;
+    border: none;
+}
+
+.logCoponentDropDown{
+    display: none;
+    position: absolute;
+    top: 50px;
+    padding: 2em;
+}
+
+.logCoponentDropDown > div{
+    background-color: var(--CardBackground);
+    display: flex;
+    flex-direction: column;
+    min-width: 140px;
+    box-shadow: 0 5px 10px 10px var(--Shadow);
+    border-radius: 25px;
+}
+
+.logLink{
+    background-color: var(--CardBackground);
+    color: var(--PrimaryText);
+    border: none;
+    text-align: left;
+    padding: .5em 1em;
+    text-decoration: none;
+}
+
+
+
+button.logLink, a.logLink{
+    font-size: 1.2em;
+    margin: 1em;
+    border-radius: 25px;
+}
+
+button.logLink{
+    margin-top: 0;
+    background-color: var(--RedButton);
+}
+
+button.logLink:hover {
+    cursor: pointer;
+    background-color: var(--RedButtonHover);
+}
+
+
+.logLink:hover {background-color: var(--NavbarHover);}
+
 
 .log {
     text-decoration: none;
@@ -88,8 +153,8 @@ html {
     font-weight:600
 }
 
-.log:hover {
-    background:var(--BlueButtonHover)
+.log > img{
+    display: none;
 }
 
 input[type=text] {
@@ -113,4 +178,41 @@ input[type=text] {
 
 .footer p {
     margin:5px
+}
+
+@media only screen and (max-width: 600px) {
+    .menu {
+        position: fixed;
+        top: auto;
+        bottom: 0;
+        left: 0;
+        margin: 0;
+        box-shadow: none;
+        -webkit-backdrop-filter: saturate(1.8) blur(20px);
+        backdrop-filter: saturate(1.8) blur(20px);
+        justify-content: space-around;
+    }
+    
+    .dwarfDiv {
+        display: none;
+    }
+    
+    .menu > a {
+        display: none;
+    }
+    
+    .log {
+        text-align: center;
+        text-decoration: none;
+        padding: .5em 1em;
+        color: var(--PrimaryText);
+        background-color: transparent;
+        font-size: 10px;
+        font-weight: normal;
+    }
+    
+    .link {
+        font-size: 10px;
+        font-weight: normal;
+    }
 }

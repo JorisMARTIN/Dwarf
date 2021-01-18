@@ -63,7 +63,7 @@ class PageDAO extends DAO {
      * @return array Page Object array | Empty array = ❌
      */
     function getNPages(int $nb, int $firstId) : array {
-        $query = 'SELECT * FROM "Page" WHERE pageid <= :firstId and completed = true ORDER BY pageid DESC LIMIT :nb';
+        $query = 'SELECT * FROM "Page" WHERE pageid <= :firstId and completed = true and deleted = false ORDER BY pageid DESC LIMIT :nb';
         $tmp = $this->db->prepare($query);
         if ($tmp->execute([':firstId' => $firstId, ':nb' => $nb])) {
             return $tmp->fetchAll(PDO::FETCH_CLASS, "Page");
@@ -127,8 +127,8 @@ class PageDAO extends DAO {
      * 
      * @return array|NULL Array of page object | NULL = ❌
      */
-    function getUserPages(int $userId) : array {
-        $query = 'SELECT * FROM "Page" WHERE userid=:userId';
+    function getUserPagesDone(int $userId) : array {
+        $query = 'SELECT * FROM "Page" WHERE userid=:userId AND completed=\'t\'';
         $tmp = $this->db->prepare($query);
         if($tmp->execute([':userId' => $userId])) {
             return $tmp->fetchAll(PDO::FETCH_CLASS, "Page");
@@ -150,7 +150,7 @@ class PageDAO extends DAO {
         $files = scandir($path);
         foreach ($files as $file) {
             if (!is_dir($file)) {
-                unlink($file);
+                unlink($path.'/'.$file);
             }
         }
         rmdir($path);

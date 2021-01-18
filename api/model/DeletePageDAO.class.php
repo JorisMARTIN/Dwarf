@@ -10,9 +10,9 @@ class DeletePageDAO extends DAO {
      * 
      * @param int $pageId Id of the page
      * 
-     * @return DeletedPag|NULL DeletePage objet | NULL = ❌
+     * @return DeletedPage|NULL DeletePage objet | NULL = ❌
      */
-    function getDeletePageInfos(int $pageId) : ?DeletePage {
+    function getDeletePageInfos(int $pageId) : ? DeletePage {
         $query = 'SELECT * FROM "DeletePage" WHERE pageid = :pageId';
         $tmp = $this->db->prepare($query);
         if ($tmp->execute([':pageId' => $pageId])) {
@@ -34,7 +34,7 @@ class DeletePageDAO extends DAO {
      */
     function putDeletePage(int $pageId, int $userId, string $reason): bool
     {
-        $query = 'INSERT INTO "DeletePage" (pageId, userId, reason, deleteDate) VALUES (:pageId, :userId, :reasonn, CURRENT_TIMESTAMP)';
+        $query = 'INSERT INTO "DeletePage" (pageId, userId, reason, deleteDate) VALUES (:pageId, :userId, :reason, CURRENT_TIMESTAMP)';
         $tmp = $this->db->prepare($query);
         return ($tmp->execute([
             ':pageId' => $pageId,

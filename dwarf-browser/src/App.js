@@ -13,7 +13,7 @@ import AuthPage from './AuthPage';
 import E404 from './E404';
 import Auth from './components/AuthHelperMethods';
 import Help from './Help';
-//import UserInfos from './UserInfos';
+import UserInfos from './UserInfos';
 
 export default class App extends Component {
 
@@ -33,22 +33,29 @@ export default class App extends Component {
       <Router>
         <div className="menu">
           <div className="dwarfDiv">
-            <img className="dwarfLogo" src="https://dwarf.jorismartin.fr/icons/dwarf.svg"></img>
+            <img className="dwarfLogo" src={Auth.url + "/icons/dwarf.svg"} alt="logo" />
             <Link className="dwarf" to="/">Dwarf</Link>
           </div>
-          
+
           <div className="componentsMenu">
-            <Link className="link" to="/">Accueil</Link>
-            <Link className="link" to="/draw">Dessiner !</Link>
-            <Link className="link" to="/init">Nouvelle BD</Link>
-            <Link className="link" to="/help">Aide</Link>
-            {/* this.state.logged ? <Link className="link" to="/user">User</Link> : ""*/}
+            <Link className="link" to="/"><img src={Auth.url + "/icons/Accueil.svg"} alt="" /><span>Accueil</span></Link>
+            <Link className="link" to="/draw"><img src={Auth.url + "/icons/Dessiner.svg"} alt="" /><span>Dessiner !</span></Link>
+            <Link className="link" to="/init"><img src={Auth.url + "/icons/NouvelleBD.svg"} alt="" /><span>Nouvelle BD</span></Link>
+            <Link className="link" to="/help"><img src={Auth.url + "/icons/Aide.svg"} alt="" /><span>Aide</span></Link>
           </div>
-          <a className="link" target="_blank" href="https://www.frama.link/dwarfExperience">Ton avis nous intéresse !</a>
+
+          {this.state.logged ? 
           <div className="logComponent">
-            {this.state.logged ? <button className="log" onClick={this.logout}>Déconnexion</button> 
-            : <Link className="log" to="/auth">Connexion / Inscription</Link>}
+            <img className="logButton" src={Auth.url + "/icons/Compte.svg"} alt="" />
+            <div className="logCoponentDropDown">
+              <div>
+                <Link className="logLink" to="/user">Compte</Link>
+                <button className="logLink" onClick={this.logout}>Déconnexion</button>
+              </div>
+            </div>
           </div>
+            : <Link className="log" to="/auth"><img src={Auth.url + "/icons/Compte.svg"} alt="" /><span>Connexion / Inscription</span></Link>
+          }
         </div>
 
         <Switch>
@@ -62,21 +69,15 @@ export default class App extends Component {
 
           <Route path="/help" component={Help} />
 
-          {/* <Route path="/user" component={UserInfos} /> */}
+          <Route path="/user" component={UserInfos} />
 
-          <Route path="*">
-            <E404 />
-          </Route>
+          <Route path="*" component={E404} />
         </Switch>
 
         <div className="footer">
           <p>Dwarf</p>
           <p>{new Date().getFullYear()} &#169; Tous droits réservés.</p>
-          {/* <div>
-            <h3>Information :</h3>
-            <a href="CGU.pdf">Condition d'utilisation</a>
-            [<a href="Confidentialite.pdf">Confidentialité</a>
-          </div> */}
+          <a href={Auth.url + "/docs/CGU.pdf"}>Conditions Générales d'utilisations</a>
         </div>
       </Router>
     )

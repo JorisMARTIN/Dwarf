@@ -17,7 +17,7 @@ class TemplateCanvas extends React.Component {
 
     async componentDidMount() {
         const canvas = this.canvasRef.current;
-        const template = await (await fetch('https://dwarf.jorismartin.fr/cdn/templates/template' + this.props.id + '.json')).json();
+        const template = await (await fetch(Auth.url + '/cdn/templates/template' + this.props.id + '.json')).json();
         const ctx = canvas.getContext('2d');
 
         let max_x = 0;
@@ -133,13 +133,14 @@ class InitDrawing extends React.Component {
                                     <label htmlFor="normal">Normal</label>
                                 </div>
                                 <div>
-                                    <input type="radio" name="gamemode" id="reverse" value="1" onChange={this._handleChange} disabled />
+                                    <input type="radio" name="gamemode" id="reverse" value="1" onChange={this._handleChange} />
                                     <label htmlFor="reverse">Reverse</label>
                                 </div>
-                                <div>
-                                    <input type="radio" name="gamemode" id="intermediate" value="2" onChange={this._handleChange} disabled />
+                                {/* disabled */}
+                                {/* <div>
+                                    <input type="radio" name="gamemode" id="intermediate" value="2" onChange={this._handleChange} />
                                     <label htmlFor="intermediate">Intermediate</label>
-                                </div>
+                                </div> */}
                             </div>
                         </div>
                     </fieldset>
