@@ -3,7 +3,7 @@ import decode from 'jwt-decode';
 //adapted from https://github.com/jinolacson/login-jwt-react-php/
 
 class AuthHelperMethods {
-    url = "https://dev-dwarf.jorismartin.fr";
+    url = "https://dwarf.jorismartin.fr";
     apiURL = this.url + "/api/";
 
     loggedIn = () => {
