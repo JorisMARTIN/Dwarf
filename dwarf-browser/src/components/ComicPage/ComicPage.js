@@ -77,7 +77,6 @@ export default class ComicPage extends React.Component {
     /* VOTE */
 
     handleVoteClick = (rate) => {
-        this.setState({ rate: rate });
 
         Auth.fetch("rate.php", {
             method: "POST",
@@ -96,7 +95,8 @@ export default class ComicPage extends React.Component {
             } else {
                 this.setState({
                     likes: res.likes,
-                    dislikes: res.dislikes
+                    dislikes: res.dislikes,
+                    rate: rate
                 })
             }
         })
