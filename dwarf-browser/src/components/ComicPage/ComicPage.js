@@ -38,7 +38,8 @@ export default class ComicPage extends React.Component {
         const canvas = this.canvasRef.current;
         if(!canvas) return;
 
-        const template = await (await fetch(Auth.url + '/cdn/templates/template' + this.props.template + '.json')).json();
+        // const template = await (await fetch(Auth.url + '/cdn/templates/template' + this.props.template + '.json')).json();
+        const template = Auth.templates[this.props.template];
         const ctx = canvas.getContext('2d');
 
         let max_x = 0;
@@ -114,11 +115,13 @@ export default class ComicPage extends React.Component {
         } else {
             this.setState({ fullscreen: true });
         }
+
+        setTimeout(this.drawPlanche, 0);
     }
 
-    componentDidUpdate() {
-        this.drawPlanche();
-    }
+    // componentDidUpdate() {
+    //     this.drawPlanche();
+    // }
     /* Supression page */
 
     deletePage = (action) => {

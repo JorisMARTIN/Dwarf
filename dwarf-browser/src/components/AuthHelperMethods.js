@@ -6,6 +6,18 @@ class AuthHelperMethods {
     url = "https://dwarf.jorismartin.fr";
     apiURL = this.url + "/api/";
 
+    constructor() {
+        this.templates = [];
+        
+        for(let i = 0; i < 3; i++) {
+            fetch(this.url + '/cdn/templates/template' + i + '.json')
+            .then(res => res.json())
+            .then(res => {
+                this.templates[i] = res;
+            });
+        }
+    }
+
     loggedIn = () => {
         // Checks if there is a saved token and it's still valid
         const token = this.getToken();

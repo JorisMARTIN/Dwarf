@@ -73,7 +73,7 @@ export default class Scroller extends React.Component {
                     ))} 
                 </div>
                 <div>
-                    {loading && <p class="scrollerLoading">Chargement ...</p>}
+                    {loading && <p className="scrollerLoading">Chargement ...</p>}
                 </div>
             </div>
         )
