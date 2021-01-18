@@ -43,17 +43,17 @@ class FrameDAO extends DAO {
   /**
    * Collect all frames of a user
    *
-   * @param int $userId ID of the page
+   * @param int $userId
    * 
    * @return array|NULL Array of Frame Object | NULL = ❌
    */
   function getUserFrames(int $userId) : array {
-    $query = 'SELECT * FROM "Frame" WHERE userId = :userId AND pageid IN (SELECT pageid FROM "Page" where userid =:userId and completed=\'f\') ORDER BY frameid';
+    $query = 'SELECT * FROM "Frame" WHERE userId = :userId';
     $tmp = $this->db->prepare($query);
     if ($tmp->execute([':userId' => $userId])) {
       return $tmp->fetchAll(PDO::FETCH_CLASS, 'Frame');
     } else {
-      return [];
+      return NULL;
     }
   }
 

@@ -205,7 +205,6 @@ class UserInfo extends Component {
                     {this.state.isAdmin && <button className="userPageMenuLink" onClick={() => this.setState({ section: 3})}>Modération</button>}
                 </section>
                 <section className="userPageDisplay">
-                    {/* Comment on gère les fonction dans les composant ??? A FAIRE ! */}
                     {this.state.section === 0 &&
                         <article className="userPageInfos">
                             <div className="userPageTop">
