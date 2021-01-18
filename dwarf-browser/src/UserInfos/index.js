@@ -117,7 +117,7 @@ const UserFramesComponent = ({frames}) => (
                     <ComicFrame key={i} {...frame} />
                 ))
                 :
-                <h2 className="userPageCreationsFinishMessage">Vous n'avez aucun dessin dans une BD en cours de réalisation</h2>
+                <h2 className="userPageCreationsFinishMessage">Vous n'avez encore réaliser aucun dessin</h2>
             }
         </div>
     </article>
