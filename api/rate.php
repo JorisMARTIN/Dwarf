@@ -33,7 +33,7 @@ if($userId != -1){
 }else{
     // User not logged in
     $out = [
-        'message' => "Tu dois être connecté pour voter !\nVeux tu te connecter ou t'inscrire ?"
+        'message' => "Tu dois être connecté pour voter !\nSouhaite-tu te connecter ou t'inscrire ?"
     ];
 }
 

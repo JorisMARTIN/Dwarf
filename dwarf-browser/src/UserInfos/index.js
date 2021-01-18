@@ -16,7 +16,7 @@ const UserInfoComponent = ({userInfos, toDelete, toTrue, messageError}) => (
         </div>
         <div className="userPageInfosBottom">
             <button onClick={toTrue} className="userPageButton">Modifier</button>
-            <button onClick={toDelete} className="userPageButton userPageRedButton">Supprimer le compte</button>
+            {/* <button onClick={toDelete} className="userPageButton userPageRedButton">Supprimer le compte</button> */}
         </div>
     </div>
 )

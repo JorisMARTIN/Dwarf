@@ -36,7 +36,7 @@ if (!empty($data)) {
             // Restauration d'une page supporimée
             case "unDelete":
                 $deletePageDAO->removeDeletePage($pageId);
-                $out = ['message' => 'Page restaurer'];
+                $out = ['message' => 'Page restaurée'];
             break;
 
             // Suppression définitive d'une page supprimée
@@ -60,7 +60,7 @@ if (!empty($data)) {
 
 
 } else {
-    $out = ['message' => 'Error aucune données passée en entré !'];
+    $out = ['message' => 'Erreur ! Aucune données passée en entrée !'];
 }
 
 echo json_encode($out);

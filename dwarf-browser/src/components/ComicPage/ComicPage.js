@@ -122,7 +122,7 @@ export default class ComicPage extends React.Component {
     /* Supression page */
 
     deletePage = (action) => {
-        if (window.confirm("Voulez vous vraiment " + (action === "unDelete" ? "restaurer" : "supprimer") + " cette page ?")) {
+        if (window.confirm("Voulez-vous vraiment " + (action === "unDelete" ? "restaurer" : "supprimer") + " cette page ?")) {
 
             switch(action) {
                 case "delete":
@@ -158,7 +158,7 @@ export default class ComicPage extends React.Component {
                 break;
 
                 case "erase":
-                    if (window.confirm("Cette action est irréversible, êtes-vous sur de vouloir supprimer définitivement cette page ?")){
+                    if (window.confirm("Cette action est irréversible, êtes-vous sûr de vouloir supprimer définitivement cette page ?")){
                         Auth.fetch("delete.php", {
                             method: "POST",
                             body: JSON.stringify({
@@ -174,7 +174,7 @@ export default class ComicPage extends React.Component {
                 break;
 
                 default: 
-                    alert("ERROR : action " + action + " does not exist !");
+                    alert("ERREUR : L'action " + action + " n'existe pas !");
                 break;
             }
         }

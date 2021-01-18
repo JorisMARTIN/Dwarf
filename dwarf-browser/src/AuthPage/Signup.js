@@ -173,7 +173,7 @@ export default class Signup extends Component {
                                 />
                             </div>
                             <div className="authPageSignupCGU">
-                                <label htmlFor="cgu">J'ai lu et accepté les <a href={Auth.url + "/docs/CGU.pdf"} >Conditions Générales d'Utilisations</a></label>
+                                <label htmlFor="cgu">J'ai lu et j'accepte les <a href={Auth.url + "/docs/CGU.pdf"} >Conditions Générales d'Utilisations</a></label>
                                 <input
                                     required
                                     id="cgu"
