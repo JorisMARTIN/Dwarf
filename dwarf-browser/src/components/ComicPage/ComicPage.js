@@ -36,6 +36,8 @@ export default class ComicPage extends React.Component {
 
     drawPlanche = async () => {
         const canvas = this.canvasRef.current;
+        if(!canvas) return;
+
         const template = await (await fetch(Auth.url + '/cdn/templates/template' + this.props.template + '.json')).json();
         const ctx = canvas.getContext('2d');
 

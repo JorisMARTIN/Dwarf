@@ -49,7 +49,8 @@
     font-weight:500
 }
 
-.authPageLoginEmail, .authPageLoginPwd, .authPageSignupConfEmail, .authPageSignupDate, .authPageSignupEmail, .authPageSignupPwd, .authPageSignupPwd2, .authPageSignupUserName {
+/* .authPageLoginEmail, .authPageLoginPwd, .authPageSignupConfEmail, .authPageSignupDate, .authPageSignupEmail, .authPageSignupPwd, .authPageSignupPwd2, .authPageSignupUserName { */
+.authPageSignupDiv > div {
     display: flex;
     justify-content: space-between;
     align-items:center
@@ -61,7 +62,7 @@
     padding:2em
 }
 
-.authPageLoginEmail > input[type=email], .authPageLoginPwd > input[type=password], .authPageSignupConfEmail > input[type=email], .authPageSignupDate > input[type=date], .authPageSignupEmail > input[type=email], .authPageSignupPwd2 > input[type=password], .authPageSignupPwd > input[type=password], .authPageSignupUserName > input[type=text] {
+.authPageLoginEmail > input[type=email], .authPageLoginPwd > input[type=password], .authPageSignupConfEmail > input[type=email], .authPageSignupDate input, .authPageSignupDate select, .authPageSignupEmail > input[type=email], .authPageSignupPwd2 > input[type=password], .authPageSignupPwd > input[type=password], .authPageSignupUserName > input[type=text] {
     border-radius: 25px;
     color: var(--SecondaryText);
     background: var(--Background);
@@ -69,6 +70,10 @@
     margin: .5em;
     float: right;
     border:none
+}
+
+.authPageSignupCGU > input {
+    margin-right: 4em; 
 }
 
 .authPageLoginForgotPwd {
